@@ -200,7 +200,7 @@ compute_suitability_STA<-function(inputsdata=NULL,
   if (nrow(BCtokeep)==0){print("no objective selected, so keep them all")
     BCtokeep<-interface[interface$side=="effecttrait",]
   }
-  browser()
+  #browser()
   toto<-subsetDB[subsetDB$ES %in% BCtokeep$choice,]
   if(nrow(toto)==0) {print("no tree provides the selected ES, so we keep all ES")
   } else {subsetDB<-subsetDB[subsetDB$ES %in% BCtokeep$choice,]}

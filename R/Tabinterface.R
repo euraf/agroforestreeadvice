@@ -30,11 +30,11 @@ moduleTabInterface_UI <- function(id, data, interface) {
       class = "custom-well-panel5",
       style = "display: flex; justify-content: center;",
       # Fourth panel (full width)
-      box(title="For debugging",
-          solidHeader = TRUE,
-          status="danger",
-          width=NULL,
-          fluidRow(verbatimTextOutput(ns("controlOutput")))),
+      # box(title="For debugging",
+      #     solidHeader = TRUE,
+      #     status="danger",
+      #     width=NULL,
+      #     fluidRow(verbatimTextOutput(ns("controlOutput")))),
       actionButton(inputId = ns("ab_compute"), label="Compare trees !")
       
     )),
@@ -101,37 +101,36 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         return(allinputs)
       })#reformattedinputs() is a named character of choices of the user (with the checkbox name for TRUE checkboxes)
       #observe(print(str(reformattedinputs())))
-
+      # output$controlOutput <- renderPrint({
+      #   # Only update controlOutput if the button is clicked
+      #   #req(buttonClicked())
+      #   reformattedinputs()
+      # })
+      
       # reactive of radiobutton to reorder the data
       orderby<-reactive(
-        return(input[[ns("orderby")]])
+        return(input$orderby)
       )
-      # just for debugging ----
-      output$controlOutput <- renderPrint({
-        str(input)
-      })
-
-      # reactive indicating if the comput button has been cliqued
+      
+      # reactive indicating if the compute button has been cliqued
       buttonClicked <- reactiveVal(FALSE)
-      observeEvent(input[[ns("ab_compute")]], {
+      observeEvent(input$ab_compute, {
         # Update the buttonClicked reactive value when the button is clicked
         buttonClicked(TRUE)
       })
       
       
-      
-      
-      
       datatoplot<-reactive({
         allinputs<-reformattedinputs() 
-        orderby<-orderby()
-        print(orderby)
+        orderby<-input$orderby
+        #print(orderby)
+        #print(allinputs)
         if(length(allinputs)>0){
-          #message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
-          dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
+          message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
+          #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
           
-          #dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
-          #                                   orderby = orderby)
+          dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
+                                             orderby = orderby)
         } else{
           dfSuitability<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
         }
@@ -143,11 +142,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           dfSuitability$BigCriteria),]
         #print(str(dfSuitability))
         return(dfSuitability)
-      }) %>% bindEvent(input[[ns("ab_compute")]]) # datatoplot() is a data frame of trees, BigCriteria and values
-      #just for debugging
-      #output$controlOutput <- renderPrint({
-      #  datatoplot()
-      #})
+      }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
+
       
       
       
