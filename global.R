@@ -215,7 +215,7 @@ compute_suitability_STA<-function(inputsdata=NULL,
   # Calculate the sum of the variables in orderby for each species to find the correct order
   #species_order <- df[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side==orderby, c("BigCriteria")],]
   species_order<-df
-  species_order<-aggregate(species_order[,"value", drop=FALSE], by=species_order[,c("Tree_latin")], sum, na.rm=TRUE)
+  species_order<-aggregate(species_order[,"value", drop=FALSE], by=species_order[,c("Tree_latin"), drop=FALSE], sum, na.rm=TRUE)
   species_order<-species_order[order(species_order$value, decreasing=FALSE),]
   species_order<-species_order$Tree_latin 
   species_order[!is.na(species_order)]
