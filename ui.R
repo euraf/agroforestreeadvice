@@ -1,4 +1,6 @@
 
+# Fichier de définition de l'interface utilisateur pour l'application Shiny
+
 # header ----
 
 header <- dashboardHeader(title = "DigitAF tree Advice")
@@ -21,8 +23,6 @@ sidebar <- dashboardSidebar(
   )
 )
 
-
-
 # Main panel ----
 
 body <- dashboardBody(
@@ -33,49 +33,20 @@ body <- dashboardBody(
             img(src = "logoDigitAF_HR_500.png")
     ),#fin infos
     tabItem(tabName = "tool", 
-            fluidRow(column(width=6,
-                            box(title = "Your site",
-                                solidHeader = TRUE,
-                                status="danger",
-                                width=NULL,
-                                uiOutput("dynamicControlsResponse")
-                            )),
-                     column(width=6,
-                            box(title = "Your objectives",
-                                solidHeader = TRUE,
-                                status="primary",
-                                width=NULL,
-                                fluidRow(uiOutput("dynamicControlsEffect"))
-                            ))
-            ),
-            fluidRow(wellPanel(
-              class = "custom-well-panel5",
-              style = "display: flex; justify-content: center;",
-              # Fourth panel (full width)
-              actionButton(inputId = "ab_compute", label="Compare trees !")
-            )),
-            box(title = "All trees",
-                solidHeader = TRUE,
-                status="warning",
-                width=NULL,
-                fluidRow(
-                  column(width=12,
-                         radioButtons(inputId="orderby", label="Order By", 
-                                      choices=c(Adaptation="responsetrait", Efficiency="effecttrait"),
-                                      selected="responsetrait", inline=TRUE),
-                         plotOutput("barplot_suitability")
-                         
-                  ),
-                  column(width=12,
-                         DTOutput(outputId = "DTSuitability")
-                  ))
+            tabsetPanel(
+              
+              tabPanel("Flanders Tree Advisor (DENTRO)", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), # module selecmap avec les données de l'Afrique
+              
+              tabPanel("Shade Tree Advice (coffee and cocoa)", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA))#, # module selecmap avec les données de l'Amérique
+              
+              # tabPanel("Deciduous (fruit trees in France)", moduleTabInterface_ui(id = "deciduous", regionDF = AsiaDF)) # module selecmap avec les données de l'Asie
+              
             )
-            
             
             # A completer: page tutoriel video, page pdf backend
     )#fin tool
   ) #fin pages
-) #fin dashboard
+) #fin dashboardbody
 
 
 # Complete page ----
@@ -85,4 +56,6 @@ dashboardPage(
   sidebar,
   body
 )
+
+
 
