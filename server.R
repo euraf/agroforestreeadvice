@@ -40,8 +40,8 @@ shinyServer(function(input, output, session) {
     allinputs<-allinputs()
     if(length(allinputs)>0){
       message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
-      dfSuitability<-compute_suitability(inputsdata=allinputs, interface=interface, dataDENTRO=dataDENTRO,
-                                orderby = input$orderby)
+      dfSuitability<-compute_suitability(inputsdata=allinputs, interface=interface, database=database,
+                                         orderby = input$orderby)
     } else{
       dfSuitability<-data.frame(species="no data yet", value=1, BigCriteria="please describe your site and objectives")
     }
@@ -64,6 +64,7 @@ shinyServer(function(input, output, session) {
     #print(str(compactcontrols()))
     initcompactcontrols<-reshapecontrols(interface, language="en")
     responsecontrols<-which(initcompactcontrols$side=="responsetrait")
+    #browser()
     #print(responsecontrols)
     controls_list <- lapply(responsecontrols, function(i) {
       control_type <- initcompactcontrols$objecttype[i]
@@ -96,6 +97,7 @@ shinyServer(function(input, output, session) {
     initcompactcontrols<-reshapecontrols(interface, language="en")
     responsecontrols<-which(initcompactcontrols$side=="effecttrait")
     #print(responsecontrols)
+    #browser()
     controls_list <- lapply(responsecontrols, function(i) {
       message("creation", initcompactcontrols$criteria[i])
       control_type <- initcompactcontrols$objecttype[i]
