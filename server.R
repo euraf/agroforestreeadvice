@@ -25,7 +25,9 @@ server <- function(input, output, session) {
   
   # Deciduous ----
   
-  #moduleTabInterface_Server(id = "asia", regionDF = AsiaDF)
+  moduleTabInterface_Server(id = "DECIDUOUS",
+                            language= language,
+                            data=dataDECIDUOUS, interface=interfaceDECIDUOUS, functionSuitability=compute_suitability_DECIDUOUS)
   
   
 }

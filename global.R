@@ -258,131 +258,151 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   user_hauteur <- inputsdata["user_hauteur"]
   user_especes <- inputsdata["especes_user"]
   
+  # Criteres d'importance des experts (Cf. google doc) de  1 (plus important) a 5 (moins important)
+  # a terme il faudra reflechir a mettre des sliders pour laisser le choix a l utilisaeur
+  # criteres PG :
+  crit_PG_prof_sol <- 3.2
+  crit_PG_hydromorphie <- 2.3
+  crit_PG_sens_deficit_hydrique <- 2.4
+  crit_PG_taux_ca <- 2.4
+  crit_PG_pH <- 3.0
+  # criteres especes :
+  crit_esp_sensibilite_gel_hiver <- 3.1
+  crit_esp_sensibilite_gel_tardif<- 2.0
+  crit_esp_sensibilite_deficit_hydrique <- 2.7
+  crit_esp_saisonalite_prod <- 3.0
+  crit_esp_hauteur_arbre <- 5.0
+  crit_esp_besoin_entretien <- 2.3
+  crit_esp_periode_entretien <- 4.2
+  crit_esp_besoin_conservation <- 2.6
+  crit_esp_besoin_filet <- 3.0
+  
   # stocke le tableau de données dans "result"
-  result <- donnees
+  result <- database
   
-  # on met un 1, 0.5 ou 0 dans les cases qui respectent les critères d'entrée de l'utilisateur, et 0 si ce n'est pas le cas
-  result <- result %>%  mutate(
-    note_gel_tardif = case_when( 
-      user_risque_gel_tardif == "Faible"  ~ 1,
-      user_risque_gel_tardif == "Moyen" & sens_gel_tar == "faible" ~ 1,
-      user_risque_gel_tardif == "Moyen" & sens_gel_tar == "moyenne" ~ 0.5, 
-      user_risque_gel_tardif == "Moyen" & sens_gel_tar == "forte" ~ 0, 
-      user_risque_gel_tardif == "Fort" & sens_gel_tar == "faible" ~ 1,
-      user_risque_gel_tardif == "Fort" & sens_gel_tar == "moyenne" ~ 0.5,
-      user_risque_gel_tardif == "Fort" & sens_gel_tar == "forte" ~ 0,
-    ),
-    
-    note_risk_def_hyd = case_when( 
-      user_risk_def_hyd == "Faible"  ~ 1,
-      user_risk_def_hyd == "Moyen" & sens_def_hyd_e== "faible" ~ 1,
-      user_risk_def_hyd == "Moyen" & sens_def_hyd_e == "moyenne" ~ 0.5,
-      user_risk_def_hyd == "Moyen" & sens_def_hyd_e == "forte" ~ 0,
-      user_risk_def_hyd == "Fort" & sens_def_hyd_e == "faible" ~ 1,
-      user_risk_def_hyd == "Fort" & sens_def_hyd_e == "moyenne" ~ 0.5,
-      user_risk_def_hyd == "Fort" & sens_def_hyd_e == "forte" ~ 0,
-    ),
-    
-    note_irrigation = case_when(
-      user_irrigation == "Irrigation régulière"  ~ 1,
-      user_irrigation == "Irrigation ponctuelle" & sens_def_hyd_e== "faible" ~ 1,
-      user_irrigation == "Irrigation ponctuelle" & sens_def_hyd_e == "moyenne" ~ 0.5,
-      user_irrigation == "Irrigation ponctuelle" & sens_def_hyd_e == "forte" ~ 0,
-      user_irrigation == "Pas d'irrigation possible" & sens_def_hyd_e == "faible" ~ 1,
-      user_irrigation == "Pas d'irrigation possible" & sens_def_hyd_e == "moyenne" ~ 0.5,
-      user_irrigation == "Pas d'irrigation possible" & sens_def_hyd_e == "forte" ~ 0,
-    ),
-    
-    note_prof_sol_ara = case_when(
-      stri_detect_fixed(profondeur_sol, user_prof_sol_ara) ~ 1 ,
-      TRUE ~ 0),
-    
-    note_hyd_sol = case_when(
-      stri_detect_fixed(hydromorphie_sol, user_hyd_sol) ~ 1 ,
-      TRUE ~ 0),
-    
-    note_ca_actif = case_when(
-      user_ca_actif == "< 10 %"  ~ 1,
-      user_ca_actif == "> 10 %" & tol_ca_actif == "1 a 10%" ~ 0,
-      user_ca_actif == "> 10 %" & tol_ca_actif == ">10%" ~ 1,
-    ),
-    
-    note_besoin_entretien = case_when(
-      user_dispo == "forte"  ~ 1,
-      user_dispo == "moyenne" & bes_ent == "faible" ~ 1,
-      user_dispo == "moyenne" & bes_ent == "moyen" ~ 0.5,
-      user_dispo == "moyenne" & bes_ent == "fort" ~ 0,
-      user_dispo == "faible" & bes_ent == "faible" ~ 1,
-      user_dispo == "faible" & bes_ent == "moyen" ~ 0.5,
-      user_dispo == "faible" & bes_ent == "fort" ~ 0,
-    ),
-    
-    note_hauteur = case_when(
-      stri_detect_fixed(hauteur_arbre, user_hauteur) ~ 1 ,
-      TRUE ~ 0),
-  )
-  
-  
-  # on crée les colonnes scores pour chaque critère et la colonne score global
-  result <- result %>%  mutate(
-    score_gel_tardif = note_gel_tardif * (6 - crit_esp_sensibilite_gel_tardif), # inverstion de score car l'echelle etait inversee sur google doc
-    score_def_hyd = note_risk_def_hyd * (6 - crit_PG_sens_deficit_hydrique),
-    score_irrigation = note_irrigation * (6 - crit_esp_sensibilite_deficit_hydrique),
-    score_prof_sol_ara = note_prof_sol_ara * (6 - crit_PG_prof_sol),
-    score_hyd_sol = note_hyd_sol * (6 - crit_PG_hydromorphie),
-    score_ca_actif = note_ca_actif * (6 - crit_PG_taux_ca),
-    score_besoin_entretien = note_besoin_entretien * (6 - crit_esp_besoin_entretien),
-    score_hauteur = note_hauteur * (6 - crit_esp_hauteur_arbre),
-    
-    # elements pas encore pris en compte dans le calcul de la note :
-    # # criteres li?s au porte greffe:
-    # crit_PG_pH <- 3.0 #correle au Ca
-    
-    # # criteres li?s aux especes :
-    # crit_esp_sensibilite_gel_hiver <- 3.1 #moins problematique que gel de printemps
-    # crit_esp_sensibilite_deficit_hydrique <- 2.7 #a combiner avec sensibilite PG
-    # crit_esp_saisonalite_prod <- 3.0 #cf. onglet varietes et calendrier
-    # crit_esp_periode_entretien <- 4.2 #cf. onglet varietes et calendrier
-    # crit_esp_besoin_conservation <- 2.6 #cf. informations generales / points de vigilance
-    # crit_esp_besoin_filet <- 3.0 #cf. informations generales / points de vigilance
-  )
-  
-  # note deficit hydrique = r?sultatnt de def_hyd et irrigation
-  result$score_def_hyd_combine <- (result$score_def_hyd + result$score_irrigation)/2
-  
-  # on somme tous les scores pour avoir la note globale
-  result$global_score <- result$score_gel_tardif+
-    result$score_def_hyd_combine+
-    result$score_prof_sol_ara+
-    result$score_hyd_sol+
-    result$score_ca_actif+
-    result$score_besoin_entretien+
-    result$score_hauteur
-  
-  # on classe les r?sultats par note la plus haute
-  final_result <- result[order(-result$global_score),] %>%
-    # selectionne uniquement les especes selectionnees
-    filter(Espece %in% user_especes) %>%
-    # selectionne uniquement les variables interessantes
-    select(couple_espece_PG,
-           score_gel_tardif,
-           score_def_hyd_combine,
-           score_prof_sol_ara,
-           score_hyd_sol,
-           score_ca_actif,
-           score_besoin_entretien,
-           score_hauteur,
-           global_score) %>% 
-    
-    rename('Espèce & Porte greffe' = couple_espece_PG, 
-           'Gel' = score_gel_tardif, 
-           'Deficit hydrique' = score_def_hyd_combine,
-           'Profondeur sol' = score_prof_sol_ara,
-           'Hydromorphie' = score_hyd_sol,
-           'CaCO3' = score_ca_actif,
-           'Entretien' = score_besoin_entretien, 
-           'Hauteur' = score_hauteur)
-  
+  # # on met un 1, 0.5 ou 0 dans les cases qui respectent les critères d'entrée de l'utilisateur, et 0 si ce n'est pas le cas
+  # result <- result %>%  mutate(
+  #   note_gel_tardif = case_when( 
+  #     user_risque_gel_tardif == "Faible"  ~ 1,
+  #     user_risque_gel_tardif == "Moyen" & sens_gel_tar == "faible" ~ 1,
+  #     user_risque_gel_tardif == "Moyen" & sens_gel_tar == "moyenne" ~ 0.5, 
+  #     user_risque_gel_tardif == "Moyen" & sens_gel_tar == "forte" ~ 0, 
+  #     user_risque_gel_tardif == "Fort" & sens_gel_tar == "faible" ~ 1,
+  #     user_risque_gel_tardif == "Fort" & sens_gel_tar == "moyenne" ~ 0.5,
+  #     user_risque_gel_tardif == "Fort" & sens_gel_tar == "forte" ~ 0,
+  #   ),
+  #   
+  #   note_risk_def_hyd = case_when( 
+  #     user_risk_def_hyd == "Faible"  ~ 1,
+  #     user_risk_def_hyd == "Moyen" & sens_def_hyd_e== "faible" ~ 1,
+  #     user_risk_def_hyd == "Moyen" & sens_def_hyd_e == "moyenne" ~ 0.5,
+  #     user_risk_def_hyd == "Moyen" & sens_def_hyd_e == "forte" ~ 0,
+  #     user_risk_def_hyd == "Fort" & sens_def_hyd_e == "faible" ~ 1,
+  #     user_risk_def_hyd == "Fort" & sens_def_hyd_e == "moyenne" ~ 0.5,
+  #     user_risk_def_hyd == "Fort" & sens_def_hyd_e == "forte" ~ 0,
+  #   ),
+  #   
+  #   note_irrigation = case_when(
+  #     user_irrigation == "Irrigation régulière"  ~ 1,
+  #     user_irrigation == "Irrigation ponctuelle" & sens_def_hyd_e== "faible" ~ 1,
+  #     user_irrigation == "Irrigation ponctuelle" & sens_def_hyd_e == "moyenne" ~ 0.5,
+  #     user_irrigation == "Irrigation ponctuelle" & sens_def_hyd_e == "forte" ~ 0,
+  #     user_irrigation == "Pas d'irrigation possible" & sens_def_hyd_e == "faible" ~ 1,
+  #     user_irrigation == "Pas d'irrigation possible" & sens_def_hyd_e == "moyenne" ~ 0.5,
+  #     user_irrigation == "Pas d'irrigation possible" & sens_def_hyd_e == "forte" ~ 0,
+  #   ),
+  #   
+  #   note_prof_sol_ara = case_when(
+  #     stri_detect_fixed(profondeur_sol, user_prof_sol_ara) ~ 1 ,
+  #     TRUE ~ 0),
+  #   
+  #   note_hyd_sol = case_when(
+  #     stri_detect_fixed(hydromorphie_sol, user_hyd_sol) ~ 1 ,
+  #     TRUE ~ 0),
+  #   
+  #   note_ca_actif = case_when(
+  #     user_ca_actif == "< 10 %"  ~ 1,
+  #     user_ca_actif == "> 10 %" & tol_ca_actif == "1 a 10%" ~ 0,
+  #     user_ca_actif == "> 10 %" & tol_ca_actif == ">10%" ~ 1,
+  #   ),
+  #   
+  #   note_besoin_entretien = case_when(
+  #     user_dispo == "forte"  ~ 1,
+  #     user_dispo == "moyenne" & bes_ent == "faible" ~ 1,
+  #     user_dispo == "moyenne" & bes_ent == "moyen" ~ 0.5,
+  #     user_dispo == "moyenne" & bes_ent == "fort" ~ 0,
+  #     user_dispo == "faible" & bes_ent == "faible" ~ 1,
+  #     user_dispo == "faible" & bes_ent == "moyen" ~ 0.5,
+  #     user_dispo == "faible" & bes_ent == "fort" ~ 0,
+  #   ),
+  #   
+  #   note_hauteur = case_when(
+  #     stri_detect_fixed(hauteur_arbre, user_hauteur) ~ 1 ,
+  #     TRUE ~ 0),
+  # )
+  # 
+  # 
+  # # on crée les colonnes scores pour chaque critère et la colonne score global
+  # result <- result %>%  mutate(
+  #   score_gel_tardif = note_gel_tardif * (6 - crit_esp_sensibilite_gel_tardif), # inverstion de score car l'echelle etait inversee sur google doc
+  #   score_def_hyd = note_risk_def_hyd * (6 - crit_PG_sens_deficit_hydrique),
+  #   score_irrigation = note_irrigation * (6 - crit_esp_sensibilite_deficit_hydrique),
+  #   score_prof_sol_ara = note_prof_sol_ara * (6 - crit_PG_prof_sol),
+  #   score_hyd_sol = note_hyd_sol * (6 - crit_PG_hydromorphie),
+  #   score_ca_actif = note_ca_actif * (6 - crit_PG_taux_ca),
+  #   score_besoin_entretien = note_besoin_entretien * (6 - crit_esp_besoin_entretien),
+  #   score_hauteur = note_hauteur * (6 - crit_esp_hauteur_arbre),
+  #   
+  #   # elements pas encore pris en compte dans le calcul de la note :
+  #   # # criteres li?s au porte greffe:
+  #   # crit_PG_pH <- 3.0 #correle au Ca
+  #   
+  #   # # criteres li?s aux especes :
+  #   # crit_esp_sensibilite_gel_hiver <- 3.1 #moins problematique que gel de printemps
+  #   # crit_esp_sensibilite_deficit_hydrique <- 2.7 #a combiner avec sensibilite PG
+  #   # crit_esp_saisonalite_prod <- 3.0 #cf. onglet varietes et calendrier
+  #   # crit_esp_periode_entretien <- 4.2 #cf. onglet varietes et calendrier
+  #   # crit_esp_besoin_conservation <- 2.6 #cf. informations generales / points de vigilance
+  #   # crit_esp_besoin_filet <- 3.0 #cf. informations generales / points de vigilance
+  # )
+  # 
+  # # note deficit hydrique = r?sultatnt de def_hyd et irrigation
+  # result$score_def_hyd_combine <- (result$score_def_hyd + result$score_irrigation)/2
+  # 
+  # # on somme tous les scores pour avoir la note globale
+  # result$global_score <- result$score_gel_tardif+
+  #   result$score_def_hyd_combine+
+  #   result$score_prof_sol_ara+
+  #   result$score_hyd_sol+
+  #   result$score_ca_actif+
+  #   result$score_besoin_entretien+
+  #   result$score_hauteur
+  # 
+  # # on classe les r?sultats par note la plus haute
+  # final_result <- result[order(-result$global_score),] %>%
+  #   # selectionne uniquement les especes selectionnees
+  #   filter(Espece %in% user_especes) %>%
+  #   # selectionne uniquement les variables interessantes
+  #   select(couple_espece_PG,
+  #          score_gel_tardif,
+  #          score_def_hyd_combine,
+  #          score_prof_sol_ara,
+  #          score_hyd_sol,
+  #          score_ca_actif,
+  #          score_besoin_entretien,
+  #          score_hauteur,
+  #          global_score) %>% 
+  #   
+  #   rename('Espèce & Porte greffe' = couple_espece_PG, 
+  #          'Gel' = score_gel_tardif, 
+  #          'Deficit hydrique' = score_def_hyd_combine,
+  #          'Profondeur sol' = score_prof_sol_ara,
+  #          'Hydromorphie' = score_hyd_sol,
+  #          'CaCO3' = score_ca_actif,
+  #          'Entretien' = score_besoin_entretien, 
+  #          'Hauteur' = score_hauteur)
+  # 
+  final_result<-result
   return(final_result)
   
 }
