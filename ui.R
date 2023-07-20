@@ -37,9 +37,9 @@ body <- dashboardBody(
               
               tabPanel("Flanders Tree Advisor (DENTRO)", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), # module selecmap avec les données de l'Afrique
               
-              tabPanel("Shade Tree Advice (coffee and cocoa)", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA))#, # module selecmap avec les données de l'Amérique
+              tabPanel("Shade Tree Advice (coffee and cocoa)", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), # module selecmap avec les données de l'Amérique
               
-              # tabPanel("Deciduous (fruit trees in France)", moduleTabInterface_ui(id = "deciduous", regionDF = AsiaDF)) # module selecmap avec les données de l'Asie
+              tabPanel("Deciduous (fruit trees in France)", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)) # module selecmap avec les données de l'Asie
               
             )
             

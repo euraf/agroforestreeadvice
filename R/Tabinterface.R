@@ -88,7 +88,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       compactcontrols<-reactive({
         reshapecontrols(interface, language=language())
       }) # compactcontrols() is a dataframe of controls (object type, criteria (for site controls) or BigCriteria (for objective controls) (=object name), and their labels, and the choices (for SelectInput and CheckboxGroup)
-      #observe(print(str(head(compactcontrols()))))
+      observe(print(str(head(compactcontrols()))))
       
       #reactive value of formatted inputs for computing suitability
       reformattedinputs<-reactive({
