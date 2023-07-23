@@ -76,6 +76,34 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
 }
 
 
+#' orders a df of species scores by a given side (or, in the future, a weight between effecttraits and responsetraits)
+#'
+#' @param df a data frame of scores with columns "side", "BigCriteria", "English.name", "Scientific.name", "value"
+#' @param orderby currently= either "effecttrait or responsetrait, in the future: weight of effecttrait (0= order by responsetrait, 1 = order by effecttrait, in between = weighted mean of both)
+#' @param idvariable variable to use as ordered factor, it should give unique id to each row
+#' @param interface data.frame describing the interface of the app for this database, with columns "initialorder" (not used), "side" (either reponsetrait or effecttrait), "order" (not used), "BigCriteria", "criteria", "choice", "objecttype" (checkbox, Selectinput etc...), "weightwithincriteria" (not used for now), "BigCriteria_en", "criteria_en", "choice_en" and other colums for translations in other languages
+#' #'
+#' @return a data frame of scores with columns "side", "BigCriteria", "English.name", "Scientific.name", "value", "species" (the idvariable as an ordered factor), ordered by orderby
+#' @export
+#'
+#' @examples
+orderdf<-function(df, orderby, idvariable, interface){
+  # Calculate the sum of the variables in orderby for each species to find the correct order
+  linestokeep<-df$BigCriteria %in% unique(interface[!is.na(interface$side) & interface$side==orderby, c("BigCriteria")])
+  if(sum(linestokeep)==0) linestokeep=TRUE
+  species_order <- df[linestokeep,]
+  species_order<-aggregate(species_order[,"value", drop=FALSE], by=species_order[,idvariable, drop=FALSE], sum, na.rm=TRUE)
+  species_order<-species_order[order(species_order$value, decreasing=FALSE),]
+  species_order<-species_order[,idvariable] 
+  species_order[!is.na(species_order)]
+  
+  # Reorder the levels of the species variable based on the sum
+  df$species <- factor(df[,idvariable], levels = species_order)
+  #reorder rows
+  df<-df[order(df$species, decreasing=FALSE), c("species", setdiff(names(df), "species"))]
+  return(df)
+}
+
 #' compute_suitability for Flanders data
 #'
 #' @param inputsdata named character vector of choices (for response traits) or Big criteria (for effect traits) made by the user, warning: these are the values internal to the interface, not the labels seen on the screen (which depend on language) ; the names are 
@@ -140,15 +168,8 @@ compute_suitability_DENTRO<-function(inputsdata=NULL,
   
   df<-rbind(toto, titi)
   
-  # Calculate the sum of the variables in orderby for each species to find the correct order
-  species_order <- df[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side==orderby, c("BigCriteria")],]
-  species_order<-aggregate(species_order[,"value", drop=FALSE], by=species_order[,c("English.name","Scientific.name")], sum, na.rm=TRUE)
-  species_order<-species_order[order(species_order$value, decreasing=FALSE),]
-  species_order<-species_order$English.name #I have to do it by english name because latin names are not unique
-  species_order[!is.na(species_order)]
+  df<-orderdf(df=df, orderby=orderby, idvariable="English.name", interface=interface) #I have to do it by english name because latin name is not unique (several cultivars of poplar)
   
-  # Reorder the levels of the species variable based on the sum
-  df$species <- factor(df$English.name, levels = species_order)
   # give negative values for response traits so that they appear on the left
   df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]<- -  df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]
   
@@ -214,17 +235,9 @@ compute_suitability_STA<-function(inputsdata=NULL,
   #just in case we end up wit hseveral lines for the same combination of tree and BigCriteria
   df<-aggregate(subsetDB[,"value", drop=FALSE], by=subsetDB[,c("side", "BigCriteria", "Tree_latin"), drop=FALSE], mean, na.rm=TRUE)
   
-  
-  # Calculate the sum of the variables in orderby for each species to find the correct order
-  #species_order <- df[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side==orderby, c("BigCriteria")],]
-  species_order<-df
-  species_order<-aggregate(species_order[,"value", drop=FALSE], by=species_order[,c("Tree_latin"), drop=FALSE], sum, na.rm=TRUE)
-  species_order<-species_order[order(species_order$value, decreasing=FALSE),]
-  species_order<-species_order$Tree_latin 
-  species_order[!is.na(species_order)]
-  
-  # Reorder the levels of the species variable based on the sum
-  df$species <- factor(df$Tree_latin, levels = species_order)
+  #order the df by latin name
+  df<-orderdf(df=df, orderby=orderby, idvariable="Tree_latin", interface=interface) #I have to do it by english name because latin name is not unique (several cultivars of poplar)
+
   # give negative values for response traits so that they appear on the left
   df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]<- -  df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]
   
