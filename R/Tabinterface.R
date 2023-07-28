@@ -295,18 +295,11 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       ## DT table----
       output$DTSuitability <- renderDT({
         datatoplot()
-      })
+      }, options = list(
+        order = list(list(1, 'desc'))
+      ))
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
     } # fin function(input, output, session)
     
   ) # fin moduleServer
