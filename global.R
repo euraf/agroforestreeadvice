@@ -7,6 +7,7 @@ library(ggplot2)
 #library(plotly)
 library(shinydashboard)
 library(DT)
+library(dplyr)
 ##global----
 
 #load("~/a_ABSYS/autreschercheurs/BertReubens/FlandersTreeAdvice/dataDENTRO.Rdata")
@@ -15,6 +16,7 @@ library(DT)
 load("dataSTA.Rdata")
 load("dataFlanders.Rdata")
 load("dataDeciduous.Rdata")
+load("dataSCSM.Rdata")
 
 
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
@@ -23,13 +25,15 @@ interfaceDENTRO<-interfaceDENTRO[!is.na(interfaceDENTRO$side),]
 interfaceDENTRO[1:length(interfaceDENTRO)]<-lapply(interfaceDENTRO[1:length(interfaceDENTRO)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceDECIDUOUS<-interfaceDECIDUOUS[!is.na(interfaceDECIDUOUS$side),]
 interfaceDECIDUOUS[1:length(interfaceDECIDUOUS)]<-lapply(interfaceDECIDUOUS[1:length(interfaceDECIDUOUS)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceSCSM<-interfaceSCSM[!is.na(interfaceSCSM$side),]
+interfaceSCSM[1:length(interfaceSCSM)]<-lapply(interfaceSCSM[1:length(interfaceSCSM)], function(x) gsub(pattern=",", replacement=".", x=x))
 
-toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS)), split="_")
+toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives=TRUE){
   print("reshapecontrols")
-  #print(str(controls))
+  print(str(controls))
   print(paste("language=", language))
   toto<-strsplit(c(names(controls)), split="_")
   languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
@@ -61,11 +65,13 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
   if (compactconditions) {message("compact conditions not yet coded")}
   if(compactobjectives){
     bigeffects<-unique(compact[compact$side=="effecttrait", c("side", "BigCriteria", "order", "labelBigCriteria")])
-    bigeffects$criteria<-bigeffects$BigCriteria
-    bigeffects$labelcriteria<-bigeffects$labelBigCriteria
-    bigeffects$choice<-""
-    bigeffects$labelchoice<-""
-    bigeffects$objecttype<-"checkboxInput"
+    if(length(bigeffects$side) > 0) {
+      bigeffects$criteria<-bigeffects$BigCriteria
+      bigeffects$labelcriteria<-bigeffects$labelBigCriteria
+      bigeffects$choice<-""
+      bigeffects$labelchoice<-""
+      bigeffects$objecttype<-"checkboxInput"
+    }
     #message(paste(c(names(compact), names(bigeffects)), collapse=" "))
     compact<-rbind(compact[compact$side=="responsetrait",],bigeffects)
   }
@@ -468,6 +474,35 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   final_result<-data.frame(species="not coded yet", side="responsetrait", value=1, BigCriteria="The scoring function is not finalised yet")
   return(final_result)
   
+}
+
+
+compute_suitability_SCSM<-function(inputsdata=NULL,
+                                        database, 
+                                        interface,
+                                        orderby="responsetrait"){
+  
+  database['BigCriteria']='climate'
+  database['side']='responsetrait'
+  
+  database['species_phylogenetic']=database['species']
+  database['species']=database['nameCommon']
+  
+  
+  # Calulate value for temperature
+  database_temp = database
+  database_temp['criteria'] = 'temperature'
+  temperature = as.numeric(inputsdata["temperature"])
+  database_temp = mutate(database_temp, value = ifelse(temperature_min<=temperature & temperature<=temperature_max, 1, -1))  
+  
+  # Calulate value for precipitation
+  database_precipitation = database
+  database_precipitation['criteria'] = 'precipitation'
+  precipitation = as.numeric(inputsdata["precipitation"])
+  database_precipitation = mutate(database_precipitation, value = ifelse(precipitation_min<=precipitation & precipitation<=precipitation_max, 1, -1))  
+
+  return(rbind(database_temp, database_precipitation))
+
 }
 
 #colorscontrols<-c("")
