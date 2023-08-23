@@ -33,11 +33,11 @@ languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives=TRUE){
   print("reshapecontrols")
-  print(str(controls))
-  print(paste("language=", language))
+  #print(str(controls))
+  #print(paste("language=", language))
   toto<-strsplit(c(names(controls)), split="_")
   languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
-  print(paste("languages=", paste(languages, collapse=",")))
+  #print(paste("languages=", paste(languages, collapse=",")))
   if(is.null(language) ) language<-"en"
   if(! language %in% languages) {print(paste(language, "is not in the languages available for this interface, so defaulting to english"))
     language<-"en"
@@ -99,14 +99,15 @@ orderdf<-function(df, orderby, idvariable, interface){
   if(sum(linestokeep)==0) linestokeep=TRUE
   species_order <- df[linestokeep,]
   species_order<-aggregate(species_order[,"value", drop=FALSE], by=species_order[,idvariable, drop=FALSE], sum, na.rm=TRUE)
-  species_order<-species_order[order(species_order$value, decreasing=FALSE),]
+  species_order<-species_order[order(species_order$value, decreasing=TRUE),]
   species_order<-species_order[,idvariable] 
   species_order[!is.na(species_order)]
   
   # Reorder the levels of the species variable based on the sum
   df$species <- factor(df[,idvariable], levels = species_order)
   #reorder rows
-  df<-df[order(df$species, decreasing=FALSE), c("species", setdiff(names(df), "species"))]
+  df<-df[order(df$species, decreasing=TRUE), c("species", setdiff(names(df), "species"))] 
+  #decreasing = TRUE so that the best are on top in the dataframe (best = first in the levels of the factor)
   return(df)
 }
 

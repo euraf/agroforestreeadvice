@@ -45,12 +45,22 @@ moduleTabInterface_UI <- function(id, data, interface) {
         width=NULL,
         fluidRow(
           column(width=12,
-                 radioButtons(inputId=ns("orderby"), label="Order By", 
-                              choices=c(Adaptation="responsetrait", Efficiency="effecttrait"),
-                              selected="responsetrait", inline=TRUE),
-                 plotOutput((ns("barplot_suitability")))
-                            
+                 fluidRow(
+                   div(style="display: inline-block;vertical-align:top; width: 20px;", HTML("<br>")), #because else the orderby radiobuttons start out of the box
+                   div(style="display: inline-block;vertical-align:top; width: 300px;",
+                       radioButtons(inputId=ns("orderby"), label="Order By", 
+                                    choices=c(Adaptation="responsetrait", Efficiency="effecttrait"),
+                                    selected="responsetrait", inline=TRUE)),
+                   div(style="display: inline-block;vertical-align:top; width: 100px;",
+                       HTML("<br>")),
+                   div(style="display: inline-block;vertical-align:top; width: 200px;",
+                       numericInput(inputId=ns("barplotfrom"), label="Display from the xth", value=1)),
+                   div(style="display: inline-block;vertical-align:top; width: 200px;",
+                       numericInput(inputId=ns("barplotto"), label="to the yth", value=20))
                  ),
+                 plotOutput((ns("barplot_suitability")))
+                 
+          ),
           column(width=12,
                  DTOutput(outputId = ns("DTSuitability"))
           )
@@ -88,7 +98,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       compactcontrols<-reactive({
         reshapecontrols(interface, language=language())
       }) # compactcontrols() is a dataframe of controls (object type, criteria (for site controls) or BigCriteria (for objective controls) (=object name), and their labels, and the choices (for SelectInput and CheckboxGroup)
-      observe(print(str(head(compactcontrols()))))
+      #observe(print(str(head(compactcontrols()))))
       
       #reactive value of formatted inputs for computing suitability
       reformattedinputs<-reactive({
@@ -101,12 +111,14 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         return(allinputs)
       })#reformattedinputs() is a named character of choices of the user (with the checkbox name for TRUE checkboxes)
       #observe(print(str(reformattedinputs())))
+      
       # output$controlOutput <- renderPrint({
       #   # Only update controlOutput if the button is clicked
       #   #req(buttonClicked())
       #   reformattedinputs()
       # })
       
+      #for a strange reason, it seems we cannot use the input$whatever values directly, they need to go through a reactive value
       # reactive of radiobutton to reorder the data
       orderby<-reactive(
         return(input$orderby)
@@ -119,6 +131,14 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         buttonClicked(TRUE)
       })
       
+      #reactive keeping the range of species to plot
+      rangetoplot<-reactiveValues(from=1, to=20)
+      observeEvent(input$barplotfrom, {
+        rangetoplot$from<<-input$barplotfrom
+      })
+      observeEvent(input$barplotto, {
+        rangetoplot$to<<-input$barplotto
+      })
       
       datatoplot<-reactive({
         allinputs<-reformattedinputs() 
@@ -143,7 +163,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         #print(str(dfSuitability))
         return(dfSuitability)
       }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
-
+      
       
       
       
@@ -280,10 +300,17 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         print("plot")
         #  setdiff(names(allinputs), c("orderby", "sidebarCollapsed", "ab_compute", "in_language", "sidebarItemExpanded"))]
         #browser()
-        plot_Suitability<-ggplot(datatoplot(), aes(x = value, y = species, fill = BigCriteria)) +
+        databis<-datatoplot()
+        print(str(databis))
+        print(str(as.numeric(databis$species)))
+        #select only the range of species to display (user choice, by default 1 to 20), species is an ordered vector
+        databis<-databis[as.numeric(databis$species)>=rangetoplot$from 
+                         & as.numeric(databis$species)<=rangetoplot$to ,]
+        plot_Suitability<-ggplot(databis, aes(x = value, y = species, fill = BigCriteria)) +
           #geom_rect(aes(xmin = -Inf, xmax = 0, ymin = -Inf, ymax = Inf), fill = "#ffcccc", alpha = 0.5) +
           #geom_rect(aes(xmin = 0, xmax = Inf, ymin = -Inf, ymax = Inf), fill = "#ccccff", alpha = 0.5) +
           geom_bar(stat = "identity", position = "stack") +
+          scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
           #scale_fill_manual(values = colors) +
           theme_minimal() +
@@ -297,10 +324,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         datatoplot()
       }, options = list(
         scrollX = TRUE,
-        order = list(list(1, 'desc'))
+        order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
       ))
       
-
+      
     } # fin function(input, output, session)
     
   ) # fin moduleServer
