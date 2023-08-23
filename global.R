@@ -7,7 +7,7 @@ library(ggplot2)
 #library(plotly)
 library(shinydashboard)
 library(DT)
-library(dplyr)
+#library(dplyr)
 ##global----
 
 #load("~/a_ABSYS/autreschercheurs/BertReubens/FlandersTreeAdvice/dataDENTRO.Rdata")
@@ -494,15 +494,35 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   database_temp = database
   database_temp['criteria'] = 'temperature'
   temperature = as.numeric(inputsdata["temperature"])
-  database_temp = mutate(database_temp, value = ifelse(temperature_min<=temperature & temperature<=temperature_max, 1, -1))  
+  #database_temp = mutate(database_temp, value = ifelse(temperature_min<=temperature & temperature<=temperature_max, 1, -1))  
+  #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
+  #also, I give the value 0 if it is outside the range because the app expects a score from 0 to Inf
+  database_temp$value<-ifelse(database_temp$temperature_min<=temperature & temperature<=database_temp$temperature_max, 1, 0)
   
   # Calulate value for precipitation
   database_precipitation = database
   database_precipitation['criteria'] = 'precipitation'
   precipitation = as.numeric(inputsdata["precipitation"])
-  database_precipitation = mutate(database_precipitation, value = ifelse(precipitation_min<=precipitation & precipitation<=precipitation_max, 1, -1))  
-
-  return(rbind(database_temp, database_precipitation))
+  #database_precipitation = mutate(database_precipitation, value = ifelse(precipitation_min<=precipitation & precipitation<=precipitation_max, 1, -1))  
+  #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
+  #also, I give the value 0 if it is outside the range because the app expects a score from 0 to Inf
+  database_precipitation$value<-ifelse(database_precipitation$temperature_min<=temperature & temperature<=database_precipitation$temperature_max, 1, 0)
+  
+  dbfinal<-rbind(database_temp, database_precipitation)
+  
+  #to allow correct display in the barplot, values for response traits
+  #order the df by orderby, using latin name as id (ads an id variable, which is a factor with levels ordered by the orderby side)
+  #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
+  # to do: separate computation of score and ordering of the species
+  dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable='species_phylogenetic', interface=interface) 
+  
+  # give negative values for response traits so that they appear on the left
+  dbfinal$value<- -dbfinal$value
+  
+  #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
+  print("fin suitability")
+  
+  return(dbfinal)
 
 }
 
