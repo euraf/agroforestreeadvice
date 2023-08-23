@@ -296,6 +296,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       output$DTSuitability <- renderDT({
         datatoplot()
       }, options = list(
+        scrollX = TRUE,
         order = list(list(1, 'desc'))
       ))
       
