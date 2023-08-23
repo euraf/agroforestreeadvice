@@ -3,7 +3,7 @@
 
 # header ----
 
-header <- dashboardHeader(title = "DigitAF tree Advice")
+header <- dashboardHeader(title = "AgroforesTreeAdvice")
 
 
 # sidebar ----
