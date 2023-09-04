@@ -29,6 +29,12 @@ server <- function(input, output, session) {
                             language= language,
                             data=dataDECIDUOUS, interface=interfaceDECIDUOUS, functionSuitability=compute_suitability_DECIDUOUS)
   
+  # Species Climate Suitability Model ----
+  
+  moduleTabInterface_Server(id = "SCSM",
+                            language= language,
+                            data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM)
+  
   
 }
 

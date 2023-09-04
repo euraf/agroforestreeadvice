@@ -7,6 +7,7 @@ library(ggplot2)
 #library(plotly)
 library(shinydashboard)
 library(DT)
+#library(dplyr)
 ##global----
 
 #load("~/a_ABSYS/autreschercheurs/BertReubens/FlandersTreeAdvice/dataDENTRO.Rdata")
@@ -15,6 +16,7 @@ library(DT)
 load("dataSTA.Rdata")
 load("dataFlanders.Rdata")
 load("dataDeciduous.Rdata")
+load("dataSCSM.Rdata")
 
 
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
@@ -23,17 +25,19 @@ interfaceDENTRO<-interfaceDENTRO[!is.na(interfaceDENTRO$side),]
 interfaceDENTRO[1:length(interfaceDENTRO)]<-lapply(interfaceDENTRO[1:length(interfaceDENTRO)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceDECIDUOUS<-interfaceDECIDUOUS[!is.na(interfaceDECIDUOUS$side),]
 interfaceDECIDUOUS[1:length(interfaceDECIDUOUS)]<-lapply(interfaceDECIDUOUS[1:length(interfaceDECIDUOUS)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceSCSM<-interfaceSCSM[!is.na(interfaceSCSM$side),]
+interfaceSCSM[1:length(interfaceSCSM)]<-lapply(interfaceSCSM[1:length(interfaceSCSM)], function(x) gsub(pattern=",", replacement=".", x=x))
 
-toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS)), split="_")
+toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives=TRUE){
   print("reshapecontrols")
   #print(str(controls))
-  print(paste("language=", language))
+  #print(paste("language=", language))
   toto<-strsplit(c(names(controls)), split="_")
   languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
-  print(paste("languages=", paste(languages, collapse=",")))
+  #print(paste("languages=", paste(languages, collapse=",")))
   if(is.null(language) ) language<-"en"
   if(! language %in% languages) {print(paste(language, "is not in the languages available for this interface, so defaulting to english"))
     language<-"en"
@@ -61,11 +65,13 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
   if (compactconditions) {message("compact conditions not yet coded")}
   if(compactobjectives){
     bigeffects<-unique(compact[compact$side=="effecttrait", c("side", "BigCriteria", "order", "labelBigCriteria")])
-    bigeffects$criteria<-bigeffects$BigCriteria
-    bigeffects$labelcriteria<-bigeffects$labelBigCriteria
-    bigeffects$choice<-""
-    bigeffects$labelchoice<-""
-    bigeffects$objecttype<-"checkboxInput"
+    if(length(bigeffects$side) > 0) {
+      bigeffects$criteria<-bigeffects$BigCriteria
+      bigeffects$labelcriteria<-bigeffects$labelBigCriteria
+      bigeffects$choice<-""
+      bigeffects$labelchoice<-""
+      bigeffects$objecttype<-"checkboxInput"
+    }
     #message(paste(c(names(compact), names(bigeffects)), collapse=" "))
     compact<-rbind(compact[compact$side=="responsetrait",],bigeffects)
   }
@@ -93,14 +99,15 @@ orderdf<-function(df, orderby, idvariable, interface){
   if(sum(linestokeep)==0) linestokeep=TRUE
   species_order <- df[linestokeep,]
   species_order<-aggregate(species_order[,"value", drop=FALSE], by=species_order[,idvariable, drop=FALSE], sum, na.rm=TRUE)
-  species_order<-species_order[order(species_order$value, decreasing=FALSE),]
+  species_order<-species_order[order(species_order$value, decreasing=TRUE),]
   species_order<-species_order[,idvariable] 
   species_order[!is.na(species_order)]
   
   # Reorder the levels of the species variable based on the sum
   df$species <- factor(df[,idvariable], levels = species_order)
   #reorder rows
-  df<-df[order(df$species, decreasing=FALSE), c("species", setdiff(names(df), "species"))]
+  df<-df[order(df$species, decreasing=TRUE), c("species", setdiff(names(df), "species"))] 
+  #decreasing = TRUE so that the best are on top in the dataframe (best = first in the levels of the factor)
   return(df)
 }
 
@@ -468,6 +475,55 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   final_result<-data.frame(species="not coded yet", side="responsetrait", value=1, BigCriteria="The scoring function is not finalised yet")
   return(final_result)
   
+}
+
+
+compute_suitability_SCSM<-function(inputsdata=NULL,
+                                        database, 
+                                        interface,
+                                        orderby="responsetrait"){
+  
+  database['BigCriteria']='climate'
+  database['side']='responsetrait'
+  
+  database['species_phylogenetic']=database['species']
+  database['species']=database['nameCommon']
+  
+  
+  # Calulate value for temperature
+  database_temp = database
+  database_temp['criteria'] = 'temperature'
+  temperature = as.numeric(inputsdata["temperature"])
+  #database_temp = mutate(database_temp, value = ifelse(temperature_min<=temperature & temperature<=temperature_max, 1, -1))  
+  #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
+  #also, I give the value 0 if it is outside the range because the app expects a score from 0 to Inf
+  database_temp$value<-ifelse(database_temp$temperature_min<=temperature & temperature<=database_temp$temperature_max, 1, 0)
+  
+  # Calulate value for precipitation
+  database_precipitation = database
+  database_precipitation['criteria'] = 'precipitation'
+  precipitation = as.numeric(inputsdata["precipitation"])
+  #database_precipitation = mutate(database_precipitation, value = ifelse(precipitation_min<=precipitation & precipitation<=precipitation_max, 1, -1))  
+  #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
+  #also, I give the value 0 if it is outside the range because the app expects a score from 0 to Inf
+  database_precipitation$value<-ifelse(database_precipitation$temperature_min<=temperature & temperature<=database_precipitation$temperature_max, 1, 0)
+  
+  dbfinal<-rbind(database_temp, database_precipitation)
+  
+  #to allow correct display in the barplot, values for response traits
+  #order the df by orderby, using latin name as id (ads an id variable, which is a factor with levels ordered by the orderby side)
+  #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
+  # to do: separate computation of score and ordering of the species
+  dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable='species_phylogenetic', interface=interface) 
+  
+  # give negative values for response traits so that they appear on the left
+  dbfinal$value<- -dbfinal$value
+  
+  #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
+  print("fin suitability")
+  
+  return(dbfinal)
+
 }
 
 #colorscontrols<-c("")

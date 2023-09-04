@@ -1,11 +1,13 @@
-# agroforestreeadvice
+# AgroforesTreeAdvice
 Decision Support System to help choose tree species/varieties/rootstocks for agroforestry systems
 the tool can be tested here: https://gosme.shinyapps.io/agroforestreeadvice/
 
 Contributors to code:
 Marie Gosme
-Clément Rigal
 Raphael Paut
+Clément Rigal
+Birk Skyum
+
 
 Contributors to databases:
 DENTRO:
@@ -30,5 +32,9 @@ Sigrun WAGNER
 Sophie GRAEFE
 Baptiste CAMUS
 Juan Carlos Villalba Malaver
+
+SCSM :
+Birk Skyum
+Kristoffer Ronn-ANderson
 
 
