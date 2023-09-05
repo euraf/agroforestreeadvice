@@ -19,6 +19,9 @@ load("dataDeciduous.Rdata")
 load("dataSCSM.Rdata")
 
 
+
+  
+
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
 interfaceSTA[1:length(interfaceSTA)]<-lapply(interfaceSTA[1:length(interfaceSTA)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceDENTRO<-interfaceDENTRO[!is.na(interfaceDENTRO$side),]
@@ -63,7 +66,7 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
   compact$order<-as.numeric(compact$order)
   #print(str(compact))
   if (compactconditions) {message("compact conditions not yet coded")}
-  if(compactobjectives){
+  if(compactobjectives){ #we keep only the bigCriteria for the objectives, not the detailed objectives
     bigeffects<-unique(compact[compact$side=="effecttrait", c("side", "BigCriteria", "order", "labelBigCriteria")])
     if(length(bigeffects$side) > 0) {
       bigeffects$criteria<-bigeffects$BigCriteria
@@ -71,7 +74,7 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
       bigeffects$choice<-""
       bigeffects$labelchoice<-""
       bigeffects$objecttype<-"checkboxInput"
-    }
+    } 
     #message(paste(c(names(compact), names(bigeffects)), collapse=" "))
     compact<-rbind(compact[compact$side=="responsetrait",],bigeffects)
   }
@@ -487,7 +490,8 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   database['side']='responsetrait'
   
   database['species_phylogenetic']=database['species']
-  database['species']=database['nameCommon']
+  #icici we use as id the combination genus species
+  database['idspecies']=paste(database$genus,database$species, sep=" ")
   
   
   # Calulate value for temperature
@@ -514,7 +518,15 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   #order the df by orderby, using latin name as id (ads an id variable, which is a factor with levels ordered by the orderby side)
   #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
   # to do: separate computation of score and ordering of the species
-  dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable='species_phylogenetic', interface=interface) 
+  dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable='idspecies', interface=interface) 
+  
+  
+  
+  
+  #todo, compute effectiveness based on effect traits and inputdata of objectives
+  
+  
+  
   
   # give negative values for response traits so that they appear on the left
   dbfinal$value<- -dbfinal$value
