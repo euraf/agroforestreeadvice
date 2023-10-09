@@ -425,8 +425,8 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   result$note_dispo[user_dispo=="userdispo_low" & result$bes_ent=="faible"]<-1
   result$note_dispo[user_dispo=="userdispo_low" & result$bes_ent=="moyen"]<-0.5
   result$note_dispo[user_dispo=="userdispo_low" & result$bes_ent=="fort"]<-0
-  
-  result$note_hauteur <- as.numeric((result[user_hauteur]=="oui"))
+ 
+  result$note_hauteur <- as.numeric((result[gsub(pattern=" ", replacement=".", fixed=TRUE, x= user_hauteur)]=="oui"))
   
   # on crée les colonnes scores pour chaque critère et la colonne score global
   result$score_gel_tardif = result$note_gel_tardif * (6 - crit_esp_sensibilite_gel_tardif) # inverstion de score car l'echelle etait inversee sur google doc
@@ -482,6 +482,7 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
           "hauteur")
   )
   responses$side<-"responsetrait"
+  responses$side[responses$time=="hauteur"]<-"effecttrait"
   responses$value<- responses$"score_" 
   BC<-unique(interface[,c("BigCriteria", "criteria")]) ; rownames(BC)<-BC$criteria
   responses$BigCriteria<-BC[paste("user_", responses$time, sep=""),"BigCriteria"]
