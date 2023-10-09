@@ -336,7 +336,32 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       ## DT table----
       output$DTSuitability <- renderDT({
-        datatoplot()
+        
+        datalong<-datatoplot()
+        datalong[datalong$side=="responsetrait", "value"]<- -datalong[datalong$side=="responsetrait", "value"]
+        if("criteria" %in% names(datalong)) {
+          #datalong<-datalong[order(datalong$side, datalong$criteria, datalong$species),]
+          datawide<-reshape(datalong[,c("species", "criteria", "value")], direction="wide",
+                  v.names="value",
+                  timevar="criteria",
+                  idvar=c("species")
+          )
+          crits<-unique(datalong[,c("side", "criteria")])
+          crits$criteria<-paste("value", crits$criteria, sep=".")
+          } else {
+          #datalong<-datalong[order(datalong$side, datalong$BigCriteria, datalong$species),]
+          datawide<-reshape(datalong[,c("species", "BigCriteria", "value")], direction="wide",
+                  v.names="value",
+                  timevar="BigCriteria",
+                  idvar=c("species")
+          )
+          crits<-unique(datalong[,c("side", "BigCriteria")])
+          crits$criteria<-paste("value", crits$BigCriteria, sep=".")
+        }
+        datawide$adaptation.score<-rowSums(datawide[, crits$criteria[crits$side=="responsetrait"]],na.rm=TRUE)
+        datawide$efficiency.score<-rowSums(datawide[, crits$criteria[crits$side=="effecttrait"]],na.rm=TRUE)
+        
+        datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
       }, options = list(
         scrollX = TRUE,
         order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
