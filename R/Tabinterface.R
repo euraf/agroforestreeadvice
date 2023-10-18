@@ -100,12 +100,17 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       }) # compactcontrols() is a dataframe of controls (object type, criteria (for site controls) or BigCriteria (for objective controls if compactobjectives is true) (=object name), and their labels, and the choices (for SelectInput and CheckboxGroup)
       #observe(print(str(head(compactcontrols()))))
       
-      #reactive value of formatted inputs for computing suitability
+      #reactive value of formatted inputs for computing suitability (icicicici : now I regret reformatting: lists are more versatile than character vectors, but for legacy reasons, suitability functions expect character vectors.)
+      #to do in the future: move the formatting to inside the suitability functions that need character vector, and allow suitability fnctions to accept lists as inputs
       reformattedinputs<-reactive({
         allinputs <- controlData()
         reformated<-character()
         if(length(allinputs)>0) {
-          message("initial inputs:") ; message(str(allinputs))
+          message("initial inputs:") ; message(str(allinputs)) 
+          # List of things (chr for selectInput, 
+          #                 chr vector for checkboxGroupInput,
+          #                 int for numericInput,
+          #                 logical for checkbox)
           #transform checked checkboxes into their name
           checkboxyes<-sapply(allinputs, function (x) all(is.logical(x) & as.logical(x)))
           if(sum(checkboxyes)>0){
@@ -114,7 +119,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             checked<-checked[checked!="FALSE"]
             reformated<-c(reformated, checked)
           }
-          #transform selectInputs and checkboxgroupInputs to character vectors
+          #transform numericInput selectInputs and checkboxgroupInputs to character vectors
           notcheckbox<-sapply(allinputs, function (x) !is.logical(x))
           if(sum(notcheckbox)>0){
             reformated<-c(reformated, unlist(allinputs[notcheckbox]))
@@ -211,7 +216,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             checkboxInput=checkboxInput(input_id, label = labelinput),
             numericInput=numericInput(input_id, label = labelinput, value = 0),
             selectInput=selectInput(input_id, label = labelinput, choices = choices),
-            checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices)
+            checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices),
+            sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices)))
             # Add more control types as needed
           )
           
@@ -243,7 +249,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             checkboxInput=checkboxInput(input_id, label = labelinput),
             numericInput=numericInput(input_id, label = labelinput, value = 0),
             selectInput=selectInput(input_id, label = labelinput, choices = choices),
-            checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices)
+            checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices),
+            sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices)))
             # Add more control types as needed
           )
           
@@ -338,31 +345,38 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       output$DTSuitability <- renderDT({
         
         datalong<-datatoplot()
-        datalong[datalong$side=="responsetrait", "value"]<- -datalong[datalong$side=="responsetrait", "value"]
-        if("criteria" %in% names(datalong)) {
-          #datalong<-datalong[order(datalong$side, datalong$criteria, datalong$species),]
-          datawide<-reshape(datalong[,c("species", "criteria", "value")], direction="wide",
-                  v.names="value",
-                  timevar="criteria",
-                  idvar=c("species")
-          )
-          crits<-unique(datalong[,c("side", "criteria")])
-          crits$criteria<-paste("value", crits$criteria, sep=".")
+        if(datalong$species != "no data yet") {
+          datalong[datalong$side=="responsetrait", "value"]<- -datalong[datalong$side=="responsetrait", "value"]
+          if("criteria" %in% names(datalong)) {
+            #datalong<-datalong[order(datalong$side, datalong$criteria, datalong$species),]
+            datawide<-reshape(datalong[,c("species", "criteria", "value")], direction="wide",
+                              v.names="value",
+                              timevar="criteria",
+                              idvar=c("species")
+            )
+            crits<-unique(datalong[,c("side", "criteria")])
+            crits$criteria<-paste("value", crits$criteria, sep=".")
           } else {
-          #datalong<-datalong[order(datalong$side, datalong$BigCriteria, datalong$species),]
-          datawide<-reshape(datalong[,c("species", "BigCriteria", "value")], direction="wide",
-                  v.names="value",
-                  timevar="BigCriteria",
-                  idvar=c("species")
-          )
-          crits<-unique(datalong[,c("side", "BigCriteria")])
-          crits$criteria<-paste("value", crits$BigCriteria, sep=".")
-        }
-        datawide$adaptation.score<-rowSums(datawide[, crits$criteria[crits$side=="responsetrait"]],na.rm=TRUE)
-        datawide$efficiency.score<-rowSums(datawide[, crits$criteria[crits$side=="effecttrait"]],na.rm=TRUE)
-        
-        datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
-      }, options = list(
+            #datalong<-datalong[order(datalong$side, datalong$BigCriteria, datalong$species),]
+            datawide<-reshape(datalong[,c("species", "BigCriteria", "value")], direction="wide",
+                              v.names="value",
+                              timevar="BigCriteria",
+                              idvar=c("species")
+            )
+            crits<-unique(datalong[,c("side", "BigCriteria")])
+            crits$criteria<-paste("value", crits$BigCriteria, sep=".")
+          }
+          if(any(crits$side=="responsetrait")){
+            datawide$adaptation.score<-rowSums(datawide[, crits$criteria[crits$side=="responsetrait"], drop=FALSE],na.rm=TRUE)
+          } else datawide$adaptation.score<-0
+          if(any(crits$side=="effecttrait")){
+            datawide$efficiency.score<-rowSums(datawide[, crits$criteria[crits$side=="effecttrait"], drop=FALSE],na.rm=TRUE)
+          } else datawide$efficiency.score<-0
+          
+          datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
+          
+        } else {datalong}
+        }, options = list(
         scrollX = TRUE,
         order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
       ))
