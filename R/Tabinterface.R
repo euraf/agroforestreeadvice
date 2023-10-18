@@ -73,7 +73,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
 
 # Fonction server du module ----
 #language is a reactive value from the main app
-moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO) {
+moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) {
   
   moduleServer(
     id,
@@ -96,19 +96,33 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       #reactive to define the controls of the module (site (=> responsetraits) and objectives (=> effecttraits))
       compactcontrols<-reactive({
-        reshapecontrols(interface, language=language())
-      }) # compactcontrols() is a dataframe of controls (object type, criteria (for site controls) or BigCriteria (for objective controls) (=object name), and their labels, and the choices (for SelectInput and CheckboxGroup)
+        reshapecontrols(interface, language=language(), compactobjectives=compactobjectives)
+      }) # compactcontrols() is a dataframe of controls (object type, criteria (for site controls) or BigCriteria (for objective controls if compactobjectives is true) (=object name), and their labels, and the choices (for SelectInput and CheckboxGroup)
       #observe(print(str(head(compactcontrols()))))
       
       #reactive value of formatted inputs for computing suitability
       reformattedinputs<-reactive({
         allinputs <- controlData()
-        #transform 
-        checkboxyes<-sapply(allinputs, function (x) (is.logical(x) & as.logical(x)))
-        allinputs<-unlist(allinputs)
-        allinputs[checkboxyes]<- names(allinputs)[checkboxyes]
-        allinputs<-allinputs[allinputs!="FALSE"]
-        return(allinputs)
+        reformated<-character()
+        if(length(allinputs)>0) {
+          message("initial inputs:") ; message(str(allinputs))
+          #transform checked checkboxes into their name
+          checkboxyes<-sapply(allinputs, function (x) all(is.logical(x) & as.logical(x)))
+          if(sum(checkboxyes)>0){
+            checked<-unlist(allinputs)
+            checked[checkboxyes]<- names(checked)[checkboxyes]
+            checked<-checked[checked!="FALSE"]
+            reformated<-c(reformated, checked)
+          }
+          #transform selectInputs and checkboxgroupInputs to character vectors
+          notcheckbox<-sapply(allinputs, function (x) !is.logical(x))
+          if(sum(notcheckbox)>0){
+            reformated<-c(reformated, unlist(allinputs[notcheckbox]))
+          }
+        }
+        message("reformated inputs:"); message(str(reformated))
+        return(reformated)
+
       })#reformattedinputs() is a named character of choices of the user (with the checkbox name for TRUE checkboxes)
       #observe(print(str(reformattedinputs())))
       
@@ -175,10 +189,11 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       #after that, when just the language is modified, we use update... to simply update the labels without redrawing the whole controls
       output$dynamicControlsResponse <- renderUI({
         message("init dynamicControlsResponse")
-        #print(str(compactcontrols()))
+        print(str(compactcontrols()))
         #initcompactcontrols<-reshapecontrols(interface, language="en")
         initcompactcontrols<-compactcontrols()
         responsecontrols<-which(initcompactcontrols$side=="responsetrait")
+        print(str(responsecontrols))
         #browser()
         #print(responsecontrols)
         controls_list <- lapply(responsecontrols, function(i) {
@@ -321,7 +336,32 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       ## DT table----
       output$DTSuitability <- renderDT({
-        datatoplot()
+        
+        datalong<-datatoplot()
+        datalong[datalong$side=="responsetrait", "value"]<- -datalong[datalong$side=="responsetrait", "value"]
+        if("criteria" %in% names(datalong)) {
+          #datalong<-datalong[order(datalong$side, datalong$criteria, datalong$species),]
+          datawide<-reshape(datalong[,c("species", "criteria", "value")], direction="wide",
+                  v.names="value",
+                  timevar="criteria",
+                  idvar=c("species")
+          )
+          crits<-unique(datalong[,c("side", "criteria")])
+          crits$criteria<-paste("value", crits$criteria, sep=".")
+          } else {
+          #datalong<-datalong[order(datalong$side, datalong$BigCriteria, datalong$species),]
+          datawide<-reshape(datalong[,c("species", "BigCriteria", "value")], direction="wide",
+                  v.names="value",
+                  timevar="BigCriteria",
+                  idvar=c("species")
+          )
+          crits<-unique(datalong[,c("side", "BigCriteria")])
+          crits$criteria<-paste("value", crits$BigCriteria, sep=".")
+        }
+        datawide$adaptation.score<-rowSums(datawide[, crits$criteria[crits$side=="responsetrait"]],na.rm=TRUE)
+        datawide$efficiency.score<-rowSums(datawide[, crits$criteria[crits$side=="effecttrait"]],na.rm=TRUE)
+        
+        datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
       }, options = list(
         scrollX = TRUE,
         order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
