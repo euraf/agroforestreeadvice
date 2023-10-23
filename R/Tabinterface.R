@@ -345,7 +345,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       output$DTSuitability <- renderDT({
         
         datalong<-datatoplot()
-        if(datalong$species != "no data yet") {
+        if(datalong$species[1] != "no data yet") {
           datalong[datalong$side=="responsetrait", "value"]<- -datalong[datalong$side=="responsetrait", "value"]
           if("criteria" %in% names(datalong)) {
             #datalong<-datalong[order(datalong$side, datalong$criteria, datalong$species),]
