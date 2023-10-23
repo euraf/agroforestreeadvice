@@ -20,7 +20,7 @@ load("dataSCSM.Rdata")
 
 
 
-  
+
 
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
 interfaceSTA[1:length(interfaceSTA)]<-lapply(interfaceSTA[1:length(interfaceSTA)], function(x) gsub(pattern=",", replacement=".", x=x))
@@ -113,6 +113,64 @@ orderdf<-function(df, orderby, idvariable, interface){
   #decreasing = TRUE so that the best are on top in the dataframe (best = first in the levels of the factor)
   return(df)
 }
+
+#' Title
+#'
+#' @param criteria single name of a criteria for which to compute the score
+#' @param type #type of widget (one of "checkboxGroupInput", "selectInput", "sliderInput", "checkboxInput", "numericInput")
+#' @param inputs#character vector of reformatted inputs (until I update everything to accept lists)
+#' @param db #database of species characteristics
+#' @param BigCriteria #big criteria to which the criteria belongs
+#' @param side #side to which the criteria belongs (one of "responsetrait", "effecttrait")
+#' @param yesindicator #value used in the database to indicate that the species fits this criteria (by default, "yes", "oui", "x", "T", "TRUE")
+#'
+#' @return a (long) data.frame of the initial database (I know it is not most efficient) with added columns "value" (with the value of the score for the criteria), "BigCriteria" and "side" ; rbinded for each criteria
+#' @export
+#'
+#' @examples
+default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "T", "TRUE")){
+  if (type=="checkboxGroupInput"){
+    #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
+    chosen<-inputs[grepl(pattern=criteria, x=names(inputs))]
+    services<-strsplit(db[,criteria], ",\\s*")
+    #count the number of characteristics %in% inputs to get the score
+    # Function to count the number of matching keywords
+    count_matching_keywords <- function(keyword_list) {
+      sum(keyword_list %in% chosen)
+    }
+    # Apply the function to each species
+    nbmatches <- sapply(services, count_matching_keywords)
+    #then divide by the number of possibilities to obtain score between 0 and 1
+    db$value<-nbmatches/length(chosen)
+  } else if (type=="selectInput") {
+    chosen<-inputs[criteria]
+    db$value<-as.numeric(db[,criteria]==chosen)
+  } else if (type=="checkboxInput") {
+    db$value<- as.numeric(db[,criteria] %in% yesindicator)
+  } else if (type=="sliderInput") {
+    chosen<-inputs[grepl(pattern=criteria, x=names(inputs))]
+    if(length(unique(chosen))==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
+      db$value<-as.numeric(db[,criteria]>=chosen[1] && db[,criteria]<=chosen[1])
+    } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
+      rangevalues<-range(as.numeric(db[,criteria]), na.rm=TRUE)
+      db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(chosen))/(rangevalues[2]-rangevalues[1]))
+    }
+  } else if (type=="numericInput") {
+    rangevalues<-range(as.numeric(db[,criteria]))
+    db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(inputs[criteria]))/(rangevalues[2]-rangevalues[1]))
+  }
+  db$criteria<-criteria
+  db$BigCriteria<-criteria
+  db$side<-side
+  return(db)
+}
+
+
+
+
+
+
+
 
 #' compute_suitability for Flanders data
 #'
@@ -283,7 +341,7 @@ compute_suitability_STA<-function(inputsdata=NULL,
     #we give the same adaptation score to all trees
     resultadapt<-merge(unique(database[,c("Tree_latin"), drop=FALSE]),
                        unique(interface[interface$side=="responsetrait",c("side", "BigCriteria", "criteria", "choice" )]))#,
-                       #all.x=TRUE)
+    #all.x=TRUE)
     resultadapt$value<-1
   }
   
@@ -377,7 +435,7 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   
   # stocke le tableau de données dans "result"
   result <- database
-
+  
   # # on met un 1, 0.5 ou 0 dans les cases qui respectent les critères d'entrée de l'utilisateur, et 0 si ce n'est pas le cas
   result$note_gel_tardif<-NA
   result$note_gel_tardif[user_risque_gel_tardif=="usergeltardif_low"]<-1
@@ -407,7 +465,7 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   result$note_irrigation[user_irrigation=="userirrigation_no" & result$sens_def_hyd_e=="moyenne"]<-0.5
   result$note_irrigation[user_irrigation=="userirrigation_no" & result$sens_def_hyd_e=="forte"]<-0
   
- 
+  
   result$note_prof_sol_ara<- as.numeric(result[,user_prof_sol_ara]=="oui")
   
   result$note_hyd_sol <- as.numeric((result[,user_hyd_sol]=="oui"))
@@ -425,7 +483,7 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   result$note_dispo[user_dispo=="userdispo_low" & result$bes_ent=="faible"]<-1
   result$note_dispo[user_dispo=="userdispo_low" & result$bes_ent=="moyen"]<-0.5
   result$note_dispo[user_dispo=="userdispo_low" & result$bes_ent=="fort"]<-0
- 
+  
   result$note_hauteur <- as.numeric((result[gsub(pattern=" ", replacement=".", fixed=TRUE, x= user_hauteur)]=="oui"))
   
   # on crée les colonnes scores pour chaque critère et la colonne score global
@@ -453,16 +511,16 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   
   # # on classe les r?sultats par note la plus haute
   #result <- result[order(-result$global_score),]
-   #agroforesTreeAdvice: add big criteria for the adaptation to species
+  #agroforesTreeAdvice: add big criteria for the adaptation to species
   responses<-reshape(result[,c("couple_espece_PG",
-                                     "score_gel_tardif",
-                                     "score_risk_def_hyd", "score_irrigation",
-                                     "score_prof_sol_ara",
-                                     "score_hyd_sol",
-                                     "score_ca_actif",
-                                     "score_dispo",
-                                     "score_hauteur"#,
-                                     #"global_score"
+                               "score_gel_tardif",
+                               "score_risk_def_hyd", "score_irrigation",
+                               "score_prof_sol_ara",
+                               "score_hyd_sol",
+                               "score_ca_actif",
+                               "score_dispo",
+                               "score_hauteur"#,
+                               #"global_score"
   )], direction="long",
   idvar="couple_espece_PG",
   varying=c("score_gel_tardif",
@@ -495,7 +553,7 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   effects$criteria<-effects$Espece
   
   df <- rbind(responses[,c("couple_espece_PG", "side", "value", "BigCriteria", "criteria")],
-                        effects[,c("couple_espece_PG", "side", "value", "BigCriteria", "criteria")])
+              effects[,c("couple_espece_PG", "side", "value", "BigCriteria", "criteria")])
   
   
   #just in case we end up wit hseveral lines for the same combination of tree and BigCriteria
@@ -547,12 +605,9 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
 #' @examples compute_suitability(inputsdata = c(countryregion="Vietnam (North-West Vietnam)", crop="Arabica coffee",	precipitation="Medium precipitation","biodiversity"), database=database, interface=interface)
 
 compute_suitability_SCSM<-function(inputsdata=NULL,
-                                        database, 
-                                        interface,
-                                        orderby="responsetrait"){
-  
-  database['BigCriteria']='climate'
-  database['side']='responsetrait'
+                                   database, 
+                                   interface,
+                                   orderby="responsetrait"){
   
   database['species_phylogenetic']=database['species']
   #icici we use as id the combination genus species
@@ -562,6 +617,8 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   # Calulate value for temperature
   database_temp = database
   database_temp['criteria'] = 'temperature'
+  database_temp$BigCriteria<-"climate"
+  database_temp$side<-"responsetrait"
   temperature = as.numeric(inputsdata["temperature"])
   #database_temp = mutate(database_temp, value = ifelse(temperature_min<=temperature & temperature<=temperature_max, 1, -1))  
   #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
@@ -571,6 +628,8 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   # Calulate value for precipitation
   database_precipitation = database
   database_precipitation['criteria'] = 'precipitation'
+  database_precipitation$BigCriteria<-"climate"
+  database_precipitation$side<-"responsetrait"
   precipitation = as.numeric(inputsdata["precipitation"])
   #database_precipitation = mutate(database_precipitation, value = ifelse(precipitation_min<=precipitation & precipitation<=precipitation_max, 1, -1))  
   #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
@@ -579,47 +638,46 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   
   dbfinal<-rbind(database_temp, database_precipitation)
   
-  #todo, compute effectiveness based on effect traits and inputdata of objectives
-  database['BigCriteria']='climate'
-  database['side']='responsetrait'
-  computecrit<-function(characteristics,type=c("checkboxgroup", "selectinrange"),inputs){
-    if (type=="checkboxgroup"){
-      #strsplit the inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
-      #count the number of characteristics %in% inputs to get the score
-      #then divide by the number of possibilities to obtain score between 0 and 1
-    } else if (type=="selectinrange") {
-      #strsplit the inputs to find min and max, give score 1 if the species is within the chosen range
-    }
+  #todo, compute effectiveness based on effect traits and inputdata of objectives (generic functions that can be used also in future compute suitabilit functions)
+  
+  
+  toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
+  #rownames(toto)<-toto$criteria #in SCSM, utilities are a mix of several Big criteria
+     toto$BigCriteria[toto$criteria=="utilities"]<-"several"
+     toto<-unique(toto)
+     rownames(toto)<-toto$criteria
+  standardformcriteria<-c("utilities", "form", "height","lifespan")
+  for(crit in standardformcriteria){
+    dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
+                                                type= toto[crit, "objecttype"],
+                                                BigCriteria=toto[crit, "BigCriteria"],
+                                                side=toto[crit, "side"],
+                                                inputs=inputsdata, 
+                                                db=database))
   }
-  for (crit in c("utilities", "form", "height","lifespan")){
+
+ 
+  #for (crit in c("utilities", "form", "height","lifespan")){
     #if (!grepl("any", inputsdata[[crit]])) {
     #  database[,paste("score_", crit)]<-computecrit(database$crit, type=ifelse(crit=="utilities", ))
     #}
-  }
-  
-  
+    
+  #}
+  #browser()
   
   #order the df by orderby, using latin name as id (ads an id variable, which is a factor with levels ordered by the orderby side)
   #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
   # to do: separate computation of score and ordering of the species
   dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable='idspecies', interface=interface) 
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   # give negative values for response traits so that they appear on the left
-  dbfinal$value<- -dbfinal$value
+  dbfinal$value[dbfinal$side=="responsetrait"]<- -dbfinal$value[dbfinal$side=="responsetrait"]
   
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
   print("fin suitability")
   
   return(dbfinal)
-
+  
 }
 
 #colorscontrols<-c("")
