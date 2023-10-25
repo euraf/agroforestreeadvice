@@ -12,9 +12,11 @@
 #'
 #' @examples compute_suitability(inputsdata = c("(Heavy).clay", "Moist", "biodiversity"), database=dataDENTRO, interface=interface)
 compute_suitability_DENTRO<-function(inputsdata=NULL,
-                                     database, 
-                                     interface,
                                      orderby="responsetrait"){
+  
+  database<-dataDENTRO
+  interface<-interfaceDENTRO
+  
   print("suitability")
   
   message(str(inputsdata))

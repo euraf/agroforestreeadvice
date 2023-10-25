@@ -11,9 +11,12 @@
 #' @examples compute_suitability(inputsdata = c(countryregion="Vietnam (North-West Vietnam)", crop="Arabica coffee",	precipitation="Medium precipitation","biodiversity"), database=database, interface=interface)
 
 compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
-                                        database, 
-                                        interface,
                                         orderby="responsetrait"){
+  
+  database<-dataDECIDUOUS
+  interface<-interfaceDECIDUOUS
+  
+  
   # on stocke toutes les entrées utilisateur
   user_risque_gel_tardif <- inputsdata["user_gel_tardif"]
   user_risk_def_hyd <- inputsdata["user_risk_def_hyd"]

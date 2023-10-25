@@ -73,7 +73,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
 
 # Fonction server du module ----
 #language is a reactive value from the main app
-moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) {
+moduleTabInterface_Server <- function(id, language, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) {
   
   moduleServer(
     id,
@@ -168,7 +168,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
           #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
           
-          dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
+          dfSuitability<-functionSuitability(inputsdata=allinputs, 
                                              orderby = orderby)
         } else{
           dfSuitability<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")

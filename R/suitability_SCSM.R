@@ -12,9 +12,11 @@
 #' @examples compute_suitability(inputsdata = c(countryregion="Vietnam (North-West Vietnam)", crop="Arabica coffee",	precipitation="Medium precipitation","biodiversity"), database=database, interface=interface)
 
 compute_suitability_SCSM<-function(inputsdata=NULL,
-                                   database, 
-                                   interface,
                                    orderby="responsetrait"){
+  
+  database<-dataSCSM
+  interface<-interfaceSCSM
+  
   
   database['species_phylogenetic']=database['species']
   #icici we use as id the combination genus species

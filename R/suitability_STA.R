@@ -21,9 +21,11 @@
 
 
 compute_suitability_STA<-function(inputsdata=NULL,
-                                  database, 
-                                  interface,
                                   orderby="responsetrait"){
+  
+  database<-dataSTA
+  interface<-interfaceSTA
+  
   
   #print(str(inputsdata))
   interface<-interface[!is.na(interface$side),]
