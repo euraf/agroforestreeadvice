@@ -45,7 +45,6 @@ body <- dashboardBody(
     ),#fin infos
     tabItem(tabName = "tool", 
             tabsetPanel(
-              tabPanel("Czech tree selection tool", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech)), 
               
               tabPanel("Flanders Tree Advisor (DENTRO)", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
@@ -53,7 +52,9 @@ body <- dashboardBody(
               
               tabPanel("Deciduous (fruit trees in France)", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
               
-              tabPanel("SCSM (species climate suitability model)", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)) 
+              tabPanel("SCSM (species climate suitability model)", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
+              
+              tabPanel("Czech tree selection tool", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech))
               
             )
     ),#fin tool
