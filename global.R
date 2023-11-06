@@ -23,6 +23,8 @@ dataDECIDUOUS<-read.xlsx("models/DECIDUOUS.xlsx", sheet="data")
 interfaceDECIDUOUS<-read.xlsx("models/DECIDUOUS.xlsx", sheet="interface")
 dataSCSM<-read.xlsx("models/SCSM.xlsx", sheet="data")
 interfaceSCSM<-read.xlsx("models/SCSM.xlsx", sheet="interface")
+dataCzech<-read.xlsx("models/Czech.xlsx", sheet="data")
+interfaceCzech<-read.xlsx("models/Czech.xlsx", sheet="interface")
 
 
 
@@ -34,11 +36,13 @@ interfaceDECIDUOUS<-interfaceDECIDUOUS[!is.na(interfaceDECIDUOUS$side),]
 interfaceDECIDUOUS[1:length(interfaceDECIDUOUS)]<-lapply(interfaceDECIDUOUS[1:length(interfaceDECIDUOUS)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceSCSM<-interfaceSCSM[!is.na(interfaceSCSM$side),]
 interfaceSCSM[1:length(interfaceSCSM)]<-lapply(interfaceSCSM[1:length(interfaceSCSM)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceCzech<-interfaceCzech[!is.na(interfaceCzech$side),]
+interfaceCzech[1:length(interfaceCzech)]<-lapply(interfaceCzech[1:length(interfaceCzech)], function(x) gsub(pattern=",", replacement=".", x=x))
 
-toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM)), split="_")
+toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM), names(interfaceCzech)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
-reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives=TRUE){
+reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives){
   print("reshapecontrols")
   #print(str(controls))
   #print(paste("language=", language))
@@ -132,7 +136,7 @@ orderdf<-function(df, orderby, idvariable, interface){
 #' @export
 #'
 #' @examples
-default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "T", "TRUE")){
+default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "T", "TRUE", "VRAI")){
   if (type=="checkboxGroupInput"){
     #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
     chosen<-inputs[grepl(pattern=criteria, x=names(inputs))]
@@ -148,7 +152,14 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
     db$value<-nbmatches/length(chosen)
   } else if (type=="selectInput") {
     chosen<-inputs[criteria]
-    db$value<-as.numeric(db[,criteria]==chosen)
+    if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
+      db$value<-as.numeric(db[,criteria]==chosen) 
+    } else if (sum(grepl(pattern=chosen, x=names(db))==1)) {
+      db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
+    } else {
+      print("could not guess which variable to use") ; db$value<-NA
+    }
+    
   } else if (type=="checkboxInput") {
     db$value<- as.numeric(db[,criteria] %in% yesindicator)
   } else if (type=="sliderInput") {
@@ -174,6 +185,7 @@ source("R/suitability_DENTRO.R")
 source("R/suitability_DECIDUOUS.R")
 source("R/suitability_STA.R")
 source("R/suitability_SCSM.R")
+source("R/suitability_Czech.R")
 
 
 

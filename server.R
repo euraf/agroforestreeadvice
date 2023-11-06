@@ -6,6 +6,13 @@ server <- function(input, output, session) {
     input$in_language
   })
   
+  # Czech tree advice ----
+  
+  moduleTabInterface_Server(id = "Czech",
+                            language= language,
+                            data=dataCzech, interface=interfaceCzech, functionSuitability=compute_suitability_Czech, compactobjectives=FALSE)
+  
+  
   # Flanders tree advice ----
   
   moduleTabInterface_Server( # nom de la fonction server du module

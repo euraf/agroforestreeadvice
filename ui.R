@@ -40,19 +40,20 @@ body <- dashboardBody(
             h2("DENTRO: Sarah Carton; Paul Pardon; Bert Reubens"),
             h2("Deciduous: Raphael Paut; François Warlop"),
             h2("Shade Tree Advice: Clément Rigal; Philippe Vaast; Laurence Jassogne; Just van der Wolf; Gilles Gram; Mathilde LEPINE; Anais CARPENTE; Mai Phuong NGUYEN; Sigrun WAGNER; Sophie GRAEFE; Baptiste CAMUS; Juan Carlos Villalba Malaver"),
-            h2("SCSM : Birk Skyum Kristoffer Ronn-Anderson")
+            h2("SCSM : Birk Skyum Kristoffer Ronn-Anderson"),
+            h2("Czech database : colleagues from RILOG and MENDEL university")
     ),#fin infos
     tabItem(tabName = "tool", 
             tabsetPanel(
+              tabPanel("Czech tree selection tool", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech)), 
               
+              tabPanel("Flanders Tree Advisor (DENTRO)", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
-              tabPanel("Flanders Tree Advisor (DENTRO)", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), # module selecmap avec les données de l'Afrique
+              tabPanel("Shade Tree Advice (coffee and cocoa)", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
               
-              tabPanel("Shade Tree Advice (coffee and cocoa)", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), # module selecmap avec les données de l'Amérique
+              tabPanel("Deciduous (fruit trees in France)", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
               
-              tabPanel("Deciduous (fruit trees in France)", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), # module selecmap avec les données de l'Asie
-              
-              tabPanel("SCSM (species climate suitability model)", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)) # module selecmap avec les données de l'Asie
+              tabPanel("SCSM (species climate suitability model)", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)) 
               
             )
     ),#fin tool
