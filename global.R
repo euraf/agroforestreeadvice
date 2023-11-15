@@ -137,10 +137,12 @@ orderdf<-function(df, orderby, idvariable, interface){
 #'
 #' @examples
 default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "T", "TRUE", "VRAI")){
-  if (type=="checkboxGroupInput"){
+  if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
-    chosen<-inputs[grepl(pattern=criteria, x=names(inputs))]
-    services<-strsplit(db[,criteria], ",\\s*")
+    chosen<-inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria]
+    services<-strsplit(
+      gsub(pattern="(", replacement=", ", fixed=TRUE, x=gsub(pattern=")", replacement="", fixed=TRUE, x=db[,criteria])) #replace first ( by comma and remove )
+           , "[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces
     #count the number of characteristics %in% inputs to get the score
     # Function to count the number of matching keywords
     count_matching_keywords <- function(keyword_list) {
@@ -151,24 +153,34 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
     #then divide by the number of possibilities to obtain score between 0 and 1
     db$value<-nbmatches/length(chosen)
   } else if (type=="selectInput") {
+   
     chosen<-inputs[criteria]
     if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
       db$value<-as.numeric(db[,criteria]==chosen) 
-    } else if (sum(grepl(pattern=chosen, x=names(db))==1)) {
+    } else {
+      if (sum(grepl(pattern=chosen, x=names(db)))==1) {
       db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
     } else {
       print("could not guess which variable to use") ; db$value<-NA
-    }
+    }}
     
   } else if (type=="checkboxInput") {
     db$value<- as.numeric(db[,criteria] %in% yesindicator)
   } else if (type=="sliderInput") {
-    chosen<-inputs[grepl(pattern=criteria, x=names(inputs))]
-    if(length(unique(chosen))==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
-      db$value<-as.numeric(db[,criteria]>=chosen[1] & db[,criteria]<=chosen[1])
+    #browser()
+    chosen<-as.numeric(inputs[grepl(pattern=criteria, x=names(inputs))])
+    #I don't know why, sometimes inputs are duplicated...
+    chosen<-unique(as.numeric(chosen))
+    chosen<-chosen[!is.na(chosen)]
+    treetraits<-as.numeric(db[,criteria])
+    
+    #chosen<-as.numeric(chosen[!duplicated(names(chosen))])
+    
+    if(length(chosen)==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
+      db$value<-as.numeric(treetraits>=min(chosen) & treetraits<=max(chosen))
     } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
-      rangevalues<-range(as.numeric(db[,criteria]), na.rm=TRUE)
-      db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(chosen))/(rangevalues[2]-rangevalues[1]))
+      rangevalues<-range(treetraits, na.rm=TRUE)
+      db$value<-1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1]))
     }
   } else if (type=="numericInput") {
     chosen<-inputs[criteria]

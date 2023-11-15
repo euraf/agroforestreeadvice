@@ -19,6 +19,7 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   database['species_phylogenetic']=database['species']
   #icici we use as id the combination genus species
   database['idspecies']=paste(database$genus,database$species, sep=" ")
+  #warning: some latin species are duplicated (solanum	betaceum, trifolium	pratense), with different common names
   
   # 
   # # Calulate value for temperature
@@ -47,11 +48,8 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   # 
   dbfinal<-data.frame()
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
-  #rownames(toto)<-toto$criteria #in SCSM, utilities are a mix of several Big criteria
-  toto$BigCriteria[toto$criteria=="utilities"]<-"several"
-  toto<-unique(toto)
-  rownames(toto)<-toto$criteria
-  
+  rownames(toto)<-toto$criteria #in SCSM, utilities were a mix of several Big criteria, but it breaks the code if not all choices of the same criterion are in the same Bigcriteria
+
   print("compute adaptation from responsetraits")
   standardformcriteria<-c("temperature", "precipitation")
   for(crit in standardformcriteria){

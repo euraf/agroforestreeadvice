@@ -18,7 +18,12 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   dbfinal<-data.frame()
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
   rownames(toto)<-toto$criteria
-  standardformcriteria<-intersect(names(inputsdata), c("fruit", "forage", "forest", "ornamental", "height", "habitus", "growthspeed", "earlinessleafing", "floweringdate", "climateclass", "altitude", "soil_fertility", "soil_water", "light", "wood", "food")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
+  standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
+                                  c("fruit", "forage", "forest", "ornamental",
+                                    "height", "habitus", "growthspeed", 
+                                    "earlinessleafing", "floweringdate", 
+                                    "climateclass", "altitude", "soil_fertility",
+                                    "soil_water", "light", "wood", "food")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
   for(crit in standardformcriteria){
     print(paste("compute score for", crit))
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
