@@ -112,7 +112,7 @@ orderdf<-function(df, orderby, idvariable, interface){
   species_order<-aggregate(species_order[,"value", drop=FALSE], by=species_order[,idvariable, drop=FALSE], sum, na.rm=TRUE)
   species_order<-species_order[order(species_order$value, decreasing=TRUE),]
   species_order<-species_order[,idvariable] 
-  species_order[!is.na(species_order)]
+  species_order<-species_order[!is.na(species_order)]
   
   # Reorder the levels of the species variable based on the sum
   df$species <- factor(df[,idvariable], levels = species_order)
@@ -126,7 +126,7 @@ orderdf<-function(df, orderby, idvariable, interface){
 #'
 #' @param criteria single name of a criteria for which to compute the score
 #' @param type #type of widget (one of "checkboxGroupInput", "selectInput", "sliderInput", "checkboxInput", "numericInput")
-#' @param inputs#character vector of reformatted inputs (until I update everything to accept lists)
+#' @param inputs #character vector of reformatted inputs (until I update everything to accept lists)
 #' @param db #database of species characteristics
 #' @param BigCriteria #big criteria to which the criteria belongs
 #' @param side #side to which the criteria belongs (one of "responsetrait", "effecttrait")
@@ -165,17 +165,27 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
   } else if (type=="sliderInput") {
     chosen<-inputs[grepl(pattern=criteria, x=names(inputs))]
     if(length(unique(chosen))==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
-      db$value<-as.numeric(db[,criteria]>=chosen[1] && db[,criteria]<=chosen[1])
+      db$value<-as.numeric(db[,criteria]>=chosen[1] & db[,criteria]<=chosen[1])
     } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
       rangevalues<-range(as.numeric(db[,criteria]), na.rm=TRUE)
       db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(chosen))/(rangevalues[2]-rangevalues[1]))
     }
   } else if (type=="numericInput") {
-    rangevalues<-range(as.numeric(db[,criteria]))
-    db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(inputs[criteria]))/(rangevalues[2]-rangevalues[1]))
+    chosen<-inputs[criteria]
+    if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
+      splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
+      min<-sapply(splits, "[[", 1)
+      max<-min
+      max[sapply(splits, length)>1]<-sapply(splits[sapply(splits, length)>1], "[[", 2)
+      db$value<-as.numeric(min<=chosen & max>=chosen)
+    } else { #unique value
+      rangevalues<-range(as.numeric(db[,criteria]))
+      db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(inputs[criteria]))/(rangevalues[2]-rangevalues[1]))
+    }
+    
   }
   db$criteria<-criteria
-  db$BigCriteria<-criteria
+  db$BigCriteria<-BigCriteria
   db$side<-side
   return(db)
 }
