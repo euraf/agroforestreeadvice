@@ -19,40 +19,49 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   database['species_phylogenetic']=database['species']
   #icici we use as id the combination genus species
   database['idspecies']=paste(database$genus,database$species, sep=" ")
+  #warning: some latin species are duplicated (solanum	betaceum, trifolium	pratense), with different common names
   
-  
-  # Calulate value for temperature
-  database_temp = database
-  database_temp['criteria'] = 'temperature'
-  database_temp$BigCriteria<-"climate"
-  database_temp$side<-"responsetrait"
-  temperature = as.numeric(inputsdata["temperature"])
-  #database_temp = mutate(database_temp, value = ifelse(temperature_min<=temperature & temperature<=temperature_max, 1, -1))  
-  #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
-  #also, I give the value 0 if it is outside the range because the app expects a score from 0 to Inf
-  database_temp$value<-ifelse(database_temp$temperature_min<=temperature & temperature<=database_temp$temperature_max, 1, 0)
-  
-  # Calulate value for precipitation
-  database_precipitation = database
-  database_precipitation['criteria'] = 'precipitation'
-  database_precipitation$BigCriteria<-"climate"
-  database_precipitation$side<-"responsetrait"
-  precipitation = as.numeric(inputsdata["precipitation"])
-  #database_precipitation = mutate(database_precipitation, value = ifelse(precipitation_min<=precipitation & precipitation<=precipitation_max, 1, -1))  
-  #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
-  #also, I give the value 0 if it is outside the range because the app expects a score from 0 to Inf
-  database_precipitation$value<-ifelse(database_precipitation$temperature_min<=temperature & temperature<=database_precipitation$temperature_max, 1, 0)
-  
-  dbfinal<-rbind(database_temp, database_precipitation)
-  
-  #todo, compute effectiveness based on effect traits and inputdata of objectives (generic functions that can be used also in future compute suitabilit functions)
-  
-  
+  # 
+  # # Calulate value for temperature
+  # database_temp = database
+  # database_temp['criteria'] = 'temperature'
+  # database_temp$BigCriteria<-"climate"
+  # database_temp$side<-"responsetrait"
+  # temperature = as.numeric(inputsdata["temperature"])
+  # #database_temp = mutate(database_temp, value = ifelse(temperature_min<=temperature & temperature<=temperature_max, 1, -1))  
+  # #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
+  # #also, I give the value 0 if it is outside the range because the app expects a score from 0 to Inf
+  # database_temp$value<-ifelse(database_temp$temperature_min<=temperature & temperature<=database_temp$temperature_max, 1, 0)
+  # 
+  # # Calulate value for precipitation
+  # database_precipitation = database
+  # database_precipitation['criteria'] = 'precipitation'
+  # database_precipitation$BigCriteria<-"climate"
+  # database_precipitation$side<-"responsetrait"
+  # precipitation = as.numeric(inputsdata["precipitation"])
+  # #database_precipitation = mutate(database_precipitation, value = ifelse(precipitation_min<=precipitation & precipitation<=precipitation_max, 1, -1))  
+  # #icicic from Marie: since I had a problem when deploying the app to shinyappsio (often due to hidden package dependencies), I try without dplyr
+  # #also, I give the value 0 if it is outside the range because the app expects a score from 0 to Inf
+  # database_precipitation$value<-ifelse(database_precipitation$temperature_min<=temperature & temperature<=database_precipitation$temperature_max, 1, 0)
+  # 
+  # dbfinal<-rbind(database_temp, database_precipitation)
+  # 
+  dbfinal<-data.frame()
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
-  #rownames(toto)<-toto$criteria #in SCSM, utilities are a mix of several Big criteria
-  toto$BigCriteria[toto$criteria=="utilities"]<-"several"
-  toto<-unique(toto)
-  rownames(toto)<-toto$criteria
+  rownames(toto)<-toto$criteria #in SCSM, utilities were a mix of several Big criteria, but it breaks the code if not all choices of the same criterion are in the same Bigcriteria
+
+  print("compute adaptation from responsetraits")
+  standardformcriteria<-c("temperature", "precipitation")
+  for(crit in standardformcriteria){
+    dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
+                                                type= toto[crit, "objecttype"],
+                                                BigCriteria=toto[crit, "BigCriteria"],
+                                                side=toto[crit, "side"],
+                                                inputs=inputsdata, 
+                                                db=database))
+  }
+  
+  print("compute efficiency from effecttraits")
   standardformcriteria<-c("utilities", "form", "height","lifespan")
   for(crit in standardformcriteria){
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,

@@ -17,7 +17,7 @@ sidebar <- dashboardSidebar(
     selected = "en",
     inline = TRUE),
   sidebarMenu(
-    
+    id="sidemenu",
     menuItem("Informations", tabName = "Welcome"),
     menuItem("Tool", tabName = "tool"),
     menuItem("Databases", tabName = "databases")
@@ -45,16 +45,16 @@ body <- dashboardBody(
     ),#fin infos
     tabItem(tabName = "tool", 
             tabsetPanel(
+              id = "toolsTabset",
+              tabPanel("Flanders Tree Advisor (DENTRO)", value="DENTRO", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
-              tabPanel("Flanders Tree Advisor (DENTRO)", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
+              tabPanel("Shade Tree Advice (coffee and cocoa)", value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
               
-              tabPanel("Shade Tree Advice (coffee and cocoa)", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
+              tabPanel("Deciduous (fruit trees in France)", value="DECIDUOUS", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
               
-              tabPanel("Deciduous (fruit trees in France)", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
+              tabPanel("SCSM (species climate suitability model)", value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
               
-              tabPanel("SCSM (species climate suitability model)", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
-              
-              tabPanel("Czech tree selection tool", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech))
+              tabPanel("Czech tree selection tool", value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech))
               
             )
     ),#fin tool
