@@ -1,5 +1,0 @@
-essai de .gitconfig avec 
-[includeIf "hasconfig:remote.*.url:git@forgemia.inra.fr:*/**"]
-    path = gitlab
-    
-clef ssh ajoutée    
