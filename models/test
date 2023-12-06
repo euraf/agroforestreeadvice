@@ -1,0 +1,3 @@
+essai de .gitconfig avec 
+[includeIf "hasconfig:remote.*.url:git@forgemia.inra.fr:*/**"]
+    path = gitlab
