@@ -1,6 +1,7 @@
 # AgroforesTreeAdvice
 Decision Support System to help choose tree species/varieties/rootstocks for agroforestry systems
-the tool can be tested here: https://gosme.shinyapps.io/agroforestreeadvice/
+the tool can be used here: https://agroforestreeadvice.sk8.inrae.fr/
+(the latest development version might differ, it can be tested here https://gosme.shinyapps.io/agroforestreeadvice/)
 
 Contributors to code:
 Marie Gosme
