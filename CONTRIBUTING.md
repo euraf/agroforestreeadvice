@@ -92,9 +92,9 @@ tabPanel("name to display in tab", value="MODELNAME", moduleTabInterface_UI(id =
 (you can also add the information about your tool in the "infos" tabItem)
 - at the end of the  server.R file, add the following line:
 ```
-moduleTabInterface_Server(id = "Czech",
+moduleTabInterface_Server(id = "MODELNAME",
                             language= language,
-                            data=dataCzech, interface=interfaceCzech, functionSuitability=compute_suitability_Czech, compactobjectives=FALSE)
+                            data=dataMODELNAME, interface=interfaceMODELNAME, functionSuitability=compute_suitability_MODELNAME, compactobjectives=FALSE)
 ```
 NB the compactobjectives argument can be set to TRUE if you want to reduce the number of inputs (only big criteria are diaplyed and all criteria that belong to the selected bigcriteria are selected)
 
