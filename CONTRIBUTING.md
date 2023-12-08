@@ -1,10 +1,6 @@
 # Welcome to AgroforesTreeAdvice contributing guide <!-- omit in toc -->
 
-Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on [docs.github.com](https://github.com/euraf/agroforestreeadvice) :sparkles:.
-
-In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
-
-Use the table of contents icon <img src="/contributing/images/table-of-contents.png" width="25" height="25" /> on the top left corner of this document to get to a specific section of this guide quickly.
+Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on [AgroforesTreeAdvice](https://github.com/euraf/agroforestreeadvice) :sparkles:.
 
 ## New contributor guide
 
@@ -23,7 +19,7 @@ AgroforesTreeAdvice is an aggregator of tree selection tools. Existing tools wer
 
 AgroforesTreeAdvice can be used either interactively through the shiny app user interface or by querying a model through an URL query.
 The UI allows selecting the desired language, the desired tool, enter the user's site and objectives descriptions (according to the info needed by the specific tool), and then visualise the results
-The URL query can be used to query one model with a set of parameters, and returns a tab-delimited file of the fresult
+The URL query can be used to query one model with a set of parameters, and returns a tab-delimited file of the result
 
 Contributors can:
 1) Check/correct translations of each tool in their native language
@@ -42,9 +38,10 @@ Excel files cannot be modified online with github so the steps are
 
 
 ## Add a new model
-If you are a tool developper, or have access to an (opensource) database of tree characteristics, and whish to include it in agroforestreeadvice, here's how to proceed. To help you, we provide (in the doc folder) templates for the excel sheet and for the scoring funciton.
+If you are a tool developper, or have access to an (opensource) database of tree characteristics, and whish to include it in agroforestreeadvice, here's how to proceed. To help you, we provide (in the doc folder) templates for the excel sheet and for the scoring function.
 ### step 1: clean the database of tree characteristics
 Agroforestreeadvice needs a clean database of tree characteristics with tree species in lines, characteristics of the species in columns. The first line must contain headers, with one header for each column, no space and no special characters in headers. Check that you have at least one column that can serve as a unique tree identifier (ideally this should be the tree latin name and if you have species with several lines (e.g. because of several cultivars), then the unique identifier should include the cultivar). Check that the text cells are correctly spelled.
+
 ### step 2: decide which inputs to ask from the user
 In agroforestreeadvice, inputs are called "criteria" (because they are the criteria on which the tree species are scored). They can be of different types (corresponding to shiny widgets): checkboxInput, checkboxGroupInput, radioButtons, selectInput (=drop-down menu), numericInput, sliderInput etc... You need to decide, for each criteria, the object type that you want, and indicate it in the objecttype column (column F). For criteria that don't have suboptions, you need to write one line per criteria, with criteria name (see below for the choice of name) in both coulmn "criteria" and "choice" (columns E end F). For criteria that need 2 supplementary information (i.e. sliderInput, which need the min and max of the range), you need to have 2 lines for the criteria, with the criteria name in column "criteria", and the min and max in 2 lines in the column "choice" For criteria that have several suboptions (i.e. selectInput, checkboxGroupInput, radioButtons, checkboxGroupInput), you need to add as many lines as necessary, with the criteria name in the "criteria" column, and the different suboptions in the "choice" column.
 Criteria name: In order to use the automatic score computation function, each user input should correspond to one column of the tree characteristic database (= with the same name as the column), or to several columns (=each with the name of a choice of a criteria that has suboptions), but this is not mandatory: you can code your own scoring function, and even mix automatic computation for certain criteria, and ad-hoc function for others.
