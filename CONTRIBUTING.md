@@ -31,7 +31,7 @@ Contributors can:
 ## Check/correct translations
 The widgets (checkboxes, drop-down menus, radio buttons...) of each tool have been translated from their native languages into all the languages supported by AgroforesTreeAdvice (currently, english, french, german, dutch and czech) automatically by deepL => there may be some mistakes. If you detect an error, we would appreciate if you could correct it.
 
-The translations are kept in the speadsheet describing the interface of each tool. These are stored in the "models" folder, in the form of excel files, one per tool. Each file has 2 sheets: one named "data", which contains the tree characteristics, and one named "interface", which contains all the information AgroforesTreeAdvice needs to build the interface for this specific tool.
+The translations are kept in the speadsheet describing the interface of each tool. These are stored in the ["models" folder](https://github.com/euraf/agroforestreeadvice/tree/main/models), in the form of excel files, one per tool. Each file has 2 sheets: one named "data", which contains the tree characteristics, and one named "interface", which contains all the information AgroforesTreeAdvice needs to build the interface for this specific tool.
 
 Excel files cannot be modified online with github so the steps are:
 1) if you are a github user, clone the repository or create a new branch on your computer, if you are not using github, download the file of the model you want to correct on your computer
@@ -68,7 +68,7 @@ Provide the translation of the BigCriteria, criteria and choices in all the lang
 Create an excel file with 2 sheets, one named "data", which contains the tree characteristics, and one named "interface", which contains all the information AgroforesTreeAdvice needs to build the interface for this specific tool. The file name should be your model name and it should not have space, underscore nor special characters in it.
 
 ### step 3: code the scoring function
-You can use the file suitability_template.R to start from. You just need to add the names of criteria that follow the standard algorithm in line 22, add the computation of other non-standard criteria on line 33 and insert the name of your ID column in line 38.
+You can use the file [suitability_template.R](https://github.com/euraf/agroforestreeadvice/blob/main/R/suitability_template.R) to start from. You just need to add the names of criteria that follow the standard algorithm in line 22, add the computation of other non-standard criteria on line 33 and insert the name of your ID column in line 38.
 
 The standard algorithm works for each criteria that corresponds to a single column of the tree characteristics database (= name of the criteria = name of the column in the database) or to multiple columns of the database (names of columns = names of the different choices within the criteria). In this case, there is a generic function that will compute a score between 0 and 1 for each criteria based on the following rules:
 
@@ -87,7 +87,7 @@ save your file as suitability_MODELNAME.R
 ### step 4: add your tool to agroforestryadvice code
 - clone the repository on your computer
 - add the excel file with sheets "data" and "interface" in folder "models", with name MODELNAME.xlsx (MODELNAME should be a short version of your model name, without spaces not underscore nor special characters that will be used everywhere in agroforestreeadvice to identify parts that are specific to your tool)
-- add the suitability_MODLENAME.R file to the R folder
+- add the suitability_MODLENAME.R file to the "R" folder
 - in global.R file, add the following 2 lines at the beginning:
 ```
 dataMODELNAME<-read.xlsx("models/MODELNAME.xlsx", sheet="data")
@@ -114,5 +114,5 @@ NB the compactobjectives argument can be set to TRUE if you want to reduce the n
 
 :tada: That's it, you have added your tool! 
 ## Contribute to code
-### To Do: explain structure of code files, structure of shiny app, reactive structure
-### To Do: comment code
+### To Do: explain structure of code files, structure of shiny app, reactive structure to help contributors
+### To Do: comment code to help contributors
