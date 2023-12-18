@@ -141,7 +141,8 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
     #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
     chosen<-inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria]
     services<-strsplit(
-      gsub(pattern="(", replacement=", ", fixed=TRUE, x=gsub(pattern=")", replacement="", fixed=TRUE, x=db[,criteria])) #replace first ( by comma and remove )
+      gsub(pattern="(", replacement=", ", fixed=TRUE, x=gsub(pattern=")", replacement="", fixed=TRUE, 
+                                                             x=db[,intersect(names(db), c(criteria, chosen))])) #replace first ( by comma and remove )
            , "[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces
     #count the number of characteristics %in% inputs to get the score
     # Function to count the number of matching keywords

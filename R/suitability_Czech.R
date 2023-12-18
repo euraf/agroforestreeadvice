@@ -8,7 +8,7 @@
 #' @return A data.frame with names "side", "BigCriteria", "English.name", "Scientific.name", "value", where side, big criteria (but only those relevant to inputdata choices, except for the effecttraits side (if no big criteria chosen, then keep all))"English.name" and "Scientific.name" are the same as in database, and value is computed to be the score for each tree for each retained big criteria, and species is an ordered factor (ordered by sum of effecttraits or responsetraits depending on argument orderby)
 #' @export
 #'
-#' @examples compute_suitability(inputsdata = c(countryregion="Vietnam (North-West Vietnam)", crop="Arabica coffee",	precipitation="Medium precipitation","biodiversity"), database=database, interface=interface)
+#' @examples compute_suitability_Czech(inputsdata = c(climateclass=3, legislation="approval"), database=dataCzech, interface=interfaceCzech)
 
 compute_suitability_Czech<-function(inputsdata=NULL,
                                    database, 
@@ -19,7 +19,7 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
   rownames(toto)<-toto$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
-                                  c("fruit", "forage", "forest", "ornamental",
+                                  c("legislation", "fruit", "forage", "forest", "ornamental",
                                     "height", "habitus", "growthspeed", 
                                     "earlinessleafing", "floweringdate", 
                                     "climateclass", "altitude", "soil_fertility",
