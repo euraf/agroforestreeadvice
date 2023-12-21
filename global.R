@@ -26,6 +26,19 @@ interfaceSCSM<-read.xlsx("models/SCSM.xlsx", sheet="interface")
 dataCzech<-read.xlsx("models/Czech.xlsx", sheet="data")
 interfaceCzech<-read.xlsx("models/Czech.xlsx", sheet="interface")
 
+#don't forget to save files as tab-delimited, with utf-8 encoding because of Czech special characters 
+#does not work because there are quotes, special characters etc.. and even in utf-8 czech characters are not properly read
+# dataDENTRO<-read.table("models/dataDENTRO.txt", header=TRUE, sep="\t", fileEncoding="latin1")
+# interfaceDENTRO<-read.table("models/interfaceDENTRO.txt", header=TRUE, sep="\t", fileEncoding="UTF-8", quote="", fill=TRUE) 
+# dataSTA<-read.table("models/dataSTA.txt", header=TRUE, sep="\t")
+# interfaceSTA<-read.table("models/interfaceSTA.txt", header=TRUE, sep="\t")
+# dataDECIDUOUS<-read.table("models/dataDECIDUOUS.txt", header=TRUE, sep="\t")
+# interfaceDECIDUOUS<-read.table("models/interfaceDECIDUOUS.txt", header=TRUE, sep="\t")
+# dataSCSM<-read.table("models/dataSCSM.txt", header=TRUE, sep="\t")
+# interfaceSCSM<-read.table("models/interfaceSCSM.txt", header=TRUE, sep="\t")
+# dataCzech<-read.table("models/dataCzech.txt", header=TRUE, sep="\t")
+# interfaceCzech<-read.table("models/interfaceCzech.txt", header=TRUE, sep="\t")
+
 
 
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]

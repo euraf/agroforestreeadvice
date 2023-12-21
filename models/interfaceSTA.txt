@@ -1,0 +1,107 @@
+side	order	BigCriteria	criteria	choice	objecttype	weightwithincriteria	BigCriteria_en	criteria_en	choice_en	BigCriteria_es	criteria_es	choice_es	BigCriteria_nl	criteria_nl	choice_nl	BigCriteria_fr	criteria_fr	choice_fr	BigCriteria_de	criteria_de	choice_de	BigCriteria_cz	criteria_cz	choice_cz
+effecttrait	2	animals	fodder	Fodder supply	checkboxInput	NA	Animal production	Fodder supply	NA	NA	NA	NA	Dierlijke productie	Levering van voedergewassen	NA	Production animale	Fourniture de fourrage	NA	Tierische Erzeugung	Futtermittelversorgung	NA	Živo?išná výroba	Zásobování krmivy	NA
+effecttrait	NA	animals	fodder	leaf	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	10	biodiversity	biodiversity	Biodiversity	checkboxInput	NA	Biodiversity protection	Biodiversity	NA	NA	Biodiversidad	NA	Bescherming biodiversiteit	Biodiversiteit	NA	Protection de la biodiversité	Biodiversité	NA	Schutz der biologischen Vielfalt	Biologische Vielfalt	NA	Ochrana biologické rozmanitosti	Biodiverzita	NA
+effecttrait	NA	biodiversity	biodiversity	Biodiversity / Biodiversidad	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	biodiversity	biodiversity	increases biodiversity 	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	1	cropproduction	cropLifeExpectancy	Coffee tree life expectancy / Esperanza de vida	checkboxInput	NA	Crop production	Coffee Tree life expectancy	NA	NA	Esperanza de vida	NA	Gewasproductie	Levensverwachting koffiebomen	NA	Production végétale	Espérance de vie des caféiers	NA	Pflanzliche Erzeugung	Lebenserwartung von Kaffeebäumen	NA	Rostlinná výroba	O?ekávaná délka života kávovníku	NA
+effecttrait	NA	cropproduction	cropLifeExpectancy	Increased coffee longevity	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	cropproduction	cropLifeExpectancy	Life Expectancy	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	cropproduction	OptimizeRessources	Limitation of Root Competition	NA	NA	NA	Optimization of resource use	NA	NA	NA	NA	NA	Optimalisatie van het gebruik van hulpbronnen	NA	NA NA	Optimisation de l'utilisation des ressources	NA	NA	Optimierung der Ressourcennutzung	NA	NA	Optimalizace využívání zdroj?	NA
+effecttrait	NA	cropproduction	OptimizeRessources	water-nutrients uptake	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	cropproduction	quality	Increased coffee quality	NA	NA	NA	Coffee quality	NA	NA	NA	NA	NA	Koffiekwaliteit	NA	NA NA	Qualité du café	NA	NA	Qualität des Kaffees	NA	NA	Kvalita kávy	NA
+effecttrait	NA	cropproduction	yield	Coffee production	NA	NA	NA	Yield	NA	NA	Produccion de cafe	NA	NA	Opbrengst	NA	NA	Rendement	NA	NA	Ausbeute	NA	NA	Výnos	NA
+effecttrait	NA	cropproduction	yield	Coffee production / Produccion de cafe	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	cropproduction	yield	Coffee Yield Optimization	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	cropproduction	yield	increased coffee production	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	cropproduction	yield	Increased coffee yield	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	cropproduction	yield	Yield	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	12	economic	diversification	Provision of Other Economic Products	checkboxInput	NA	Economic performance	Diversification	NA	NA	NA	NA	Economische prestaties	Diversificatie	NA	Performance économique	Diversification	NA	Wirtschaftliche Leistung	Diversifizierung	NA	Ekonomická výkonnost	Diverzifikace	NA
+effecttrait	NA	economic	Income	Income	NA	NA	NA	Income	NA	NA	NA	NA	NA	Inkomen	NA	NA	Revenus	NA	NA	Einkommen	NA	NA	P?íjmy	NA
+effecttrait	NA	economic	reduceCosts	Fertilizer saving	NA	NA	NA	Reduced costs	NA	NA	NA	NA	NA	Lagere kosten	NA	NA	Réduction des coûts	NA	NA	Geringere Kosten	NA	NA	Snížení náklad?	NA
+effecttrait	NA	economic	reduceCosts	Use of fertilizer	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	6	firewood	firewood	firewood	checkboxInput	NA	Firewood production	Firewood	NA	NA	NA	NA	Productie brandhout	Brandhout	NA	Production de bois de chauffage	Bois de chauffage	NA	Brennholzproduktion	Brennholz	NA	Produkce palivového d?eva	Palivové d?evo	NA
+effecttrait	NA	firewood	firewood	Firewood supply	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	firewood	firewood	Fuel	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	firewood	firewood	fuelwood	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	5	food	autoconsumption	Autoconsumption	checkboxInput	NA	Food production	Autoconsumption	NA	NA	NA	NA	Productie van voedsel	Autoconsumptie	NA	Production de denrées alimentaires	Autoconsommation	NA	Nahrungsmittelproduktion	Eigenverbrauch	NA	Výroba potravin	Autospot?eba	NA
+effecttrait	NA	food	food	Food	NA	NA	NA	Food	NA	NA	NA	NA	NA	Voedsel	NA	NA	Alimentation	NA	NA	Lebensmittel	NA	NA	Potraviny	NA
+effecttrait	NA	food	food	Food provision	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	food	Fruit production / Produccion de fruta	Fruit production / Produccion de fruta	NA	NA	NA	Fruit production	NA	NA	Produccion de fruta	NA	NA	Fruitproductie	NA	NA NA	Production de fruits	NA	NA	Produktion von Obst	NA	NA	Produkce ovoce	NA
+effecttrait	NA	food	Macabo Production	Macabo Production	NA	NA	NA	Macabo Production	NA	NA	NA	NA	NA	Macaboproductie	NA	NA	Production de macabo	NA	NA	Macabo-Produktion	NA	NA	Produkce makarón?	NA
+effecttrait	8	microclimate	climate regulation	climate regulation	checkboxInput	NA	Microclimate regulation	Climate regulation	NA	NA	Regulacion climatica	NA	Microklimaatregeling	Klimaatbeheersing	NA	Régulation du microclimat	Régulation du climat	NA	Regulierung des Mikroklimas	Klimaregulierung	NA	Regulace mikroklimatu	Regulace klimatu	NA
+effecttrait	NA	microclimate	Climate regulation / Regulacion climatica	Climate regulation / Regulacion climatica	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	physicalprotection	Protection against hail / Proteccion granizo	NA	NA	NA	Protection against hail	NA	NA	Proteccion granizo	NA	NA	Bescherming tegen hagel	NA	NA	Protection contre la grêle	NA	NA	Schutz gegen Hagel	NA	NA	Ochrana proti krupobití	NA
+effecttrait	NA	microclimate	shade	shade	NA	NA	NA	Shade	NA	NA	NA	NA	NA	Schaduw	NA	NA	Ombrage	NA	NA	Beschattung	NA	NA	Stín	NA
+effecttrait	NA	microclimate	shade	Shade provision	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	shade	shade quality	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	shade	Shading production	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	temperatureBuffering	Frost control	NA	NA	NA	Frost control	NA	NA	NA	NA	NA	Vorstbestrijding	NA	NA	Lutte contre le gel	NA	NA	Frostschutz	NA	NA	Ochrana proti mrazu	NA
+effecttrait	NA	microclimate	temperatureBuffering	protection against cold and frost	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	temperatureBuffering	Protection from Cold	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	temperatureBuffering	Protection from Heat	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	temperatureBuffering	Temperature	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	windbreak	Protection against wind	NA	NA	NA	Windbreak	NA	NA	Proteccion viento	NA	NA	Windscherm	NA	NA	Brise-vent	NA	NA	Windschutz	NA	NA	V?trný štít	NA
+effecttrait	NA	microclimate	windbreak	Protection from wind	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	windbreak	Wind control	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	microclimate	windbreak	Wind protection / Proteccion viento	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	7	otherProducts	medicinal	medicinal	checkboxInput	NA	Other products	Medicinal	NA	NA	NA	NA	Andere producten	Medicinaal	NA	Autres produits	Médicinale	NA	Andere Produkte	Medizinische	NA	Ostatní produkty	Lé?ivé	NA
+effecttrait	NA	otherProducts	medicinal	Medicinal properties	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	11	pestdiseasecontrol	BCTB	BCTB	checkboxInput	NA	Pest and Disease regulation	Black Coffee Twig Borer reduction	NA	NA	NA	NA	Ongedierte- en ziektebestrijding	Vermindering zwarte koffie takkenboorder	NA	Régulation des ravageurs et des maladies	Réduction du scolyte noir du caféier	NA	Schädlings- und Krankheitsbekämpfung	Bekämpfung des Schwarzkaffeezünslers	NA	Regulace šk?dc? a chorob	Snížení výskytu ?erné kávové v?tvi?ky	NA
+effecttrait	NA	pestdiseasecontrol	blackpod disease	blackpod disease	NA	NA	NA	Black Pod disease reduction	NA	NA	NA	NA	NA	Reductie zwarte peulziekte	NA	NA	Réduction de la maladie de la gousse noire	NA	NA	Reduzierung der schwarzen Schotenkrankheit	NA	NA	Redukce onemocn?ní ?erných lusk?	NA
+effecttrait	NA	pestdiseasecontrol	capsids	capsids	NA	NA	NA	Capsids reduction	NA	NA	NA	NA	NA	Vermindering capsules	NA	NA	Réduction des capsides	NA	NA	Reduzierung der Kapseln	NA	NA	Redukce kapsid?	NA
+effecttrait	NA	pestdiseasecontrol	CLR	Shortlist CLR	NA	NA	NA	Coffee leaf rust	NA	NA	NA	NA	NA	Koffieroest	NA	NA	Rouille des feuilles du caféier	NA	NA	Kaffeeblattrost	NA	NA	Rez kávová	NA
+effecttrait	NA	pestdiseasecontrol	pestcontrol	Pest control / Control de plagas	NA	NA	NA	Pest control	NA	NA	Control de plagas	NA	NA	Ongediertebestrijding	NA	NA	Lutte contre les parasites	NA	NA	Schädlingsbekämpfung	NA	NA	Ochrana proti šk?dc?m	NA
+effecttrait	NA	pestdiseasecontrol	WCSB	Shortlist WCSB	NA	NA	NA	White Coffee Stem Borer	NA	NA	NA	NA	NA	Witte koffie stengelboorder	NA	NA	Pyrale blanche du café	NA	NA	Weißer Kaffeestängelbohrer	NA	NA	Bílý šk?dce stonk? kávy	NA
+effecttrait	NA	pestdiseasecontrol	Weed Control	Weed Control	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	pestdiseasecontrol	Weed control / Control de maleza	Weed control / Control de maleza	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	pestdiseasecontrol	weed decrease	weed decrease	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	pestdiseasecontrol	Weed suppression	Weed suppression	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	pestdiseasecontrol	Weeds	Weed	NA	NA	NA	Weeds	NA	NA	Control de maleza	NA	NA	Onkruid	NA	NA	Mauvaises herbes	NA	NA	Unkraut	NA	NA	Plevele	NA
+effecttrait	9	soil	mulch	Mulch	checkboxInput	NA	Soil protection	Mulch provision	NA	NA	NA	NA	Bodembescherming	Mulchvoorziening	NA	Protection des sols	Fourniture de paillis	NA	Schutz des Bodens	Bereitstellung von Mulch	NA	Ochrana p?dy	Poskytování mul?e	NA
+effecttrait	NA	soil	mulch	Mulch provision	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	mulch	Provision of Mulch	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	organicMatter	litter	NA	NA	NA	Organic matter	NA	NA	NA	NA	NA	Organische stof	NA	NA	Matière organique	NA	NA	Organische Substanz	NA	NA	Organická hmota	NA
+effecttrait	NA	soil	reduceSoilErosion	avoids soil erosion	NA	NA	NA	Reduced soil erosion	NA	NA	NA	NA	NA	Verminderde bodemerosie	NA	NA NA	Réduction de l'érosion du sol	NA	NA	Verminderte Bodenerosion	NA	NA	Snížení p?dní eroze	NA
+effecttrait	NA	soil	reduceSoilErosion	Erosion	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	reduceSoilErosion	Protection from Soil Erosion	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	reduceSoilErosion	Soil erosion control	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	soil	soil	NA	NA	NA	Soil protection	NA	NA	NA	NA	NA	Bodembescherming	NA	NA	Protection des sols	NA	NA	Schutz des Bodens	NA	NA	Ochrana p?dy	NA
+effecttrait	NA	soil	Soil fertility	Soil fertility	NA	NA	NA	Soil fertility	NA	NA	Fertilidad	NA	NA	Bodemvruchtbaarheid	NA	NA	Fertilité des sols	NA	NA	Fruchtbarkeit des Bodens	NA	NA	Úrodnost p?dy	NA
+effecttrait	NA	soil	Soil fertility / Fertilidad	Soil fertility / Fertilidad	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	Soil fertility improvement	Soil fertility improvement	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	soil fertility improvement 	soil fertility improvement 	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	Soil humidity	Soil humidity	NA	NA	NA	Soil humidity	NA	NA	NA	NA	NA	Vochtigheid van de bodem	NA	NA	Humidité du sol	NA	NA	Feuchtigkeit des Bodens	NA	NA	Vlhkost p?dy	NA
+effecttrait	NA	soil	Soil humidity	Soil moisture	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	soil	Soil humidity	Soil Moisture Enhancement	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	N.D.	NA	NA	NA	NA	NA	NA	NA
+effecttrait	4	timber	Timber	Timber	checkboxInput	NA	Timber production	Timber production	NA	NA	NA	NA	Houtproductie	Houtproductie	NA	Production de bois	Production de bois	NA	Holzproduktion	Holzproduktion	NA	Produkce d?eva	Produkce d?eva	NA
+effecttrait	3	treegrowth	treegrowth	Adapted	checkboxInput	NA	Tree production	Tree growth	NA	NA	NA	NA	Boomproductie	Boomgroei	NA	Production d'arbres	Croissance des arbres	NA	Produktion von Bäumen	Baumwachstum	NA	Produkce strom?	R?st strom?	NA
+effecttrait	NA	treegrowth	treegrowth	growth	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	treegrowth	treegrowth	Growth speed	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	13	work	pruning	Ease of pruning	checkboxInput	NA	Workload reduction	Easy/reduced pruning	NA	NA	NA	NA	Vermindering werklast	Gemakkelijk/gereduceerd snoeien	NA	Réduction de la charge de travail	Taille facile/réduite	NA	Verringerung der Arbeitsbelastung	Einfacher/reduzierter Rückschnitt	NA	Snížení pracovní zát?že	Snadné/redukované pro?ezávání	NA
+effecttrait	NA	work	pruning	falling branches	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	work	pruning	Minimized pruning	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA	NA
+effecttrait	NA	work	shadingWorkers	Shading for Workers	NA	NA	NA	Shading for Workers	NA	NA	NA	NA	NA	Schaduw voor arbeiders	NA	NA	Ombrage pour les travailleurs	NA	NA	Schattierung für Arbeiter	NA	NA	Stín?ní pro pracovníky	NA
+responsetrait	4	climate	altitude	all altitudes	selectInput	NA	Climate	Altitude	All altitudes	NA	NA	NA	Klimaat	Hoogte	Alle hoogtes	Climat	Altitude	Toutes les altitudes	Klima	Höhenlage	Alle Höhenlagen	Klima	Nadmo?ská výška	Všechny nadmo?ské výšky
+responsetrait	NA	climate	altitude	High altitude	selectInput	NA	Climate	Altitude	High altitude	NA	NA	NA	Klimaat	Hoogte	Grote hoogte	Climat	Altitude	Haute altitude	Klima	Höhenlage	Große Höhe	Klima	Nadmo?ská výška	Vysoká nadmo?ská výška
+responsetrait	NA	climate	altitude	Low altitude	selectInput	NA	Climate	Altitude	Low altitude	NA	NA	NA	Klimaat	Hoogte	Lage hoogte	Climat	Altitude	Basse altitude	Klima	Höhenlage	Niedrige Höhe	Klima	Nadmo?ská výška	Nízká nadmo?ská výška
+responsetrait	NA	climate	altitude	Mid altitude	selectInput	NA	Climate	Altitude	Mid altitude	NA	NA	NA	Klimaat	Hoogte	Midden hoogte	Climat	Altitude	Moyenne altitude	Klima	Höhenlage	Mittlere Höhe	Klima	Nadmo?ská výška	St?ední nadmo?ská výška
+responsetrait	3	climate	precipitation	all precipitation zones	selectInput	NA	Climate	Precipitation	All precipitation zones	NA	NA	NA	Klimaat	Neerslag	Alle neerslaggebieden	Climat	Précipitations	Toutes les zones de précipitations	Klima	Niederschlag	Alle Niederschlagszonen	Klima	Srážky	Všechny srážkové oblasti
+responsetrait	NA	climate	precipitation	High precipitation	selectInput	NA	Climate	Precipitation	High precipitation	NA	NA	NA	Klimaat	Neerslag	Hoge neerslag	Climat	Précipitations	Fortes précipitations	Klima	Niederschlag	Hoher Niederschlag	Klima	Srážky	Vysoké srážky
+responsetrait	NA	climate	precipitation	Low precipitation	selectInput	NA	Climate	Precipitation	Low precipitation	NA	NA	NA	Klimaat	Neerslag	Lage neerslag	Climat	Précipitations	Faibles précipitations	Klima	Niederschlag	Geringer Niederschlag	Klima	Srážky	Nízké srážky
+responsetrait	NA	climate	precipitation	Medium precipitation	selectInput	NA	Climate	Precipitation	Medium precipitation	NA	NA	NA	Klimaat	Neerslag	Gemiddelde neerslag	Climat	Précipitations	Précipitations moyennes	Klima	Niederschlag	Mittlerer Niederschlag	Klima	Srážky	St?ední srážky
+responsetrait	2	crop	crop	all crops	selectInput	NA	Crop	Crop	All crops	NA	NA	NA	Gewas	Gewas	Alle gewassen	Culture	Culture	Toutes les cultures	Kulturpflanzen	Kulturpflanzen	Alle Kulturpflanzen	Plodiny	Plodiny	Všechny plodiny
+responsetrait	NA	crop	crop	Arabica coffee	selectInput	NA	Crop	Crop	Arabica coffee	NA	NA	NA	Gewas	Gewas	Arabica koffie	Culture	Culture	Café arabica	Kulturpflanze	Ernte	Arabica-Kaffee	Plodiny	Plodiny	Káva arabica
+responsetrait	NA	crop	crop	Cocoa	selectInput	NA	Crop	Crop	Cocoa	NA	NA	NA	Gewas	Gewas	Cacao	Culture	Culture	Cacao	Kulturpflanze	Ernte	Kakao	Plodiny	Plodina	Kakao
+responsetrait	NA	crop	crop	Robusta coffee	selectInput	NA	Crop	Crop	Robusta coffee	NA	NA	NA	Gewas	Gewas	Robusta koffie	Culture	Culture	Café robusta	Kulturpflanze	Ernte	Robusta-Kaffee	Plodina	Plodina	Káva Robusta
+responsetrait	1	location	countryregion	all  regions	selectInput	NA	Location	Country (region)	All regions	NA	NA	NA	Locatie	Land (regio)	Alle regio's	Lieu d'implantation	Pays (région)	Toutes les régions	Standort	Land (Region)	Alle Regionen	Lokalita	Zem? (region)	Všechny regiony
+responsetrait	NA	location	countryregion	Cameroon (West)	selectInput	NA	Location	Country (region)	Cameroon (West)	NA	NA	NA	Locatie	Land (regio)	Kameroen (Westen)	Lieu d'implantation	Pays (région)	Cameroun (Ouest)	Standort	Land (Region)	Kamerun (West)	Lokalita	Zem? (region)	Kamerun (západ)
+responsetrait	NA	location	countryregion	China (South Yunnan)	selectInput	NA	Location	Country (region)	China (South Yunnan)	NA	NA	NA	Locatie	Land (regio)	China (Zuid-Yunnan)	Lieu d'implantation	Pays (région)	Chine (Sud Yunnan)	Standort	Land (Region)	China (Süd-Yunnan)	Lokalita	Zem? (region)	?ína (Jižní Yunnan)
+responsetrait	NA	location	countryregion	Colombia (Cauca)	selectInput	NA	Location	Country (region)	Colombia (Cauca)	NA	NA	NA	Locatie	Land (regio)	Colombia (Cauca)	Lieu d'implantation	Pays (région)	Colombie (Cauca)	Standort	Land (Region)	Kolumbien (Cauca)	Lokalita	Zem? (region)	Kolumbie (Cauca)
+responsetrait	NA	location	countryregion	Ghana (West)	selectInput	NA	Location	Country (region)	Ghana (West)	NA	NA	NA	Locatie	Land (regio)	Ghana (Westen)	Localisation de la culture	Pays (région)	Ghana (Ouest)	Standort	Land (Region)	Ghana (Westen)	Lokalita	Zem? (region)	Ghana (západ)
+responsetrait	NA	location	countryregion	Laos (South Laos)	selectInput	NA	Location	Country (region)	Laos (South Laos)	NA	NA	NA	Locatie	Land (regio)	Laos (Zuid-Laos)	Le lieu de l'action	Pays (région)	Laos (Sud Laos)	Standort	Land (Region)	Laos (Süd-Laos)	Umíst?ní	Zem? (region)	Laos (Jižní Laos)
+responsetrait	NA	location	countryregion	Nicaragua (Central)	selectInput	NA	Location	Country (region)	Nicaragua (Central)	NA	NA	NA	Locatie	Land (regio)	Nicaragua (Centraal)	Le lieu de l'action	Pays (région)	Nicaragua (Central)	Standort	Land (Region)	Nicaragua (Zentral)	Umíst?ní	Zem? (region)	Nikaragua (st?ední)
+responsetrait	NA	location	countryregion	Tanzania (Mt. Kilimanjaro)	selectInput	NA	Location	Country (region)	Tanzania (Mt. Kilimanjaro)	NA	NA	NA	Locatie	Land (regio)	Tanzania (Kilimanjaro)	Le lieu de l'action	Pays (région)	Tanzanie (Mt. Kilimanjaro)	Standort	Land (Region)	Tansania (Mt. Kilimandscharo)	Umíst?ní	Zem? (region)	Tanzanie (hora Kilimandžáro)
+responsetrait	NA	location	countryregion	Uganda (Central Uganda)	selectInput	NA	Location	Country (region)	Uganda (Central Uganda)	NA	NA	NA	Locatie	Land (regio)	Oeganda (Centraal Oeganda)	Le lieu de l'action	Pays (région)	Ouganda (Central Uganda)	Standort	Land (Region)	Uganda (Zentral-Uganda)	Umíst?ní	Zem? (region)	Uganda (st?ední Uganda)
+responsetrait	NA	location	countryregion	Uganda (Mount Elgon)	selectInput	NA	Location	Country (region)	Uganda (Mount Elgon)	NA	NA	NA	Locatie	Land (regio)	Oeganda (Mount Elgon)	Le lieu de l'action	Pays (région)	Ouganda (Mont Elgon)	Standort	Land (Region)	Uganda (Berg Elgon)	Umíst?ní	Zem? (region)	Uganda (hora Elgon)
+responsetrait	NA	location	countryregion	Vietnam (North-West Vietnam)	selectInput	NA	Location	Country (region)	Vietnam (North-West Vietnam)	NA	NA	NA	Locatie	Land (regio)	Vietnam (Noordwest-Vietnam)	Lieu d'implantation	Pays (région)	Vietnam (Nord-Ouest du Vietnam)	Standort	Land (Region)	Vietnam (Nordwest-Vietnam)	Umíst?ní	Zem? (region)	Vietnam (severozápadní Vietnam)
