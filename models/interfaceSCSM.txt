@@ -1,0 +1,30 @@
+side	order	BigCriteria	criteria	choice	objecttype	weightwithincriteria	BigCriteria_en	criteria_en	choice_en	BigCriteria_nl	criteria_nl	choice_nl	BigCriteria_fr	criteria_fr	choice_fr	BigCriteria_de	criteria_de	choice_de	BigCriteria_cz	criteria_cz	choice_cz
+responsetrait	1	climate	temperature	temperature	numericInput	NA	Climate	Temperature	Temperature	Klimaat	Temperatuur	Temperatuur	Climat	Température	Température	Klima	Temperatur	Temperatur	Klima	Teplota	Teplota
+responsetrait	2	climate	precipitation	precipitation	numericInput	NA	Climate	Precipitation	Precipitation	Klimaat	Neerslag	Neerslag	Climat	Précipitations	Précipitations	Klima	Niederschlag	Niederschlag	Podnebí	Srážky	Srážky
+effecttrait	1	Production	utilities	anyutility	checkboxGroupInput	NA	Nutrition	Utilities	Any utility	Voeding	Nutsvoorzieningen	Nut	Alimentation	Utilisation	Toute utilisation	Ernährung	Versorgungsunternehmen	Jeder Nutzen	Výživa	Komunální služby	Jakýkoli užitek
+effecttrait	1	Production	utilities	food	checkboxGroupInput	NA	Nutrition	Utilities	Food	Voeding	Hulpprogramma's	Voedsel	Alimentation	Utilisation	Nourriture	Ernährung	Dienstprogramme	Lebensmittel	Výživa	Komunální služby	Potraviny
+effecttrait	1	Production	utilities	spice	checkboxGroupInput	NA	Nutrition	Utilities	Spice	Voeding	Hulpprogramma's	Kruiden	Alimentation	Utilisation	Épices	Ernährung	Dienstprogramme	Gewürze	Výživa	Komunální služby	Koření
+effecttrait	1	Production	utilities	timber	checkboxGroupInput	NA	Timber	Utilities	Timber	Hout	Hulpprogramma's	Hout	Bois	Utilisation	Bois de construction	Holz	Dienstprogramme	Holz	Dřevo	Nástroje	Dřevo
+effecttrait	1	Production	utilities	fodder	checkboxGroupInput	NA	Feed or fodder	Utilities	Feed or fodder	Voer	Nutsvoorzieningen	Voeder	Aliments pour animaux ou fourrage	Utilisation	Aliments pour animaux ou fourrage	Futtermittel oder Futtermittel	Versorgungsunternehmen	Futter oder Futtermittel	Krmivo nebo píce	Nástroje	Krmivo nebo píce
+effecttrait	1	Production	utilities	biomass	checkboxGroupInput	NA	Energy	Utilities	Biomass	Energie	Hulpprogramma's	Biomassa	Energie	Utilisation	Biomasse	Energie	Dienstprogramme	Biomasse	Energie	Nástroje	Biomasa
+effecttrait	1	Production	utilities	shade	checkboxGroupInput	NA	Climate regulation	Utilities	Shade	Klimaatregeling	Hulpprogramma's	Schaduw	Régulation du climat	Utilisation	Ombrage	Klimaregulierung	Dienstprogramme	Schatten	Regulace klimatu	Nástroje	Stín
+effecttrait	1	Production	utilities	nitrogen	checkboxGroupInput	NA	Soil Fertility	Utilities	Nitrogen	Bodemvruchtbaarheid	Hulpprogramma's	Stikstof	Fertilité des sols	Utilisation	Azote	Fruchtbarkeit des Bodens	Dienstprogramme	Stickstoff	Úrodnost půdy	Nástroje	Dusík
+effecttrait	1	Production	utilities	fiber	checkboxGroupInput	NA	Fibres and other materials	Utilities	Fiber	Vezels en andere materialen	Hulpprogramma's	Vezel	Fibres et autres matériaux	Utilisation	Fibre	Fasern und andere Materialien	Dienstprogramme	Faser	Vlákna a další materiály	Nástroje	Vlákno
+effecttrait	1	Production	utilities	medicinal	checkboxGroupInput	NA	Fibres and other materials	Utilities	Medicinal	Vezels en andere materialen	Hulpprogramma's	Medicinaal	Fibres et autres matériaux	Utilisation	Médicinale	Fasern und andere Materialien	Dienstprogramme	Medizinisch	Vlákna a jiné materiály	Nástroje	Léčivé
+effecttrait	1	Production	utilities	oil	checkboxGroupInput	NA	Nutrition	Utilities	Oil	Voeding	Hulpprogramma's	Olie	Alimentation	Utilisation	Huile	Ernährung	Dienstprogramme	Öl	Výživa	Nástroje	Olej
+effecttrait	1	Production	utilities	gum	checkboxGroupInput	NA	Fibres and other materials	Utilities	Gum	Vezels en andere materialen	Hulpprogramma's	Gom	Fibres et autres matériaux	Utilisation	Gomme	Fasern und andere Materialien	Dienstprogramme	Kaugummi	Vlákna a jiné materiály	Nástroje	Guma
+effecttrait	2	size	form	anyform	selectInput	NA	Size	Form	Any form	Grootte	Vorm	Elke vorm	Taille	Forme	Toute forme	Größe	Formular	Jede Form	Velikost	Formulář	Jakákoli forma
+effecttrait	2	size	form	bamboo	selectInput	NA	Size	Form	bamboo	Grootte	Vorm	bamboe	Taille	Forme	bambou	Größe	Formular	Bambus	Velikost	Formulář	bambus
+effecttrait	2	size	form	cactus	selectInput	NA	Size	Form	cactus	Grootte	Vorm	cactus	Taille	Forme	cactus	Größe	Formular	Kaktus	Velikost	Formulář	kaktus
+effecttrait	2	size	form	giantherb	selectInput	NA	Size	Form	giantherb	Grootte	Vorm	reuzenkruid	Taille	Forme	herbe géante	Größe	Formular	Riesenwurzel	Velikost	Formulář	obří bylinka
+effecttrait	2	size	form	grass	selectInput	NA	Size	Form	grass	Grootte	Formulier	gras	Taille	Forme	herbe	Größe	Formular	Gras	Velikost	Formulář	tráva
+effecttrait	2	size	form	herb	selectInput	NA	Size	Form	herb	Grootte	Vorm	kruid	Taille	Forme	herbe	Größe	Formular	Kraut	Velikost	Formulář	bylina
+effecttrait	2	size	form	palm	selectInput	NA	Size	Form	palm	Grootte	Vorm	palm	Taille	Forme	palmier	Größe	Formular	Palme	Velikost	Formulář	palma
+effecttrait	2	size	form	shrub	selectInput	NA	Size	Form	shrub	Grootte	Vorm	struik	Taille	Forme	arbuste	Größe	Formular	Strauch	Velikost	Formulář	keř
+effecttrait	2	size	form	succulent	selectInput	NA	Size	Form	succulent	Grootte	Vorm	vetplant	Taille	Forme	succulent	Größe	Formular	Sukkulente	Velikost	Formulář	sukulentní
+effecttrait	2	size	form	tree	selectInput	NA	Size	Form	tree	Grootte	Vorm	boom	Taille	Forme	arbre	Größe	Formular	Baum	Velikost	Formulář	strom
+effecttrait	2	size	form	vine	selectInput	NA	Size	Form	vine	Grootte	Formulier	wingerd	Taille	Forme	vigne	Größe	Formular	Weinstock	Velikost	Formulář	vinná réva
+effecttrait	4	lifespan	lifespan	0	sliderInput	NA	Lifespan	lifespan	-	Levensduur	levensduur	-	Durée de vie	durée de vie	-	Lebenserwartung	Lebensspanne	-	Délka života	životnost	-
+effecttrait	4	lifespan	lifespan	1000	sliderInput	NA	Lifespan	lifespan	-	Levensduur	levensduur	-	Durée de vie	durée de vie	-	Lebenserwartung	Lebensspanne	-	Délka života	životnost	-
+effecttrait	3	size	height	0	sliderInput	NA	Size	Height	-	Grootte	Lengte	-	Taille	Taille	-	Größe	Höhe	-	Velikost	Formulář	-
+effecttrait	3	size	height	100	sliderInput	NA	Size	Height	-	Grootte	Lengte	-	Taille	Taille	-	Größe	Höhe	-	Velikost	Formulář	-

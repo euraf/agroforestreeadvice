@@ -41,7 +41,8 @@ body <- dashboardBody(
             h2("Deciduous: Raphael Paut; François Warlop"),
             h2("Shade Tree Advice: Clément Rigal; Philippe Vaast; Laurence Jassogne; Just van der Wolf; Gilles Gram; Mathilde LEPINE; Anais CARPENTE; Mai Phuong NGUYEN; Sigrun WAGNER; Sophie GRAEFE; Baptiste CAMUS; Juan Carlos Villalba Malaver"),
             h2("SCSM : Birk Skyum Kristoffer Ronn-Anderson"),
-            h2("Czech database : colleagues from RILOG and MENDEL university")
+            h2("Czech database : Jan Weger (VUKOZ Průhonice), Lubos Úradníček and Antonín Martiník (MENDELU Brno)"),
+            h2("If you want to report bugs, or have suggestions for improvement, or want to contribute, please do so on github: https://github.com/euraf/agroforestreeadvice")
     ),#fin infos
     tabItem(tabName = "tool", 
             tabsetPanel(

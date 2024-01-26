@@ -1,0 +1,34 @@
+Espece	PG	code_espece	code_PG	sens_gel_tar	sens_def_hyd_e	bes_ent	sol_superficiel	sol_moyen	sol_profond	hydro_drainant	hydro_equilibre	hydro_peu_hydromorphe	hydro_tres_hydromorphe	hauteur_<3m	hauteur_3.a.5m	hauteur_>.5m	hauteur_>.8m	sens_def_hyd_pg	tol_ca_actif	couple_espece_PG
+Pommiers	MM116	1	1	faible	moyenne	moyen	oui	oui	oui	oui	oui	non	non	non	oui	non	non	forte	>10%	Pommiers  -  MM116
+Pommiers	M9	1	2	faible	moyenne	moyen	non	oui	oui	oui	oui	non	non	oui	oui	non	non	forte	>10%	Pommiers  -  M9
+Pommiers	M7	1	3	faible	moyenne	moyen	oui	oui	oui	oui	oui	oui	non	non	oui	non	non	moyenne	>10%	Pommiers  -  M7
+Pommiers	M111	1	4	faible	moyenne	moyen	oui	oui	oui	oui	oui	non	non	non	oui	non	non	moyenne	1 a 10%	Pommiers  -  M111
+Pommiers	M25	1	5	faible	moyenne	moyen	oui	oui	oui	oui	oui	non	non	non	non	oui	non	moyenne	>10%	Pommiers  -  M25
+Pommiers	franc	1	6	faible	moyenne	moyen	oui	oui	oui	oui	oui	oui	non	non	non	oui	non	moyenne	>10%	Pommiers  -  franc
+Poiriers	Farold 87	2	7	moyenne	forte	moyen	oui	oui	oui	oui	oui	non	non	non	oui	oui	non	moyenne	>10%	Poiriers  -  Farold 87
+Poiriers	Pyriam	2	8	moyenne	forte	moyen	oui	oui	oui	oui	oui	non	non	non	oui	oui	non	moyenne	>10%	Poiriers  -  Pyriam
+Poiriers	cognassier BA29	2	9	moyenne	forte	moyen	non	oui	oui	oui	oui	oui	oui	oui	oui	oui	non	forte	1 a 10%	Poiriers  -  cognassier BA29
+Poiriers	Kirchensaller	2	10	moyenne	forte	moyen	oui	oui	oui	oui	oui	oui	non	non	non	oui	oui	faible	>10%	Poiriers  -  Kirchensaller
+Pechers	GF305	3	11	forte	moyenne	fort	non	oui	oui	oui	oui	non	non	oui	oui	non	non	forte	1 a 10%	Pechers  -  GF305
+Pechers	Montclar	3	12	forte	moyenne	fort	non	oui	oui	oui	oui	non	non	oui	oui	non	non	forte	1 a 10%	Pechers  -  Montclar
+Pechers	Cadaman	3	13	forte	moyenne	fort	non	oui	oui	oui	oui	oui	non	non	oui	non	non	moyenne	>10%	Pechers  -  Cadaman
+Pechers	GF677	3	14	forte	moyenne	fort	non	oui	oui	oui	oui	non	non	non	oui	non	non	faible	>10%	Pechers  -  GF677
+Pechers	Julior	3	15	forte	moyenne	fort	non	oui	oui	oui	oui	oui	non	oui	oui	non	non	moyenne	>10%	Pechers  -  Julior
+Abricotiers	GF305	4	11	forte	faible	fort	non	oui	oui	oui	oui	non	non	oui	oui	non	non	forte	1 a 10%	Abricotiers  -  GF305
+Abricotiers	Montclar	4	12	forte	faible	fort	non	oui	oui	oui	oui	non	non	oui	oui	non	non	forte	1 a 10%	Abricotiers  -  Montclar
+Abricotiers	Rubira	4	18	forte	faible	fort	oui	oui	oui	oui	oui	non	non	oui	oui	non	non	forte	1 a 10%	Abricotiers  -  Rubira
+Abricotiers	Myrobolan	4	19	forte	faible	fort	non	oui	oui	oui	oui	oui	non	non	oui	oui	non	faible	>10%	Abricotiers  -  Myrobolan
+Abricotiers	Julior	4	15	forte	faible	fort	non	oui	oui	oui	oui	oui	non	oui	oui	non	non	moyenne	>10%	Abricotiers  -  Julior
+Abricotiers	Mariana GF 8.1 et intermediaire Reine Claude vraie	4	21	forte	faible	fort	non	oui	oui	oui	oui	oui	oui	non	oui	oui	non	faible	>10%	Abricotiers  -  Mariana GF 8.1 et intermediaire Reine Claude vraie
+Abricotiers	Jaspi	4	22	forte	faible	fort	non	oui	oui	oui	oui	oui	non	oui	oui	non	non	moyenne	>10%	Abricotiers  -  Jaspi
+Abricotiers	GF 677	4	14	forte	faible	fort	non	oui	oui	oui	oui	non	non	non	oui	oui	non	faible	>10%	Abricotiers  -  GF 677
+Abricotiers	Manicot	4	24	forte	faible	fort	non	oui	oui	oui	oui	non	non	non	oui	oui	non	faible	>10%	Abricotiers  -  Manicot
+Pruniers	Jaspi	5	22	moyenne	moyenne	moyen	oui	oui	oui	oui	oui	oui	oui	oui	oui	non	non	moyenne	>10%	Pruniers  -  Jaspi
+Pruniers	Ishtara	5	26	moyenne	moyenne	moyen	oui	oui	oui	oui	oui	oui	non	oui	oui	non	non	moyenne	1 a 10%	Pruniers  -  Ishtara
+Pruniers	St Julien	5	27	moyenne	moyenne	moyen	non	oui	oui	oui	oui	oui	non	oui	oui	non	non	moyenne	>10%	Pruniers  -  St Julien
+Pruniers	Julior	5	15	moyenne	moyenne	moyen	non	oui	oui	oui	oui	oui	oui	non	oui	oui	non	moyenne	>10%	Pruniers  -  Julior
+Pruniers	Myrobolan	5	19	moyenne	moyenne	moyen	non	oui	oui	oui	oui	oui	oui	non	oui	oui	non	moyenne	>10%	Pruniers  -  Myrobolan
+Pruniers	Mariana GF 8.1	5	30	moyenne	moyenne	moyen	non	oui	oui	oui	oui	oui	oui	non	oui	oui	non	moyenne	>10%	Pruniers  -  Mariana GF 8.1
+Cerisiers	Maxma 14	6	31	moyenne	faible	moyen	non	oui	oui	oui	oui	oui	non	oui	oui	oui	non	moyenne	>10%	Cerisiers  -  Maxma 14
+Cerisiers	Maxma 60	6	32	moyenne	faible	moyen	non	oui	oui	oui	oui	oui	non	non	non	oui	oui	moyenne	>10%	Cerisiers  -  Maxma 60
+Cerisiers	SL64	6	33	moyenne	faible	moyen	non	oui	oui	oui	oui	non	non	non	non	oui	oui	faible	>10%	Cerisiers  -  SL64
