@@ -47,3 +47,6 @@ version might differ, it can be tested here
 -   Jan Weger (VUKOZ Průhonice)
 -   Lubos Úradníček (MENDELU Brno)
 -   Antonín Martiník (MENDELU Brno)
+
+## Funding :
+This work was initiated through DigitAF (Grant Agreement N° 101059794), a project co-funded by the European Commission, European Research Agency, within the Horizon Europe programme, Cluster 6: “Food, bioeconomy, natural resources, agriculture and environment”. 
