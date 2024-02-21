@@ -37,7 +37,7 @@ Tab-delimited text files can be changed directly on github, but since the column
 1) if you are a github user, clone the repository or create a new branch on your computer, if you are not using github, download the file of the model you want to correct on your computer
 2) modify the necessary cells in columns I to W in the "interface" sheet (DO NOT modify columns A to H)
 3) if you used a spreadsheet editor and are sending the file by email (see below), highlight these cells in colors so that we can quickly do a manual merge if several people have tried to modify the same file at the same time
-4) save the corrected file in **UTF-8** format (this is particularly important because the Czech words contain a lot of unusual characters)
+4) save the corrected file in **UTF-8** format (this is particularly important because the Czech words contain a lot of unusual characters). to save as UTF-8 in excel, you need to go to menu>saves as... then select .txt (tab-delimited) and on the same screen, click on the button "Tools" then select "Web options..." then go to tab "encoding" and then select Unicode (UTF-8)
 5) if you are a github user, commit your changes and create a pull request, if you are not using github, send the file by email to Marie Gosme (firstname.lastname@inrae.fr) 
 
 
