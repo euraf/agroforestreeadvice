@@ -31,12 +31,12 @@ Contributors can:
 ## Check/correct translations
 The widgets (checkboxes, drop-down menus, radio buttons...) of each tool have been translated from their native languages into all the languages supported by AgroforesTreeAdvice (currently, english, french, german, dutch and czech) automatically by deepL => there may be some mistakes. If you detect an error, we would appreciate if you could correct it.
 
-The translations are kept in the speadsheet describing the interface of each tool. These are stored in the ["models" folder](https://github.com/euraf/agroforestreeadvice/tree/main/models), in the form of excel files, one per tool. Each file has 2 sheets: one named "data", which contains the tree characteristics, and one named "interface", which contains all the information AgroforesTreeAdvice needs to build the interface for this specific tool.
+The translations are kept in the tab-delimited text file describing the interface of each tool **Warning:** do not include tabs in the text within cells if you use a spraedsheet editor to input the data. These are stored in the ["models" folder](https://github.com/euraf/agroforestreeadvice/tree/main/models), in the form of 2 tab-delimited text files for each tool : one named "data", which contains the tree characteristics, and one named "interface", which contains all the information AgroforesTreeAdvice needs to build the interface for this specific tool.
 
-Excel files cannot be modified online with github so the steps are:
+Tab-delimited text files can be changed directly on github, but since the columns are not aligned, it is very difficult to edit the file on the github web page. So the steps to change the file with a more convenient text editor (or spreadsheet) are:
 1) if you are a github user, clone the repository or create a new branch on your computer, if you are not using github, download the file of the model you want to correct on your computer
 2) modify the necessary cells in columns I to W in the "interface" sheet (DO NOT modify columns A to H)
-3) highlight these cells in colors so that we can quickly do a manual merge if several people have tried to modify the same file at the same time
+3) if you used a spreadsheet editor and are sending the file by email (see below), highlight these cells in colors so that we can quickly do a manual merge if several people have tried to modify the same file at the same time
 4) save the corrected file
 5) if you are a github user, commit your changes and create a pull request, if you are not using github, send the file by email to Marie Gosme (firstname.lastname@inrae.fr) 
 
