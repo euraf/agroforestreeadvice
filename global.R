@@ -11,6 +11,11 @@ library(DT)
 #library(dplyr)
 ##global----
 
+#this is to allow POST requests despite the fact that there is a www folder (found here: https://gist.github.com/jcheng5/2aaff19e67079840350d08361fe7fb20 )
+#shiny_env <- shiny:::.globals
+#shiny_env$resourcePaths <- c(shiny_env$resourcePaths, list("postpath" = httpuv::excludeStaticPath()))
+
+
 #load("dataSTA.Rdata")
 #load("dataFlanders.Rdata")
 #load("dataDeciduous.Rdata")
