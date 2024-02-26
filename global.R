@@ -12,8 +12,16 @@ library(DT)
 ##global----
 
 #this is to allow POST requests despite the fact that there is a www folder (found here: https://gist.github.com/jcheng5/2aaff19e67079840350d08361fe7fb20 )
+#actually we don't use POST requests, just some kind of GET through session$clientData$url_search
 #shiny_env <- shiny:::.globals
 #shiny_env$resourcePaths <- c(shiny_env$resourcePaths, list("postpath" = httpuv::excludeStaticPath()))
+
+#how to handle POST requests: 
+#https://stackoverflow.com/questions/25283736/r-shiny-rest-api-communication/71064046#71064046
+#https://stackoverflow.com/questions/25297489/accept-http-request-in-r-shiny-application
+#plumber and shiny integration (unsolved): 
+#https://community.rstudio.com/t/integrate-plumber-api-within-hosted-shiny-app/162224
+#
 
 
 #load("dataSTA.Rdata")

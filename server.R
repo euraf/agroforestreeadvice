@@ -60,19 +60,23 @@ server <- function(input, output, session) {
         }
       )
 
-      showModal(modalDialog(
-        title = "Download txt file",
-        htmlOutput("dataPreview"),  # Display data preview
-        footer = tagList(
-          modalButton("Cancel"),
-          downloadButton("modalDownload", "Download")
-        ),
-        size = "l",
-        easyClose = TRUE
-      ))
+      # showModal(modalDialog(
+      #   title = "Download txt file",
+      #   htmlOutput("dataPreview"),  # Display data preview
+      #   footer = tagList(
+      #     modalButton("Cancel"),
+      #     downloadButton("modalDownload", "Download")
+      #   ),
+      #   size = "l",
+      #   easyClose = TRUE
+      # ))
+      httpResponse(
+        status = 200L,
+        content_type = "application/json",
+        content = jsonlite::toJSON(resultdf, dataframe="rows")
+      )
       
-      
-    }
+    } #end parameters sent through URL
     
   }) #end managing URL queries
   
