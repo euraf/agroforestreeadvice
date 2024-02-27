@@ -8,15 +8,19 @@ library(datasets)
 #setwd("E:\\Mes_documents\\a_ABSys\\DIGITAF\\WP2farmers\\task2.2_treecropperformance\\DigitAFtreeAdvice\\agroforestreeadvice avecHTTP")
 #source("E:\\Mes_documents\\a_ABSys\\DIGITAF\\WP2farmers\\task2.2_treecropperformance\\DigitAFtreeAdvice\\agroforestreeadvice avecHTTP\\global.R")
 source("global.R")
+
 #icicicci todo: in global, instead of reading the models from local file, read them directly from github:
 #readr::read_csv("url_obtained_from_clicking_raw_view_in_github")
+
 
 ui <- function(req) {
   # The `req` object is a Rook environment
   # See https://github.com/jeffreyhorner/Rook#the-environment
   if (identical(req$REQUEST_METHOD, "GET")) {
+
     source(file.path("R", "Tabinterface.R")) #not local because we want the function
     source("ui_visual.R", local = TRUE)
+
   } else if (identical(req$REQUEST_METHOD, "POST")) {
     # Handle the POST
     query_params <- parseQueryString(req$QUERY_STRING)
@@ -52,6 +56,7 @@ attr(ui, "http_methods_supported") <- c("GET", "POST")
 
 #server <- function(input, output, session) {}
 source("server_logic.R", local = TRUE)
+
 
 app<-shinyApp(ui, server, uiPattern = ".*")
 
