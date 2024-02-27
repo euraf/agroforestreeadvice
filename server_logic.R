@@ -21,62 +21,60 @@ server <- function(input, output, session) {
     }
     
     allotherparameters<-setdiff(names(query), c("in_language", "model"))
-    if(length(allotherparameters)>0){ #we passed parameters by URL = we want to get the results as csv
-      queryinputs<-unlist(query[allotherparameters]) #icicicic todo : check that all necessary inputs are provided before sending to the suitability function
-      print(paste("computing suitability of model", desiredmodel))
-      resultdf<-do.call(paste("compute_suitability_", desiredmodel, sep=""), list(
-        inputsdata=queryinputs,
-        database=get(paste("data", desiredmodel, sep="")), 
-        interface=get(paste("interface", desiredmodel, sep="")))
-      )
-      #print(str(resultCSV))
-      # Define a function to generate and return the CSV content
-      generatetxtContent <- function(df) {
-        m <- as.matrix(df)
-        # add column headers
-        m <- rbind(dimnames(m)[[2]], m)
-        m<-apply(m, 1, paste, collapse="\t")
-        return(m)
-      }
-      
-      preview_table <- head(resultdf, n = 5)
-      
-      # Display data preview in the modal
-      output$dataPreview <- renderUI({
-        tableOutput("previewTable")
-      })
-      output$previewTable <- renderTable({
-        preview_table
-      })
-      
-      # Handle the download button within the modal
-      output$modalDownload <- downloadHandler(
-        filename = function() {
-          "computed_data.csv"
-        },
-        content = function(file) {
-          txt_content <- generatetxtContent(resultdf)
-          writeLines(txt_content, file)
-        }
-      )
-
-      # showModal(modalDialog(
-      #   title = "Download txt file",
-      #   htmlOutput("dataPreview"),  # Display data preview
-      #   footer = tagList(
-      #     modalButton("Cancel"),
-      #     downloadButton("modalDownload", "Download")
-      #   ),
-      #   size = "l",
-      #   easyClose = TRUE
-      # ))
-      httpResponse(
-        status = 200L,
-        content_type = "application/json",
-        content = jsonlite::toJSON(resultdf, dataframe="rows")
-      )
-      
-    } #end parameters sent through URL
+    
+    
+    ##old code to generate a csv file and open a modal to propose to download => now replaced with the POST mechanism in ui.R
+    # if(length(allotherparameters)>0){ #we passed parameters by URL = we want to get the results as csv
+    #   queryinputs<-unlist(query[allotherparameters]) #icicicic todo : check that all necessary inputs are provided before sending to the suitability function
+    #   print(paste("computing suitability of model", desiredmodel))
+    #   resultdf<-do.call(paste("compute_suitability_", desiredmodel, sep=""), list(
+    #     inputsdata=queryinputs,
+    #     database=get(paste("data", desiredmodel, sep="")), 
+    #     interface=get(paste("interface", desiredmodel, sep="")))
+    #   )
+    #   #print(str(resultCSV))
+    #   # Define a function to generate and return the CSV content
+    #   generatetxtContent <- function(df) {
+    #     m <- as.matrix(df)
+    #     # add column headers
+    #     m <- rbind(dimnames(m)[[2]], m)
+    #     m<-apply(m, 1, paste, collapse="\t")
+    #     return(m)
+    #   }
+    #   
+    #   preview_table <- head(resultdf, n = 5)
+    #   
+    #   # Display data preview in the modal
+    #   output$dataPreview <- renderUI({
+    #     tableOutput("previewTable")
+    #   })
+    #   output$previewTable <- renderTable({
+    #     preview_table
+    #   })
+    #   
+    #   # Handle the download button within the modal
+    #   output$modalDownload <- downloadHandler(
+    #     filename = function() {
+    #       "computed_data.csv"
+    #     },
+    #     content = function(file) {
+    #       txt_content <- generatetxtContent(resultdf)
+    #       writeLines(txt_content, file)
+    #     }
+    #   )
+    # 
+    #   showModal(modalDialog(
+    #     title = "Download txt file",
+    #     htmlOutput("dataPreview"),  # Display data preview
+    #     footer = tagList(
+    #       modalButton("Cancel"),
+    #       downloadButton("modalDownload", "Download")
+    #     ),
+    #     size = "l",
+    #     easyClose = TRUE
+    #   ))
+    #  
+    #} #end parameters sent through URL
     
   }) #end managing URL queries
   
