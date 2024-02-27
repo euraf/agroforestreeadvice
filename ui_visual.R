@@ -72,44 +72,8 @@ body <- dashboardBody(
 
 
 # Complete page ----
-
 dashboardPage(
   header,
   sidebar,
   body
 )
-
-# ui <- function(req) {
-#   # The `req` object is a Rook environment
-#   # See https://github.com/jeffreyhorner/Rook#the-environment
-#   if (identical(req$REQUEST_METHOD, "GET")) {
-#     # Complete page ----
-#     
-#     dashboardPage(
-#       header,
-#       sidebar,
-#       body
-#     )
-#   } else if (identical(req$REQUEST_METHOD, "POST")) {
-#     # Handle the POST
-#     query_params <- parseQueryString(req$QUERY_STRING)
-#     body_bytes <- req$rook.input$read(-1)
-#     if(req$PATH_INFO == "/API"){
-#       json_received <- jsonlite::fromJSON(rawToChar(body_bytes))
-#       df_to_be_sent <- as.data.frame(query_params)
-#       httpResponse(
-#         status = 200L,
-#         content_type = "application/json",
-#         content = jsonlite::toJSON(df_to_be_sent, dataframe="rows")
-#       )
-#     } else {
-#       httpResponse(
-#         status = 200L,
-#         content_type = "text/html",
-#         content = "POST works only if the URL ends with /API"
-#       )
-#     }
-#   }
-# }
-#attr(ui, "http_methods_supported") <- c("GET", "POST")
-
