@@ -42,7 +42,7 @@ Tab-delimited text files can be changed directly on github, but since the column
 
 
 ## Add a new model
-If you are a tool developper, or have access to an (opensource) database of tree characteristics, and whish to include it in agroforestreeadvice, here's how to proceed. To help you, we provide (in the doc folder) templates for the excel sheet and for the scoring function.
+If you are a tool developper, or have access to an (opensource) database of tree characteristics, and whish to include it in agroforestreeadvice, here's how to proceed. To help you, we provide templates for the excel sheet (https://github.com/euraf/agroforestreeadvice/blob/main/models/template.xlsx) and for the scoring function (https://github.com/euraf/agroforestreeadvice/blob/main/R/suitability_template.R).
 ### step 1: clean the database of tree characteristics
 Agroforestreeadvice needs a clean database of tree characteristics with tree species in lines, characteristics of the species in columns. The first line must contain headers, with one header for each column, no space and no special characters in headers. Check that you have at least one column that can serve as a unique tree identifier (ideally this should be the tree latin name and if you have species with several lines (e.g. because of several cultivars), then the unique identifier should include the cultivar). Check that the text cells are correctly spelled.
 
