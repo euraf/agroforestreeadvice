@@ -8,7 +8,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
   # Appliquer la fonction ns à tous les inputId / outputId
   ns <- NS(id)
   
-  
+
   # Il faut encapsuler l'interface dans un tagList
   tagList(
     fluidRow(column(width=6,
@@ -64,8 +64,19 @@ moduleTabInterface_UI <- function(id, data, interface) {
           column(width=12,
                  DTOutput(outputId = ns("DTSuitability"))
           )
-        ))
-    
+        )),
+
+        if (id == "Czech") {      # Add legislative criteria for Czech tree advice
+          box(title = "Legislative criteria for tree selection",
+              solidHeader = TRUE,
+              status="warning",
+              width=NULL,
+                column(width=12,
+                      DTOutput(outputId = ns("DTSinformations"))
+          ))}
+            
+        
+      
   ) # fin tagList
   
 } # fin moduleTabInterface_UI
@@ -183,6 +194,44 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         return(dfSuitability)
       }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
       
+       datatoplot_informations <- reactive({
+        allinputs1<-reformattedinputs() 
+        # allinputs append legislative criteria
+        
+        # very primitive way to force the legislative criteria to be present in the allinputs list
+        allinputs2 <- list(
+            approval = "approval",
+            endengeredG = "endengeredG",
+            endengeredU = "endengeredU",
+            endengeredY = "endengeredY"
+          )
+        
+        # Append the new allinputs list to the existing allinputs list
+        allinputs <- c(allinputs1, allinputs2)
+        # write.csv(allinputs, "00_allinputs_datatoplot_informations.csv")   # very usefull for debugging
+
+        orderby <- input$orderby
+        if(length(allinputs)>0){
+          message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
+          #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
+          
+          dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
+                                             orderby = orderby)
+        } else{
+          dfSuitability<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
+        }
+        #order of the bars in ggplot is determined by species (ordered factor), but for the DT, we need to also sort the rows
+        #browser()
+        dfSuitability<-dfSuitability[order(
+          dfSuitability$species, 
+          factor(dfSuitability$side, levels=c("responsetrait", "effecttrait")), 
+          dfSuitability$BigCriteria),]
+        # print(str(dfSuitability))     # for debugging
+        # write_xlsx(dfSuitability, "00_dfSuitability_tabinterface_datatoplot_informations.xlsx")    # for debugging
+        return(dfSuitability)
+      }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
+      
+      
       
       
       
@@ -244,6 +293,11 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           #print(choices)
           labelinput<-initcompactcontrols$labelcriteria[i]
           
+          # If the label is "Legislation", return NULL  - make batter, now primitive way to remove the legislation option, but store its data         
+          if (labelinput == "Legislation") {
+            return(NULL)
+          }
+  
           control <- switch(
             control_type,
             checkboxInput=checkboxInput(input_id, label = labelinput),
@@ -331,13 +385,20 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         plot_Suitability<-ggplot(databis, aes(x = value, y = species, fill = BigCriteria)) +
           #geom_rect(aes(xmin = -Inf, xmax = 0, ymin = -Inf, ymax = Inf), fill = "#ffcccc", alpha = 0.5) +
           #geom_rect(aes(xmin = 0, xmax = Inf, ymin = -Inf, ymax = Inf), fill = "#ccccff", alpha = 0.5) +
-          geom_bar(stat = "identity", position = "stack") +
+          geom_bar(stat = "identity", position = "stack", color = NA) +
           scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
-          #scale_fill_manual(values = colors) +
           theme_minimal() +
-          #theme(legend.position = "none" )+
-          labs(x = "Adaptation                         Efficiency", y = "Species")
+          labs(y = "Species", x = NULL, fill = "Main Criteria") +
+          scale_x_continuous(breaks = c(-2, 2), labels = c("Adaptation", "Efficiency")) +        # anchors the descriptions of X axis around the vline, hides X axis values
+          theme(axis.text.y = element_text(family = "Arial", size = 14),                         # too small descriptions on some monitors
+                axis.text.x = element_text(family = "Arial", size = 14),
+                legend.title = element_text(family = "Arial", size = 16),
+                legend.text = element_text(family = "Arial", size = 14),
+                panel.grid.major.x = element_blank(),                                            # hides major vertical grid lines
+                panel.grid.minor.x = element_blank()                                             # hides minor vertical grid lines  
+                )
+
         return(plot_Suitability)
       })
       
@@ -381,6 +442,45 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
       ))
       
+
+      output$DTSinformations <- renderDT({
+        datalong <- datatoplot_informations()
+        if(datalong$species[1] != "no data yet") {
+          datalong[datalong$side=="responsetrait", "value"]<- -datalong[datalong$side=="responsetrait", "value"]
+          if("criteria" %in% names(datalong)) {
+            #datalong<-datalong[order(datalong$side, datalong$criteria, datalong$species),]
+            datawide<-reshape(datalong[,c("species", "criteria", "value")], direction="wide",
+                              v.names="value",
+                              timevar="criteria",
+                              idvar=c("species")
+            )
+            # write_xlsx(datawide, "00_datawide_datalong.xlsx")      allows to view the complete datawide
+            crits<-unique(datalong[,c("side", "criteria")])
+            crits$criteria<-paste("value", crits$criteria, sep=".")
+          } else {
+            #datalong<-datalong[order(datalong$side, datalong$BigCriteria, datalong$species),]
+            datawide<-reshape(datalong[,c("species", "BigCriteria", "value")], direction="wide",
+                              v.names="value",
+                              timevar="BigCriteria",
+                              idvar=c("species")
+            )
+            crits<-unique(datalong[,c("side", "BigCriteria")])
+            crits$criteria<-paste("value", crits$BigCriteria, sep=".")
+          }
+          if(any(crits$side=="responsetrait")){
+            datawide$adaptation.value<-rowSums(datawide[, crits$criteria[crits$side=="responsetrait"], drop=FALSE],na.rm=TRUE)         # so the DT will copy the order of original
+          } else datawide$adaptation.value<-0
+          if(any(crits$side=="effecttrait")){
+            datawide$efficiency.value<-rowSums(datawide[, crits$criteria[crits$side=="effecttrait"], drop=FALSE],na.rm=TRUE)           # so the DT will copy the order of original
+          } else datawide$efficiency.value<-0
+          
+            datawide[,c("species", "adaptation.value", "efficiency.value", "value.approval", "value.endengeredG", "value.endengeredU", "value.endengeredY")]
+            
+          } else {datalong}
+          }, options = list(
+          scrollX = TRUE,
+          order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
+        ))
       
     } # fin function(input, output, session)
     
