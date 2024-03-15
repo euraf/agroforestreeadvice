@@ -2,6 +2,7 @@
 #                    "https://gosme.shinyapps.io/DigitAFtreeAdvice/", streaming=TRUE)
 #"D:\\Mes_documents\\a_ABSys\\autreschercheurs\\BertReubens\\DigitAFtreeAdvice\\rsconnect\\shinyapps.io\\gosme"
 
+# library(writexl)       # for writing xlsx files
 library(shiny)
 library(openxlsx)
 library(ggplot2)
@@ -56,7 +57,7 @@ toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDEC
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives){
-  print("reshapecontrols")
+  # print("reshapecontrols")     ## very useful for debugging
   #print(str(controls))
   #print(paste("language=", language))
   toto<-strsplit(c(names(controls)), split="_")
@@ -72,6 +73,9 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
   #we first reshape the choices (in the case of multichoices controls: selectInput, checkBoxGroupInput)
   
   compact<-data.frame()
+  # print("Uniq criteria:")                ## very useful for debugging
+  # print(unique(toto$criteria))
+
   for (crit in unique(toto$criteria)){
     #print(crit)
     dat<-toto[toto$criteria==crit,]
