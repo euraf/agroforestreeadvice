@@ -20,10 +20,11 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   rownames(toto)<-toto$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
                                   c("legislation", "fruit", "forage", "forest", "ornamental",
-                                    "height", "habitus", "growthspeed", 
+                                    "height", "understory_tree", "habitus", "growthspeed", 
                                     "earlinessleafing", "floweringdate", 
                                     "climateclass", "altitude", "soil_fertility",
-                                    "soil_water", "light", "wood", "food")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
+                                    "soil_water", "light", "wood", "food",
+                                    "approval", "endengeredG", "endengeredU", "endengeredY")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
   for(crit in standardformcriteria){
     print(paste("compute score for", crit))
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
@@ -45,6 +46,7 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
   print("fin suitability")
   
+  # write_xlsx(dbfinal, "00_dbfinal.xlsx") #for debugging
   return(dbfinal)
   
 }
