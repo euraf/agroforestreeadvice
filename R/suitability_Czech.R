@@ -46,7 +46,45 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
   print("fin suitability")
   
-  # write_xlsx(dbfinal, "00_dbfinal.xlsx") #for debugging
+
+  # print(inputsdata)
+  #write_xlsx(dbfinal, "00_dbfinal.xlsx") #for debugging
+  #assign("dbfinal", dbfinal, envir = .GlobalEnv) # debugging, this is to be able to see the result in the console
   return(dbfinal)
   
+}
+
+#' @param db The database of trees.
+#' @param inputsdata A list of criteria for filtering the trees.
+#'
+#' @return The filtered database of trees.
+#'
+#' @examples
+#' db <- data.frame(growthspeed = c("fast", "medium", "slow"),
+#'                  habitus = c("upright", "spreading", "columnar"),
+#'                  earlynessleafing = c("early", "medium", "late"),
+#'                  understory_tree = c(TRUE, FALSE, TRUE),
+#'                  height = c(5, 10, 15))
+#' inputsdata <- list(growthspeed = "fast",
+#'                    habitus = "upright",
+#'                    earlynessleafing = "early",
+#'                    understory_tree = TRUE,
+#'                    height1 = 5,
+#'                    height2 = 10)
+#' filtered_db <- Hard_criteria_filter(db, inputsdata)
+#' print(filtered_db)
+#'
+#' @export
+Hard_criteria_filter <- function(db, inputsdata) {
+  # Filter trees based on criteria in inputsdata - if the tree do not meet these criteria, it is removed
+
+  if ("growthspeed" %in% names(inputsdata))              {db <- db[db$growthspeed == inputsdata[["growthspeed"]],]}
+  #if ("habitus" %in% names(inputsdata))                  {db <- db[db$habitus == inputsdata[["habitus"]],]}
+  #if ("earlinessleafing" %in% names(inputsdata))         {db <- db[db$earlinessleafing == inputsdata[["earlinessleafing"]],]}
+  if ("understory_tree" %in% names(inputsdata))          {db <- db[db$understory_tree == inputsdata[["understory_tree"]],]}
+  if ("height1" %in% names(inputsdata))                  {db <- db[db$height >= inputsdata[["height1"]],]}
+  if ("height2" %in% names(inputsdata))                  {db <- db[db$height <= inputsdata[["height2"]],]}
+
+  # write_xlsx(db, "01_dbfinal_filtered.xlsx") #for debugging
+  return(db)
 }
