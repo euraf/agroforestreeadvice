@@ -2,7 +2,7 @@
 #                    "https://gosme.shinyapps.io/DigitAFtreeAdvice/", streaming=TRUE)
 #"D:\\Mes_documents\\a_ABSys\\autreschercheurs\\BertReubens\\DigitAFtreeAdvice\\rsconnect\\shinyapps.io\\gosme"
 
-library(writexl)       # for writing xlsx files
+#library(writexl)       # for writing xlsx files
 library(shiny)
 library(openxlsx)
 library(ggplot2)
