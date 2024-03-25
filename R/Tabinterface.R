@@ -7,37 +7,11 @@ moduleTabInterface_UI <- function(id, data, interface) {
   # Permet d'avoir des Id uniques dans toute l'application pour les inputs/outputs
   # Appliquer la fonction ns à tous les inputId / outputId
   ns <- NS(id)
-  
+
 
   # Il faut encapsuler l'interface dans un tagList
   tagList(
-    fluidRow(column(width=6,
-                    box(title = "Your site",
-                        solidHeader = TRUE,
-                        status="danger",
-                        width=NULL,
-                        uiOutput(ns("dynamicControlsResponse"))
-                    )),
-             column(width=6,
-                    box(title = "Your objectives",
-                        solidHeader = TRUE,
-                        status="primary",
-                        width=NULL,
-                        uiOutput(ns("dynamicControlsEffect"))
-                    ))
-    ),
-    fluidRow(wellPanel(
-      class = "custom-well-panel5",
-      style = "display: flex; justify-content: center;",
-      # Fourth panel (full width)
-      # box(title="For debugging",
-      #     solidHeader = TRUE,
-      #     status="danger",
-      #     width=NULL,
-      #     fluidRow(verbatimTextOutput(ns("controlOutput")))),
-      actionButton(inputId = ns("ab_compute"), label="Compare trees !")
-      
-    )),
+    uiOutput(ns("dynamicUI")),
     
     box(title = "All trees",
         solidHeader = TRUE,
@@ -66,7 +40,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
           )
         )),
 
-        if (id == "Czech") {      # Add legislative criteria for Czech tree advice
+    if (id == "Czech") {      # Add legislative criteria for Czech tree advice
           box(title = "Legislative criteria for tree selection",
               solidHeader = TRUE,
               status="warning",
@@ -92,9 +66,41 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       ns <- session$ns # utile si renderUI
       
+      output$dynamicUI <- renderUI({
+      req(language())  # Ensure 'language' is available
+      tagList(
+        fluidRow(column(width=6,
+                        box(title = Site_box_lang(language()),
+                            solidHeader = TRUE,
+                            status="danger",
+                            width=NULL,
+                            uiOutput(ns("dynamicControlsResponse"))
+                        )),
+                 column(width=6,
+                        box(title = Objectives_box_lang(language()),
+                            solidHeader = TRUE,
+                            status="primary",
+                            width=NULL,
+                            uiOutput(ns("dynamicControlsEffect"))
+                        ))
+        ),
+        fluidRow(wellPanel(
+          class = "custom-well-panel5",
+          style = "display: flex; justify-content: center;",
+          actionButton(inputId = ns("ab_compute"), label=Compare_trees_button(language()))
+        ))
+      )
+    })
+
+
+
       ## reactives ----
       
       # Reactive expression to capture control names and values
+
+      # reactiveValues to keep the order of the species for the second datatable
+      speciesOrder <- reactiveValues(order = NULL)   
+
       controlData <- reactive({
         controls <- reactiveValuesToList(input)
         theoreticalcontrols<-compactcontrols()
@@ -181,6 +187,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           
           dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
                                              orderby = orderby)
+
+          # filter the trees based on the hard criteria
+          # dfSuitability<-Hard_criteria_filter(dfSuitability, allinputs)
+        
         } else{
           dfSuitability<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
         }
@@ -191,43 +201,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           factor(dfSuitability$side, levels=c("responsetrait", "effecttrait")), 
           dfSuitability$BigCriteria),]
         #print(str(dfSuitability))
-        return(dfSuitability)
-      }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
-      
-       datatoplot_informations <- reactive({
-        allinputs1<-reformattedinputs() 
-        # allinputs append legislative criteria
-        
-        # very primitive way to force the legislative criteria to be present in the allinputs list
-        allinputs2 <- list(
-            approval = "approval",
-            endengeredG = "endengeredG",
-            endengeredU = "endengeredU",
-            endengeredY = "endengeredY"
-          )
-        
-        # Append the new allinputs list to the existing allinputs list
-        allinputs <- c(allinputs1, allinputs2)
-        # write.csv(allinputs, "00_allinputs_datatoplot_informations.csv")   # very usefull for debugging
 
-        orderby <- input$orderby
-        if(length(allinputs)>0){
-          message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
-          #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
-          
-          dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
-                                             orderby = orderby)
-        } else{
-          dfSuitability<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
-        }
-        #order of the bars in ggplot is determined by species (ordered factor), but for the DT, we need to also sort the rows
-        #browser()
-        dfSuitability<-dfSuitability[order(
-          dfSuitability$species, 
-          factor(dfSuitability$side, levels=c("responsetrait", "effecttrait")), 
-          dfSuitability$BigCriteria),]
-        # print(str(dfSuitability))     # for debugging
-        # write_xlsx(dfSuitability, "00_dfSuitability_tabinterface_datatoplot_informations.xlsx")    # for debugging
+        #write_xlsx(dfSuitability, "01_dfsuitablity.xlsx")
         return(dfSuitability)
       }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
       
@@ -378,6 +353,13 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         #browser()
         databis<-datatoplot()
         print(str(databis))
+        
+        # change BigCriteria names in order to change plot legend language
+        # databis <- BigCriteria_lang(language(), databis)
+
+        # reset the as.numeric(databis$species) from one to the number of species - needed if I want to reduce the number of species to plot
+        databis$species<-factor(databis$species, levels=speciesOrder$order)
+
         print(str(as.numeric(databis$species)))
         #select only the range of species to display (user choice, by default 1 to 20), species is an ordered vector
         databis<-databis[as.numeric(databis$species)>=rangetoplot$from 
@@ -389,16 +371,17 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
           theme_minimal() +
-          labs(y = "Species", x = NULL, fill = "Main Criteria") +
-          scale_x_continuous(breaks = c(-2, 2), labels = c("Adaptation", "Efficiency")) +        # anchors the descriptions of X axis around the vline, hides X axis values
+          labs(y = "Species", x = NULL, fill = Graph_legend_lang(language())) +
+          scale_x_continuous(breaks = c(-2, 2), labels = Graph_labels_lang(language())) +        # anchors the descriptions of X axis around the vline, hides X axis values
           theme(axis.text.y = element_text(family = "Arial", size = 14),                         # too small descriptions on some monitors
                 axis.text.x = element_text(family = "Arial", size = 14),
                 legend.title = element_text(family = "Arial", size = 16),
                 legend.text = element_text(family = "Arial", size = 14),
                 panel.grid.major.x = element_blank(),                                            # hides major vertical grid lines
                 panel.grid.minor.x = element_blank()                                             # hides minor vertical grid lines  
-                )
-
+                ) +
+          scale_fill_discrete(labels = Plot_legend_lang(language()))      
+              
         return(plot_Suitability)
       })
       
@@ -433,9 +416,9 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           if(any(crits$side=="effecttrait")){
             datawide$efficiency.score<-rowSums(datawide[, crits$criteria[crits$side=="effecttrait"], drop=FALSE],na.rm=TRUE)
           } else datawide$efficiency.score<-0
+          speciesOrder$order <- unique(datalong$species)
           
           datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
-          
         } else {datalong}
         }, options = list(
         scrollX = TRUE,
@@ -444,46 +427,83 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
 
       output$DTSinformations <- renderDT({
-        datalong <- datatoplot_informations()
-        if(datalong$species[1] != "no data yet") {
-          datalong[datalong$side=="responsetrait", "value"]<- -datalong[datalong$side=="responsetrait", "value"]
-          if("criteria" %in% names(datalong)) {
-            #datalong<-datalong[order(datalong$side, datalong$criteria, datalong$species),]
-            datawide<-reshape(datalong[,c("species", "criteria", "value")], direction="wide",
-                              v.names="value",
-                              timevar="criteria",
-                              idvar=c("species")
-            )
-            # write_xlsx(datawide, "00_datawide_datalong.xlsx")      allows to view the complete datawide
-            crits<-unique(datalong[,c("side", "criteria")])
-            crits$criteria<-paste("value", crits$criteria, sep=".")
-          } else {
-            #datalong<-datalong[order(datalong$side, datalong$BigCriteria, datalong$species),]
-            datawide<-reshape(datalong[,c("species", "BigCriteria", "value")], direction="wide",
-                              v.names="value",
-                              timevar="BigCriteria",
-                              idvar=c("species")
-            )
-            crits<-unique(datalong[,c("side", "BigCriteria")])
-            crits$criteria<-paste("value", crits$BigCriteria, sep=".")
-          }
-          if(any(crits$side=="responsetrait")){
-            datawide$adaptation.value<-rowSums(datawide[, crits$criteria[crits$side=="responsetrait"], drop=FALSE],na.rm=TRUE)         # so the DT will copy the order of original
-          } else datawide$adaptation.value<-0
-          if(any(crits$side=="effecttrait")){
-            datawide$efficiency.value<-rowSums(datawide[, crits$criteria[crits$side=="effecttrait"], drop=FALSE],na.rm=TRUE)           # so the DT will copy the order of original
-          } else datawide$efficiency.value<-0
-          
-            datawide[,c("species", "adaptation.value", "efficiency.value", "value.approval", "value.endengeredG", "value.endengeredU", "value.endengeredY")]
-            
-          } else {datalong}
-          }, options = list(
-          scrollX = TRUE,
-          order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
-        ))
+        # MOST IMPORTANT! select desired criteria it will find them in the interface and also the answers in choice_en, choice_cz, etc.
+        legislative_criteria <- c("approval", "endengeredG", "endengeredU", "endengeredY")
+        informative_criteria <- c("wood", "food")
+
+        # use informative_criteria to load dataframe from interfaceCzech
+        datainfo <- dataCzech[, c("Scientific_name", informative_criteria, legislative_criteria)]
+
+        language_col <- paste("choice", (as.character(language())), sep = "_") # returns choice_en, choice_cz, etc.
+
+        informative_text = list()
+        for(i in seq_along(informative_criteria)) {  # finds answers in choice_en, choice_cz, etc. for each informative_criteria                                              
+          row <- interfaceCzech[interfaceCzech$criteria == informative_criteria[i], ]
+          informative <- row[, language_col]
+          informative_text[[length(informative_text) + 1]] <- informative
+        }
+
+        legislative_text = list()
+        for(i in seq_along(legislative_criteria)) {  # finds answers in choice_en, choice_cz, etc. for each informative_criteria                                              
+          row <- interfaceCzech[interfaceCzech$choice == legislative_criteria[i], ]
+          legislative <- row[, language_col]
+          print("##### legislative")
+          print(row)
+          legislative_text[[length(legislative_text) + 1]] <- legislative
+        }
+
+        # Replace VRAI with the legislative text
+        for(i in seq_along(legislative_criteria)) {
+          datainfo[[legislative_criteria[i]]][datainfo[[legislative_criteria[i]]] == "VRAI"] <- legislative_text[[i]]
+        }
+
+        # Concatenate columns into custom columns
+        datainfo$information <- do.call(paste, c(lapply(informative_criteria, function(x) datainfo[[x]]), sep = ", "))
+        datainfo$legislation <- do.call(paste, c(lapply(legislative_criteria, function(x) datainfo[[x]]), sep = ", "))
+        
+        # Replace all occurrences of invalid characters
+        datainfo$information <- gsub("FAUX,", "", datainfo$information)
+        datainfo$information <- gsub("FAUX", "", datainfo$information)
+        datainfo$information <- gsub(",FAUX", "", datainfo$information)
+        datainfo$information <- gsub(", $", "", datainfo$information) # remove trailing comma
+        datainfo$information <- gsub(",$", "", datainfo$information)  # remove trailing comma
+        datainfo$information <- gsub("^, ", "", datainfo$information) # remove leading comma
+
+        datainfo$legislation <- gsub("FAUX,", "", datainfo$legislation)
+        datainfo$legislation <- gsub("FAUX", "", datainfo$legislation)
+        datainfo$legislation <- gsub(",FAUX", "", datainfo$legislation)
+        datainfo$legislation <- gsub(", $", "", datainfo$legislation) # remove trailing comma
+        datainfo$legislation <- gsub(",$", "", datainfo$legislation)  # remove trailing comma
+
+        # Order the data frame by species_order of main dataframe
+        speciesOrder$order #calls the reactive value
+        datainfo <- datainfo[order(match(datainfo$Scientific_name, speciesOrder$order)), ]
+        
+        # simplify the data frame
+        datainfo <- datainfo[, c("Scientific_name", "legislation", "information")]
+        
+        # change language of column names
+        if (as.character(language()) == "cz") {colnames(datainfo) <- c("Vědecký název", "Legislativa", "Informace")}
+        if (as.character(language()) == "en") {colnames(datainfo) <- c("Scientific name","Legislation", "Information")}
+        if (as.character(language()) == "fr") {colnames(datainfo) <- c("Nom scientifique", "Législation", "Information")}
+        if (as.character(language()) == "de") {colnames(datainfo) <- c("Wissenschaftlicher Name", "Gesetzgebung", "Information")}
+        if (as.character(language()) == "es") {colnames(datainfo) <- c("Nombre científico", "Legislación", "Información")}
+        if (as.character(language()) == "nl") {colnames(datainfo) <- c("Wetenschappelijke naam", "Wetgeving", "Informatie")}
       
-    } # fin function(input, output, session)
-    
-  ) # fin moduleServer
-  return(moduleServer)
+        #assign("datainfo", datainfo, envir = .GlobalEnv) # debugging
+
+        # Return the simplified data frame
+        datainfo
+
+        }, options = list(
+          scrollX = TRUE,
+          columnDefs = list(   # auto width is on, but we can partially set the width of the columns
+            list(width = '40px', targets = c(0)),
+            list(width = '300px', targets = c(1)),
+            list(width = '300px', targets = c(2))
+          )
+          
+        ))    
+    return(moduleServer)
+  })
 } # fin moduleTabInterface_Server

@@ -2,14 +2,14 @@
 #                    "https://gosme.shinyapps.io/DigitAFtreeAdvice/", streaming=TRUE)
 #"D:\\Mes_documents\\a_ABSys\\autreschercheurs\\BertReubens\\DigitAFtreeAdvice\\rsconnect\\shinyapps.io\\gosme"
 
-# library(writexl)       # for writing xlsx files
+library(writexl)       # for writing xlsx files
 library(shiny)
 library(openxlsx)
 library(ggplot2)
 #library(plotly)
 library(shinydashboard)
 library(DT)
-#library(dplyr)
+library(dplyr)
 ##global----
 
 #load("dataSTA.Rdata")
@@ -123,6 +123,11 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
 #' @examples
 orderdf<-function(df, orderby, idvariable, interface){
   # Calculate the sum of the variables in orderby for each species to find the correct order
+  #assign("df_from_orderdf", df, envir = .GlobalEnv) # debugging, this is to be able to see the result in the console
+  #assign("orderby_from_orderdf", orderby, envir = .GlobalEnv) # debugging, this is to be able to see the result in the console
+  #assign("idvariable_from_orderdf", idvariable, envir = .GlobalEnv) # debugging, this is to be able to see the result in the console
+  #assign("interface_from_orderdf", interface, envir = .GlobalEnv) # debugging, this is to be able to see the result in the console
+  
   linestokeep<-df$BigCriteria %in% unique(interface[!is.na(interface$side) & interface$side==orderby, c("BigCriteria")])
   if(sum(linestokeep)==0) linestokeep=TRUE
   species_order <- df[linestokeep,]
