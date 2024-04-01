@@ -1,0 +1,10 @@
+object, type, en, fr, de, es, nl, cz
+DTinformations,DTinfo_col_names,Scientific name,Nom scientifique,Wissenschaftlicher Name,Nombre científico,Wetenschappelijke naam,Vědecký název
+DTinformations,DTinfo_col_legislative,Legislation,Législation,Gesetzgebung,Legislación,Wetgeving,Legislativa
+DTinformations,DTinfo_col_information,Information,Information,Information,Información,Informatie,Informace
+Site_box,Site_box_title,Your site,Votre site,Ihre Website,Su sitio,Uw site, Vaše stránka
+Objective_box,Objective_box_title,Your Objectives,Vos objectifs,Ihre Ziele,Sus objetivos,Uw doelstellingen,Vaše cíle
+Compere!, Compere_trees_button,Compare Trees,Comparer les Arbres,Bäume vergleichen,Comparar Árboles,Bomen vergelijken,Porovnat stromy
+Graph,Graph_legend,Main Criteria,Critères Principaux,Hauptkriterien,Criterios Principales,Belangrijkste Criteria,Hlavní Kritéria
+Graph,Graph_label1,Adaptation,Adaptation,Anpassung,Adaptación,Aanpassing,Adaptace
+Graph,Graph_label2,Efficiency,Efficacité,Effizienz,Eficiencia,Efficiëntie,Efektivita
