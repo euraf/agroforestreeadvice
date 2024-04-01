@@ -1,58 +1,3 @@
-Site_box_lang <- function(lang) {
-    # set the language of all variables of website
-
-    Site_box_lang = "Your Site"
-    if (as.character(lang) == "fr") {Site_box_lang = "Votre Site"}
-    if (as.character(lang) == "es") {Site_box_lang = "Su Sitio"}
-    if (as.character(lang) == "de") {Site_box_lang = "Ihre Seite"}
-    if (as.character(lang) == "nl") {Site_box_lang = "Uw Site"}
-    if (as.character(lang) == "cz") {Site_box_lang = "Vaše Stanoviště"}
-    #print(as.character(lang))
-
-    return(Site_box_lang)
-}
-
-Objectives_box_lang <- function(lang) {
-    # set the language of all variables of website
-
-    Objectives_box_lang = "Your Objectives"
-    if (as.character(lang) == "fr") {Objectives_box_lang = "Vos Objectifs"}
-    if (as.character(lang) == "es") {Objectives_box_lang = "Sus Objetivos"}
-    if (as.character(lang) == "de") {Objectives_box_lang = "Ihre Ziele"}
-    if (as.character(lang) == "nl") {Objectives_box_lang = "Uw Doelstellingen"}
-    if (as.character(lang) == "cz") {Objectives_box_lang = "Vaše požadavky"}
-    #print(as.character(lang))
-
-    return(Objectives_box_lang)
-}
-
-Compare_trees_button <- function(lang) {
-    # set the language of all variables of website
-
-    Compere_trees_button = "Compare Trees"
-    if (as.character(lang) == "fr") {Compere_trees_button = "Comparer les Arbres"}
-    if (as.character(lang) == "es") {Compere_trees_button = "Comparar Árboles"}
-    if (as.character(lang) == "de") {Compere_trees_button = "Bäume vergleichen"}
-    if (as.character(lang) == "nl") {Compere_trees_button = "Bomen vergelijken"}
-    if (as.character(lang) == "cz") {Compere_trees_button = "Porovnat stromy"}
-    #print(as.character(lang))
-
-    return(Compere_trees_button)
-}
-
-Graph_legend_lang <- function(lang) {
-    # set the language of graph legend header
-
-    Graph_legend_lang = "Main Criteria"
-    if (as.character(lang) == "fr") {Graph_legend_lang = "Critères Principaux"}
-    if (as.character(lang) == "es") {Graph_legend_lang = "Criterios Principales"}
-    if (as.character(lang) == "de") {Graph_legend_lang = "Hauptkriterien"}
-    if (as.character(lang) == "nl") {Graph_legend_lang = "Belangrijkste Criteria"}
-    if (as.character(lang) == "cz") {Graph_legend_lang = "Hlavní Kritéria"}
-
-    return(Graph_legend_lang)
-}
-
 Plot_legend_lang <- function(lang) {
     # changes names of X axis , actually used:
     # climate, equipment, soil, species, resources, height, production, legislation, growth, understory_tree, food,
@@ -118,30 +63,4 @@ Plot_legend_lang <- function(lang) {
         "size" = "velikost", "lifespan" = "doba života")}
 
     return(translations)
-}
-
-Graph_labels_lang <- function(lang) {
-    # generates labes for graph
-
-    labels = c("Adaptation", "Efficiency")
-    if (as.character(lang) == "fr") {labels = c("Adaptation", "Efficacité")}
-    if (as.character(lang) == "es") {labels = c("Adaptación", "Eficiencia")}
-    if (as.character(lang) == "de") {labels = c("Anpassung", "Effizienz")}
-    if (as.character(lang) == "nl") {labels = c("Aanpassing", "Efficiëntie")}
-    if (as.character(lang) == "cz") {labels = c("Adaptace", "Efektivita")}
-    #print(as.character(lang))
-
-    return(labels)
-}
-
-Order_by_lang <- function(lang) {
-    # set the language of Graph controls
-    label = "Order by"
-    if (as.character(lang) == "fr") {label = "Trier par"}
-    if (as.character(lang) == "es") {label = "Ordenar por"}
-    if (as.character(lang) == "de") {label = "Sortieren nach"}
-    if (as.character(lang) == "nl") {label = "Sorteer op"}
-    if (as.character(lang) == "cz") {label = "Seřadit podle"}
-
-    return(label)
 }
