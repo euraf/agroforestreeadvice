@@ -185,14 +185,14 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
           #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
           
-          dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
+          dfSuitability<<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
                                              orderby = orderby)
 
           # filter the trees based on the hard criteria
-          # dfSuitability<-Hard_criteria_filter(dfSuitability, allinputs)
+          dfSuitability<<-Hard_criteria_filter(dfSuitability, allinputs)
         
         } else{
-          dfSuitability<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
+          dfSuitability<<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
         }
         #order of the bars in ggplot is determined by species (ordered factor), but for the DT, we need to also sort the rows
         #browser()
@@ -447,8 +447,6 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         for(i in seq_along(legislative_criteria)) {  # finds answers in choice_en, choice_cz, etc. for each informative_criteria                                              
           row <- interfaceCzech[interfaceCzech$choice == legislative_criteria[i], ]
           legislative <- row[, language_col]
-          print("##### legislative")
-          print(row)
           legislative_text[[length(legislative_text) + 1]] <- legislative
         }
 
@@ -477,10 +475,23 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
 
         # Order the data frame by species_order of main dataframe
         speciesOrder$order #calls the reactive value
-        datainfo <- datainfo[order(match(datainfo$Scientific_name, speciesOrder$order)), ]
-        
+        # print("#### speciesOrder$order ####")
+        # print(speciesOrder$order)
+
+        # leaves only the species that are in the speciesOrder$order - needed for hard_filter
+        datainfo <- datainfo[datainfo$Scientific_name %in% speciesOrder$order, ]
+
         # simplify the data frame
         datainfo <- datainfo[, c("Scientific_name", "legislation", "information")]
+
+        # Reorder the factor levels
+        datainfo$Scientific_name <- factor(datainfo$Scientific_name, levels = speciesOrder$order)
+
+        # Physically reorder the rows of the dataframe
+        datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
+        
+        # print("#### datainfo ####")
+        # print(datainfo)
         
         # change language of column names
         if (as.character(language()) == "cz") {colnames(datainfo) <- c("Vědecký název", "Legislativa", "Informace")}
