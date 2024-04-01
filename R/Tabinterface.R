@@ -46,7 +46,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
               status="warning",
               width=NULL,
                 column(width=12,
-                      DTOutput(outputId = ns("DTSinformations"))
+                      DTOutput(outputId = ns("DTinformations"))
           ))}
             
         
@@ -67,17 +67,21 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       ns <- session$ns # utile si renderUI
       
       output$dynamicUI <- renderUI({
+      
       req(language())  # Ensure 'language' is available
+      # assign actual language
+      actual_lang <<- as.character(language())
+      
       tagList(
         fluidRow(column(width=6,
-                        box(title = Site_box_lang(language()),
+                        box(title = DFtranslation[4,actual_lang],
                             solidHeader = TRUE,
                             status="danger",
                             width=NULL,
                             uiOutput(ns("dynamicControlsResponse"))
                         )),
                  column(width=6,
-                        box(title = Objectives_box_lang(language()),
+                        box(title = DFtranslation[5,actual_lang],
                             solidHeader = TRUE,
                             status="primary",
                             width=NULL,
@@ -87,7 +91,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         fluidRow(wellPanel(
           class = "custom-well-panel5",
           style = "display: flex; justify-content: center;",
-          actionButton(inputId = ns("ab_compute"), label=Compare_trees_button(language()))
+          actionButton(inputId = ns("ab_compute"), label=DFtranslation[6,actual_lang])
         ))
       )
     })
@@ -268,10 +272,6 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           #print(choices)
           labelinput<-initcompactcontrols$labelcriteria[i]
           
-          # If the label is "Legislation", return NULL  - make batter, now primitive way to remove the legislation option, but store its data         
-          if (labelinput == "Legislation") {
-            return(NULL)
-          }
   
           control <- switch(
             control_type,
@@ -354,6 +354,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         databis<-datatoplot()
         print(str(databis))
         
+
         # change BigCriteria names in order to change plot legend language
         # databis <- BigCriteria_lang(language(), databis)
 
@@ -371,8 +372,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
           theme_minimal() +
-          labs(y = "Species", x = NULL, fill = Graph_legend_lang(language())) +
-          scale_x_continuous(breaks = c(-2, 2), labels = Graph_labels_lang(language())) +        # anchors the descriptions of X axis around the vline, hides X axis values
+          labs(y = "Species", x = NULL, fill = DFtranslation[7, actual_lang]) +
+          scale_x_continuous(breaks = c(-2, 2), labels = DFtranslation[8:9, actual_lang]) +        # anchors the descriptions of X axis around the vline, hides X axis values
           theme(axis.text.y = element_text(family = "Arial", size = 14),                         # too small descriptions on some monitors
                 axis.text.x = element_text(family = "Arial", size = 14),
                 legend.title = element_text(family = "Arial", size = 16),
@@ -426,7 +427,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       ))
       
 
-      output$DTSinformations <- renderDT({
+      output$DTinformations <- renderDT({
         # MOST IMPORTANT! select desired criteria it will find them in the interface and also the answers in choice_en, choice_cz, etc.
         legislative_criteria <- c("approval", "endengeredG", "endengeredU", "endengeredY")
         informative_criteria <- c("wood", "food")
@@ -490,17 +491,9 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         # Physically reorder the rows of the dataframe
         datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
         
-        # print("#### datainfo ####")
-        # print(datainfo)
-        
         # change language of column names
-        if (as.character(language()) == "cz") {colnames(datainfo) <- c("Vědecký název", "Legislativa", "Informace")}
-        if (as.character(language()) == "en") {colnames(datainfo) <- c("Scientific name","Legislation", "Information")}
-        if (as.character(language()) == "fr") {colnames(datainfo) <- c("Nom scientifique", "Législation", "Information")}
-        if (as.character(language()) == "de") {colnames(datainfo) <- c("Wissenschaftlicher Name", "Gesetzgebung", "Information")}
-        if (as.character(language()) == "es") {colnames(datainfo) <- c("Nombre científico", "Legislación", "Información")}
-        if (as.character(language()) == "nl") {colnames(datainfo) <- c("Wetenschappelijke naam", "Wetgeving", "Informatie")}
-      
+        colnames(datainfo) <- DFtranslation[1:3, actual_lang]
+
         #assign("datainfo", datainfo, envir = .GlobalEnv) # debugging
 
         # Return the simplified data frame
