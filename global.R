@@ -55,6 +55,7 @@ interfaceCzech[1:length(interfaceCzech)]<-lapply(interfaceCzech[1:length(interfa
 
 toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM), names(interfaceCzech)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
+DFtranslation <- read.csv("R/translation.csv", sep = ",", header = TRUE)
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives){
   # print("reshapecontrols")     ## very useful for debugging
