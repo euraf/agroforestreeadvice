@@ -77,13 +77,17 @@ compute_suitability_Czech<-function(inputsdata=NULL,
 #' @export
 Hard_criteria_filter <- function(db, inputsdata) {
   # Filter trees based on criteria in inputsdata - if the tree do not meet these criteria, it is removed
+  print(inputsdata)
 
-  if ("growthspeed" %in% names(inputsdata))              {db <- db[db$growthspeed == inputsdata[["growthspeed"]],]}
+  #if ("growthspeed" %in% names(inputsdata))              {db <- db[db$growthspeed == inputsdata[["growthspeed"]],]}
   #if ("habitus" %in% names(inputsdata))                  {db <- db[db$habitus == inputsdata[["habitus"]],]}
   #if ("earlinessleafing" %in% names(inputsdata))         {db <- db[db$earlinessleafing == inputsdata[["earlinessleafing"]],]}
-  if ("understory_tree" %in% names(inputsdata))          {db <- db[db$understory_tree == inputsdata[["understory_tree"]],]}
-  if ("height1" %in% names(inputsdata))                  {db <- db[db$height >= inputsdata[["height1"]],]}
-  if ("height2" %in% names(inputsdata))                  {db <- db[db$height <= inputsdata[["height2"]],]}
+  #if ("understory_tree" %in% names(inputsdata))          {db <- db[db$understory_tree == inputsdata[["understory_tree"]],]}
+  #if ("height1" %in% names(inputsdata))                  {db <- db[db$height >= inputsdata[["height1"]],]}
+  #if ("height2" %in% names(inputsdata))                  {db <- db[db$height <= inputsdata[["height2"]],]}
+  if ("fruit" %in% names(inputsdata))                    {db <- db[db$fruit == "VRAI", ]}
+  if ("forage" %in% names(inputsdata))                   {db <- db[db$forage == "VRAI", ]}
+  if ("forest" %in% names(inputsdata))                   {db <- db[db$forest == "VRAI", ]}
 
   # write_xlsx(db, "01_dbfinal_filtered.xlsx") #for debugging
   return(db)
