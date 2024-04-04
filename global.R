@@ -41,7 +41,6 @@ dataCzech<-read.table("models/dataCzech.txt", fileEncoding = "UTF-8", encoding =
 interfaceCzech<-read.table("models/interfaceCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
 
-
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
 interfaceSTA[1:length(interfaceSTA)]<-lapply(interfaceSTA[1:length(interfaceSTA)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceDENTRO<-interfaceDENTRO[!is.na(interfaceDENTRO$side),]
