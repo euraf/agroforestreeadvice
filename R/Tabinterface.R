@@ -41,7 +41,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
         )),
 
     if (id == "Czech") {      # Add legislative criteria for Czech tree advice
-          box(title = "Legislative criteria for tree selection",
+          box(title = "Additional information",
               solidHeader = TRUE,
               status="warning",
               width=NULL,
@@ -184,7 +184,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         allinputs<-reformattedinputs() 
         orderby<-input$orderby
         #print(orderby)
-        #print(allinputs)
+        print("### allinputs ###")
+        print(allinputs)
         if(length(allinputs)>0){
           message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
           #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
@@ -205,7 +206,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           factor(dfSuitability$side, levels=c("responsetrait", "effecttrait")), 
           dfSuitability$BigCriteria),]
         #print(str(dfSuitability))
-
+        if (id == "Czech") {
+            # Get the information about the trees
+            dfInfo <<- dfczechinfo(interface = interfaceCzech, data = dataCzech)
+          }
         #write_xlsx(dfSuitability, "01_dfsuitablity.xlsx")
         return(dfSuitability)
       }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
@@ -428,62 +432,9 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
 
       output$DTinformations <- renderDT({
-        # MOST IMPORTANT! select desired criteria it will find them in the interface and also the answers in choice_en, choice_cz, etc.
-        legislative_criteria <- c("approval", "endengeredG", "endengeredU", "endengeredY")
-        informative_criteria <- c("wood", "food")
-
-        # use informative_criteria to load dataframe from interfaceCzech
-        datainfo <- dataCzech[, c("Scientific_name", informative_criteria, legislative_criteria)]
-
-        language_col <- paste("choice", (as.character(language())), sep = "_") # returns choice_en, choice_cz, etc.
-
-        informative_text = list()
-        for(i in seq_along(informative_criteria)) {  # finds answers in choice_en, choice_cz, etc. for each informative_criteria                                              
-          row <- interfaceCzech[interfaceCzech$criteria == informative_criteria[i], ]
-          informative <- row[, language_col]
-          informative_text[[length(informative_text) + 1]] <- informative
-        }
-
-        legislative_text = list()
-        for(i in seq_along(legislative_criteria)) {  # finds answers in choice_en, choice_cz, etc. for each informative_criteria                                              
-          row <- interfaceCzech[interfaceCzech$choice == legislative_criteria[i], ]
-          legislative <- row[, language_col]
-          legislative_text[[length(legislative_text) + 1]] <- legislative
-        }
-
-        # Replace VRAI with the legislative text
-        for(i in seq_along(legislative_criteria)) {
-          datainfo[[legislative_criteria[i]]][datainfo[[legislative_criteria[i]]] == "VRAI"] <- legislative_text[[i]]
-        }
-
-        # Concatenate columns into custom columns
-        datainfo$information <- do.call(paste, c(lapply(informative_criteria, function(x) datainfo[[x]]), sep = ", "))
-        datainfo$legislation <- do.call(paste, c(lapply(legislative_criteria, function(x) datainfo[[x]]), sep = ", "))
         
-        # Replace all occurrences of invalid characters
-        datainfo$information <- gsub("FAUX,", "", datainfo$information)
-        datainfo$information <- gsub("FAUX", "", datainfo$information)
-        datainfo$information <- gsub(",FAUX", "", datainfo$information)
-        datainfo$information <- gsub(", $", "", datainfo$information) # remove trailing comma
-        datainfo$information <- gsub(",$", "", datainfo$information)  # remove trailing comma
-        datainfo$information <- gsub("^, ", "", datainfo$information) # remove leading comma
-
-        datainfo$legislation <- gsub("FAUX,", "", datainfo$legislation)
-        datainfo$legislation <- gsub("FAUX", "", datainfo$legislation)
-        datainfo$legislation <- gsub(",FAUX", "", datainfo$legislation)
-        datainfo$legislation <- gsub(", $", "", datainfo$legislation) # remove trailing comma
-        datainfo$legislation <- gsub(",$", "", datainfo$legislation)  # remove trailing comma
-
-        # Order the data frame by species_order of main dataframe
-        speciesOrder$order #calls the reactive value
-        # print("#### speciesOrder$order ####")
-        # print(speciesOrder$order)
-
         # leaves only the species that are in the speciesOrder$order - needed for hard_filter
-        datainfo <- datainfo[datainfo$Scientific_name %in% speciesOrder$order, ]
-
-        # simplify the data frame
-        datainfo <- datainfo[, c("Scientific_name", "legislation", "information")]
+        datainfo <- dfInfo[dfInfo$Scientific_name %in% speciesOrder$order, ]
 
         # Reorder the factor levels
         datainfo$Scientific_name <- factor(datainfo$Scientific_name, levels = speciesOrder$order)
@@ -492,7 +443,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
         
         # change language of column names
-        colnames(datainfo) <- DFtranslation[1:3, actual_lang]
+        #colnames(datainfo) <- DFtranslation[1:3, actual_lang]
 
         #assign("datainfo", datainfo, envir = .GlobalEnv) # debugging
 
