@@ -70,18 +70,18 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       req(language())  # Ensure 'language' is available
       # assign actual language
-      actual_lang <<- as.character(language())
+      actual_lang <<- paste0("choice_",as.character(language()))
       
       tagList(
         fluidRow(column(width=6,
-                        box(title = DFtranslation[4,actual_lang],
+                        box(title = vocabulary[4,actual_lang],
                             solidHeader = TRUE,
                             status="danger",
                             width=NULL,
                             uiOutput(ns("dynamicControlsResponse"))
                         )),
                  column(width=6,
-                        box(title = DFtranslation[5,actual_lang],
+                        box(title = vocabulary[5,actual_lang],
                             solidHeader = TRUE,
                             status="primary",
                             width=NULL,
@@ -91,7 +91,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         fluidRow(wellPanel(
           class = "custom-well-panel5",
           style = "display: flex; justify-content: center;",
-          actionButton(inputId = ns("ab_compute"), label=DFtranslation[6,actual_lang])
+          actionButton(inputId = ns("ab_compute"), label=vocabulary[6,actual_lang])
         ))
       )
     })
@@ -376,8 +376,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
           theme_minimal() +
-          labs(y = "Species", x = NULL, fill = DFtranslation[7, actual_lang]) +
-          scale_x_continuous(breaks = c(-2, 2), labels = DFtranslation[8:9, actual_lang]) +        # anchors the descriptions of X axis around the vline, hides X axis values
+          labs(y = "Species", x = NULL, fill = vocabulary[7, actual_lang]) +
+          scale_x_continuous(breaks = c(-2, 2), labels = vocabulary[8:9, actual_lang]) +        # anchors the descriptions of X axis around the vline, hides X axis values
           theme(axis.text.y = element_text(family = "Arial", size = 14),                         # too small descriptions on some monitors
                 axis.text.x = element_text(family = "Arial", size = 14),
                 legend.title = element_text(family = "Arial", size = 16),
@@ -433,29 +433,29 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
 
       output$DTinformations <- renderDT({
         
+        speciesOrder$order
+        language()
+        # Translate the data
+        datainfo <- translator(dfInfo, interfaceCzech, vocabulary, actual_lang)
+        print("### datainfo ###")
+        print(actual_lang)
+        print(dim(datainfo))
+
+        
         # leaves only the species that are in the speciesOrder$order - needed for hard_filter
-        datainfo <- dfInfo[dfInfo$Scientific_name %in% speciesOrder$order, ]
+        datainfo <- datainfo[datainfo$Scientific_name %in% speciesOrder$order, ]
 
         # Reorder the factor levels
         datainfo$Scientific_name <- factor(datainfo$Scientific_name, levels = speciesOrder$order)
 
         # Physically reorder the rows of the dataframe
         datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
-        
-        # change language of column names
-        #colnames(datainfo) <- DFtranslation[1:3, actual_lang]
-
-        #assign("datainfo", datainfo, envir = .GlobalEnv) # debugging
-
-        # Return the simplified data frame
         datainfo
 
         }, options = list(
           scrollX = TRUE,
           columnDefs = list(   # auto width is on, but we can partially set the width of the columns
-            list(width = '40px', targets = c(0)),
-            list(width = '300px', targets = c(1)),
-            list(width = '300px', targets = c(2))
+            list(width = '40px', targets = c(0))
           )
           
         ))    
