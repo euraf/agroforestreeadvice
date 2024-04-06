@@ -2,7 +2,7 @@ object,type,choice_en,choice_fr,choice_de,choice_es,choice_nl,choice_cz
 DTinformations,DTinfo_col_names,Scientific name,Nom scientifique,Wissenschaftlicher Name,Nombre científico,Wetenschappelijke naam,Vědecký název
 DTinformations,DTinfo_col_legislative,Legislation,Législation,Gesetzgebung,Legislación,Wetgeving,Legislativa
 DTinformations,DTinfo_col_information,Information,Information,Information,Información,Informatie,Informace
-Site_box,Site_box_title,Your site,Votre site,Ihre Website,Su sitio,Uw site,Vaše stránka
+Site_box,Site_box_title,Your site,Votre emplacement,Ihr Standort,Tu ubicación,Jouw locatie,Vaše stanoviště
 Objective_box,Objective_box_title,Your Objectives,Vos objectifs,Ihre Ziele,Sus objetivos,Uw doelstellingen,Vaše cíle
 Compere!,Compere_trees_button,Compare Trees,Comparer les Arbres,Bäume vergleichen,Comparar Árboles,Bomen vergelijken,Porovnat stromy
 Graph,Graph_legend,Main Criteria,Critères Principaux,Hauptkriterien,Criterios Principales,Belangrijkste Criteria,Hlavní Kritéria
