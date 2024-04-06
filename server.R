@@ -16,7 +16,7 @@ server <- function(input, output, session) {
       freezeReactiveValue(input, "sidemenu")
       updateTabItems(session, "sidemenu", selected = "tool")
       freezeReactiveValue(input, "toolsTabset")
-      print(desiredmodel)
+      # print(desiredmodel)
       updateTabsetPanel(session, "toolsTabset", selected = desiredmodel)
     }
     
