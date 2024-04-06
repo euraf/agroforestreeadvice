@@ -74,14 +74,14 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       tagList(
         fluidRow(column(width=6,
-                        box(title = vocabulary[4,actual_lang],
+                        box(title = vocabulary[vocabulary$type=="Site_box_title",actual_lang],
                             solidHeader = TRUE,
                             status="danger",
                             width=NULL,
                             uiOutput(ns("dynamicControlsResponse"))
                         )),
                  column(width=6,
-                        box(title = vocabulary[5,actual_lang],
+                        box(title = vocabulary[vocabulary$type=="Objective_box_title",actual_lang],
                             solidHeader = TRUE,
                             status="primary",
                             width=NULL,
@@ -91,7 +91,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         fluidRow(wellPanel(
           class = "custom-well-panel5",
           style = "display: flex; justify-content: center;",
-          actionButton(inputId = ns("ab_compute"), label=vocabulary[6,actual_lang])
+          actionButton(inputId = ns("ab_compute"), label=vocabulary[vocabulary$type=="Compere_trees_button",actual_lang])
         ))
       )
     })
@@ -226,11 +226,11 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       #after that, when just the language is modified, we use update... to simply update the labels without redrawing the whole controls
       output$dynamicControlsResponse <- renderUI({
         message("init dynamicControlsResponse")
-        print(str(compactcontrols()))
+       #  print(str(compactcontrols()))
         #initcompactcontrols<-reshapecontrols(interface, language="en")
         initcompactcontrols<-compactcontrols()
         responsecontrols<-which(initcompactcontrols$side=="responsetrait")
-        print(str(responsecontrols))
+        # print(str(responsecontrols))
         #browser()
         #print(responsecontrols)
         controls_list <- lapply(responsecontrols, function(i) {
@@ -356,7 +356,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         #  setdiff(names(allinputs), c("orderby", "sidebarCollapsed", "ab_compute", "in_language", "sidebarItemExpanded"))]
         #browser()
         databis<-datatoplot()
-        print(str(databis))
+        # print(str(databis))
         
 
         # change BigCriteria names in order to change plot legend language
@@ -365,7 +365,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         # reset the as.numeric(databis$species) from one to the number of species - needed if I want to reduce the number of species to plot
         databis$species<-factor(databis$species, levels=speciesOrder$order)
 
-        print(str(as.numeric(databis$species)))
+        # print(str(as.numeric(databis$species)))
         #select only the range of species to display (user choice, by default 1 to 20), species is an ordered vector
         databis<-databis[as.numeric(databis$species)>=rangetoplot$from 
                          & as.numeric(databis$species)<=rangetoplot$to ,]
@@ -376,8 +376,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
           theme_minimal() +
-          labs(y = "Species", x = NULL, fill = vocabulary[7, actual_lang]) +
-          scale_x_continuous(breaks = c(-2, 2), labels = vocabulary[8:9, actual_lang]) +        # anchors the descriptions of X axis around the vline, hides X axis values
+          labs(y = "Species", x = NULL, fill = vocabulary[vocabulary$type=="Graph_legend",actual_lang]) +
+          scale_x_continuous(breaks = c(-2, 2), labels = vocabulary[vocabulary$type=="Graph_label",actual_lang]) +        # anchors the descriptions of X axis around the vline, hides X axis values
           theme(axis.text.y = element_text(family = "Arial", size = 14),                         # too small descriptions on some monitors
                 axis.text.x = element_text(family = "Arial", size = 14),
                 legend.title = element_text(family = "Arial", size = 16),
@@ -434,14 +434,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       output$DTinformations <- renderDT({
         
         speciesOrder$order
-        language()
+
         # Translate the data
         datainfo <- translator(dfInfo, interfaceCzech, vocabulary, actual_lang)
-        print("### datainfo ###")
-        print(actual_lang)
-        print(dim(datainfo))
 
-        
         # leaves only the species that are in the speciesOrder$order - needed for hard_filter
         datainfo <- datainfo[datainfo$Scientific_name %in% speciesOrder$order, ]
 
