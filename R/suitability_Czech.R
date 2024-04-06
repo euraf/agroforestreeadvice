@@ -76,7 +76,7 @@ compute_suitability_Czech<-function(inputsdata=NULL,
 #' @export
 Hard_criteria_filter <- function(db, inputsdata) {
   # Filter trees based on criteria in inputsdata - if the tree do not meet these criteria, it is removed
-  print(inputsdata)
+  # print(inputsdata)
 
   #if ("growthspeed" %in% names(inputsdata))              {db <- db[db$growthspeed == inputsdata[["growthspeed"]],]}
   #if ("habitus" %in% names(inputsdata))                  {db <- db[db$habitus == inputsdata[["habitus"]],]}
@@ -92,7 +92,7 @@ Hard_criteria_filter <- function(db, inputsdata) {
   return(db)
 }
 
-dfczechinfo <- function(interface, data) {
+dfczechinfo <- function(interface = interfaceCzech, data = dataCzech) {
     #loads all "info" side rows of interface, find their values for each tree in data and 
     #then agregate them into one row if they share "criteria" value
 
@@ -148,16 +148,62 @@ dfczechinfo <- function(interface, data) {
     #drop all columns other then (col in datainfo2$criteria)
     datainfo3 <- datainfo3[, c("Scientific_name" ,datainfo2$criteria)]
 
-    # take whole datainfo3 and replace all FAUX with ""
-    datainfo4 <- data.frame(lapply(datainfo3, function(x) gsub("FAUX", "", x)))
-    datainfo4 <- data.frame(lapply(datainfo4, function(x) gsub(" , ", "", x)))
+    datainfo3 <- data.frame(lapply(datainfo3, function(x) {
+      x <- gsub("FAUX", "", x)          # Replace "FAUX" with ""
+      x <- gsub(" , ", "", x)           # Replace " , " with ""
+      x <- gsub("^\\,+|^\\ +", "", x)   # Remove commas and spaces at the start
+      x <- gsub("\\,+$|\\ +$", "", x)   # Remove commas and spaces at the end
+      x <- trimws(x, which = c("both")) # Remove leading and trailing whitespaces
+      return(x)
+    }))
 
-    # Delete all "," at start of string
-    datainfo4 <- data.frame(lapply(datainfo4, function(x) gsub("^\\,+", "", x)))
-
-    # Delete all "," at the end of string
-    datainfo4 <- data.frame(lapply(datainfo4, function(x) gsub("\\,+$", "", x)))
-
-    return(datainfo4)
+    return(datainfo3)
 }
 
+translator <- function(data, interface, vocabulary, language) {
+  # Tries to translate all data - based on the interface and vocabulary
+
+  # Ensure 'info' side exists in 'interface'
+  if (!"info" %in% interface$side) {
+    warning("No 'info' side found in the 'interface' dataframe.")
+    return(data)  # Exit early if no 'info' side to avoid further errors
+  }
+  interface <- interface[interface$side == "info", ]
+
+  # Create a translation map from vocabulary
+  translations <- c(setNames(vocabulary[[language]], vocabulary$type),setNames(interface[[language]], interface$choice))
+
+  # Function to translate cell values, handling both simple "furniture" and comma-separated cases "furniture, sports"
+    translate_cell <- function(cell, translations) {
+    if (str_detect(cell, ", ")) {
+      # Handle comma-separated values
+      translated_values <- sapply(str_split(cell, ",\\s*")[[1]], function(x) {
+        if (x %in% names(translations)) {
+          return(translations[x])
+        } else {
+          return(x)
+        }
+      })
+      str_c(translated_values, collapse = ", ") # puts cells back together
+    } else {
+      # Handle simple values
+      if (cell %in% names(translations)) {
+        return(translations[cell])
+      } else {
+        return(cell)
+      }
+    }
+  }
+  # Apply translations to all cells in the data
+  data <- data %>% 
+    mutate(across(everything(), ~sapply(., translate_cell, translations = translations)))
+
+  # Rename columns based on vocabulary
+  rename_cols <- filter(vocabulary, object == "DFinfo_headline")
+  rename_cols <- setNames(str_to_title(rename_cols[[language]]), rename_cols$type)
+  names(data) <- sapply(names(data), function(x) ifelse(x %in% names(rename_cols), rename_cols[x], x))
+
+  return(data)
+}
+
+#translated_info <- translator(x, interfaceCzech, vocabulary, "cz")
