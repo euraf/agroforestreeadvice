@@ -432,8 +432,9 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
 
       output$DTinformations <- renderDT({
-        
+        #calls the function when one changes
         speciesOrder$order
+        language()
 
         # Translate the data
         datainfo <- translator(dfInfo, interfaceCzech, vocabulary, actual_lang)
