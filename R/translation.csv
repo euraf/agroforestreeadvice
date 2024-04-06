@@ -1,4 +1,4 @@
-object,type,en,fr,de,es,nl,cz
+object,type,choice_en,choice_fr,choice_de,choice_es,choice_nl,choice_cz
 DTinformations,DTinfo_col_names,Scientific name,Nom scientifique,Wissenschaftlicher Name,Nombre científico,Wetenschappelijke naam,Vědecký název
 DTinformations,DTinfo_col_legislative,Legislation,Législation,Gesetzgebung,Legislación,Wetgeving,Legislativa
 DTinformations,DTinfo_col_information,Information,Information,Information,Información,Informatie,Informace
@@ -6,5 +6,13 @@ Site_box,Site_box_title,Your site,Votre site,Ihre Website,Su sitio,Uw site,Vaše
 Objective_box,Objective_box_title,Your Objectives,Vos objectifs,Ihre Ziele,Sus objetivos,Uw doelstellingen,Vaše cíle
 Compere!,Compere_trees_button,Compare Trees,Comparer les Arbres,Bäume vergleichen,Comparar Árboles,Bomen vergelijken,Porovnat stromy
 Graph,Graph_legend,Main Criteria,Critères Principaux,Hauptkriterien,Criterios Principales,Belangrijkste Criteria,Hlavní Kritéria
-Graph,Graph_label1,Adaptation,Adaptation,Anpassung,Adaptación,Aanpassing,Adaptace
-Graph,Graph_label2,Efficiency,Efficacité,Effizienz,Eficiencia,Efficiëntie,Efektivita
+Graph,Graph_label,Adaptation,Adaptation,Anpassung,Adaptación,Aanpassing,Adaptace
+Graph,Graph_label,Efficiency,Efficacité,Effizienz,Eficiencia,Efficiëntie,Efektivita
+DFinfo_headline,legislation,legislation,législation,Gesetzgebung,legislación,wetgeving,legislativa
+DFinfo_headline,information,information,information,Information,información,informatie,informace
+DFinfo_headline,wood,wood,bois,Holz,madera,hout,dřevo
+DFinfo_headline,food,food,nourriture,Lebensmittel,comida,voedsel,jídlo
+DFinfo_content,firewood and furniture wood,firewood and furniture wood,"bois de chauffage et bois d'ameublement",Feuerholz und Möbelholz,madera de leña y madera de muebles,brandhout en meubelhout,dřevo na topení a nábytek
+DFinfo_content,"wide use - furniture, tiles, decking, decoration, pine resin","wide use - furniture, tiles, decking, decoration, pine resin","large utilisation - meubles, carrelage, terrasse, décoration, résine de pin","weit verbreitete Nutzung - Möbel, Fliesen, Terrassen, Dekoration, Kiefernharz","amplio uso - muebles, azulejos, terrazas, decoración, resina de pino","breed gebruik - meubels, tegels, terrassen, decoratie, dennenhars","široké použití - nábytek, dlažba, terasy, dekorace, borovicová pryskyřice"
+DFinfo_content,"decorative objects (maple)","decorative objects (maple)","objets décoratifs (érable)","Dekorationsobjekte (Ahorn)","objetos decorativos (arce)","decoratieve objecten (esdoorn)","dekorativní předměty (javor)"
+DFinfo_content,"furniture (solid wood)","furniture (solid wood)","meubles (bois massif)","Möbel (Massivholz)","muebles (madera maciza)","meubels (massief hout)","nábytek (masivní dřevo)"
