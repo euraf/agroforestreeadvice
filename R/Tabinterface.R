@@ -436,8 +436,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         speciesOrder$order
         language()
 
-        # Translate the data
-        datainfo <- translator(dfInfo, interfaceCzech, vocabulary, actual_lang)
+        datainfo <- dfInfo
 
         # leaves only the species that are in the speciesOrder$order - needed for hard_filter
         datainfo <- datainfo[datainfo$Scientific_name %in% speciesOrder$order, ]
@@ -447,6 +446,9 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
 
         # Physically reorder the rows of the dataframe
         datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
+        # Translate the data
+        datainfo <- translator(datainfo, interfaceCzech, vocabulary, actual_lang)
+        
         datainfo
 
         }, options = list(
