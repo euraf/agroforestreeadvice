@@ -163,10 +163,6 @@ dfczechinfo <- function(interface = interfaceCzech, data = dataCzech) {
 translator <- function(data, interface, vocabulary, language) {
   # Tries to translate all data - based on the interface and vocabulary
 
-  if (language == "choice_en") {
-    names(data) <- str_to_title(names(data)) # Capitalize column names
-    return(data)  # Exit early as no translation is needed
-  }
   # Ensure 'info' side exists in 'interface'
   if (!"info" %in% interface$side) {
     warning("No 'info' side found in the 'interface' dataframe.")
