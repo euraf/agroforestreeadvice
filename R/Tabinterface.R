@@ -337,7 +337,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           #scale_fill_manual(values = colors) +
           theme_minimal() +
           #theme(legend.position = "none" )+
-          labs(x = "Adaptation                         Efficiency", y = "Species")
+          scale_x_continuous(breaks = c(-2, 2), labels = c("Adaptation", "Efficiency")) +
+          labs(x = NULL, y = "Species")
         return(plot_Suitability)
       })
       
