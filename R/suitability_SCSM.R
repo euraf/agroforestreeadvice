@@ -14,7 +14,8 @@
 compute_suitability_SCSM<-function(inputsdata=NULL,
                                    database, 
                                    interface,
-                                   orderby="responsetrait"){
+                                   orderby="responsetrait",
+                                   use_weights=TRUE){
   
   database['species_phylogenetic']=database['species']
   #icici we use as id the combination genus species
@@ -49,6 +50,8 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
   dbfinal<-data.frame()
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
   rownames(toto)<-toto$criteria #in SCSM, utilities were a mix of several Big criteria, but it breaks the code if not all choices of the same criterion are in the same Bigcriteria
+  weight <- interface[, c("criteria", "weightwithincriteria")]
+  if (use_weights==FALSE) weight$weightwithincriteria<-1
 
   print("compute adaptation from responsetraits")
   standardformcriteria<-c("temperature", "precipitation")
@@ -56,6 +59,7 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
                                                 type= toto[crit, "objecttype"],
                                                 BigCriteria=toto[crit, "BigCriteria"],
+                                                weight=weight[weight$criteria==crit,"weightwithincriteria"][1],
                                                 side=toto[crit, "side"],
                                                 inputs=inputsdata, 
                                                 db=database))
@@ -67,6 +71,7 @@ compute_suitability_SCSM<-function(inputsdata=NULL,
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
                                                 type= toto[crit, "objecttype"],
                                                 BigCriteria=toto[crit, "BigCriteria"],
+                                                weight=weight[weight$criteria==crit,"weightwithincriteria"][1],
                                                 side=toto[crit, "side"],
                                                 inputs=inputsdata, 
                                                 db=database))
