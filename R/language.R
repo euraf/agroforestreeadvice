@@ -3,7 +3,7 @@ Plot_legend_lang <- function(lang) {
     # climate, equipment, soil, species, resources, height, production, legislation, growth, understory_tree, food,
     # wood, animals, biomass, timber, fruits, biodiversity, windbreak, shade, fertility, bioticenvironment, cropproduction,
     # economic, firewood, microclimate, otherProducts, pestdiseasecontrol, treegrowth, work, crop, location, size, lifespan
-  all_translations <- list(
+  BigCriteria_translates <- list(
     en = c("climate" = "climate", "equipment" = "equipment", "soil" = "soil", 
            "species" = "species", "resources" = "resources", "height" = "height", 
            "production" = "production", "legislation" = "legislation", "growth" = "growth", 
@@ -84,10 +84,7 @@ Plot_legend_lang <- function(lang) {
   )
 
   # Default to English if the specified language is not found
-  translations <- all_translations[[as.character(lang)]] %||% all_translations[["en"]]
-  
-  print("XXXXXXXX")
-  print(as.character(lang))
+  BigCriteria_translates <- BigCriteria_translates[[as.character(lang)]] %||% BigCriteria_translates[["en"]]
 
-  return(translations)
+  return(BigCriteria_translates)
 }
