@@ -13,13 +13,17 @@
 compute_suitability_Czech<-function(inputsdata=NULL,
                                    database, 
                                    interface,
-                                   orderby="responsetrait"){
-  
+                                   orderby="responsetrait",
+                                   use_weights=TRUE){
   dbfinal<-data.frame()
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
+  weight <- interface[, c("criteria", "weightwithincriteria")]
+  print(weight)
+  if (use_weights==FALSE) weight$weightwithincriteria<-1
+  
   rownames(toto)<-toto$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
-                                  c("legislation", "fruit", "forage", "forest", "ornamental",
+                                c("legislation", "fruit", "forage", "forest", "ornamental",
                                     "height", "understory_tree", "habitus", "growthspeed", 
                                     "earlinessleafing", "floweringdate", 
                                     "climateclass", "altitude", "soil_fertility",
@@ -31,11 +35,12 @@ compute_suitability_Czech<-function(inputsdata=NULL,
                                                 type= toto[crit, "objecttype"],
                                                 BigCriteria=toto[crit, "BigCriteria"],
                                                 side=toto[crit, "side"],
+                                                weight=weight[weight$criteria==crit,"weightwithincriteria"][1],
                                                 inputs=inputsdata, 
-                                                db=database))
+                                                db=database))                                             
   }
-  
-   #order the df by orderby, using latin name as id (ads an id variable, which is a factor with levels ordered by the orderby side)
+
+  #order the df by orderby, using latin name as id (ads an id variable, which is a factor with levels ordered by the orderby side)
   #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
   # to do: separate computation of score and ordering of the species
   dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable='Scientific_name', interface=interface) 
@@ -53,42 +58,56 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   
 }
 
-#' @param db The database of trees.
-#' @param inputsdata A list of criteria for filtering the trees.
-#'
-#' @return The filtered database of trees.
-#'
-#' @examples
-#' db <- data.frame(growthspeed = c("fast", "medium", "slow"),
-#'                  habitus = c("upright", "spreading", "columnar"),
-#'                  earlynessleafing = c("early", "medium", "late"),
-#'                  understory_tree = c(TRUE, FALSE, TRUE),
-#'                  height = c(5, 10, 15))
-#' inputsdata <- list(growthspeed = "fast",
-#'                    habitus = "upright",
-#'                    earlynessleafing = "early",
-#'                    understory_tree = TRUE,
-#'                    height1 = 5,
-#'                    height2 = 10)
-#' filtered_db <- Hard_criteria_filter(db, inputsdata)
-#' print(filtered_db)
-#'
-#' @export
-Hard_criteria_filter <- function(db, inputsdata) {
-  # Filter trees based on criteria in inputsdata - if the tree do not meet these criteria, it is removed
-  # print(inputsdata)
+Hard_criteria_filter <- function(db, inputsdata, interface) {
+  # Filter trees - if 999 in weightwithincriteria, then it is a hard criteria and if it is in inputsdata, then filter the trees
+  
+  if (999 %in% interface$weightwithincriteria) {print("Filtered by hard criteria") }
+  else {print("NO hard criteria (999) found in interface")
+        return(db) }
+  
+  # Consolidate criteria from interface based on inputsdata and slider inputs
+  used_criteria <<- rbind(interface[interface$criteria %in% names(inputsdata) &
+                                    interface$weightwithincriteria == 999 & !is.na(interface$weightwithincriteria),],
+                         interface[interface$objecttype == "sliderInput",])
 
-  #if ("growthspeed" %in% names(inputsdata))              {db <- db[db$growthspeed == inputsdata[["growthspeed"]],]}
-  #if ("habitus" %in% names(inputsdata))                  {db <- db[db$habitus == inputsdata[["habitus"]],]}
-  #if ("earlinessleafing" %in% names(inputsdata))         {db <- db[db$earlinessleafing == inputsdata[["earlinessleafing"]],]}
-  #if ("understory_tree" %in% names(inputsdata))          {db <- db[db$understory_tree == inputsdata[["understory_tree"]],]}
-  #if ("height1" %in% names(inputsdata))                  {db <- db[db$height >= inputsdata[["height1"]],]}
-  #if ("height2" %in% names(inputsdata))                  {db <- db[db$height <= inputsdata[["height2"]],]}
-  if ("fruit" %in% names(inputsdata))                    {db <- db[db$fruit == "VRAI", ]}
-  if ("forage" %in% names(inputsdata))                   {db <- db[db$forage == "VRAI", ]}
-  if ("forest" %in% names(inputsdata))                   {db <- db[db$forest == "VRAI", ]}
+  # drop criteria which weightwithincriteria is not 999
+  used_criteria <- used_criteria[used_criteria$weightwithincriteria == 999,]
+  used_criteria_uniq <- unique(used_criteria$criteria)
 
-  # write_xlsx(db, "01_dbfinal_filtered.xlsx") #for debugging
+  unique_db <- db[FALSE, ]
+  unique_species <- unique(db$species)
+
+  # loop species, find values for each relevant criteria of the species, and if there is a zero, then add "yes" to delete column
+  for (species in unique_species) {
+      species_data <- db[db$species == species, ]
+      
+      # Get only the criteria that are relevant
+      criteria_data <- species_data[species_data$criteria %in% used_criteria_uniq, ]
+      
+      # Get unique values of the criteria
+      unique_values <- unique(criteria_data$value)
+      unique_criteria <- unique(criteria_data$criteria)
+      
+      # Determine if there are any zeros in the values
+      delete_flag <- if("0" %in% unique_values) "yes" else "no"
+      
+      # Create a new row to be added to unique_db
+      new_row <- data.frame(
+          species = species,
+          value = paste(unique_values, collapse = ", "),
+          criteria = paste(unique_criteria, collapse = ", "),
+          delete = delete_flag)
+      
+      # Append new row to unique_db
+      unique_db <- rbind(unique_db, new_row)
+  }
+
+  # Select species where 'delete' is "yes"
+  delete_species <- unique_db$species[unique_db$delete == "yes"]
+
+  # drop these species
+  db <- db[!db$species %in% delete_species, ]
+
   return(db)
 }
 
