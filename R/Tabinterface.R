@@ -194,7 +194,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
                                              orderby = orderby)
 
           # filter the trees based on the hard criteria
-          dfSuitability<<-Hard_criteria_filter(dfSuitability, allinputs)
+          dfSuitability<<-Hard_criteria_filter(dfSuitability, allinputs, interface)
         
         } else{
           dfSuitability<<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
