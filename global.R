@@ -165,7 +165,7 @@ orderdf<-function(df, orderby, idvariable, interface){
 #' @export
 #'
 #' @examples
-default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "T", "TRUE", "VRAI")){
+default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weight = as.integer(1), yesindicator=c("yes", "oui", "x", "T", "TRUE", "VRAI")){
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
     chosen<-inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria]
@@ -226,9 +226,23 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
     }
     
   }
+
+  if (!is.na(weight) && weight == as.integer(999)) {
+    weight <- as.integer(1)
+    print(paste("Weight is INFINITE for criteria:", criteria))
+  }
+  else {
+      # Ensure weight is numeric
+      weight <- as.numeric(weight)
+      if (is.na(weight))  {
+          weight <- as.integer(1)
+          warning("Weight is not numeric and cannot be converted. Weight set to 1.")
+        }
+    }
   db$criteria<-criteria
   db$BigCriteria<-BigCriteria
   db$side<-side
+  db$value<-db$value*weight
   return(db)
 }
 
