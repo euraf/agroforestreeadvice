@@ -33,3 +33,9 @@ docs/
 po/*~
 # RStudio Connect folder
 rsconnect/
+testing.R
+test_global.R
+test_DFinfo.R
+test_translation.R
+testing-suitabbility.R
+R/test_server.R
