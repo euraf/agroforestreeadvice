@@ -39,3 +39,9 @@ test_DFinfo.R
 test_translation.R
 testing-suitabbility.R
 R/test_server.R
+tests/testing_defaultcomputercrit.R
+tests/testing_dbfinal_values.rds
+tests/inputsdata.rds
+tests/inputsdata_SCSM.rds
+tests/dfSuitability_SCSM.rds
+tests/dbfinal_test.rds
