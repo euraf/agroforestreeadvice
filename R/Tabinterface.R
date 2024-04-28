@@ -72,7 +72,19 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       # assign actual language
       actual_lang <<- paste0("choice_",as.character(language()))
       
+      # information about the filters, calls modalDialog
       tagList(
+        fluidRow(wellPanel(
+        style = "padding: 5px; border-radius: 0px",
+        class = "custom-class",
+        div(
+          style = "text-align: right;",
+          actionButton(inputId = ns("filter_info"), 
+            label = "Information",
+            style = "font-weight: bold; background-color: #3c8dbc; color: white; border: none; padding: 5px 10px;"
+              )) # end div
+            )), 
+
         fluidRow(column(width=6,
                         box(title = vocabulary[vocabulary$type=="Site_box_title",actual_lang],
                             solidHeader = TRUE,
@@ -170,6 +182,28 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         # Update the buttonClicked reactive value when the button is clicked
         buttonClicked(TRUE)
       })
+      
+      # shows information about the filters - loads texts from help_informations - only thoses with actual ID and correct language
+      observeEvent(input$filter_info, {
+      texts <- help_text(as.character(id), actual_lang)
+      showModal(modalDialog(
+        title = vocabulary[vocabulary$type=="Main_header",actual_lang],
+        # Creating a list of div elements based on the texts
+        do.call(tagList, lapply(seq_along(texts), function(i) {
+          if (i %% 2 == 0) {
+            tags$div(
+              style = "display: flex; justify-content: flex-start; padding: 5px;",
+              tags$div(style = "font-weight: normal;", texts[i])
+            )
+          } else {
+            tags$div(
+              style = "display: flex; justify-content: flex-start; padding: 5px;",
+              tags$div(style = "font-weight: bold;", texts[i]))}
+           })),
+        easyClose = TRUE,
+        footer = modalButton(vocabulary[vocabulary$type=="Close_button",actual_lang])
+            )) # ends modal
+          }) # ends observeEvent
       
       #reactive keeping the range of species to plot
       rangetoplot<-reactiveValues(from=1, to=20)
