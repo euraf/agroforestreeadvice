@@ -88,3 +88,69 @@ Plot_legend_lang <- function(lang) {
 
   return(BigCriteria_translates)
 }
+
+
+translator <- function(data, interface, vocabulary, language) {
+  # Tries to translate all data - based on the interface and vocabulary
+
+  # Ensure 'info' side exists in 'interface'
+  if (!"info" %in% interface$side) {
+    warning("No 'info' side found in the 'interface' dataframe.")
+    return(data)  # Exit early if no 'info' side to avoid further errors
+  }
+  interface <- interface[interface$side == "info", ]
+
+  # Create a translation map from vocabulary
+  translations <- c(setNames(vocabulary[[language]], vocabulary$type),setNames(interface[[language]], interface$choice))
+
+  # Function to translate cell values, handling both simple "furniture" and comma-separated cases "furniture, sports"
+    translate_cell <- function(cell, translations) {
+    if (str_detect(cell, ", ")) {
+      # Handle comma-separated values
+      translated_values <- sapply(str_split(cell, ",\\s*")[[1]], function(x) {
+        if (x %in% names(translations)) {
+          return(translations[x])
+        } else {
+          return(x)
+        }
+      })
+      str_c(translated_values, collapse = ", ") # puts cells back together
+    } else {
+      # Handle simple values
+      if (cell %in% names(translations)) {
+        return(translations[cell])
+      } else {
+        return(cell)
+      }
+    }
+  }
+  # Apply translations to all cells in the data
+  data <- data %>% 
+    mutate(across(everything(), ~sapply(., translate_cell, translations = translations)))
+
+  # Rename columns based on vocabulary
+  rename_cols <- filter(vocabulary, object == "DFinfo_headline")
+  rename_cols <- setNames(str_to_title(rename_cols[[language]]), rename_cols$type)
+  names(data) <- sapply(names(data), function(x) ifelse(x %in% names(rename_cols), rename_cols[x], x))
+
+  return(data)
+}
+#translated_info <- translator(x, interfaceCzech, vocabulary, "cz")
+
+help_text <- function(id, lang) {
+  # Load help information - very primitive, returns as list of strings
+  help_text <- read.csv("R/help_information.csv", stringsAsFactors = FALSE)
+
+  # Gets only "tool" rows containg correct ID substring
+  help_text <- help_text[grepl(id, help_text$tool), ]
+
+  help_text <- help_text[[lang]]
+  if (length(help_text) == 0)      {return("No help information found. Add your ID to tool column in help_information.csv or create custom help row.
+                                          Please follow the used formating. Tool - add ID of tools which want to view this help. 
+                                          Filter and type are only for describtion.")}
+
+  if (length(help_text) %% 2 != 0) {return("Texts are not divisible by two! Check the help_information.csv file. Tool is probably incorrect.
+                                            To use filter you need to add your tool ID to both - header and text of wanted Filter.")}
+
+  return(help_text)
+}
