@@ -72,6 +72,14 @@ body <- dashboardBody(
             # A completer: page tutoriel video, page pdf backend
     )#fin databases
   ) #fin pages
+    ,tags$style(HTML("
+        .box.box-solid.box-primary>.box-header {
+          //background: lightblue;//}
+          "))
+    ,tags$style(HTML("
+        .box.box-solid.box-danger>.box-header {
+          //background: darkblue;//}
+          "))
 ) #fin dashboardbody
 
 
