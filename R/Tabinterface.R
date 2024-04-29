@@ -90,14 +90,24 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
                             solidHeader = TRUE,
                             status="danger",
                             width=NULL,
-                            uiOutput(ns("dynamicControlsResponse"))
+                            uiOutput(ns("dynamicControlsResponse")),
+                            tags$style(HTML("
+                              .box-title {
+                                font-family: 'Arial', sans-serif;
+                                   }")
+                                )
                         )),
                  column(width=6,
                         box(title = vocabulary[vocabulary$type=="Objective_box_title",actual_lang],
                             solidHeader = TRUE,
                             status="primary",
                             width=NULL,
-                            uiOutput(ns("dynamicControlsEffect"))
+                            uiOutput(ns("dynamicControlsEffect")),
+                            tags$style(HTML("
+                              .box-title {
+                                font-family: 'Arial', sans-serif;
+                                   }")
+                                )
                         ))
         ),
         fluidRow(wellPanel(
@@ -183,7 +193,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         buttonClicked(TRUE)
       })
       
-      # shows information about the filters - loads texts from help_informations - only thoses with actual ID and correct language
+      # shows information about the filters - loads custom texts from help_informations - only thoses with actual ID and correct language
       observeEvent(input$filter_info, {
       texts <- help_text(as.character(id), actual_lang)
       showModal(modalDialog(
@@ -193,18 +203,29 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           if (i %% 2 == 0) {
             tags$div(
               style = "display: flex; justify-content: flex-start; padding: 5px;",
-              tags$div(style = "font-weight: normal;", texts[i])
+              tags$div(style = "font-family: Arial; font-weight: normal;", texts[i])
             )
           } else {
             tags$div(
               style = "display: flex; justify-content: flex-start; padding: 5px;",
-              tags$div(style = "font-weight: bold;", texts[i]))}
+              tags$div(style = "font-family: Arial; font-weight: bold;", texts[i]))}
            })),
         easyClose = TRUE,
-        footer = modalButton(vocabulary[vocabulary$type=="Close_button",actual_lang])
+        footer = modalButton(vocabulary[vocabulary$type=="Close_button",actual_lang]),
+            # javascript custom modalButton and Header styles
+            tags$script('
+            $(document).ready(function() {
+              // Styling the close button
+              $(".modal-footer .btn").css({"background-color": "#3c8dbc", "color": "white", "border": "none", "padding": "5px 10px"});
+              
+              // Styling the modal header
+              $(".modal-header").css({"font-weight": "bold", "background-color": "#3c8dbc", "color": "white"});
+            });
+          ')
             )) # ends modal
           }) # ends observeEvent
       
+
       #reactive keeping the range of species to plot
       rangetoplot<-reactiveValues(from=1, to=20)
       observeEvent(input$barplotfrom, {
