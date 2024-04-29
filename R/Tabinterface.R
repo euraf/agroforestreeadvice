@@ -80,7 +80,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         div(
           style = "text-align: right;",
           actionButton(inputId = ns("filter_info"), 
-            label = "Information",
+            label = "Information", icon("circle-question"),
             style = "font-weight: bold; background-color: #3c8dbc; color: white; border: none; padding: 5px 10px;"
               )) # end div
             )), 
@@ -113,7 +113,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         fluidRow(wellPanel(
           class = "custom-well-panel5",
           style = "display: flex; justify-content: center;",
-          actionButton(inputId = ns("ab_compute"), label=vocabulary[vocabulary$type=="Compere_trees_button",actual_lang])
+          actionButton(inputId = ns("ab_compute"), label=vocabulary[vocabulary$type=="Compare_trees_button",actual_lang],
+                        icon("tree"), style=" font-weight: bold; color: #fff; background-color: #337ab7; border-color: #2e6da4")
         ))
       )
     })
