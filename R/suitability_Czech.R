@@ -61,8 +61,10 @@ compute_suitability_Czech<-function(inputsdata=NULL,
 Hard_criteria_filter <- function(db, inputsdata, interface) {
   # Filter trees - if 999 in weightwithincriteria, then it is a hard criteria and if it is in inputsdata, then filter the trees
   
-  if (999 %in% interface$weightwithincriteria) {print("Filtered by hard criteria") }
-  else {print("NO hard criteria (999) found in interface")
+  if (999 %in% interface$weightwithincriteria) {
+    print("Filtered by hard criteria") }
+  else {
+    print("NO hard criteria (999) found in interface")
         return(db) }
   
   # Consolidate criteria from interface based on inputsdata and slider inputs
