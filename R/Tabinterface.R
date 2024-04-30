@@ -15,7 +15,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
     
     box(title = "All trees",
         solidHeader = TRUE,
-        status="warning",
+        status="info",
         width=NULL,
         fluidRow(
           column(width=12,
@@ -43,7 +43,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
     if (id == "Czech") {      # Add legislative criteria for Czech tree advice
           box(title = "Additional information",
               solidHeader = TRUE,
-              status="warning",
+              status="info",
               width=NULL,
                 column(width=12,
                       DTOutput(outputId = ns("DTinformations"))
@@ -67,7 +67,6 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       ns <- session$ns # utile si renderUI
       
       output$dynamicUI <- renderUI({
-      
       req(language())  # Ensure 'language' is available
       # assign actual language
       actual_lang <<- paste0("choice_",as.character(language()))
@@ -81,7 +80,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           style = "text-align: right;",
           actionButton(inputId = ns("filter_info"), 
             label = "Information", icon("circle-question"),
-            style = "font-weight: bold; background-color: #3c8dbc; color: white; border: none; padding: 5px 10px;"
+            style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"
               )) # end div
             )), 
 
@@ -240,20 +239,20 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         allinputs<-reformattedinputs() 
         orderby<-input$orderby
         #print(orderby)
-        print("### allinputs ###")
-        print(allinputs)
+        # print("### allinputs ###")
+        # print(allinputs)
         if(length(allinputs)>0){
           message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
           #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
           
-          dfSuitability<<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
+          dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
                                              orderby = orderby)
 
           # filter the trees based on the hard criteria
-          dfSuitability<<-Hard_criteria_filter(dfSuitability, allinputs, interface)
+          dfSuitability<-Hard_criteria_filter(dfSuitability, allinputs, interface)
         
         } else{
-          dfSuitability<<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
+          dfSuitability<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
         }
         #order of the bars in ggplot is determined by species (ordered factor), but for the DT, we need to also sort the rows
         #browser()
