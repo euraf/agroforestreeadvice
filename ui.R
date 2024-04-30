@@ -18,7 +18,7 @@ sidebar <- dashboardSidebar(
     inline = TRUE),
   sidebarMenu(
     id="sidemenu",
-    menuItem("Informations", tabName = "Welcome"),
+    menuItem("Information", tabName = "Welcome"),
     menuItem("Tool", tabName = "tool"),
     menuItem("Databases", tabName = "databases")
   )
@@ -46,6 +46,13 @@ body <- dashboardBody(
   #       }
   #     "))
   #   ),
+  tags$head(
+    tags$style(HTML("
+      body {
+        font-family: Arial, sans-serif;
+      }
+    "))
+  ),
 
   tabItems(
     tabItem(tabName = "Welcome", 
