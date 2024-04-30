@@ -27,7 +27,26 @@ sidebar <- dashboardSidebar(
 # Main panel ----
 
 body <- dashboardBody(
-  
+  # tags$head(
+  #     tags$style(HTML("
+  #       /* Custom styles for tabs */
+  #       .nav-tabs > li > a {
+  #         background-color: #f8f9fa; /* Light grey background */
+  #         border: 1px solid #dee2e6;
+  #         color: #495057; /* Dark grey text */
+  #       }
+  #       .nav-tabs > li.active > a {
+  #         background-color: #007bff; /* Blue background for active tab */
+  #         color: white; /* White text for active tab */
+  #       }
+  #       .tab-content {
+  #         padding: 20px;
+  #         border: 1px solid #dee2e6;
+  #         border-top: none;
+  #       }
+  #     "))
+  #   ),
+
   tabItems(
     tabItem(tabName = "Welcome", 
             h1("Welcome! please go to Tool in the menu to find the best tree for you! or to the Databases to learn where all this comes from"),
@@ -73,13 +92,26 @@ body <- dashboardBody(
     )#fin databases
   ) #fin pages
     ,tags$style(HTML("
-        .box.box-solid.box-primary>.box-header {
-          //background: lightblue;//}
-          "))
-    ,tags$style(HTML("
+        /* first box, red */
         .box.box-solid.box-danger>.box-header {
-          //background: darkblue;//}
+                  background-color: #e35a56; 
+                  color: white;}
+        .box.box-solid.box-danger {border-color: #e35a56;}
+
+        /* second box, green */
+        .box.box-solid.box-primary>.box-header {
+                  background-color: #6dab57; 
+                  color: white;}
+        .box.box-solid.box-primary {border-color: #6dab57;}
+
+        /* third box, blue */
+        .box.box-solid.box-info>.box-header {
+                  background-color: #3c8dbc; 
+                  color: white;}
+        .box.box-solid.box-info {border-color: #3c8dbc;}
           "))
+
+          
 ) #fin dashboardbody
 
 
