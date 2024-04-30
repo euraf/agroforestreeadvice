@@ -166,6 +166,8 @@ orderdf<-function(df, orderby, idvariable, interface){
 #'
 #' @examples
 default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weight = as.integer(1), yesindicator=c("yes", "oui", "x", "T", "TRUE", "VRAI")){
+  print("####### get inputs[criteria]")
+  print(inputs[criteria][1])
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
     chosen<-inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria]
@@ -183,9 +185,14 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
     #then divide by the number of possibilities to obtain score between 0 and 1
     db$value<-nbmatches/length(chosen)
   } else if (type=="selectInput") {
-   
     chosen<-inputs[criteria]
-    if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
+    if(substr(chosen[1],start=1, stop=4) == "all ") # if the user selected "all " in the selectInput, then we select all species
+    {
+      print(paste0(chosen[0],": selected all"))
+      db$value<-1
+    }
+
+    else if (criteria %in% names(db)){ #one column criteria, with content equal to possible choices
       db$value<-as.numeric(db[,criteria]==chosen) 
     } else {
       if (sum(grepl(pattern=chosen, x=names(db)))==1) {
