@@ -79,7 +79,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         div(
           style = "text-align: right;",
           actionButton(inputId = ns("filter_info"), 
-            label = "Information", icon("circle-question"),
+            label = vocabulary[vocabulary$type=="Info_button",actual_lang], icon("circle-question"),
             style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"
               )) # end div
             )), 
@@ -431,12 +431,14 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
           theme_minimal() +
-          labs(y = "Species", x = NULL, fill = vocabulary[vocabulary$type=="Graph_legend",actual_lang]) +
+          labs(x = NULL, fill = vocabulary[vocabulary$type=="Graph_legend",actual_lang])+
+          ylab(vocabulary[vocabulary$type=="Graph_y_label",actual_lang]) +
           scale_x_continuous(breaks = c(-2, 2), labels = vocabulary[vocabulary$type=="Graph_label",actual_lang]) +        # anchors the descriptions of X axis around the vline, hides X axis values
           theme(axis.text.y = element_text(family = "Arial", size = 14),                         # too small descriptions on some monitors
                 axis.text.x = element_text(family = "Arial", size = 14),
                 legend.title = element_text(family = "Arial", size = 16),
                 legend.text = element_text(family = "Arial", size = 14),
+                axis.title.y = element_text(family = "Arial", size = 16),
                 panel.grid.major.x = element_blank(),                                            # hides major vertical grid lines
                 panel.grid.minor.x = element_blank()                                             # hides minor vertical grid lines  
                 ) +
