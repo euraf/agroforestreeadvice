@@ -8,6 +8,7 @@ Compere!,Compare_trees_button,Compare Trees,Comparer les Arbres,Bäume vergleich
 Graph,Graph_legend,Main Criteria,Critères Principaux,Hauptkriterien,Criterios Principales,Belangrijkste Criteria,Hlavní Kritéria
 Graph,Graph_label,Adaptation,Adaptation,Anpassung,Adaptación,Aanpassing,Adaptace
 Graph,Graph_label,Efficiency,Efficacité,Effizienz,Eficiencia,Efficiëntie,Efektivita
+Graph,Graph_y_label,Species,Species,Spezies,Especies,Soorten,Druh
 DFinfo_headline,Scientific_name,scientific name,nom scientifique,Wissenschaftlicher Name,nombre científico,wetenschappelijke naam,vědecký název
 DFinfo_headline,legislation,legislation,législation,Gesetzgebung,legislación,wetgeving,legislativa
 DFinfo_headline,information,information,information,Information,información,informatie,informace
@@ -20,3 +21,4 @@ DFinfo_content,"furniture (solid wood)","furniture (solid wood)","meubles (bois 
 DFinfo_content,beekeeping (honey bee),beekeeping (honey bee),apiculture (abeille domestique),Imkerei (Honigbiene),apicultura (abeja doméstica),bijenteelt (honingbij),včelařství (včela medonosná)
 Help_info,Close_button,Close,Fermer,Schließen,Cerrar,Sluiten,Zavřít
 Help_info,Main_header,Detailed information about filters,Informations détaillées sur les filtres,Detaillierte Informationen zu den Filtern,Información detallada sobre los filtros,Gedetailleerde informatie over de filters,Podrobné informace o filtrech
+Help_info,Info_button,Information,Information,Information,Información,Informatie,Informace
