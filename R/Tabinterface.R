@@ -480,6 +480,12 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           } else datawide$efficiency.score<-0
           speciesOrder$order <- unique(datalong$species)
           
+          # column datainfo$Scientific_name - delete text after second space (if present) to better fit the table
+          datawide$species <- gsub("^(\\S+\\s+\\S+).*", "\\1", datawide$species)
+
+          # drop value. from the column names
+          names(datawide) <- gsub("\\value.", "", names(datawide))
+
           datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
         } else {datalong}
         }, options = list(
@@ -505,7 +511,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
         # Translate the data
         datainfo <- translator(datainfo, interfaceCzech, vocabulary, actual_lang)
-        
+
         datainfo
 
         }, options = list(

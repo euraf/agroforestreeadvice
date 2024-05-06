@@ -186,7 +186,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
     db$value<-nbmatches/length(chosen)
   } else if (type=="selectInput") {
     chosen<-inputs[criteria]
-    if(substr(chosen[1],start=1, stop=4) == "all ") # if the user selected "all " in the selectInput, then we select all species
+    if(substr(chosen[1],start=1, stop=4) == "not ") # if the user selected "not " in the selectInput, then we select all species
     {
       print(paste0(chosen[0],": selected all"))
       db$value<-1
