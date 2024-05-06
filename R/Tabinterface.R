@@ -350,14 +350,15 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       ### update dynamic ui in case of language selection----
       observeEvent(compactcontrols(), {
-        message("update dynamicControlsResponse")
+        message("update dynamicControls (both Response and Effect)")
         goodtranslations<-compactcontrols()
-        responsecontrols<-which(goodtranslations$side=="responsetrait")
+        responsecontrols<-which(goodtranslations$side %in% c("responsetrait","effecttrait"))
         lapply(responsecontrols, function(i) {
           #print(goodtranslations[i,])
           control_type <- goodtranslations$objecttype[i]
           input_id <- ns(goodtranslations$criteria[i])
           current_value<-input[[input_id]]
+          print(paste("values of ", input_id, "=", paste(current_value, collapse=";")))
           choices <- strsplit(goodtranslations$choice[i], ",")[[1]]
           labchoices<-strsplit(goodtranslations$labelchoice[i], ",")[[1]]
           names(choices)<-labchoices
@@ -370,37 +371,12 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             checkboxInput=updateCheckboxInput(session, input_id, label = labelinput, value=current_value),
             numericInput=updateNumericInput(session, input_id, label = labelinput, value=current_value),
             selectInput=updateSelectInput(session, input_id, label = labelinput, choices=choices, selected  = current_value),
-            checkboxGroupInput=updateCheckboxGroupInput(session,input_id, label = labelinput, choices = choices)
+            checkboxGroupInput=updateCheckboxGroupInput(session,input_id, label = labelinput, choices = choices, selected = current_value),
+            sliderInput=updateSliderInput(session, input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=as.numeric(current_value))
             # Add more control types as needed
           )
         })
-        
-        
-        message("update dynamicControlsEffect")
-        goodtranslations<-compactcontrols()
-        responsecontrols<-which(goodtranslations$side=="effecttrait")
-        lapply(responsecontrols, function(i) {
-          #print(goodtranslations[i,])
-          control_type <- goodtranslations$objecttype[i]
-          input_id <- ns(goodtranslations$criteria[i])
-          current_value<-input[[input_id]]
-          choices <- strsplit(goodtranslations$choice[i], ",")[[1]]
-          labchoices<-strsplit(goodtranslations$labelchoice[i], ",")[[1]]
-          names(choices)<-labchoices
-          #print(choices)
-          labelinput<-goodtranslations$labelcriteria[i]
-          
-          
-          switch(
-            control_type,
-            checkboxInput=updateCheckboxInput(session, input_id, label = labelinput, value=current_value),
-            numericInput=updateNumericInput(session, input_id, label = labelinput, value=current_value),
-            selectInput=updateSelectInput(session, input_id, label = labelinput, choices=choices, selected  = current_value),
-            checkboxGroupInput=updateCheckboxGroupInput(session,input_id, label = labelinput, choices = choices)
-            # Add more control types as needed
-          )
-          
-        })
+
       }, ignoreInit=TRUE) #end update dynamic controls according to language
       
       
