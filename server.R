@@ -1,14 +1,26 @@
 
 server <- function(input, output, session) {
-  #http://127.0.0.1:3775/?in_language=cz&model=Czech this will just take the user to the desired tab, with the desired language
+  #http://127.0.0.1:3775/?selected_language=cz&model=Czech this will just take the user to the desired tab, with the desired language
   #127.0.0.1:3775/?model=Czech&soil_water=soil_water_waterlogged&habitus=bush this triggers a modal dialog to download a txt file with the species scores for this particular set of conditions
   
   
+
+  observeEvent(input$selected_language, {
+    # Print the selected language to the console
+    print(paste("The selected language has changed to:", input$selected_language))
+    shiny.i18n::update_lang(input$selected_language)})
+    
+   # Reactive expression for the selected language
+    language <- reactive({
+      input$selected_language
+    })
+
+
   observe({
     query <- parseQueryString(session$clientData$url_search)
     
-    if (!is.null(query[['in_language']])) {
-      updateRadioButtons(session, "in_language", selected = query[['in_language']])
+    if (!is.null(query[['selected_language']])) {
+      updateRadioButtons(session, "selected_language", selected = query[['selected_language']])
     }
     
     desiredmodel <- query$model 
@@ -20,7 +32,7 @@ server <- function(input, output, session) {
       updateTabsetPanel(session, "toolsTabset", selected = desiredmodel)
     }
     
-    allotherparameters<-setdiff(names(query), c("in_language", "model"))
+    allotherparameters<-setdiff(names(query), c("selected_language", "model"))
     if(length(allotherparameters)>0){ #we passed parameters by URL = we want to get the results as csv
       queryinputs<-unlist(query[allotherparameters]) #icicicic todo : check that all necessary inputs are provided before sending to the suitability function
       print(paste("computing suitability of model", desiredmodel))
@@ -78,10 +90,6 @@ server <- function(input, output, session) {
   
   
   
-  # Reactive expression for the selected language
-  language <- reactive({
-    input$in_language
-  })
   
   # Czech tree advice ----
   moduleTabInterface_Server(id = "Czech",
