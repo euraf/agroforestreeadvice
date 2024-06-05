@@ -1,3 +1,6 @@
+#this file is weak point, the translations of most of the project are handled by i18n library, but that is not suitable for
+#translation of dynamic datatables, hence the need for these custom functions here, which are hard-coded and heavy-handed
+
 Plot_legend_lang <- function(lang) {
     # changes names of X axis , actually used:
     # climate, equipment, soil, species, resources, height, production, legislation, growth, understory_tree, food,
@@ -89,9 +92,11 @@ Plot_legend_lang <- function(lang) {
   return(BigCriteria_translates)
 }
 
+# Plot_legend_lang("cz")
 
-translator <- function(data, interface, vocabulary, language) {
+translator <- function(data, interface, language) {
   # Tries to translate all data - based on the interface and vocabulary
+  vocabulary <- read.csv("R/translate_plot_categories.csv", sep = ",", header = TRUE)
 
   # Ensure 'info' side exists in 'interface'
   if (!"info" %in% interface$side) {
@@ -135,13 +140,13 @@ translator <- function(data, interface, vocabulary, language) {
 
   return(data)
 }
-#translated_info <- translator(x, interfaceCzech, vocabulary, "cz")
+#translated_info <- translator(x, interfaceCzech, "cz")
 
 help_text <- function(id, lang) {
   # Load help information - very primitive, returns as list of strings
   help_text <- read.csv("R/help_information.csv", stringsAsFactors = FALSE)
 
-  # Gets only "tool" rows containg correct ID substring
+  # Gets only "tool" rows containg only actual ID - eg. Czech, DENTRO...
   help_text <- help_text[grepl(id, help_text$tool), ]
 
   help_text <- help_text[[lang]]
@@ -154,3 +159,5 @@ help_text <- function(id, lang) {
 
   return(help_text)
 }
+
+#help_text("Czech", "cz")
