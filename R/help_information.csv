@@ -1,9 +1,9 @@
 tool,Filter,type,choice_en,choice_fr,choice_de,choice_es,choice_nl,choice_cz
 Czech;DENTRO,height,header,Height,Hauteur,Höhe,Altura,Hoogte,Výška
-Czech;DENTRO,height,text,"Maximal height, which the tree can grow up in its life time in ideal conditions","Hauteur maximale que l'arbre peut atteindre dans des conditions idéales","Maximale Höhe, die der Baum in idealen Bedingungen erreichen kann","Altura máxima que el árbol puede alcanzar en condiciones ideales","Maximale hoogte die de boom kan bereiken in ideale omstandigheden","Maximální výška, které strom může dosáhnout za ideálních podmínek"
+Czech;DENTRO,height,text,"Maximal height, which the tree can grow up in its life time in ideal conditions",Hauteur maximale que l'arbre peut atteindre dans des conditions idéales,"Maximale Höhe, die der Baum in idealen Bedingungen erreichen kann",Altura máxima que el árbol puede alcanzar en condiciones ideales,Maximale hoogte die de boom kan bereiken in ideale omstandigheden,"Maximální výška, které strom může dosáhnout za ideálních podmínek"
 Czech;DENTRO,sun,header,Sunny,Ensoleillé,Sonnig,Soleado,Zonnig,Slunečno
-Czech;DENTRO;SCSM,sun,text,"The tree prefers sunny locations","L'arbre préfère les endroits ensoleillés","Der Baum bevorzugt sonnige Standorte","El árbol prefiere lugares soleados","De boom geeft de voorkeur aan zonnige locaties","Strom preferuje slunečné místa"
+Czech;DENTRO;SCSM,sun,text,The tree prefers sunny locations,L'arbre préfère les endroits ensoleillés,Der Baum bevorzugt sonnige Standorte,El árbol prefiere lugares soleados,De boom geeft de voorkeur aan zonnige locaties,Strom preferuje slunečné místa
 Czech;SCSM,acid,header,Soil acidity,Acidité du sol,Bodenazidität,Acidez del suelo,Bodemzuurgraad,Kyselost půdy
-Czech,acid,text,"The preference to the soil acidity","La préférence à l'acidité du sol","Die Vorliebe für die Bodenazidität","La preferencia por la acidez del suelo","De voorkeur voor de bodemzuurgraad","Preference k půdní kyselosti"
-Czech,Add new header,header,Add new header,Ajouter un nouvel en-tête,Neuen Header hinzufügen,Agregar nuevo encabezado,Nieuwe kop toevoegen,Přidat nový záhlaví
+Czech,acid,text,The preference to the soil acidity,La préférence à l'acidité du sol,Die Vorliebe für die Bodenazidität,La preferencia por la acidez del suelo,De voorkeur voor de bodemzuurgraad,Preference k půdní kyselosti
+Czech,Add new header,header,Add new header,Ajouter un nouvel en-tête,Neuen Header hinzufügen,Agregar nuevo encabezado,Nieuwe kop toevoegen,Přidat nové záhlaví
 Czech,Add new description,text,Add new description,Ajouter une nouvelle description,Neue Beschreibung hinzufügen,Agregar nueva descripción,Nieuwe beschrijving toevoegen,Přidat nový popis
