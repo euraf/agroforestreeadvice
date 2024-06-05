@@ -10,17 +10,17 @@ header <- dashboardHeader(title = "AgroforesTreeAdvice")
 
 sidebar <- dashboardSidebar(
   
-  radioButtons(
-    inputId="in_language",
-    label="Language",
-    choices = languages,
-    selected = "en",
-    inline = TRUE),
+  shiny.i18n::usei18n(i18n),
+  selectInput(inputId = 'selected_language',
+              i18n$t("Change language"),
+              choices = i18n$get_languages(),
+              selected = i18n$get_key_translation()),
+
   sidebarMenu(
     id="sidemenu",
-    menuItem("Information", tabName = "Welcome"),
-    menuItem("Tool", tabName = "tool"),
-    menuItem("Databases", tabName = "databases")
+    menuItem(i18n$t("Information"), tabName = "Welcome"),
+    menuItem(i18n$t("Databases"), tabName = "databases"),
+    menuItem(i18n$t("Tools"), tabName = "tool")
   )
 )
 
@@ -75,13 +75,13 @@ body <- dashboardBody(
               id = "toolsTabset",
               tabPanel("Flanders Tree Advisor (DENTRO)", value="DENTRO", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
-              tabPanel("Shade Tree Advice (coffee and cocoa)", value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
+              tabPanel(i18n$t("Shade Tree Advice (coffee and cocoa)"), value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
               
-              tabPanel("Deciduous (fruit trees in France)", value="DECIDUOUS", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
+              tabPanel(i18n$t("Deciduous (fruit trees in France)"), value="DECIDUOUS", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
               
-              tabPanel("SCSM (species climate suitability model)", value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
+              tabPanel(i18n$t("SCSM (species climate suitability model)"), value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
               
-              tabPanel("Czech tree selection tool", value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech))
+              tabPanel(i18n$t("Czech tree selection tool"), value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech))
               
             )
     ),#fin tool
