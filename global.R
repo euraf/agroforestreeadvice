@@ -13,6 +13,7 @@ library(dplyr)
 library(stringr)
 #library(tidyverse)
 library(purrr)
+library(shiny.i18n)
 
 ##global----
 
@@ -44,9 +45,13 @@ interfaceSCSM<-read.table("models/interfaceSCSM.txt", fileEncoding = "UTF-8", en
 dataCzech<-read.table("models/dataCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceCzech<-read.table("models/interfaceCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
+# In czech, there are empty spaces around words in some cells 
 dataCzech <- data.frame(lapply(dataCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
 interfaceCzech <- data.frame(lapply(interfaceCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
 
+  # Initialize the translator
+i18n <- Translator$new(translation_csvs_path = "R/translation/")
+i18n$set_translation_language("en")  # Default language
 
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
 interfaceSTA[1:length(interfaceSTA)]<-lapply(interfaceSTA[1:length(interfaceSTA)], function(x) gsub(pattern=",", replacement=".", x=x))
@@ -61,7 +66,6 @@ interfaceCzech[1:length(interfaceCzech)]<-lapply(interfaceCzech[1:length(interfa
 
 toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM), names(interfaceCzech)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
-vocabulary <- read.csv("R/translation.csv", sep = ",", header = TRUE)
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives){
   # print("reshapecontrols")     ## very useful for debugging
