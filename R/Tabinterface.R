@@ -7,13 +7,13 @@ moduleTabInterface_UI <- function(id, data, interface) {
   # Permet d'avoir des Id uniques dans toute l'application pour les inputs/outputs
   # Appliquer la fonction ns à tous les inputId / outputId
   ns <- NS(id)
-
+  
 
   # Il faut encapsuler l'interface dans un tagList
   tagList(
     uiOutput(ns("dynamicUI")),
-    
-    box(title = "All trees",
+
+    box(title = i18n$t("Trees suitability"),
         solidHeader = TRUE,
         status="info",
         width=NULL,
@@ -22,15 +22,15 @@ moduleTabInterface_UI <- function(id, data, interface) {
                  fluidRow(
                    div(style="display: inline-block;vertical-align:top; width: 20px;", HTML("<br>")), #because else the orderby radiobuttons start out of the box
                    div(style="display: inline-block;vertical-align:top; width: 300px;",
-                       radioButtons(inputId=ns("orderby"), label="Order By", 
+                       radioButtons(inputId=ns("orderby"), label=i18n$t("Order by"), 
                                     choices=c(Adaptation="responsetrait", Efficiency="effecttrait"),
                                     selected="responsetrait", inline=TRUE)),
                    div(style="display: inline-block;vertical-align:top; width: 100px;",
                        HTML("<br>")),
                    div(style="display: inline-block;vertical-align:top; width: 200px;",
-                       numericInput(inputId=ns("barplotfrom"), label="Display from the xth", value=1)),
+                       numericInput(inputId=ns("barplotfrom"), label=i18n$t("Display from the"), value=1)),
                    div(style="display: inline-block;vertical-align:top; width: 200px;",
-                       numericInput(inputId=ns("barplotto"), label="to the yth", value=20))
+                       numericInput(inputId=ns("barplotto"), label=i18n$t("Display to the"), value=20))
                  ),
                  plotOutput((ns("barplot_suitability")))
                  
@@ -41,7 +41,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
         )),
 
     if (id == "Czech") {      # Add legislative criteria for Czech tree advice
-          box(title = "Additional information",
+          box(title = i18n$t("Additional information"),
               solidHeader = TRUE,
               status="info",
               width=NULL,
@@ -79,13 +79,13 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         div(
           style = "text-align: right;",
           actionButton(inputId = ns("filter_info"), 
-            label = vocabulary[vocabulary$type=="Info_button",actual_lang], icon("circle-question"),
+            label = i18n$t("Information"), icon("circle-question"),
             style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"
               )) # end div
             )), 
 
         fluidRow(column(width=6,
-                        box(title = vocabulary[vocabulary$type=="Site_box_title",actual_lang],
+                        box(title = i18n$t("Your site"),
                             solidHeader = TRUE,
                             status="danger",
                             width=NULL,
@@ -97,7 +97,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
                                 )
                         )),
                  column(width=6,
-                        box(title = vocabulary[vocabulary$type=="Objective_box_title",actual_lang],
+                        box(title = i18n$t("Your Objectives"),
                             solidHeader = TRUE,
                             status="primary",
                             width=NULL,
@@ -112,7 +112,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         fluidRow(wellPanel(
           class = "custom-well-panel5",
           style = "display: flex; justify-content: center;",
-          actionButton(inputId = ns("ab_compute"), label=vocabulary[vocabulary$type=="Compare_trees_button",actual_lang],
+          actionButton(inputId = ns("ab_compute"), label=i18n$t(c("Compare Trees")),
                         icon("tree"), style=" font-weight: bold; color: #fff; background-color: #337ab7; border-color: #2e6da4")
         ))
       )
@@ -197,7 +197,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       observeEvent(input$filter_info, {
       texts <- help_text(as.character(id), actual_lang)
       showModal(modalDialog(
-        title = vocabulary[vocabulary$type=="Main_header",actual_lang],
+        title = i18n$t("Information about the filters"),
         # Creating a list of div elements based on the texts
         do.call(tagList, lapply(seq_along(texts), function(i) {
           if (i %% 2 == 0) {
@@ -211,7 +211,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
               tags$div(style = "font-family: Arial; font-weight: bold;", texts[i]))}
            })),
         easyClose = TRUE,
-        footer = modalButton(vocabulary[vocabulary$type=="Close_button",actual_lang]),
+        footer = modalButton(i18n$t("Close"), icon = icon("remove")),
             # javascript custom modalButton and Header styles
             tags$script('
             $(document).ready(function() {
@@ -263,7 +263,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         #print(str(dfSuitability))
         if (id == "Czech") {
             # Get the information about the trees
-            dfInfo <<- dfczechinfo(interface = interfaceCzech, data = dataCzech)
+            dfInfo <<- dfczechinfo(interface = interface, data = data)
           }
         #write_xlsx(dfSuitability, "01_dfsuitablity.xlsx")
         return(dfSuitability)
@@ -348,6 +348,15 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         tagList(controls_list)
       }) # end create dynamic controls for user objectives
       
+      # Update language in session when user selects a new language
+      observeEvent(input$selected_language, {
+      # This print is just for demonstration
+      print(paste("Language change!", input$selected_language))
+      # Here is where we update language in session
+      store_input <<- input
+      shiny.i18n::update_lang(input$selected_language)
+      })
+
       ### update dynamic ui in case of language selection----
       observeEvent(compactcontrols(), {
         message("update dynamicControls (both Response and Effect)")
@@ -384,7 +393,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       ## barplot ----
       output$barplot_suitability <- renderPlot({
         print("plot")
-        #  setdiff(names(allinputs), c("orderby", "sidebarCollapsed", "ab_compute", "in_language", "sidebarItemExpanded"))]
+        #  setdiff(names(allinputs), c("orderby", "sidebarCollapsed", "ab_compute", "selected_language", "sidebarItemExpanded"))]
         #browser()
         databis<-datatoplot()
         # print(str(databis))
@@ -407,14 +416,14 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
           theme_minimal() +
-          labs(x = NULL, fill = vocabulary[vocabulary$type=="Graph_legend",actual_lang])+
-          ylab(vocabulary[vocabulary$type=="Graph_y_label",actual_lang]) +
-          scale_x_continuous(breaks = c(-2, 2), labels = vocabulary[vocabulary$type=="Graph_label",actual_lang]) +        # anchors the descriptions of X axis around the vline, hides X axis values
-          theme(axis.text.y = element_text(family = "Arial", size = 14),                         # too small descriptions on some monitors
-                axis.text.x = element_text(family = "Arial", size = 14),
-                legend.title = element_text(family = "Arial", size = 16),
-                legend.text = element_text(family = "Arial", size = 14),
-                axis.title.y = element_text(family = "Arial", size = 16),
+          labs(x = NULL, fill = i18n$t("Main Criteria"))+
+          ylab(i18n$t("Species")) +
+          scale_x_continuous(breaks = c(-2, 2), labels = i18n$t(c("Adaptation", "Efficiency"))) +        # anchors the descriptions of X axis around the vline, hides X axis values
+          theme(axis.text.y = element_text(size = 14),                         # too small descriptions on some monitors
+                axis.text.x = element_text(size = 14),
+                legend.title = element_text(size = 16),
+                legend.text = element_text(size = 14),
+                axis.title.y = element_text(size = 16),
                 panel.grid.major.x = element_blank(),                                            # hides major vertical grid lines
                 panel.grid.minor.x = element_blank()                                             # hides minor vertical grid lines  
                 ) +
@@ -466,8 +475,16 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         } else {datalong}
         }, options = list(
         scrollX = TRUE,
-        order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
-      ))
+        order = list(list(1, 'asc')), #order by the species column, which is an ordered factor
+        language = list(
+          search = i18n$t("Search:"),
+          lengthMenu = i18n$t("Display _MENU_ entries"),
+          info = i18n$t("Showing _START_ to _END_ of _TOTAL_ entries"),
+          paginate = list(
+            "next" = i18n$t("Next"),
+            "previous" = i18n$t("Previous"))
+          )
+        ))
       
 
       output$DTinformations <- renderDT({
@@ -486,16 +503,22 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         # Physically reorder the rows of the dataframe
         datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
         # Translate the data
-        datainfo <- translator(datainfo, interfaceCzech, vocabulary, actual_lang)
+        datainfo <- translator(datainfo, interfaceCzech, actual_lang)
 
         datainfo
 
         }, options = list(
           scrollX = TRUE,
           columnDefs = list(   # auto width is on, but we can partially set the width of the columns
-            list(width = '40px', targets = c(0))
-          )
-          
+            list(width = '40px', targets = c(0))),
+          language = list(
+            search = i18n$t("Search:"),
+            lengthMenu = i18n$t("Display _MENU_ entries"),
+            info = i18n$t("Showing _START_ to _END_ of _TOTAL_ entries"),
+            paginate = list(
+              "next" = i18n$t("Next"),
+              "previous" = i18n$t("Previous"))
+            )
         ))    
     return(moduleServer)
   })
