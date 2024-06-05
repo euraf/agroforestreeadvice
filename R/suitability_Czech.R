@@ -59,7 +59,9 @@ compute_suitability_Czech<-function(inputsdata=NULL,
 }
 
 Hard_criteria_filter <- function(db, inputsdata, interface) {
-  # Filter trees - if 999 in weightwithincriteria, then it is a hard criteria and if it is in inputsdata, then filter the trees
+  # Filter trees - if 999 in weightwithincriteria, then it is a hard criteria and algorithm will drop trees which does not meet it 
+  # it will check if values of these criteria is 1 - if not - drop them
+  # 1. identify hard_criteria 2. identify trees 3. identify values of hard_criteria for each tree 4. drop trees where these values are 0 
   
   if (999 %in% interface$weightwithincriteria) {
     print("Filtered by hard criteria") }
@@ -113,7 +115,7 @@ Hard_criteria_filter <- function(db, inputsdata, interface) {
   return(db)
 }
 
-dfczechinfo <- function(interface = interfaceCzech, data = dataCzech) {
+dfczechinfo <- function(interface = interface, data = data) {
     #loads all "info" side rows of interface, find their values for each tree in data and 
     #then agregate them into one row if they share "criteria" value
 
@@ -122,12 +124,21 @@ dfczechinfo <- function(interface = interfaceCzech, data = dataCzech) {
 
     #combine "choice" values of duplicated "criteria" values
     datainfo2 <- aggregate(choice ~ criteria, data = datainfo2, paste, collapse = ", ")
-    datainfo3 <- data.frame(dataCzech["Scientific_name"])
-
+    # Check if the column "Scientific_name" exists
+    if ("Scientific_name" %in% names(data)) {
+      datainfo3 <- data.frame(data["Scientific_name"])
+    } else {
+      # If "Scientific_name" does not exist, try another column, e.g., "nameCommon"
+      if ("nameCommon" %in% names(data)) {
+        datainfo3 <- data.frame(data["nameCommon"])
+      } else {
+        print("Neither 'Scientific_name' nor 'nameCommon' exist in the data frame.")
+      }
+    }
     #try each criteria from datainfo2$criteria as a column, if it exists, then assign the value from datainfo2 to the new column
     for (i in 1:length(datainfo2$criteria)) {
-      if (datainfo2$criteria[i] %in% colnames(dataCzech)) {
-        datainfo3[datainfo2$criteria[i]] <- dataCzech[, datainfo2$criteria[i]]
+      if (datainfo2$criteria[i] %in% colnames(data)) {
+        datainfo3[datainfo2$criteria[i]] <- data[, datainfo2$criteria[i]]
       }
     }
     
@@ -137,8 +148,8 @@ dfczechinfo <- function(interface = interfaceCzech, data = dataCzech) {
     # iterate the choices, if the values is data column, append the column to datainfo3
     for (i in 1:length(choices)) {
       for (j in 1:length(choices[[i]])) {
-        if (choices[[i]][j] %in% colnames(dataCzech)) {
-          datainfo3[choices[[i]][j]] <- dataCzech[, choices[[i]][j]]
+        if (choices[[i]][j] %in% colnames(data)) {
+          datainfo3[choices[[i]][j]] <- data[, choices[[i]][j]]
         }
       }
     }
