@@ -53,22 +53,75 @@ body <- dashboardBody(
       }
     "))
   ),
+  # style for github link
+  tags$style(HTML("
+      .spaced-text {
+        margin-top: 50px;  /* Adjust the value to add more space */
+      }
+      .text-and-link {
+        margin-bottom: 0px;  /* Remove bottom margin */
+      }
+    ")),
 
   tabItems(
     tabItem(tabName = "Welcome", 
             h1("Welcome! please go to Tool in the menu to find the best tree for you! or to the Databases to learn where all this comes from"),
             h1("This tool is under development (to do: make this welcome page look nicer!) within the DigitAF European project"),
-            img(src = "logoDigitAF_HR_500.png"),
-            h1("Contributors:"),
-            h2("Contributors to code"),
-            h2("Marie Gosme; Clément Rigal; Raphael Paut ; Birk Skyum"),
-            h2("Contributors to databases"),
-            h2("DENTRO: Sarah Carton; Paul Pardon; Bert Reubens"),
-            h2("Deciduous: Raphael Paut; François Warlop"),
-            h2("Shade Tree Advice: Clément Rigal; Philippe Vaast; Laurence Jassogne; Just van der Wolf; Gilles Gram; Mathilde LEPINE; Anais CARPENTE; Mai Phuong NGUYEN; Sigrun WAGNER; Sophie GRAEFE; Baptiste CAMUS; Juan Carlos Villalba Malaver"),
-            h2("SCSM : Birk Skyum Kristoffer Ronn-Anderson"),
-            h2("Czech database : Jan Weger (VUKOZ Průhonice), Lubos Úradníček and Antonín Martiník (MENDELU Brno)"),
-            h2("If you want to report bugs, or have suggestions for improvement, or want to contribute, please do so on github: https://github.com/euraf/agroforestreeadvice")
+            div(class = "centered-image-container",
+                img(src = "logoDigitAF_HR_500.png")),
+
+            h3("Contributors to code"),
+            tags$ul(
+              tags$li("Marie Gosme"),
+              tags$li("Clément Rigal"),
+              tags$li("Raphael Paut"),
+              tags$li("Birk Skyum")
+            ),
+
+            h3("Contributors to databases"),
+            h4("DENTRO"),
+            tags$ul(
+              tags$li("Sarah Carton"),
+              tags$li("Paul Pardon"),
+              tags$li("Bert Reubens")
+            ),
+            h4("Deciduous"),
+            tags$ul(
+              tags$li("Raphael Paut"),
+              tags$li("François Warlop")
+            ),
+            h4("Shade Tree Advice"),
+            tags$ul(
+              tags$li("Clément Rigal"),
+              tags$li("Philippe Vaast"),
+              tags$li("Laurence Jassogne"),
+              tags$li("Just van der Wolf"),
+              tags$li("Gilles Gram"),
+              tags$li("Mathilde LEPINE"),
+              tags$li("Anais CARPENTE"),
+              tags$li("Mai Phuong NGUYEN"),
+              tags$li("Sigrun WAGNER"),
+              tags$li("Sophie GRAEFE"),
+              tags$li("Baptiste CAMUS"),
+              tags$li("Juan Carlos Villalba Malaver")
+            ),
+            h4("SCSM"),
+            tags$ul(
+              tags$li("Birk Skyum Kristoffer Ronn-Anderson")
+            ),
+            h4("Czech database"),
+            tags$ul(
+              tags$li("Jan Weger (VUKOZ Průhonice)"),
+              tags$li("Lubos Úradníček (MENDELU Brno)"),
+              tags$li("Antonín Martiník (MENDELU Brno)")
+            ),
+            div(class = "spaced-text",
+              h4("If you want to report bugs, or have suggestions for improvement, or want to contribute, please do so on github:"),
+              a("https://github.com/euraf/agroforestreeadvice", href="https://github.com/euraf/agroforestreeadvice")
+            )
+
+              
+
     ),#fin infos
     tabItem(tabName = "tool", 
             tabsetPanel(
@@ -116,7 +169,18 @@ body <- dashboardBody(
                   background-color: #3c8dbc; 
                   color: white;}
         .box.box-solid.box-info {border-color: #3c8dbc;}
-          "))
+        ")),
+    
+    # center the image
+    tags$head(
+      tags$style(HTML("
+          .centered-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+      "))
+  ),
 
           
 ) #fin dashboardbody
