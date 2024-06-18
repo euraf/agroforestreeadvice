@@ -270,7 +270,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           control_type <- goodtranslations$objecttype[i]
           input_id <- ns(goodtranslations$criteria[i])
           current_value<-input[[input_id]]
-          print(paste("values of ", input_id, "=", paste(current_value, collapse=";")))
+          #print(paste("values of ", input_id, "=", paste(current_value, collapse=";")))
           choices <- strsplit(goodtranslations$choice[i], ",")[[1]]
           labchoices<-strsplit(goodtranslations$labelchoice[i], ",")[[1]]
           names(choices)<-labchoices

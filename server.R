@@ -119,6 +119,14 @@ server <- function(input, output, session) {
                             language= language,
                             data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM, compactobjectives=FALSE)
   
+  # Juiste Boom op de Juiste Plek ----
+  
+  moduleTabInterface_Server(id = "JBOJP",
+                            language= language,
+                            data=dataJBOJP, interface=interfaceJBOJP, functionSuitability=compute_suitability_JBOJP, compactobjectives=FALSE)
+  
+  
+  
   
 }
 

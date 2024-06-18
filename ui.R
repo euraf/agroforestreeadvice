@@ -55,7 +55,11 @@ body <- dashboardBody(
               
               tabPanel("SCSM (species climate suitability model)", value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
               
-              tabPanel("Czech tree selection tool", value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech))
+              tabPanel("Czech tree selection tool", value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech)),
+              
+              tabPanel("Juiste Boom op de Juiste Plek", value="JBOJP", moduleTabInterface_UI(id = "JBOJP", data = dataJBOJP, interface= interfaceJBOJP))
+              
+              
               
             )
     ),#fin tool
