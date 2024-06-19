@@ -3,7 +3,7 @@
 #"D:\\Mes_documents\\a_ABSys\\autreschercheurs\\BertReubens\\DigitAFtreeAdvice\\rsconnect\\shinyapps.io\\gosme"
 
 library(shiny)
-library(openxlsx)
+#library(openxlsx)
 library(ggplot2)
 #library(plotly)
 library(shinydashboard)

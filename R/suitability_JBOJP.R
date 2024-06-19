@@ -14,6 +14,7 @@ compute_suitability_JBOJP<-function(inputsdata=NULL,
                                    database, 
                                    interface,
                                    orderby="responsetrait"){
+  print("computing compute_suitability_JBOJP")
   
   dbfinal<-data.frame()
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
@@ -38,26 +39,42 @@ compute_suitability_JBOJP<-function(inputsdata=NULL,
   
   #database<-read.table("models/dataJBOJP.txt", sep="\t", header=TRUE)
   #interface<-read.table("models/interfaceJBOJP.txt", sep="\t", header=TRUE, fill=TRUE)
+  #actually the BigCriteria GeneralUse is used to filter the rows (necessary to avoid duplicated species)
+  #=> make it into radioButtons
+  userobjective<-inputsdata["Objective"]
+  database<-database[database[,make.names(userobjective)]==userobjective,] #select the lines corresponding to the user objective
   database$species<-ifelse(database$Onderstam=="", database$Botanisch, paste(database$Botanisch, database$Onderstam, sep="/"))
-  for( crit in setdiff(toto$criteria, "")){
+  if(length(unique(database$specie))!=nrow(database)) {warning("there are duplicated species"); print(database[,c("Botanisch", "Onderstam", "Toepassingen", "species")])}
+  
+  for( crit in setdiff(toto$criteria, c("", "Objective"))){
+    print(crit)
+    #browser()
     intercrit<-interface[interface$criteria==crit,]
     correspondingcolumns<-intersect(names(database), make.names(intercrit$choice))
-    datacrit<-database[,c("species", "Soort", "Botanisch", "Onderstam", correspondingcolumns)]
-    datacrit$BigCriteria<-unique(intercrit$BigCriteria)
-    datacrit$side<-unique(intercrit$side)
-    datacrit$value<-0
-    for(cc in correspondingcolumns) { #get all the conditions of the user that belong to this criteria
-      datacrit$value<-datacrit$value+2*(datacrit[,cc] %in% inputsdata) #if the user conditions are OK for the tree, add 2
-      numbers<-as.numeric(datacrit[,cc])
-      MITStoget<-ifelse(is.na(numbers), NA, paste("MITS", numbers, sep=""))
-      userMITS<-MITStoget
-      userMITS[!userMITS %in% inputsdata]<-NA #remove the MITS that the user did not declare having
-      datacrit$value[!is.na(userMITS)]<-datacrit$value[!is.na(userMITS)] + 1 #add 1 to the score when the user has the necessary MITS
+    if(length(correspondingcolumns)>0){ #this is one of the columns in green/red
+      datacrit<-database[,c("species", "Soort", "Botanisch", "Onderstam", correspondingcolumns)]
+      datacrit$BigCriteria<-unique(intercrit$BigCriteria)
+      datacrit$side<-unique(intercrit$side)
+      datacrit$value<-0
+      for(cc in correspondingcolumns) { #get all the conditions of the user that belong to this criteria
+        datacrit$value<-datacrit$value+2*(datacrit[,cc] %in% inputsdata) #if the user conditions are OK for the tree, add 2
+        numbers<-suppressWarnings(as.numeric(datacrit[,cc]))
+        MITStoget<-ifelse(is.na(numbers), NA, paste("MITS", numbers, sep=""))
+        userMITS<-MITStoget
+        userMITS[!userMITS %in% inputsdata]<-NA #remove the MITS that the user did not declare having
+        datacrit$value[!is.na(userMITS)]<-datacrit$value[!is.na(userMITS)] + 1 #add 1 to the score when the user has the necessary MITS
+      } 
+    }else if (crit=="Toepassingen"){
+      datacrit<-database[,c("species", "Soort", "Botanisch", "Onderstam", "Toepassingen")]
+      datacrit$BigCriteria<-unique(intercrit$BigCriteria)
+      datacrit$side<-unique(intercrit$side)
+      datacrit$value<-ifelse(datacrit$Toepassingen %in% inputsdata,2,0)
     }
-    print("dbfinal:")
-    print(names(dbfinal))
-    print("datacrit:")
-    print(names(datacrit))
+    
+    #print("dbfinal:")
+    #print(names(dbfinal))
+    #print("datacrit:")
+    #print(names(datacrit))
     dbfinal<-rbind(dbfinal, datacrit[,c("species", "Soort", "Botanisch", "Onderstam",
                                         "BigCriteria", "side", "value")])
   }
