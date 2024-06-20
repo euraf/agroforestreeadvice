@@ -59,7 +59,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
 # Fonction server du module ----
 #language is a reactive value from the main app
 moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE,
-                                      reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability) {
+                                      reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID) {
   
   moduleServer(
     id,
@@ -71,6 +71,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       req(language())  # Ensure 'language' is available
       # assign actual language
       actual_lang <<- paste0("choice_",as.character(language()))
+      reactive_ID(id)
       
       # information about the filters, calls modalDialog
       tagList(
