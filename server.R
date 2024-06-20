@@ -2,18 +2,56 @@
 server <- function(input, output, session) {
   #http://127.0.0.1:3775/?selected_language=cz&model=Czech this will just take the user to the desired tab, with the desired language
   #127.0.0.1:3775/?model=Czech&soil_water=soil_water_waterlogged&habitus=bush this triggers a modal dialog to download a txt file with the species scores for this particular set of conditions
-  
+  reactive_dataSuitability <- reactiveVal(data.frame(x = numeric(), y = numeric()))
+  reactive_plotSuitability <- reactiveVal(ggplot())
+
+  access_dataSuitability <- function() {
+    print("Suitability data accessed")
+    reactive_dataSuitability()
+  }
+
+  access_plotSuitability <- function() {
+    print("Suitability plot accessed")
+    reactive_plotSuitability()
+  }
+
+  create_combined_plot <- function() {
+    DataSuitability <- access_dataSuitability()
+    plotting <- access_plotSuitability()
+    
+    table_grob <- tableGrob(head(DataSuitability, 20))
+    
+    combined <- plot_grid(plotting, table_grob, ncol = 1, 
+                          rel_heights = c(3, 1))  # Simplified and corrected
+    
+    return(combined)
+  }
+
+  # Revised download handler, assuming it's within a Shiny server function
+  output$downloadSVGDENTRO <- downloadHandler(
+    filename = function() {
+      paste("plot_and_data-", Sys.Date(), ".svg", sep = "")
+    },
+    content = function(file) {
+      combined <- create_combined_plot()
+      # Use grid drawing functions for combined ggplot and grid objects
+      svg(file, width = 16, height = 20)
+      print(combined)
+      dev.off()
+    }
+  )
   
 
   observeEvent(input$selected_language, {
     # Print the selected language to the console
     print(paste("The selected language has changed to:", input$selected_language))
-    shiny.i18n::update_lang(input$selected_language)})
+    shiny.i18n::update_lang(input$selected_language)
+  })
     
-   # Reactive expression for the selected language
-    language <- reactive({
-      input$selected_language
-    })
+  # Reactive expression for the selected language - still needed for some functions
+  language <- reactive({
+    input$selected_language
+  })
 
 
   observe({
@@ -100,7 +138,8 @@ server <- function(input, output, session) {
   # Flanders tree advice ----
   moduleTabInterface_Server(id = "DENTRO",
                             language= language,
-                            data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE)
+                            data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE,
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
   # Shade tree advice ----
   moduleTabInterface_Server(id = "STA",
@@ -118,5 +157,6 @@ server <- function(input, output, session) {
                             language= language,
                             data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM, compactobjectives=FALSE)
   
+
 }
 
