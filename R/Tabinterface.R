@@ -487,7 +487,6 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         } else {datalong}
         }, options = list(
         scrollX = TRUE,
-        order = list(list(1, 'asc')), #order by the species column, which is an ordered factor
         language = list(
           search = i18n$t("Search:"),
           lengthMenu = i18n$t("Display _MENU_ entries"),
