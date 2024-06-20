@@ -27,7 +27,6 @@ library(DT)
 # interfaceCzech<-read.xlsx("models/Czech.xlsx", sheet="interface")
 
 #don't forget to save files as tab-delimited, with utf-8 encoding because of Czech special characters 
-#does not work because there are quotes, special characters etc.. and even in utf-8 czech characters are not properly read
 dataDENTRO<-read.table("models/dataDENTRO.txt", fileEncoding = "UTF-8", encoding = "UTF-8",fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceDENTRO<-read.table("models/interfaceDENTRO.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataSTA<-read.table("models/dataSTA.txt",  fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
@@ -40,8 +39,10 @@ dataCzech<-read.table("models/dataCzech.txt", fileEncoding = "UTF-8", encoding =
 interfaceCzech<-read.table("models/interfaceCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataJBOJP<-read.table("models/dataJBOJP.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceJBOJP<-read.table("models/interfaceJBOJP.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataDEHM<-read.table("models/dataDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceDEHM<-read.table("models/interfaceDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
-
+#remove commas in the interface because commas are used for separating values
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
 interfaceSTA[1:length(interfaceSTA)]<-lapply(interfaceSTA[1:length(interfaceSTA)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceDENTRO<-interfaceDENTRO[!is.na(interfaceDENTRO$side),]
@@ -52,6 +53,12 @@ interfaceSCSM<-interfaceSCSM[!is.na(interfaceSCSM$side),]
 interfaceSCSM[1:length(interfaceSCSM)]<-lapply(interfaceSCSM[1:length(interfaceSCSM)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceCzech<-interfaceCzech[!is.na(interfaceCzech$side),]
 interfaceCzech[1:length(interfaceCzech)]<-lapply(interfaceCzech[1:length(interfaceCzech)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceJBOJP<-interfaceJBOJP[!is.na(interfaceJBOJP$side),]
+interfaceJBOJP[1:length(interfaceJBOJP)]<-lapply(interfaceJBOJP[1:length(interfaceJBOJP)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceDEHM<-interfaceDEHM[!is.na(interfaceDEHM$side),]
+interfaceDEHM[1:length(interfaceDEHM)]<-lapply(interfaceDEHM[1:length(interfaceDEHM)], function(x) gsub(pattern=",", replacement=".", x=x))
+
+
 
 toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM), names(interfaceCzech)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
@@ -224,7 +231,7 @@ source("R/suitability_STA.R")
 source("R/suitability_SCSM.R")
 source("R/suitability_Czech.R")
 source("R/suitability_JBOJP.R")
-
+source("R/suitability_DEHM.R")
 
 
 

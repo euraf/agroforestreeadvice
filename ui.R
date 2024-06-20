@@ -48,6 +48,9 @@ body <- dashboardBody(
             tabsetPanel(
               id = "toolsTabset",
               tabPanel("Juiste Boom op de Juiste Plek", value="JBOJP", moduleTabInterface_UI(id = "JBOJP", data = dataJBOJP, interface= interfaceJBOJP)),
+              
+              tabPanel("German Hedgerow manager", value="DEHM", moduleTabInterface_UI(id = "DEHM", data = dataDEHM, interface= interfaceDEHM)),
+              
               tabPanel("Flanders Tree Advisor (DENTRO)", value="DENTRO", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
               tabPanel("Shade Tree Advice (coffee and cocoa)", value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 

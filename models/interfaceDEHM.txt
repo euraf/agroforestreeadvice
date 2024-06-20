@@ -1,0 +1,433 @@
+initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincriteria	BigCriteria_de	criteria_de	choice_de	BigCriteria_en	criteria_en	choice_en
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Seifenbaumgewächse (Sapindaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Seifenbaumgewächse (Sapindaceae)	Family affiliation	Family affiliation	Soap tree family (Sapindaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_seifenbaumgewächse (Sapindaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	seifenbaumgewächse (Sapindaceae)	Family affiliation	Family affiliation	Soap tree family (Sapindaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Birkengewächse (Betulaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Birkengewächse (Betulaceae)	Family affiliation	Family affiliation	Birch family (Betulaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_birkengewächse (Betulaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	birkengewächse (Betulaceae)	Family affiliation	Family affiliation	Birch family (Betulaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Rosengewächse (Rosaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Rosengewächse (Rosaceae)	Family affiliation	Family affiliation	Rosaceae
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Buchengewächse (Fagaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Buchengewächse (Fagaceae)	Family affiliation	Family affiliation	Beech family (Fagaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Hartriegelgewächse (Cornaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Hartriegelgewächse (Cornaceae)	Family affiliation	Family affiliation	Dogwood (Cornaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_hartriegelgewächse (Cornaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	hartriegelgewächse (Cornaceae)	Family affiliation	Family affiliation	Dogwood (Cornaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_rosengewächse (Rosaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	rosengewächse (Rosaceae)	Family affiliation	Family affiliation	Rosaceae
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Hülsenfrüchtler (Fabaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Hülsenfrüchtler (Fabaceae)	Family affiliation	Family affiliation	Legumes (Fabaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Ölweidengewächse (Elaeagnaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Ölweidengewächse (Elaeagnaceae)	Family affiliation	Family affiliation	Elaeagnaceae
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Spindelbaumgewächse (Celastraceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Spindelbaumgewächse (Celastraceae)	Family affiliation	Family affiliation	Spindle tree family (Celastraceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Kreuzdorngewächse (Rhamnaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Kreuzdorngewächse (Rhamnaceae)	Family affiliation	Family affiliation	Buckthorn family (Rhamnaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Ölbaumgewächse (Oleaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Ölbaumgewächse (Oleaceae)	Family affiliation	Family affiliation	Oleaceae
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Walnussgewächse (Juglandaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Walnussgewächse (Juglandaceae)	Family affiliation	Family affiliation	Walnut family (Juglandaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_ölbaumgewächse (Oleaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	ölbaumgewächse (Oleaceae)	Family affiliation	Family affiliation	Oleaceae
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Geißblattgewächse (Caprifoliaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Geißblattgewächse (Caprifoliaceae)	Family affiliation	Family affiliation	Honeysuckle family (Caprifoliaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Weidengewächse (Salicaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Weidengewächse (Salicaceae)	Family affiliation	Family affiliation	Willow family (Salicaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_?	information		Familienzugehörigkeit	Familienzugehörigkeit	?	Family affiliation	Family affiliation	?
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_weidengewächse (Salicaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	weidengewächse (Salicaceae)	Family affiliation	Family affiliation	Willow family (Salicaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_buchengewächse (Fagaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	buchengewächse (Fagaceae)	Family affiliation	Family affiliation	Beech family (Fagaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_kreuzdorngewächse (Rhamnaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	kreuzdorngewächse (Rhamnaceae)	Family affiliation	Family affiliation	Buckthorn family (Rhamnaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Stachelbeerengewächse (Grossulariaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Stachelbeerengewächse (Grossulariaceae)	Family affiliation	Family affiliation	Gooseberry family (Grossulariaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Moschuskrautgewächse (Adoxaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Moschuskrautgewächse (Adoxaceae)	Family affiliation	Family affiliation	Muskwort (Adoxaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_geißblattgewächse (Caprifoliaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	geißblattgewächse (Caprifoliaceae)	Family affiliation	Family affiliation	Honeysuckle family (Caprifoliaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Malvengewächse (Malvaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Malvengewächse (Malvaceae)	Family affiliation	Family affiliation	Mallow family (Malvaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_Ulmengewächse (Ulmaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	Ulmengewächse (Ulmaceae)	Family affiliation	Family affiliation	Elm family (Ulmaceae)
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_ulmengewächse (Ulmaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	ulmengewächse (Ulmaceae)	Family affiliation	Family affiliation	Ulmaceae
+	information		Familienzugehörigkeit	Familienzugehörigkeit	Familienzugehörigkeit_moschuskrautgewächse (Adoxaceae)	information		Familienzugehörigkeit	Familienzugehörigkeit	moschuskrautgewächse (Adoxaceae)	Family affiliation	Family affiliation	Muskwort (Adoxaceae)
+	effecttrait		Giftigkeit	Giftigkeit	Giftigkeit_?	selectInput		Giftigkeit	Giftigkeit	?	Virulence	Virulence	?
+	effecttrait		Giftigkeit	Giftigkeit	Giftigkeit_giftig	selectInput		Giftigkeit	Giftigkeit	giftig	Virulence	Virulence	poisonous
+	effecttrait		Giftigkeit	Giftigkeit	Giftigkeit_leicht giftig	selectInput		Giftigkeit	Giftigkeit	leicht giftig	Virulence	Virulence	slightly toxic
+	effecttrait		Giftigkeit	Giftigkeit	Giftigkeit_stark giftig	selectInput		Giftigkeit	Giftigkeit	stark giftig	Virulence	Virulence	Highly toxic
+	information		Herkunft	Herkunft	Herkunft_einheimisch	selectInput		Herkunft	Herkunft	einheimisch	Origin	Origin	native
+	information		Herkunft	Herkunft	Herkunft_Nordamerika	selectInput		Herkunft	Herkunft	Nordamerika	Origin	Origin	North America
+	information		Herkunft	Herkunft	Herkunft_Südeuropa/Mittelmeer	selectInput		Herkunft	Herkunft	Südeuropa/Mittelmeer	Origin	Origin	Southern Europe/Mediterranean
+	information		Herkunft	Herkunft	Herkunft_?	selectInput		Herkunft	Herkunft	?	Origin	Origin	?
+	information		Herkunft	Herkunft	Herkunft_Asien	selectInput		Herkunft	Herkunft	Asien	Origin	Origin	Asia
+	information		Herkunft	Herkunft	Herkunft_Nordeuropa	selectInput		Herkunft	Herkunft	Nordeuropa	Origin	Origin	Northern Europe
+	responsetrait		Frosthärte.x	Frosthärte.x	Frosthärte.x_?	numericInput		Frosthärte.x	Frosthärte.x	?	Frost Hardness.x	Frost Hardness.x	?
+	responsetrait		Holzwert	Holzwert	Holzwert_1.5	selectInput		Holzwert	Holzwert	1.5	Wood value	Wood value	1.5
+	responsetrait		Holzwert	Holzwert	Holzwert_1	selectInput		Holzwert	Holzwert	1	Wood value	Wood value	1
+	responsetrait		Holzwert	Holzwert	Holzwert_3	selectInput		Holzwert	Holzwert	3	Wood value	Wood value	3
+	responsetrait		Holzwert	Holzwert	Holzwert_5	selectInput		Holzwert	Holzwert	5	Wood value	Wood value	5
+	responsetrait		Holzwert	Holzwert	Holzwert_4	selectInput		Holzwert	Holzwert	4	Wood value	Wood value	4
+	responsetrait		Holzwert	Holzwert	Holzwert_3.4	selectInput		Holzwert	Holzwert	3.4	Wood value	Wood value	3.4
+	responsetrait		Holzwert	Holzwert	Holzwert_2	selectInput		Holzwert	Holzwert	2	Wood value	Wood value	2
+	responsetrait		Holzwert	Holzwert	Holzwert_?	selectInput		Holzwert	Holzwert	?	Wood value	Wood value	?
+	responsetrait		Holzwert	Holzwert	Holzwert_3.5	selectInput		Holzwert	Holzwert	3.5	Wood value	Wood value	3.5
+	responsetrait		Holzwert	Holzwert	Holzwert_1.4	selectInput		Holzwert	Holzwert	1.4	Wood value	Wood value	1.4
+	responsetrait		Holzwert	Holzwert	Holzwert_1.2	selectInput		Holzwert	Holzwert	1.2	Wood value	Wood value	1.2
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Spaltfrucht	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Spaltfrucht	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Split crop
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Kapselfrucht	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Kapselfrucht	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Capsule fruit
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Zapfen	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Zapfen	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Cone
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Apfelfrucht	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Apfelfrucht	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Pome
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Flügelnuß	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Flügelnuß	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Wingnut
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Nussfrucht	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Nussfrucht	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Nut fruit
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Steinfrucht	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Steinfrucht	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Drupe
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Hülsenfrüchte	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Hülsenfrüchte	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Pulses
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_-	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	-	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	-
+	responsetrait		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen_Beerenfrüchte	selectInput		Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Fruchtartkategorien.(Apfelfrucht,.Nussfrucht,.Steinfrucht.und.Zapfen	Beerenfrüchte	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Fruit type categories. (Apple fruit,. Nut fruit,. Stone fruit and cones	Berry fruits
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_1/1 2 j.v.S. 	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	1/1 2 j.v.S. 	Tree,.50-80.cm	Tree,.50-80.cm	1/1 2 j.v.S. 
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_?	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	?	Tree,.50-80.cm	Tree,.50-80.cm	
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_1/3 4 j.v.S. 	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	1/3 4 j.v.S. 	Tree,.50-80.cm	Tree,.50-80.cm	1/3 4 j.v.S. 
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_1/1(2) 2 o.3 j.v.S.	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	1/1(2) 2 o.3 j.v.S.	Tree,.50-80.cm	Tree,.50-80.cm	1/1(2) 2 o.3 j.v.S.
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_0/1 1 j. bew. Sth	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	0/1 1 j. bew. Sth	Tree,.50-80.cm	Tree,.50-80.cm	0/1 1 y. Sth
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_ 80-120	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	 80-120	Tree,.50-80.cm	Tree,.50-80.cm	80-120
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_1/1(2) 2 o. 3 j.v.S.	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	1/1(2) 2 o. 3 j.v.S.	Tree,.50-80.cm	Tree,.50-80.cm	1/1(2) 2 or 3 j.v.S.
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_2/0# 2 j.S.gest.	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	2/0# 2 j.S.gest.	Tree,.50-80.cm	Tree,.50-80.cm	2/0# 2 j.S.gest.
+	responsetrait		Baum,.50-80.cm	Baum,.50-80.cm	Baum,.50-80.cm_ 50-80	selectInput		Baum,.50-80.cm	Baum,.50-80.cm	 50-80	Tree,.50-80.cm	Tree,.50-80.cm	50-80
+	responsetrait		100.St..€	100.St..€	100.St..€_?	numericInput		100.St..€	100.St..€	?	100.St.. €	100.St.. €	?
+	responsetrait		X5	X5	X5_l. Hei. 100-125	selectInput		X5	X5	l. Hei. 100-125	X5	X5	l. Hei. 100-125
+	responsetrait		X5	X5	X5_?	selectInput		X5	X5	?	X5	X5	?
+	responsetrait		X5	X5	X5_l. Hei. 100-150	selectInput		X5	X5	l. Hei. 100-150	X5	X5	l. Hei. 100-150
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_317.95999999999998	selectInput		100.St..€.1	100.St..€.1	317.95999999999998	100.St.. €.1	100.St.. €.1	317.96
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_?	selectInput		100.St..€.1	100.St..€.1	?	100.St.. €.1	100.St.. €.1	?
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_279.5	selectInput		100.St..€.1	100.St..€.1	279.5	100.St.. €.1	100.St.. €.1	279.5
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_309.72000000000003	selectInput		100.St..€.1	100.St..€.1	309.72000000000003	100.St.. €.1	100.St.. €.1	309.72
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_247.53	selectInput		100.St..€.1	100.St..€.1	247.53	100.St.. €.1	100.St.. €.1	247.53
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_235.37	selectInput		100.St..€.1	100.St..€.1	235.37	100.St.. €.1	100.St.. €.1	235.37
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_317.49	selectInput		100.St..€.1	100.St..€.1	317.49	100.St.. €.1	100.St.. €.1	317.49
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_1515.92	selectInput		100.St..€.1	100.St..€.1	1515.92	100.St.. €.1	100.St.. €.1	1515.92
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_ 	selectInput		100.St..€.1	100.St..€.1	 	100.St.. €.1	100.St.. €.1	?
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_385.71	selectInput		100.St..€.1	100.St..€.1	385.71	100.St.. €.1	100.St.. €.1	385.71
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_293.17	selectInput		100.St..€.1	100.St..€.1	293.17	100.St.. €.1	100.St.. €.1	293.17
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_560.04	selectInput		100.St..€.1	100.St..€.1	560.04	100.St.. €.1	100.St.. €.1	560.04
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_350.85	selectInput		100.St..€.1	100.St..€.1	350.85	100.St.. €.1	100.St.. €.1	350.85
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_654.54999999999995	selectInput		100.St..€.1	100.St..€.1	654.54999999999995	100.St.. €.1	100.St.. €.1	654.55
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_643.08000000000004	selectInput		100.St..€.1	100.St..€.1	643.08000000000004	100.St.. €.1	100.St.. €.1	643.08
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_414.55	selectInput		100.St..€.1	100.St..€.1	414.55	100.St.. €.1	100.St.. €.1	414.55
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_300.69	selectInput		100.St..€.1	100.St..€.1	300.69	100.St.. €.1	100.St.. €.1	300.69
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_368.34	selectInput		100.St..€.1	100.St..€.1	368.34	100.St.. €.1	100.St.. €.1	368.34
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_1237.8599999999999	selectInput		100.St..€.1	100.St..€.1	1237.8599999999999	100.St.. €.1	100.St.. €.1	1237.86
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_435.75	selectInput		100.St..€.1	100.St..€.1	435.75	100.St.. €.1	100.St.. €.1	435.75
+	responsetrait		100.St..€.1	100.St..€.1	100.St..€.1_309.38	selectInput		100.St..€.1	100.St..€.1	309.38	100.St.. €.1	100.St.. €.1	309.38
+	responsetrait		Strauch,.30-50.cm	Strauch,.30-50.cm	Strauch,.30-50.cm_1/0 1 j.S. 	selectInput		Strauch,.30-50.cm	Strauch,.30-50.cm	1/0 1 j.S. 	Shrub,.30-50.cm	Shrub,.30-50.cm	1/0 1 y.o. 
+	responsetrait		Strauch,.30-50.cm	Strauch,.30-50.cm	Strauch,.30-50.cm_?	selectInput		Strauch,.30-50.cm	Strauch,.30-50.cm	?	Shrub,.30-50.cm	Shrub,.30-50.cm	
+	responsetrait		Strauch,.30-50.cm	Strauch,.30-50.cm	Strauch,.30-50.cm_1 j. S 1/0 P	selectInput		Strauch,.30-50.cm	Strauch,.30-50.cm	1 j. S 1/0 P	Shrub,.30-50.cm	Shrub,.30-50.cm	1 y. S 1/0 P
+	responsetrait		Strauch,.30-50.cm	Strauch,.30-50.cm	Strauch,.30-50.cm_0/1 1 j. bew. Sth.	selectInput		Strauch,.30-50.cm	Strauch,.30-50.cm	0/1 1 j. bew. Sth.	Shrub,.30-50.cm	Shrub,.30-50.cm	0/1 1 y. Sth.
+	responsetrait		Strauch,.30-50.cm	Strauch,.30-50.cm	Strauch,.30-50.cm_1 j.S. 1/0	selectInput		Strauch,.30-50.cm	Strauch,.30-50.cm	1 j.S. 1/0	Shrub,.30-50.cm	Shrub,.30-50.cm	1 y.S. 1/0
+	responsetrait		Strauch,.30-50.cm	Strauch,.30-50.cm	Strauch,.30-50.cm_0/1 1 j. bew. Sth	selectInput		Strauch,.30-50.cm	Strauch,.30-50.cm	0/1 1 j. bew. Sth	Shrub,.30-50.cm	Shrub,.30-50.cm	0/1 1 y. Sth
+	responsetrait		Strauch,.30-50.cm	Strauch,.30-50.cm	Strauch,.30-50.cm_ 30-50	selectInput		Strauch,.30-50.cm	Strauch,.30-50.cm	 30-50	Shrub,.30-50.cm	Shrub,.30-50.cm	30-50
+	responsetrait		Habitus	Habitus	Habitus_lockerkronig	selectInput		Habitus	Habitus	lockerkronig	Habitus	Habitus	loose-crowned
+	responsetrait		Habitus	Habitus	Habitus_breitkronig	selectInput		Habitus	Habitus	breitkronig	Habitus	Habitus	broad-crowned
+	responsetrait		Habitus	Habitus	Habitus_ breitkronig	selectInput		Habitus	Habitus	 breitkronig	Habitus	Habitus	broad-crowned
+	responsetrait		Habitus	Habitus	Habitus_ breitkronig 	selectInput		Habitus	Habitus	 breitkronig 	Habitus	Habitus	broad-crowned 
+	responsetrait		Habitus	Habitus	Habitus_aufrecht	selectInput		Habitus	Habitus	aufrecht	Habitus	Habitus	erect
+	responsetrait		Habitus	Habitus	Habitus_breitbuschig 	selectInput		Habitus	Habitus	breitbuschig 	Habitus	Habitus	Broad bush 
+	responsetrait		Habitus	Habitus	Habitus_ aufrecht	selectInput		Habitus	Habitus	 aufrecht	Habitus	Habitus	erect
+	responsetrait		Habitus	Habitus	Habitus_aufrecht 	selectInput		Habitus	Habitus	aufrecht 	Habitus	Habitus	erect 
+	responsetrait		Habitus	Habitus	Habitus_breitkronig 	selectInput		Habitus	Habitus	breitkronig 	Habitus	Habitus	broad-crowned 
+	responsetrait		Habitus	Habitus	Habitus_rundlich	selectInput		Habitus	Habitus	rundlich	Habitus	Habitus	chubby
+	responsetrait		Habitus	Habitus	Habitus_ breitbuschig 	selectInput		Habitus	Habitus	 breitbuschig 	Habitus	Habitus	Broad bush 
+	responsetrait		Habitus	Habitus	Habitus_straff aufrecht 	selectInput		Habitus	Habitus	straff aufrecht 	Habitus	Habitus	taut upright 
+	responsetrait		Habitus	Habitus	Habitus_straff aufrecht	selectInput		Habitus	Habitus	straff aufrecht	Habitus	Habitus	taut upright
+	responsetrait		Habitus	Habitus	Habitus_ stark überhägend 	selectInput		Habitus	Habitus	 stark überhägend 	Habitus	Habitus	strongly overhanging 
+	responsetrait		Habitus	Habitus	Habitus_breitbuschig	selectInput		Habitus	Habitus	breitbuschig	Habitus	Habitus	Broad bush
+	responsetrait		Habitus	Habitus	Habitus_ stark überhängend 	selectInput		Habitus	Habitus	 stark überhängend 	Habitus	Habitus	strongly overhanging 
+	responsetrait		Habitus	Habitus	Habitus_?	selectInput		Habitus	Habitus	?	Habitus	Habitus	?
+	responsetrait		Habitus	Habitus	Habitus_ breitbuschig	selectInput		Habitus	Habitus	 breitbuschig	Habitus	Habitus	Broad bush
+	responsetrait		Habitus	Habitus	Habitus_lockerkronig 	selectInput		Habitus	Habitus	lockerkronig 	Habitus	Habitus	loose-crowned 
+	responsetrait		Habitus	Habitus	Habitus_ breitbüschig	selectInput		Habitus	Habitus	 breitbüschig	Habitus	Habitus	broad bushes
+	responsetrait		Habitus	Habitus	Habitus_rundlich 	selectInput		Habitus	Habitus	rundlich 	Habitus	Habitus	chubby 
+	responsetrait		Habitus	Habitus	Habitus_ aufrecht 	selectInput		Habitus	Habitus	 aufrecht 	Habitus	Habitus	erect 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_10 bis 15	selectInput		Höhe,.m	Höhe,.m	10 bis 15	Height,.m	Height,.m	10 to 15
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_15 bis 20	selectInput		Höhe,.m	Höhe,.m	15 bis 20	Height,.m	Height,.m	15 to 20
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_20 bis 30	selectInput		Höhe,.m	Höhe,.m	20 bis 30	Height,.m	Height,.m	20 to 30
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_bis 25 	selectInput		Höhe,.m	Höhe,.m	bis 25 	Height,.m	Height,.m	up to 25 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_10 bis 20	selectInput		Höhe,.m	Höhe,.m	10 bis 20	Height,.m	Height,.m	10 to 20
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_6 bis 10	selectInput		Höhe,.m	Höhe,.m	6 bis 10	Height,.m	Height,.m	6 to 10
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_4 bis 6 	selectInput		Höhe,.m	Höhe,.m	4 bis 6 	Height,.m	Height,.m	4 to 6 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_18 bis 25 	selectInput		Höhe,.m	Höhe,.m	18 bis 25 	Height,.m	Height,.m	18 to 25 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_10 bis 20 	selectInput		Höhe,.m	Höhe,.m	10 bis 20 	Height,.m	Height,.m	10 to 20 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_15 bis 30 	selectInput		Höhe,.m	Höhe,.m	15 bis 30 	Height,.m	Height,.m	15 to 30 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_4 bis 7	selectInput		Höhe,.m	Höhe,.m	4 bis 7	Height,.m	Height,.m	4 to 7
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_5 bis 7 	selectInput		Höhe,.m	Höhe,.m	5 bis 7 	Height,.m	Height,.m	5 to 7 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_2 bis 6	selectInput		Höhe,.m	Höhe,.m	2 bis 6	Height,.m	Height,.m	2 to 6
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_bis 2 	selectInput		Höhe,.m	Höhe,.m	bis 2 	Height,.m	Height,.m	up to 2 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_2 bis 6 	selectInput		Höhe,.m	Höhe,.m	2 bis 6 	Height,.m	Height,.m	2 to 6 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_25 bis 30 	selectInput		Höhe,.m	Höhe,.m	25 bis 30 	Height,.m	Height,.m	25 to 30 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_?	selectInput		Höhe,.m	Höhe,.m	?	Height,.m	Height,.m	?
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_25 bis 40	selectInput		Höhe,.m	Höhe,.m	25 bis 40	Height,.m	Height,.m	25 to 40
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_2 bis 5 	selectInput		Höhe,.m	Höhe,.m	2 bis 5 	Height,.m	Height,.m	2 to 5 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_2 bis 3	selectInput		Höhe,.m	Höhe,.m	2 bis 3	Height,.m	Height,.m	2 to 3
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_20 bis 25 	selectInput		Höhe,.m	Höhe,.m	20 bis 25 	Height,.m	Height,.m	20 to 25 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_20 bis 35 	selectInput		Höhe,.m	Höhe,.m	20 bis 35 	Height,.m	Height,.m	20 to 35 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_5 bis 15 	selectInput		Höhe,.m	Höhe,.m	5 bis 15 	Height,.m	Height,.m	5 to 15 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_1 bis 3	selectInput		Höhe,.m	Höhe,.m	1 bis 3	Height,.m	Height,.m	1 to 3
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_8 bis 12	selectInput		Höhe,.m	Höhe,.m	8 bis 12	Height,.m	Height,.m	8 to 12
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_25 bis 35	selectInput		Höhe,.m	Höhe,.m	25 bis 35	Height,.m	Height,.m	25 to 35
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_bis 3 	selectInput		Höhe,.m	Höhe,.m	bis 3 	Height,.m	Height,.m	up to 3 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_1	selectInput		Höhe,.m	Höhe,.m	1	Height,.m	Height,.m	1
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_5 bis 3	selectInput		Höhe,.m	Höhe,.m	5 bis 3	Height,.m	Height,.m	5 to 3
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_5 bis 8	selectInput		Höhe,.m	Höhe,.m	5 bis 8	Height,.m	Height,.m	5 to 8
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_bis 5	selectInput		Höhe,.m	Höhe,.m	bis 5	Height,.m	Height,.m	up to 5
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_10 bis 15 	selectInput		Höhe,.m	Höhe,.m	10 bis 15 	Height,.m	Height,.m	10 to 15 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_3 bis 5	selectInput		Höhe,.m	Höhe,.m	3 bis 5	Height,.m	Height,.m	3 to 5
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_3 bis 7	selectInput		Höhe,.m	Höhe,.m	3 bis 7	Height,.m	Height,.m	3 to 7
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_2 bis 4	selectInput		Höhe,.m	Höhe,.m	2 bis 4	Height,.m	Height,.m	2 to 4
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_6 bis 12 	selectInput		Höhe,.m	Höhe,.m	6 bis 12 	Height,.m	Height,.m	6 to 12 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_10 bis 12 	selectInput		Höhe,.m	Höhe,.m	10 bis 12 	Height,.m	Height,.m	10 to 12 
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_30 bis 35	selectInput		Höhe,.m	Höhe,.m	30 bis 35	Height,.m	Height,.m	30 to 35
+	responsetrait		Höhe,.m	Höhe,.m	Höhe,.m_15 bis 25	selectInput		Höhe,.m	Höhe,.m	15 bis 25	Height,.m	Height,.m	15 to 25
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_5 bis 7	selectInput		Breite,.m	Breite,.m	5 bis 7	Width,.m	Width,.m	5 to 7
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_10 bis 15 	selectInput		Breite,.m	Breite,.m	10 bis 15 	Width,.m	Width,.m	10 to 15 
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_15 bis 20	selectInput		Breite,.m	Breite,.m	15 bis 20	Width,.m	Width,.m	15 to 20
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_8 bis 12 	selectInput		Breite,.m	Breite,.m	8 bis 12 	Width,.m	Width,.m	8 to 12 
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_4 bis 8	selectInput		Breite,.m	Breite,.m	4 bis 8	Width,.m	Width,.m	4 to 8
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_6 bis 7	selectInput		Breite,.m	Breite,.m	6 bis 7	Width,.m	Width,.m	6 to 7
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_7 bis 12 	selectInput		Breite,.m	Breite,.m	7 bis 12 	Width,.m	Width,.m	7 to 12 
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_8 bis 12	selectInput		Breite,.m	Breite,.m	8 bis 12	Width,.m	Width,.m	8 to 12
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_12 bis 20	selectInput		Breite,.m	Breite,.m	12 bis 20	Width,.m	Width,.m	12 to 20
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_4 bis 7	selectInput		Breite,.m	Breite,.m	4 bis 7	Width,.m	Width,.m	4 to 7
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_4 bis 6	selectInput		Breite,.m	Breite,.m	4 bis 6	Width,.m	Width,.m	4 to 6
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_2 bis 5	selectInput		Breite,.m	Breite,.m	2 bis 5	Width,.m	Width,.m	2 to 5
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_3 bis 7	selectInput		Breite,.m	Breite,.m	3 bis 7	Width,.m	Width,.m	3 to 7
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_bis 2	selectInput		Breite,.m	Breite,.m	bis 2	Width,.m	Width,.m	up to 2
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_1	selectInput		Breite,.m	Breite,.m	1	Width,.m	Width,.m	1
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_5 bis 4	selectInput		Breite,.m	Breite,.m	5 bis 4	Width,.m	Width,.m	5 to 4
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_25 bis 30	selectInput		Breite,.m	Breite,.m	25 bis 30	Width,.m	Width,.m	25 to 30
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_?	selectInput		Breite,.m	Breite,.m	?	Width,.m	Width,.m	?
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_20 bis 30	selectInput		Breite,.m	Breite,.m	20 bis 30	Width,.m	Width,.m	20 to 30
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_2 bis 3	selectInput		Breite,.m	Breite,.m	2 bis 3	Width,.m	Width,.m	2 to 3
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_5 bis 8	selectInput		Breite,.m	Breite,.m	5 bis 8	Width,.m	Width,.m	5 to 8
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_15 bis 18	selectInput		Breite,.m	Breite,.m	15 bis 18	Width,.m	Width,.m	15 to 18
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_7 bis 10	selectInput		Breite,.m	Breite,.m	7 bis 10	Width,.m	Width,.m	7 to 10
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_3 bis 6	selectInput		Breite,.m	Breite,.m	3 bis 6	Width,.m	Width,.m	3 to 6
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_5 bis 12	selectInput		Breite,.m	Breite,.m	5 bis 12	Width,.m	Width,.m	5 to 12
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_2 bis 4	selectInput		Breite,.m	Breite,.m	2 bis 4	Width,.m	Width,.m	2 to 4
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_12 bis 18	selectInput		Breite,.m	Breite,.m	12 bis 18	Width,.m	Width,.m	12 to 18
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_bis 3	selectInput		Breite,.m	Breite,.m	bis 3	Width,.m	Width,.m	up to 3
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_5 bis 3	selectInput		Breite,.m	Breite,.m	5 bis 3	Width,.m	Width,.m	5 to 3
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_bis 5	selectInput		Breite,.m	Breite,.m	bis 5	Width,.m	Width,.m	up to 5
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_3 bis 5	selectInput		Breite,.m	Breite,.m	3 bis 5	Width,.m	Width,.m	3 to 5
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_3	selectInput		Breite,.m	Breite,.m	3	Width,.m	Width,.m	3
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_5 bis 5	selectInput		Breite,.m	Breite,.m	5 bis 5	Width,.m	Width,.m	5 to 5
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_10 bis 12	selectInput		Breite,.m	Breite,.m	10 bis 12	Width,.m	Width,.m	10 to 12
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_18 bis 25	selectInput		Breite,.m	Breite,.m	18 bis 25	Width,.m	Width,.m	18 to 25
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_bis 20	selectInput		Breite,.m	Breite,.m	bis 20	Width,.m	Width,.m	up to 20
+	responsetrait		Breite,.m	Breite,.m	Breite,.m_10 bis 20	selectInput		Breite,.m	Breite,.m	10 bis 20	Width,.m	Width,.m	10 to 20
+	responsetrait		X6	X6	X6_?	selectInput		X6	X6	?	X6	X6	?
+	responsetrait		X6	X6	X6_s	selectInput		X6	X6	s	X6	X6	s
+	responsetrait		Wurzel	Wurzel	Wurzel_herzwurzler 	selectInput		Wurzel	Wurzel	herzwurzler 	Root	Root	Herzwurzler 
+	responsetrait		Wurzel	Wurzel	Wurzel_Flachwurzler	selectInput		Wurzel	Wurzel	Flachwurzler	Root	Root	Shallow-rooted
+	responsetrait		Wurzel	Wurzel	Wurzel_Flachwurler	selectInput		Wurzel	Wurzel	Flachwurler	Root	Root	Flachwurler
+	responsetrait		Wurzel	Wurzel	Wurzel_ Herzwurzler	selectInput		Wurzel	Wurzel	 Herzwurzler	Root	Root	Herzwurzler
+	responsetrait		Wurzel	Wurzel	Wurzel_Herzwurzler	selectInput		Wurzel	Wurzel	Herzwurzler	Root	Root	Herzwurzler
+	responsetrait		Wurzel	Wurzel	Wurzel_ Tiefwurzler	selectInput		Wurzel	Wurzel	 Tiefwurzler	Root	Root	Deep-rooted
+	responsetrait		Wurzel	Wurzel	Wurzel_Flachwurzler 	selectInput		Wurzel	Wurzel	Flachwurzler 	Root	Root	Shallow-rooted 
+	responsetrait		Wurzel	Wurzel	Wurzel_Flachwurler 	selectInput		Wurzel	Wurzel	Flachwurler 	Root	Root	Flachwurler 
+	responsetrait		Wurzel	Wurzel	Wurzel_Herzwurzler 	selectInput		Wurzel	Wurzel	Herzwurzler 	Root	Root	Herzwurzler 
+	responsetrait		Wurzel	Wurzel	Wurzel_Tiefwurzler 	selectInput		Wurzel	Wurzel	Tiefwurzler 	Root	Root	Deep-rooted 
+	responsetrait		Wurzel	Wurzel	Wurzel_ Herzwurzler 	selectInput		Wurzel	Wurzel	 Herzwurzler 	Root	Root	Herzwurzler 
+	responsetrait		Wurzel	Wurzel	Wurzel_?	selectInput		Wurzel	Wurzel	?	Root	Root	?
+	responsetrait		Wurzel	Wurzel	Wurzel_Flachwurzlwe	selectInput		Wurzel	Wurzel	Flachwurzlwe	Root	Root	Flatroot
+	responsetrait		Wurzel	Wurzel	Wurzel_0	information		Wurzel	Wurzel	0	Root	Root	0
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_herzwurzler 	selectInput		Wurzelsystem	Wurzelsystem	herzwurzler 	Root system	Root system	Herzwurzler 
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_Flachwurzler	selectInput		Wurzelsystem	Wurzelsystem	Flachwurzler	Root system	Root system	Shallow-rooted
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_Flachwurler	selectInput		Wurzelsystem	Wurzelsystem	Flachwurler	Root system	Root system	Flachwurler
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_ Herzwurzler	selectInput		Wurzelsystem	Wurzelsystem	 Herzwurzler	Root system	Root system	Herzwurzler
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_Herzwurzler	selectInput		Wurzelsystem	Wurzelsystem	Herzwurzler	Root system	Root system	Herzwurzler
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_ Tiefwurzler	selectInput		Wurzelsystem	Wurzelsystem	 Tiefwurzler	Root system	Root system	Deep-rooted
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_Flachwurzler 	selectInput		Wurzelsystem	Wurzelsystem	Flachwurzler 	Root system	Root system	Shallow-rooted 
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_Flachwurler 	selectInput		Wurzelsystem	Wurzelsystem	Flachwurler 	Root system	Root system	Flachwurler 
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_Herzwurzler 	selectInput		Wurzelsystem	Wurzelsystem	Herzwurzler 	Root system	Root system	Herzwurzler 
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_Tiefwurzler 	selectInput		Wurzelsystem	Wurzelsystem	Tiefwurzler 	Root system	Root system	Deep-rooted 
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_ Herzwurzler 	selectInput		Wurzelsystem	Wurzelsystem	 Herzwurzler 	Root system	Root system	Herzwurzler 
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_?	selectInput		Wurzelsystem	Wurzelsystem	?	Root system	Root system	?
+	responsetrait		Wurzelsystem	Wurzelsystem	Wurzelsystem_Flachwurzlwe	selectInput		Wurzelsystem	Wurzelsystem	Flachwurzlwe	Root system	Root system	Flatroot
+	responsetrait		Frosthärte.y	Frosthärte.y	Frosthärte.y_Frosthart	selectInput		Frosthärte.y	Frosthärte.y	Frosthart	Frost Hardiness.y	Frost Hardiness.y	Frost hardy
+	responsetrait		Frosthärte.y	Frosthärte.y	Frosthärte.y_?	selectInput		Frosthärte.y	Frosthärte.y	?	Frost Hardiness.y	Frost Hardiness.y	?
+	responsetrait		Frosthärte.y	Frosthärte.y	Frosthärte.y_Frosthart 	selectInput		Frosthärte.y	Frosthärte.y	Frosthart 	Frost Hardiness.y	Frost Hardiness.y	Frost hardy 
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_6	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	6	Living area.of.woody plants	Living area.of.woody plants	6
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_2	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	2	Living area.of.woody plants	Living area.of.woody plants	2
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_3	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	3	Living area.of.woody plants	Living area.of.woody plants	3
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_7	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	7	Living area.of.woody plants	Lebensbereich.der.Gehölze	7
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_-	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	-	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	-
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_1	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	1	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	1
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_9	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	9	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	9
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_4	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	4	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	4
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_5	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	5	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	5
+	responsetrait		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze_?	selectInput		Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	?	Lebensbereich.der.Gehölze	Lebensbereich.der.Gehölze	?
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_1	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	1	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	1
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_2	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	2	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	2
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_3	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	3	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	3
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_5	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	5	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	5
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_9	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	9	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	9
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_10	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	10	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	10
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_11	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	11	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	11
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_12	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	12	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	12
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_13	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	13	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	13
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_15	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	15	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	15
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_16	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	16	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	16
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_17	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	17	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	17
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_21	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	21	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	21
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_22	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	22	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	22
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_23	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	23	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	23
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_?	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	?	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_8	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	8	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	8
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_19	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	19	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	19
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_6	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	6	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	6
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_7	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	7	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	7
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_20	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	20	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	20
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_4	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	4	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	4
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_14	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	14	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	14
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_18	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	18	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	18
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_ 15	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	 15	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	15
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)_19 	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	19 	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Feldhecken.und.Feldgehölzen)	19
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)_4	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	4	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	4
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)_5	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	5	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	5
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)_?	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	?	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)_2	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	2	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	2
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)_3	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	3	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	3
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)_1	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	1	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	1
+	responsetrait		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)_ 5	selectInput		Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	 5	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	Zugehörigkeit.zu.Pflanzengesellschaften.und.Verbänden.(Gehölze.an.Fließgewässer.und.in.Auen)	5
+	responsetrait		Bodenreaktion	Bodenreaktion	Bodenreaktion_alkalisch	selectInput		Bodenreaktion	Bodenreaktion	alkalisch	Bodenreaktion	Bodenreaktion	alkalisch
+	responsetrait		Bodenreaktion	Bodenreaktion	Bodenreaktion_-	selectInput		Bodenreaktion	Bodenreaktion	-	Bodenreaktion	Bodenreaktion	-
+	responsetrait		Bodenreaktion	Bodenreaktion	Bodenreaktion_sauer	selectInput		Bodenreaktion	Bodenreaktion	sauer	Bodenreaktion	Bodenreaktion	sauer
+	responsetrait		Bodenreaktion	Bodenreaktion	Bodenreaktion_?	selectInput		Bodenreaktion	Bodenreaktion	?	Bodenreaktion	Bodenreaktion	?
+	responsetrait		Substrat	Substrat	Substrat_leicht (sandig)	selectInput		Substrat	Substrat	leicht (sandig)	Substrat	Substrat	leicht (sandig)
+	responsetrait		Substrat	Substrat	Substrat_schwer (tonig)	selectInput		Substrat	Substrat	schwer (tonig)	Substrat	Substrat	schwer (tonig)
+	responsetrait		Substrat	Substrat	Substrat_humos 	selectInput		Substrat	Substrat	humos 	Substrat	Substrat	humos 
+	responsetrait		Substrat	Substrat	Substrat_leicht (sandig) 	selectInput		Substrat	Substrat	leicht (sandig) 	Substrat	Substrat	leicht (sandig) 
+	responsetrait		Substrat	Substrat	Substrat_schwer (tonig) 	selectInput		Substrat	Substrat	schwer (tonig) 	Substrat	Substrat	schwer (tonig) 
+	responsetrait		Substrat	Substrat	Substrat_durchlässig 	selectInput		Substrat	Substrat	durchlässig 	Substrat	Substrat	durchlässig 
+	responsetrait		Substrat	Substrat	Substrat_?	selectInput		Substrat	Substrat	?	Substrat	Substrat	?
+	responsetrait		Substrat	Substrat	Substrat_humos	selectInput		Substrat	Substrat	humos	Substrat	Substrat	humos
+	responsetrait		Bodenfeuchte	Bodenfeuchte	Bodenfeuchte_feucht bis frisch	selectInput		Bodenfeuchte	Bodenfeuchte	feucht bis frisch	Bodenfeuchte	Bodenfeuchte	feucht bis frisch
+	responsetrait		Bodenfeuchte	Bodenfeuchte	Bodenfeuchte_trocken	selectInput		Bodenfeuchte	Bodenfeuchte	trocken	Bodenfeuchte	Bodenfeuchte	trocken
+	responsetrait		Bodenfeuchte	Bodenfeuchte	Bodenfeuchte_feucht bis frisch 	selectInput		Bodenfeuchte	Bodenfeuchte	feucht bis frisch 	Bodenfeuchte	Bodenfeuchte	feucht bis frisch 
+	responsetrait		Bodenfeuchte	Bodenfeuchte	Bodenfeuchte_trocken 	selectInput		Bodenfeuchte	Bodenfeuchte	trocken 	Bodenfeuchte	Bodenfeuchte	trocken 
+	responsetrait		Bodenfeuchte	Bodenfeuchte	Bodenfeuchte_-	selectInput		Bodenfeuchte	Bodenfeuchte	-	Bodenfeuchte	Bodenfeuchte	-
+	responsetrait		Bodenfeuchte	Bodenfeuchte	Bodenfeuchte_?	selectInput		Bodenfeuchte	Bodenfeuchte	?	Bodenfeuchte	Bodenfeuchte	?
+	responsetrait		Bodenfeuchte	Bodenfeuchte	Bodenfeuchte_feucht bsi frisch	selectInput		Bodenfeuchte	Bodenfeuchte	feucht bsi frisch	Bodenfeuchte	Bodenfeuchte	feucht bsi frisch
+	responsetrait		Besonnung	Besonnung	Besonnung_sonnig	selectInput		Besonnung	Besonnung	sonnig	Besonnung	Besonnung	sonnig
+	responsetrait		Besonnung	Besonnung	Besonnung_halbschattig 	selectInput		Besonnung	Besonnung	halbschattig 	Besonnung	Besonnung	halbschattig 
+	responsetrait		Besonnung	Besonnung	Besonnung_halbschattig	selectInput		Besonnung	Besonnung	halbschattig	Besonnung	Besonnung	halbschattig
+	responsetrait		Besonnung	Besonnung	Besonnung_schattig	selectInput		Besonnung	Besonnung	schattig	Besonnung	Besonnung	schattig
+	responsetrait		Besonnung	Besonnung	Besonnung_?	selectInput		Besonnung	Besonnung	?	Besonnung	Besonnung	?
+	responsetrait		Besonnung	Besonnung	Besonnung_ halbschattig 	selectInput		Besonnung	Besonnung	 halbschattig 	Besonnung	Besonnung	halbschattig 
+	responsetrait		Besonnung	Besonnung	Besonnung_sonnig 	selectInput		Besonnung	Besonnung	sonnig 	Besonnung	Besonnung	sonnig 
+	responsetrait		Besonnung	Besonnung	Besonnung_-	selectInput		Besonnung	Besonnung	-	Besonnung	Besonnung	-
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_8	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	8	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	8
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_9	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	9	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	9
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_10	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	10	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	10
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_11	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	11	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	11
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 10	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 10	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	10
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 11	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 11	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	11
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 12	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 12	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	12
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 1	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 1	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	1
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 2	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 2	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	2
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 9	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 9	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	9
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_7	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	7	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	7
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 8	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 8	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	8
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_?	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	?	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	?
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_5	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	5	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	5
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 6	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 6	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	6
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_4	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	4	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	4
+	responsetrait		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate_ 5	selectInput		Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	 5	Fruchtbesatz,.Monate	Fruchtbesatz,.Monate	5
+	responsetrait		Fruchtschmuck	Fruchtschmuck	Fruchtschmuck_ja	selectInput		Fruchtschmuck	Fruchtschmuck	ja	Fruchtschmuck	Fruchtschmuck	ja
+	responsetrait		Fruchtschmuck	Fruchtschmuck	Fruchtschmuck_ja 	selectInput		Fruchtschmuck	Fruchtschmuck	ja 	Fruchtschmuck	Fruchtschmuck	ja 
+	responsetrait		Fruchtschmuck	Fruchtschmuck	Fruchtschmuck_unbedeutend	selectInput		Fruchtschmuck	Fruchtschmuck	unbedeutend	Fruchtschmuck	Fruchtschmuck	unbedeutend
+	responsetrait		Fruchtschmuck	Fruchtschmuck	Fruchtschmuck_?	selectInput		Fruchtschmuck	Fruchtschmuck	?	Fruchtschmuck	Fruchtschmuck	?
+	responsetrait		Fruchtschmuck	Fruchtschmuck	Fruchtschmuck_kein fruchtbesatz	selectInput		Fruchtschmuck	Fruchtschmuck	kein fruchtbesatz	Fruchtschmuck	Fruchtschmuck	kein fruchtbesatz
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_flügelartig	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	flügelartig	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	flügelartig
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_rot-braun	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	rot-braun	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	rot-braun
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_stachelig	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	stachelig	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	stachelig
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_zapfenförmig	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	zapfenförmig	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	zapfenförmig
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_blauschwarz	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	blauschwarz	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	blauschwarz
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_?	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	?	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	?
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_nussartig	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	nussartig	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	nussartig
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_rot	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	rot	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	rot
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_schwarzviolett	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	schwarzviolett	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	schwarzviolett
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_braun	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	braun	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	braun
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_schwarz	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	schwarz	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	schwarz
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_silbrig	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	silbrig	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	silbrig
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_orange	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	orange	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	orange
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_kugelig	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	kugelig	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	kugelig
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_gelb	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	gelb	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	gelb
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_wollartig	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	wollartig	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	wollartig
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_schwarzrot	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	schwarzrot	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	schwarzrot
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_purpur	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	purpur	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	purpur
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_blau	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	blau	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	blau
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_graugrün	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	graugrün	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	graugrün
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_eichelförmig	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	eichelförmig	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	eichelförmig
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_orangerot	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	orangerot	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	orangerot
+	responsetrait		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form_gelbbraun	selectInput		Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	gelbbraun	Fruchtfarbe.oder.-Form	Fruchtfarbe.oder.-Form	gelbbraun
+	responsetrait		zur.Lärmminderung	zur.Lärmminderung	zur.Lärmminderung_?	selectInput		zur.Lärmminderung	zur.Lärmminderung	?	zur.Lärmminderung	zur.Lärmminderung	?
+	responsetrait		zur.Lärmminderung	zur.Lärmminderung	zur.Lärmminderung_geeignet	selectInput		zur.Lärmminderung	zur.Lärmminderung	geeignet	zur.Lärmminderung	zur.Lärmminderung	geeignet
+	responsetrait		zur.Lärmminderung	zur.Lärmminderung	zur.Lärmminderung_gut geeignet	selectInput		zur.Lärmminderung	zur.Lärmminderung	gut geeignet	zur.Lärmminderung	zur.Lärmminderung	gut geeignet
+	responsetrait		zur.Lärmminderung	zur.Lärmminderung	zur.Lärmminderung_geeignet 	selectInput		zur.Lärmminderung	zur.Lärmminderung	geeignet 	zur.Lärmminderung	zur.Lärmminderung	geeignet 
+	responsetrait		zur.Lärmminderung	zur.Lärmminderung	zur.Lärmminderung_ 	selectInput		zur.Lärmminderung	zur.Lärmminderung	 	zur.Lärmminderung	zur.Lärmminderung	?
+	responsetrait		zur.Staubminderung	zur.Staubminderung	zur.Staubminderung_?	selectInput		zur.Staubminderung	zur.Staubminderung	?	zur.Staubminderung	zur.Staubminderung	?
+	responsetrait		zur.Staubminderung	zur.Staubminderung	zur.Staubminderung_geeignet	selectInput		zur.Staubminderung	zur.Staubminderung	geeignet	zur.Staubminderung	zur.Staubminderung	geeignet
+	responsetrait		zur.Staubminderung	zur.Staubminderung	zur.Staubminderung_gut geeignet	selectInput		zur.Staubminderung	zur.Staubminderung	gut geeignet	zur.Staubminderung	zur.Staubminderung	gut geeignet
+	responsetrait		zur.Staubminderung	zur.Staubminderung	zur.Staubminderung_gut geeignet 	selectInput		zur.Staubminderung	zur.Staubminderung	gut geeignet 	zur.Staubminderung	zur.Staubminderung	gut geeignet 
+	responsetrait		zur.Pflanzung.von	zur.Pflanzung.von	zur.Pflanzung.von_Lärmschutzwellen	selectInput		zur.Pflanzung.von	zur.Pflanzung.von	Lärmschutzwellen	zur.Pflanzung.von	zur.Pflanzung.von	Lärmschutzwellen
+	responsetrait		zur.Pflanzung.von	zur.Pflanzung.von	zur.Pflanzung.von_?	selectInput		zur.Pflanzung.von	zur.Pflanzung.von	?	zur.Pflanzung.von	zur.Pflanzung.von	?
+	responsetrait		zur.Pflanzung.von	zur.Pflanzung.von	zur.Pflanzung.von_lärmschutzwellen	selectInput		zur.Pflanzung.von	zur.Pflanzung.von	lärmschutzwellen	zur.Pflanzung.von	zur.Pflanzung.von	lärmschutzwellen
+	responsetrait		zur.Pflanzung.von	zur.Pflanzung.von	zur.Pflanzung.von_ Steilwällen	selectInput		zur.Pflanzung.von	zur.Pflanzung.von	 Steilwällen	zur.Pflanzung.von	zur.Pflanzung.von	Steilwällen
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_5	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	5	Blütezeit,.Monat	Blütezeit,.Monat	5
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_3.4	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	3.4	Blütezeit,.Monat	Blütezeit,.Monat	3.4
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_4	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	4	Blütezeit,.Monat	Blütezeit,.Monat	4
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_5.6	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	5.6	Blütezeit,.Monat	Blütezeit,.Monat	5.6
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_2.2999999999999998	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	2.2999999999999998	Blütezeit,.Monat	Blütezeit,.Monat	2.3
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_3	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	3	Blütezeit,.Monat	Blütezeit,.Monat	3
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_4.5	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	4.5	Blütezeit,.Monat	Blütezeit,.Monat	4.5
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_6.7	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	6.7	Blütezeit,.Monat	Blütezeit,.Monat	6.7
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_?	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	?	Blütezeit,.Monat	Blütezeit,.Monat	?
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_                                  5	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	                                  5	Blütezeit,.Monat	Blütezeit,.Monat	5
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_6	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	6	Blütezeit,.Monat	Blütezeit,.Monat	6
+	responsetrait		Blütezeit,.Monat	Blütezeit,.Monat	Blütezeit,.Monat_7	selectInput		Blütezeit,.Monat	Blütezeit,.Monat	7	Blütezeit,.Monat	Blütezeit,.Monat	7
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_gelbgrün	selectInput		Blütefarbe	Blütefarbe	gelbgrün	Blütefarbe	Blütefarbe	gelbgrün
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_gelb	selectInput		Blütefarbe	Blütefarbe	gelb	Blütefarbe	Blütefarbe	gelb
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_weiß	selectInput		Blütefarbe	Blütefarbe	weiß	Blütefarbe	Blütefarbe	weiß
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_braun	selectInput		Blütefarbe	Blütefarbe	braun	Blütefarbe	Blütefarbe	braun
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_grüngelb	selectInput		Blütefarbe	Blütefarbe	grüngelb	Blütefarbe	Blütefarbe	grüngelb
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_creme	selectInput		Blütefarbe	Blütefarbe	creme	Blütefarbe	Blütefarbe	creme
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_?	selectInput		Blütefarbe	Blütefarbe	?	Blütefarbe	Blütefarbe	?
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_weißrosa	selectInput		Blütefarbe	Blütefarbe	weißrosa	Blütefarbe	Blütefarbe	weißrosa
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_rot	selectInput		Blütefarbe	Blütefarbe	rot	Blütefarbe	Blütefarbe	rot
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_rotgelb	selectInput		Blütefarbe	Blütefarbe	rotgelb	Blütefarbe	Blütefarbe	rotgelb
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_violett	selectInput		Blütefarbe	Blütefarbe	violett	Blütefarbe	Blütefarbe	violett
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_weißgelb	selectInput		Blütefarbe	Blütefarbe	weißgelb	Blütefarbe	Blütefarbe	weißgelb
+	responsetrait		Blütefarbe	Blütefarbe	Blütefarbe_rotbraun	selectInput		Blütefarbe	Blütefarbe	rotbraun	Blütefarbe	Blütefarbe	rotbraun
+	responsetrait		Herbstfärbung	Herbstfärbung	Herbstfärbung_gelb	selectInput		Herbstfärbung	Herbstfärbung	gelb	Herbstfärbung	Herbstfärbung	gelb
+	responsetrait		Herbstfärbung	Herbstfärbung	Herbstfärbung_ orange 	selectInput		Herbstfärbung	Herbstfärbung	 orange 	Herbstfärbung	Herbstfärbung	orange 
+	responsetrait		Herbstfärbung	Herbstfärbung	Herbstfärbung_?	selectInput		Herbstfärbung	Herbstfärbung	?	Herbstfärbung	Herbstfärbung	?
+	responsetrait		Herbstfärbung	Herbstfärbung	Herbstfärbung_rot	selectInput		Herbstfärbung	Herbstfärbung	rot	Herbstfärbung	Herbstfärbung	rot
+	responsetrait		Herbstfärbung	Herbstfärbung	Herbstfärbung_ orange	selectInput		Herbstfärbung	Herbstfärbung	 orange	Herbstfärbung	Herbstfärbung	orange
+	responsetrait		Herbstfärbung	Herbstfärbung	Herbstfärbung_ rot	selectInput		Herbstfärbung	Herbstfärbung	 rot	Herbstfärbung	Herbstfärbung	rot
+	responsetrait		Lichtzahl	Lichtzahl	Lichtzahl_?	numericInput		Lichtzahl	Lichtzahl	?	Lichtzahl	Lichtzahl	?
+	responsetrait		Kontinentalitätszahl	Kontinentalitätszahl	Kontinentalitätszahl_4	selectInput		Kontinentalitätszahl	Kontinentalitätszahl	4	Kontinentalitätszahl	Kontinentalitätszahl	4
+	responsetrait		Kontinentalitätszahl	Kontinentalitätszahl	Kontinentalitätszahl_6	selectInput		Kontinentalitätszahl	Kontinentalitätszahl	6	Kontinentalitätszahl	Kontinentalitätszahl	6
+	responsetrait		Kontinentalitätszahl	Kontinentalitätszahl	Kontinentalitätszahl_?	selectInput		Kontinentalitätszahl	Kontinentalitätszahl	?	Kontinentalitätszahl	Kontinentalitätszahl	?
+	responsetrait		Kontinentalitätszahl	Kontinentalitätszahl	Kontinentalitätszahl_3	selectInput		Kontinentalitätszahl	Kontinentalitätszahl	3	Kontinentalitätszahl	Kontinentalitätszahl	3
+	responsetrait		Kontinentalitätszahl	Kontinentalitätszahl	Kontinentalitätszahl_5	selectInput		Kontinentalitätszahl	Kontinentalitätszahl	5	Kontinentalitätszahl	Kontinentalitätszahl	5
+	responsetrait		Kontinentalitätszahl	Kontinentalitätszahl	Kontinentalitätszahl_2	selectInput		Kontinentalitätszahl	Kontinentalitätszahl	2	Kontinentalitätszahl	Kontinentalitätszahl	2
+	responsetrait		Kontinentalitätszahl	Kontinentalitätszahl	Kontinentalitätszahl_x	selectInput		Kontinentalitätszahl	Kontinentalitätszahl	x	Kontinentalitätszahl	Kontinentalitätszahl	x
+	responsetrait		Kontinentalitätszahl	Kontinentalitätszahl	Kontinentalitätszahl_7	selectInput		Kontinentalitätszahl	Kontinentalitätszahl	7	Kontinentalitätszahl	Kontinentalitätszahl	7
+	responsetrait		Feuchtezahl	Feuchtezahl	Feuchtezahl_5	selectInput		Feuchtezahl	Feuchtezahl	5	Feuchtezahl	Feuchtezahl	5
+	responsetrait		Feuchtezahl	Feuchtezahl	Feuchtezahl_6	selectInput		Feuchtezahl	Feuchtezahl	6	Feuchtezahl	Feuchtezahl	6
+	responsetrait		Feuchtezahl	Feuchtezahl	Feuchtezahl_x	selectInput		Feuchtezahl	Feuchtezahl	x	Feuchtezahl	Feuchtezahl	x
+	responsetrait		Feuchtezahl	Feuchtezahl	Feuchtezahl_?	selectInput		Feuchtezahl	Feuchtezahl	?	Feuchtezahl	Feuchtezahl	?
+	responsetrait		Feuchtezahl	Feuchtezahl	Feuchtezahl_9	selectInput		Feuchtezahl	Feuchtezahl	9	Feuchtezahl	Feuchtezahl	9
+	responsetrait		Feuchtezahl	Feuchtezahl	Feuchtezahl_7	selectInput		Feuchtezahl	Feuchtezahl	7	Feuchtezahl	Feuchtezahl	7
+	responsetrait		Feuchtezahl	Feuchtezahl	Feuchtezahl_8	selectInput		Feuchtezahl	Feuchtezahl	8	Feuchtezahl	Feuchtezahl	8
+	responsetrait		Feuchtezahl	Feuchtezahl	Feuchtezahl_4	selectInput		Feuchtezahl	Feuchtezahl	4	Feuchtezahl	Feuchtezahl	4
+	responsetrait		Reaktionszahl	Reaktionszahl	Reaktionszahl_7	selectInput		Reaktionszahl	Reaktionszahl	7	Reaktionszahl	Reaktionszahl	7
+	responsetrait		Reaktionszahl	Reaktionszahl	Reaktionszahl_x	selectInput		Reaktionszahl	Reaktionszahl	x	Reaktionszahl	Reaktionszahl	x
+	responsetrait		Reaktionszahl	Reaktionszahl	Reaktionszahl_?	selectInput		Reaktionszahl	Reaktionszahl	?	Reaktionszahl	Reaktionszahl	?
+	responsetrait		Reaktionszahl	Reaktionszahl	Reaktionszahl_6	selectInput		Reaktionszahl	Reaktionszahl	6	Reaktionszahl	Reaktionszahl	6
+	responsetrait		Reaktionszahl	Reaktionszahl	Reaktionszahl_8	selectInput		Reaktionszahl	Reaktionszahl	8	Reaktionszahl	Reaktionszahl	8
+	responsetrait		Reaktionszahl	Reaktionszahl	Reaktionszahl_3	selectInput		Reaktionszahl	Reaktionszahl	3	Reaktionszahl	Reaktionszahl	3
+	responsetrait		Reaktionszahl	Reaktionszahl	Reaktionszahl_4	selectInput		Reaktionszahl	Reaktionszahl	4	Reaktionszahl	Reaktionszahl	4
+	responsetrait		Reaktionszahl	Reaktionszahl	Reaktionszahl_5	selectInput		Reaktionszahl	Reaktionszahl	5	Reaktionszahl	Reaktionszahl	5
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_6	selectInput		Stickstoffzahl	Stickstoffzahl	6	Stickstoffzahl	Stickstoffzahl	6
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_7	selectInput		Stickstoffzahl	Stickstoffzahl	7	Stickstoffzahl	Stickstoffzahl	7
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_x	selectInput		Stickstoffzahl	Stickstoffzahl	x	Stickstoffzahl	Stickstoffzahl	x
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_?	selectInput		Stickstoffzahl	Stickstoffzahl	?	Stickstoffzahl	Stickstoffzahl	?
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_3	selectInput		Stickstoffzahl	Stickstoffzahl	3	Stickstoffzahl	Stickstoffzahl	3
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_4	selectInput		Stickstoffzahl	Stickstoffzahl	4	Stickstoffzahl	Stickstoffzahl	4
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_5	selectInput		Stickstoffzahl	Stickstoffzahl	5	Stickstoffzahl	Stickstoffzahl	5
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_8	selectInput		Stickstoffzahl	Stickstoffzahl	8	Stickstoffzahl	Stickstoffzahl	8
+	responsetrait		Stickstoffzahl	Stickstoffzahl	Stickstoffzahl_9	selectInput		Stickstoffzahl	Stickstoffzahl	9	Stickstoffzahl	Stickstoffzahl	9
+	responsetrait		Temperaturzahl	Temperaturzahl	Temperaturzahl_6	selectInput		Temperaturzahl	Temperaturzahl	6	Temperaturzahl	Temperaturzahl	6
+	responsetrait		Temperaturzahl	Temperaturzahl	Temperaturzahl_x	selectInput		Temperaturzahl	Temperaturzahl	x	Temperaturzahl	Temperaturzahl	x
+	responsetrait		Temperaturzahl	Temperaturzahl	Temperaturzahl_?	selectInput		Temperaturzahl	Temperaturzahl	?	Temperaturzahl	Temperaturzahl	?
+	responsetrait		Temperaturzahl	Temperaturzahl	Temperaturzahl_5	selectInput		Temperaturzahl	Temperaturzahl	5	Temperaturzahl	Temperaturzahl	5
+	responsetrait		Temperaturzahl	Temperaturzahl	Temperaturzahl_4	selectInput		Temperaturzahl	Temperaturzahl	4	Temperaturzahl	Temperaturzahl	4
+	responsetrait		Temperaturzahl	Temperaturzahl	Temperaturzahl_8	selectInput		Temperaturzahl	Temperaturzahl	8	Temperaturzahl	Temperaturzahl	8
+	responsetrait		Temperaturzahl	Temperaturzahl	Temperaturzahl_7	selectInput		Temperaturzahl	Temperaturzahl	7	Temperaturzahl	Temperaturzahl	7

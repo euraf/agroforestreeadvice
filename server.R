@@ -126,7 +126,10 @@ server <- function(input, output, session) {
                             data=dataJBOJP, interface=interfaceJBOJP, functionSuitability=compute_suitability_JBOJP, compactobjectives=FALSE)
   
   
-  
+  # German Hedgerow manager
+  moduleTabInterface_Server(id = "DEHM",
+                            language= language,
+                            data=dataDEHM, interface=interfaceDEHM, functionSuitability=compute_suitability_DEHM, compactobjectives=FALSE)
   
 }
 
