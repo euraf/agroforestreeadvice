@@ -4,6 +4,8 @@
 
 #library(writexl)       # for writing xlsx files
 library(shiny)
+library(svglite)
+library(shinyjs)
 library(openxlsx)
 library(ggplot2)
 #library(plotly)
@@ -14,7 +16,8 @@ library(stringr)
 #library(tidyverse)
 library(purrr)
 library(shiny.i18n)
-
+library(cowplot)
+library(gridExtra)
 ##global----
 
 #load("dataSTA.Rdata")
