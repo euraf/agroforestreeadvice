@@ -4,6 +4,7 @@ server <- function(input, output, session) {
   #127.0.0.1:3775/?model=Czech&soil_water=soil_water_waterlogged&habitus=bush this triggers a modal dialog to download a txt file with the species scores for this particular set of conditions
   reactive_dataSuitability <- reactiveVal(data.frame(x = numeric(), y = numeric()))
   reactive_plotSuitability <- reactiveVal(ggplot())
+  reactive_ID <- reactiveVal("Unknown")
 
   access_dataSuitability <- function() {
     print("Suitability data accessed")
@@ -14,6 +15,7 @@ server <- function(input, output, session) {
     print("Suitability plot accessed")
     reactive_plotSuitability()
   }
+
 
   create_combined_plot <- function() {
     DataSuitability <- access_dataSuitability()
@@ -28,18 +30,22 @@ server <- function(input, output, session) {
   }
 
   # Revised download handler, assuming it's within a Shiny server function
-  output$downloadSVGDENTRO <- downloadHandler(
-    filename = function() {
-      paste("plot_and_data-", Sys.Date(), ".svg", sep = "")
-    },
-    content = function(file) {
-      combined <- create_combined_plot()
-      # Use grid drawing functions for combined ggplot and grid objects
-      svg(file, width = 16, height = 20)
-      print(combined)
-      dev.off()
-    }
-  )
+  observe({
+    print(reactive_ID())
+    outputId <- paste0("downloadSVG", reactive_ID())
+    
+    output[[outputId]] <- downloadHandler(
+      filename = function() {
+        paste("plot_and_data-", Sys.Date(), ".svg", sep = "")
+      },
+      content = function(file) {
+        combined <- create_combined_plot()
+        svg(file, width = 16, height = 20)
+        print(combined)
+        dev.off()
+      }
+    )
+  })
   
 
   observeEvent(input$selected_language, {
@@ -132,30 +138,34 @@ server <- function(input, output, session) {
   # Czech tree advice ----
   moduleTabInterface_Server(id = "Czech",
                             language= language,
-                            data=dataCzech, interface=interfaceCzech, functionSuitability=compute_suitability_Czech, compactobjectives=FALSE)
+                            data=dataCzech, interface=interfaceCzech, functionSuitability=compute_suitability_Czech, compactobjectives=FALSE,
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
   
   
   # Flanders tree advice ----
   moduleTabInterface_Server(id = "DENTRO",
                             language= language,
                             data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
   
   # Shade tree advice ----
   moduleTabInterface_Server(id = "STA",
                             language= language,
-                            data=dataSTA, interface=interfaceSTA, functionSuitability=compute_suitability_STA, compactobjectives=TRUE)
+                            data=dataSTA, interface=interfaceSTA, functionSuitability=compute_suitability_STA, compactobjectives=TRUE,
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
   
   
   # Deciduous ----
   moduleTabInterface_Server(id = "DECIDUOUS",
                             language= language,
-                            data=dataDECIDUOUS, interface=interfaceDECIDUOUS, functionSuitability=compute_suitability_DECIDUOUS, compactobjectives=FALSE)
+                            data=dataDECIDUOUS, interface=interfaceDECIDUOUS, functionSuitability=compute_suitability_DECIDUOUS, compactobjectives=FALSE,
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
   
   # Species Climate Suitability Model ----
   moduleTabInterface_Server(id = "SCSM",
                             language= language,
-                            data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM, compactobjectives=FALSE)
+                            data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM, compactobjectives=FALSE,
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
   
 
 }
