@@ -58,7 +58,8 @@ moduleTabInterface_UI <- function(id, data, interface) {
 
 # Fonction server du module ----
 #language is a reactive value from the main app
-moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) {
+moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE,
+                                      reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability) {
   
   moduleServer(
     id,
@@ -83,6 +84,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"
               )) # end div
             )), 
+        
+        div(
+          style = "text-align: right;",
+          downloadButton(outputId = paste0("downloadSVG", id), label = paste0("downloadSVG", id))),
 
         fluidRow(column(width=6,
                         box(title = i18n$t("Your site"),
@@ -427,8 +432,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
                 panel.grid.major.x = element_blank(),                                            # hides major vertical grid lines
                 panel.grid.minor.x = element_blank()                                             # hides minor vertical grid lines  
                 ) +
-          scale_fill_discrete(labels = Plot_legend_lang(language()))      
-              
+          scale_fill_discrete(labels = Plot_legend_lang(language()))
+          
+        reactive_plot(plot_Suitability)     
+
         return(plot_Suitability)
       })
       
@@ -471,7 +478,12 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           # drop value. from the column names
           names(datawide) <- gsub("\\value.", "", names(datawide))
 
-          datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
+          DataSuitability <- datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
+          
+          reactive_data(DataSuitability)
+
+          DataSuitability
+
         } else {datalong}
         }, options = list(
         scrollX = TRUE,
@@ -522,4 +534,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         ))    
     return(moduleServer)
   })
+
+  
+
+  
 } # fin moduleTabInterface_Server
