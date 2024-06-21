@@ -4,7 +4,6 @@ server <- function(input, output, session) {
   #127.0.0.1:3775/?model=Czech&soil_water=soil_water_waterlogged&habitus=bush this triggers a modal dialog to download a txt file with the species scores for this particular set of conditions
   reactive_dataSuitability <- reactiveVal(data.frame(x = numeric(), y = numeric()))
   reactive_plotSuitability <- reactiveVal(ggplot())
-  reactive_ID <- reactiveVal("Unknown")
 
   access_dataSuitability <- function() {
     print("Suitability data accessed")
@@ -31,10 +30,7 @@ server <- function(input, output, session) {
 
   # Revised download handler, assuming it's within a Shiny server function
   observe({
-    print(reactive_ID())
-    outputId <- paste0("downloadSVG", reactive_ID())
-    
-    output[[outputId]] <- downloadHandler(
+    output$downloadSVG <- downloadHandler(
       filename = function() {
         paste("plot_and_data-", Sys.Date(), ".svg", sep = "")
       },
@@ -116,16 +112,6 @@ server <- function(input, output, session) {
         }
       )
 
-      showModal(modalDialog(
-        title = "Download txt file",
-        htmlOutput("dataPreview"),  # Display data preview
-        footer = tagList(
-          modalButton("Cancel"),
-          downloadButton("modalDownload", "Download")
-        ),
-        size = "l",
-        easyClose = TRUE
-      ))
       
       
     }
@@ -139,33 +125,33 @@ server <- function(input, output, session) {
   moduleTabInterface_Server(id = "Czech",
                             language= language,
                             data=dataCzech, interface=interfaceCzech, functionSuitability=compute_suitability_Czech, compactobjectives=FALSE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
   
   # Flanders tree advice ----
   moduleTabInterface_Server(id = "DENTRO",
                             language= language,
                             data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
   # Shade tree advice ----
   moduleTabInterface_Server(id = "STA",
                             language= language,
                             data=dataSTA, interface=interfaceSTA, functionSuitability=compute_suitability_STA, compactobjectives=TRUE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
   
   # Deciduous ----
   moduleTabInterface_Server(id = "DECIDUOUS",
                             language= language,
                             data=dataDECIDUOUS, interface=interfaceDECIDUOUS, functionSuitability=compute_suitability_DECIDUOUS, compactobjectives=FALSE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
   # Species Climate Suitability Model ----
   moduleTabInterface_Server(id = "SCSM",
                             language= language,
                             data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM, compactobjectives=FALSE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID)
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
 
 }
