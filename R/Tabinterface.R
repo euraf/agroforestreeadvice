@@ -59,7 +59,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
 # Fonction server du module ----
 #language is a reactive value from the main app
 moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE,
-                                      reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability, reactive_ID = reactive_ID) {
+                                      reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability) {
   
   moduleServer(
     id,
@@ -71,7 +71,6 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       req(language())  # Ensure 'language' is available
       # assign actual language
       actual_lang <<- paste0("choice_",as.character(language()))
-      reactive_ID(id)
       
       # information about the filters, calls modalDialog
       tagList(
@@ -85,10 +84,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"
               )) # end div
             )), 
-        
-        div(
-          style = "text-align: right;",
-          downloadButton(outputId = paste0("downloadSVG", id), label = paste0("downloadSVG", id))),
+
+        actionButton(inputId = ns("show_modal"), label = i18n$t("Download"), icon = icon("download"), style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"),
 
         fluidRow(column(width=6,
                         box(title = i18n$t("Your site"),
@@ -230,6 +227,19 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           ')
             )) # ends modal
           }) # ends observeEvent
+
+      observeEvent(input$show_modal, {
+        showModal(modalDialog(
+          title = "Download txt file",
+          htmlOutput("dataPreview"),  # Display data preview
+          footer = tagList(
+            modalButton("Cancel"),
+            downloadButton("downloadSVG", "downloadSVG")
+            ),
+          size = "l",
+          easyClose = TRUE
+          ))
+      })
       
 
       #reactive keeping the range of species to plot
