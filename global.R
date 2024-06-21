@@ -60,7 +60,13 @@ interfaceDEHM[1:length(interfaceDEHM)]<-lapply(interfaceDEHM[1:length(interfaceD
 
 
 
-toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM), names(interfaceCzech)), split="_")
+toto<-strsplit(c(names(interfaceSTA), 
+                 names(interfaceDENTRO), 
+                 names(interfaceDECIDUOUS), 
+                 names(interfaceSCSM), 
+                 names(interfaceCzech),
+                 names(interfaceJBOJP),
+                 names(interfaceDEHM)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives){
