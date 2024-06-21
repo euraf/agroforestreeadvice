@@ -14,19 +14,24 @@ compute_suitability_DEHM<-function(inputsdata=NULL,
                                    database, 
                                    interface,
                                    orderby="responsetrait"){
-  
   dbfinal<-data.frame()
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
   rownames(toto)<-toto$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
                                   interface$criteria[interface$side %in% c("responsetrait", "effecttrait")]) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
   for(crit in standardformcriteria){
-    print(paste("compute score for", crit))
+    #print(paste("compute score for", crit))
+    #warning: the choices are actually paste(criteria, choice, sep="_) to make them unique
+    #=> modify inputsdata
+    inputsdatabis<-sapply(inputsdata, function (x) {
+      x[grepl(pattern="_", x=x)]<-sapply(strsplit(x[grepl(pattern="_", x=x)], split="_"),"[[", 2)
+      return(x)
+    })
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
                                                 type= toto[crit, "objecttype"],
                                                 BigCriteria=toto[crit, "BigCriteria"],
                                                 side=toto[crit, "side"],
-                                                inputs=inputsdata, 
+                                                inputs=inputsdatabis, 
                                                 db=database))
   }
   
@@ -35,11 +40,11 @@ compute_suitability_DEHM<-function(inputsdata=NULL,
    #order the df by orderby, using latin name as id (this adds an id variable, which is a factor with levels ordered by the orderby side)
   #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
   # to do: separate computation of score and ordering of the species
-  dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable="nameOfColumnID", interface=interface) 
+  dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable="Wissenschaftlicher.Artname", interface=interface) 
   
   # give negative values for response traits so that they appear on the left
   dbfinal$value[dbfinal$side=="responsetrait"]<- -dbfinal$value[dbfinal$side=="responsetrait"]
-  
+  #browser()
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
   print("fin suitability")
   

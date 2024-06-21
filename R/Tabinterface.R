@@ -106,7 +106,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         allinputs <- controlData()
         reformated<-character()
         if(length(allinputs)>0) {
-          message("initial inputs:") ; message(str(allinputs)) 
+          #message("initial inputs:") ; message(str(allinputs)) 
           # List of things (chr for selectInput, 
           #                 chr for radioButtons
           #                 chr vector for checkboxGroupInput,
@@ -126,7 +126,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             reformated<-c(reformated, unlist(allinputs[notcheckbox]))
           }
         }
-        message("reformated inputs:"); message(str(reformated))
+        #message("reformated inputs:"); message(str(reformated))
         return(reformated)
 
       })#reformattedinputs() is a named character of choices of the user (with the checkbox name for TRUE checkboxes)

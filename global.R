@@ -180,10 +180,10 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
     if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
       db$value<-as.numeric(db[,criteria]==chosen) 
     } else {
-      if (sum(grepl(pattern=chosen, x=names(db)))==1) {
+      if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the
       db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
     } else {
-      print("could not guess which variable to use") ; db$value<-NA
+      print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
     }}
     
   } else if (type=="checkboxInput") {
@@ -224,7 +224,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
   return(db)
 }
 
-
+# if you need to further reformat the data, you can do it within the suitability_MODELNAME.txt file
 source("R/suitability_DENTRO.R")
 source("R/suitability_DECIDUOUS.R")
 source("R/suitability_STA.R")

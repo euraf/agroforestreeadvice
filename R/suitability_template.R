@@ -21,7 +21,7 @@ compute_suitability_MODELNAME<-function(inputsdata=NULL,
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
                                   c("here", "put", "all", "the", "names", "of", "criteria", "that", "follow", "standard", "rules")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
   for(crit in standardformcriteria){
-    print(paste("compute score for", crit))
+    #print(paste("compute score for", crit))
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
                                                 type= toto[crit, "objecttype"],
                                                 BigCriteria=toto[crit, "BigCriteria"],
