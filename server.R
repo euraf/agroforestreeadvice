@@ -16,16 +16,43 @@ server <- function(input, output, session) {
   }
 
 
-  create_combined_plot <- function() {
-    DataSuitability <- access_dataSuitability()
-    plotting <- access_plotSuitability()
-    
-    table_grob <- tableGrob(head(DataSuitability, 20))
-    
-    combined <- plot_grid(plotting, table_grob, ncol = 1, 
-                          rel_heights = c(3, 1))  # Simplified and corrected
-    
-    return(combined)
+
+create_combined_plot <- function() {
+  DataSuitability <- access_dataSuitability()  # Access the data frame
+  plotting <- access_plotSuitability()         # Access the ggplot object
+
+  # Style the table grob
+  table_theme <- ttheme_default(
+    core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
+    colhead = list(bg_params = list(fill = "grey80", col = NA)),
+    rowhead = list(bg_params = list(fill = "grey80", col = NA))
+  )
+  table_grob <- tableGrob(head(DataSuitability, 20), theme = table_theme)
+
+  # Create a headline
+  headline <- ggdraw() + 
+    draw_label("Suitability Analysis Report", fontface = 'bold', size = 20, x = 0, hjust = 0) +
+    theme(plot.margin = margin(10, 0, 20, 0))  # Add space below the headline
+
+  # Annotations for the plot (example)
+  annotated_plot <- plotting + 
+    annotate("text", x = Inf, y = Inf, label = "Data Source: XYZ", hjust = 1.1, vjust = 2, size = 3, color = "blue") +
+    theme(plot.margin = margin(20, 0, 20, 0))
+
+  # Combine the elements into a single plot
+  combined <- plot_grid(
+    headline, NULL,
+    annotated_plot, NULL,
+    table_grob, 
+    ncol = 1, 
+    rel_heights = c(0.2, 0.05, 3, 0.8, 1)  # Adjust heights to add space between elements
+  )
+
+  # Wrap the combined plot in a ggdraw to add a bottom margin
+  combined_with_margin <- ggdraw(combined) + 
+    theme(plot.margin = margin(10, 10, 10, 10))  # Add margin at the bottom
+
+  return(combined_with_margin)
   }
 
   # Revised download handler, assuming it's within a Shiny server function
@@ -36,7 +63,7 @@ server <- function(input, output, session) {
       },
       content = function(file) {
         combined <- create_combined_plot()
-        svg(file, width = 16, height = 20)
+        svg(file, width = 16, height = 12)
         print(combined)
         dev.off()
       }
