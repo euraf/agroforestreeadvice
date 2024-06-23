@@ -81,11 +81,16 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           style = "text-align: right;",
           actionButton(inputId = ns("filter_info"), 
             label = i18n$t("Information"), icon("circle-question"),
-            style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"
-              )) # end div
+            style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"),
+          actionButton(inputId = ns("show_modal"), 
+            label = i18n$t("Download"), icon = icon("download"), 
+            style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"),
+              
+              
+              
+              ) # end div
             )), 
 
-        actionButton(inputId = ns("show_modal"), label = i18n$t("Download"), icon = icon("download"), style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"),
 
         fluidRow(column(width=6,
                         box(title = i18n$t("Your site"),
@@ -233,8 +238,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           title = "Download txt file",
           htmlOutput("dataPreview"),  # Display data preview
           footer = tagList(
-            modalButton("Cancel"),
-            downloadButton("downloadSVG", "downloadSVG")
+            modalButton(i18n$t("Close"), icon = icon("remove")),
+            downloadButton("downloadSVG", i18n$t("Download as SVG file"))
             ),
           size = "l",
           easyClose = TRUE
