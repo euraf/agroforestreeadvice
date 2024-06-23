@@ -31,18 +31,18 @@ create_combined_plot <- function() {
 
   # Create a headline
   headline <- ggdraw() + 
-    draw_label("Suitability Analysis Report", fontface = 'bold', size = 20, x = 0, hjust = 0) +
-    theme(plot.margin = margin(10, 0, 20, 0))  # Add space below the headline
+    draw_label("Suitability Analysis Report by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
+    theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
   # Annotations for the plot (example)
   annotated_plot <- plotting + 
-    annotate("text", x = Inf, y = Inf, label = "Data Source: XYZ", hjust = 1.1, vjust = 2, size = 3, color = "blue") +
+    annotate("text", x = Inf, y = Inf, label = "Data Source: AgroForesTreeAdvice", hjust = 1.1, vjust = 2, size = 3, color = "#616161") +
     theme(plot.margin = margin(20, 0, 20, 0))
 
   # Combine the elements into a single plot
   combined <- plot_grid(
     headline, NULL,
-    annotated_plot, NULL,
+    plotting, NULL,
     table_grob, 
     ncol = 1, 
     rel_heights = c(0.2, 0.05, 3, 0.8, 1)  # Adjust heights to add space between elements
@@ -50,8 +50,7 @@ create_combined_plot <- function() {
 
   # Wrap the combined plot in a ggdraw to add a bottom margin
   combined_with_margin <- ggdraw(combined) + 
-    theme(plot.margin = margin(10, 10, 10, 10))  # Add margin at the bottom
-
+    theme(plot.margin = margin(10, 10, 10, 10))
   return(combined_with_margin)
   }
 
