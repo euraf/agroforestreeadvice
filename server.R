@@ -45,7 +45,7 @@ create_combined_plot <- function() {
     plotting, NULL,
     table_grob, 
     ncol = 1, 
-    rel_heights = c(0.2, 0.05, 3, 0.8, 1)  # Adjust heights to add space between elements
+    rel_heights = c(0.08, 0.01, 1, 0.05, 1)  # Adjust heights to add space between elements
   )
 
   # Wrap the combined plot in a ggdraw to add a bottom margin
@@ -54,7 +54,7 @@ create_combined_plot <- function() {
   return(combined_with_margin)
   }
 
-  # Revised download handler, assuming it's within a Shiny server function
+  # Download handler for svg
   observe({
     output$downloadSVG <- downloadHandler(
       filename = function() {
@@ -62,9 +62,26 @@ create_combined_plot <- function() {
       },
       content = function(file) {
         combined <- create_combined_plot()
-        svg(file, width = 16, height = 12)
+        svg(file, width = 17, height = 13)
         print(combined)
         dev.off()
+      }
+    )
+  })
+
+  # Download handler for png
+  observe({
+    output$downloadPNG <- downloadHandler(
+      filename = function() {
+        paste("plot_and_data-", Sys.Date(), ".png", sep = "")
+      },
+      content = function(file) {
+        combined <- create_combined_plot()
+        svg_file <- tempfile(fileext = ".svg")
+        svg(svg_file, width = 17, height = 13)
+        print(combined)
+        dev.off()
+        rsvg_png(svg_file, file)
       }
     )
   })
