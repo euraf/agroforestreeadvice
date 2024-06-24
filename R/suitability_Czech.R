@@ -30,7 +30,7 @@ compute_suitability_Czech<-function(inputsdata=NULL,
                                     "soil_water", "light", "wood", "food",
                                     "approval", "endengeredG", "endengeredU", "endengeredY")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
   for(crit in standardformcriteria){
-    print(paste("compute score for", crit))
+    #print(paste("compute score for", crit))
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
                                                 type= toto[crit, "objecttype"],
                                                 BigCriteria=toto[crit, "BigCriteria"],

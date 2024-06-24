@@ -196,6 +196,17 @@ create_combined_plot <- function() {
                             data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM, compactobjectives=FALSE,
                             reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
-
+  # Juiste Boom op de Juiste Plek ----
+  
+  moduleTabInterface_Server(id = "JBOJP",
+                            language= language,
+                            data=dataJBOJP, interface=interfaceJBOJP, functionSuitability=compute_suitability_JBOJP, compactobjectives=FALSE)
+  
+  
+  # German Hedgerow manager
+  moduleTabInterface_Server(id = "DEHM",
+                            language= language,
+                            data=dataDEHM, interface=interfaceDEHM, functionSuitability=compute_suitability_DEHM, compactobjectives=FALSE)
+  
 }
 

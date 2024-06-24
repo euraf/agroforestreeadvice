@@ -126,6 +126,10 @@ body <- dashboardBody(
     tabItem(tabName = "tool", 
             tabsetPanel(
               id = "toolsTabset",
+              tabPanel("Juiste Boom op de Juiste Plek", value="JBOJP", moduleTabInterface_UI(id = "JBOJP", data = dataJBOJP, interface= interfaceJBOJP)),
+              
+              tabPanel("German Hedgerow manager", value="DEHM", moduleTabInterface_UI(id = "DEHM", data = dataDEHM, interface= interfaceDEHM)),
+              
               tabPanel("Flanders Tree Advisor (DENTRO)", value="DENTRO", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
               tabPanel(i18n$t("Shade Tree Advice (coffee and cocoa)"), value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
@@ -135,6 +139,9 @@ body <- dashboardBody(
               tabPanel(i18n$t("SCSM (species climate suitability model)"), value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
               
               tabPanel(i18n$t("Czech tree selection tool"), value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech))
+              
+              
+              
               
             )
     ),#fin tool

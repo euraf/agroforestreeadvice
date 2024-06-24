@@ -57,11 +57,11 @@ Once your criteria are defined, you need to specify where they should go on the 
 
 The "site" inputs correspond to constraints that the user needs to take into account to know what tree species are adapted to their local conditions, in terms of soil, climate, biotic context, constraints at plot scale, at farm scale or at the socio-economic level). They will be placed on the left-hand side of the interface and will be matched with the response traits (response to the environmental conditions) of the trees. Therefore you need to write "responsetrait" in the "side" column (column B) for those.
 
-The "objectives" input correspond to the user axpects from the tree in terms of production of products (e.g. timber, fruits, nuts, fuelwood etc..) and/or ecosystem services (e.g. shade, soil fertility etc...). They will be placed in the right-hand side of the interface and will be matched to the effect traits of the trees (effect on the environment). THerefore you need to write "effecttrait" in the "side" column (column B) for those.
+The "objectives" input correspond to the user axpects from the tree in terms of production of products (e.g. timber, fruits, nuts, fuelwood etc..) and/or ecosystem services (e.g. shade, soil fertility etc...). They will be placed in the right-hand side of the interface and will be matched to the effect traits of the trees (effect on the environment). Therefore you need to write "effecttrait" in the "side" column (column B) for those.
 
-You can change (or you should soon be able to) the order of display of the criteria with coulmn "order".
+You can change (or you should soon be able to) the order of display of the criteria with column "order".
 
-In order to simplify the visualisaiton of results, you can organise your criteria by "BigCriteria". these are used to give the same color to a group of scores in the graphical output (e.g. criteria describing the soil texture, soil pH, soil depths... can all be grouped in the "soil" BigCriteria. To do so, simply fill the "BigCriteria" column (column C).
+In order to simplify the visualization of results, you can organise your criteria by "BigCriteria". these are used to give the same color to a group of scores in the graphical output (e.g. criteria describing the soil texture, soil pH, soil depths... can all be grouped in the "soil" BigCriteria. To do so, simply fill the "BigCriteria" column (column C). If you don't want to group criteria, then simply paste criteria into BigCriteria
 
 Provide the translation of the BigCriteria, criteria and choices in all the languages supported by AgroforesTreeAdvice (currently, english, french, german, dutch and czech) in the corresponding columns (e.g. criteria_en)
 
@@ -88,10 +88,15 @@ save your file as suitability_MODELNAME.R
 - clone the repository on your computer
 - add the excel file with sheets "data" and "interface" in folder "models", with name MODELNAME.xlsx (MODELNAME should be a short version of your model name, without spaces not underscore nor special characters that will be used everywhere in agroforestreeadvice to identify parts that are specific to your tool)
 - add the suitability_MODLENAME.R file to the "R" folder
-- in global.R file, add the following 2 lines at the beginning:
+- in global.R file, add the following 4 lines at the beginning:
 ```
-dataMODELNAME<-read.xlsx("models/MODELNAME.xlsx", sheet="data")
-interfaceMODELNAME<-read.xlsx("models/MODELNAME.xlsx", sheet="interface")
+dataMODELNAME<-read.table("models/dataMODELNAME.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceMODELNAME<-read.table("models/interfaceMODELNAME.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+#remove commas in the interface because commas are used for separating values
+interfaceMODELNAME<-interfaceMODELNAME[!is.na(interfaceMODELNAME$side),]
+interfaceMODELNAME[1:length(interfaceMODELNAME)]<-lapply(interfaceMODELNAME[1:length(interfaceMODELNAME)], function(x) gsub(pattern=",", replacement=".", x=x))
+
+
 ```
 and add the following line at the end to import your suitability function:
 ```

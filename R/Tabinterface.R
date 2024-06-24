@@ -157,26 +157,27 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         allinputs <- controlData()
         reformated<-character()
         if(length(allinputs)>0) {
-          message("initial inputs:") ; message(str(allinputs)) 
+          #message("initial inputs:") ; message(str(allinputs)) 
           # List of things (chr for selectInput, 
+          #                 chr for radioButtons
           #                 chr vector for checkboxGroupInput,
           #                 int for numericInput,
           #                 logical for checkbox)
           #transform checked checkboxes into their name
-          checkboxyes<-sapply(allinputs, function (x) all(is.logical(x) & as.logical(x)))
+          checkboxyes<-sapply(allinputs, function (x) !is.null(x) & all(is.logical(x) & as.logical(x)))
           if(sum(checkboxyes)>0){
             checked<-unlist(allinputs)
             checked[checkboxyes]<- names(checked)[checkboxyes]
             checked<-checked[checked!="FALSE"]
             reformated<-c(reformated, checked)
           }
-          #transform numericInput selectInputs and checkboxgroupInputs to character vectors
+          #transform numericInput radiobuttons, sliderInput, selectInput and checkboxgroupInput to character vectors
           notcheckbox<-sapply(allinputs, function (x) !is.logical(x))
           if(sum(notcheckbox)>0){
             reformated<-c(reformated, unlist(allinputs[notcheckbox]))
           }
         }
-        message("reformated inputs:"); message(str(reformated))
+        #message("reformated inputs:"); message(str(reformated))
         return(reformated)
 
       })#reformattedinputs() is a named character of choices of the user (with the checkbox name for TRUE checkboxes)
@@ -263,7 +264,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         # print(paste0("### Order by: ", orderby))
         # print(paste0("### allinputs: ", allinputs ))
         if(length(allinputs)>0){
-          message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
+          #message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
           #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
           
           dfSuitability<-functionSuitability(inputsdata=allinputs, interface=interface, database=data,
@@ -272,6 +273,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           # filter the trees based on the hard criteria
           dfSuitability<-Hard_criteria_filter(dfSuitability, allinputs, interface)
         
+          #print(str(dfSuitability))
         } else{
           dfSuitability<-data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives")
         }
@@ -302,11 +304,11 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       #after that, when just the language is modified, we use update... to simply update the labels without redrawing the whole controls
       output$dynamicControlsResponse <- renderUI({
         message("init dynamicControlsResponse")
-       #  print(str(compactcontrols()))
+        #print(str(compactcontrols()))
         #initcompactcontrols<-reshapecontrols(interface, language="en")
         initcompactcontrols<-compactcontrols()
         responsecontrols<-which(initcompactcontrols$side=="responsetrait")
-        # print(str(responsecontrols))
+        #print(str(responsecontrols))
         #browser()
         #print(responsecontrols)
         controls_list <- lapply(responsecontrols, function(i) {
@@ -325,8 +327,9 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             numericInput=numericInput(input_id, label = labelinput, value = 0),
             selectInput=selectInput(input_id, label = labelinput, choices = choices),
             checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices),
-            sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices)))
-            # Add more control types as needed
+            sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices))),
+            radioButtons=radioButtons(input_id, label = labelinput,choices = choices)
+          # Add more control types as needed
           )
           
           column(width = 6, control)
@@ -341,15 +344,15 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         initcompactcontrols<-compactcontrols()
         responsecontrols<-which(initcompactcontrols$side=="effecttrait")
         #print(responsecontrols)
-        #browser()
+        
         controls_list <- lapply(responsecontrols, function(i) {
+          
           control_type <- initcompactcontrols$objecttype[i]
           input_id <- ns(initcompactcontrols$criteria[i])
           #message(paste("creation", input_id))
           choices <- strsplit(initcompactcontrols$choice[i], ",")[[1]]
           labchoices<-strsplit(initcompactcontrols$labelchoice[i], ",")[[1]]
           names(choices)<-labchoices
-          #print(choices)
           labelinput<-initcompactcontrols$labelcriteria[i]
           
   
@@ -359,10 +362,11 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             numericInput=numericInput(input_id, label = labelinput, value = 0),
             selectInput=selectInput(input_id, label = labelinput, choices = choices),
             checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices),
-            sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices)))
+            sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices))),
+            radioButtons=radioButtons(input_id, label = labelinput,choices = choices)
             # Add more control types as needed
           )
-          
+          #browser()
           column(width = 6, control)
         })
         #print(str(controls_list))
@@ -388,7 +392,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           control_type <- goodtranslations$objecttype[i]
           input_id <- ns(goodtranslations$criteria[i])
           current_value<-input[[input_id]]
-          print(paste("values of ", input_id, "=", paste(current_value, collapse=";")))
+          #print(paste("values of ", input_id, "=", paste(current_value, collapse=";")))
           choices <- strsplit(goodtranslations$choice[i], ",")[[1]]
           labchoices<-strsplit(goodtranslations$labelchoice[i], ",")[[1]]
           names(choices)<-labchoices
@@ -459,8 +463,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       output$DTSuitability <- renderDT({
         
         datalong<-datatoplot()
-        if(datalong$species[1] != "no data yet") {
+        if(datalong$species[1] != "no data yet") { #we have data: this is not the dummy dataset
           datalong[datalong$side=="responsetrait", "value"]<- -datalong[datalong$side=="responsetrait", "value"]
+          
+          
           if("criteria" %in% names(datalong)) {
             #datalong<-datalong[order(datalong$side, datalong$criteria, datalong$species),]
             datawide<-reshape(datalong[,c("species", "criteria", "value")], direction="wide",

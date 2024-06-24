@@ -6,7 +6,7 @@
 library(shiny)
 library(svglite)
 library(shinyjs)
-library(openxlsx)
+#library(openxlsx)
 library(ggplot2)
 #library(plotly)
 library(shinydashboard)
@@ -38,7 +38,6 @@ library(rsvg)
 # interfaceCzech<-read.xlsx("models/Czech.xlsx", sheet="interface")
 
 #don't forget to save files as tab-delimited, with utf-8 encoding because of Czech special characters 
-#does not work because there are quotes, special characters etc.. and even in utf-8 czech characters are not properly read
 dataDENTRO<-read.table("models/dataDENTRO.txt", fileEncoding = "UTF-8", encoding = "UTF-8",fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceDENTRO<-read.table("models/interfaceDENTRO.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataSTA<-read.table("models/dataSTA.txt",  fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
@@ -49,15 +48,20 @@ dataSCSM<-read.table("models/dataSCSM.txt", fileEncoding = "UTF-8", encoding = "
 interfaceSCSM<-read.table("models/interfaceSCSM.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataCzech<-read.table("models/dataCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceCzech<-read.table("models/interfaceCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataJBOJP<-read.table("models/dataJBOJP.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceJBOJP<-read.table("models/interfaceJBOJP.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataDEHM<-read.table("models/dataDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceDEHM<-read.table("models/interfaceDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
 # In czech, there are empty spaces around words in some cells 
 dataCzech <- data.frame(lapply(dataCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
 interfaceCzech <- data.frame(lapply(interfaceCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
 
-  # Initialize the translator
+# Initialize the translator
 i18n <- Translator$new(translation_csvs_path = "R/translation/")
 i18n$set_translation_language("en")  # Default language
 
+#remove commas in the interface because commas are used for separating values  
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
 interfaceSTA[1:length(interfaceSTA)]<-lapply(interfaceSTA[1:length(interfaceSTA)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceDENTRO<-interfaceDENTRO[!is.na(interfaceDENTRO$side),]
@@ -68,8 +72,20 @@ interfaceSCSM<-interfaceSCSM[!is.na(interfaceSCSM$side),]
 interfaceSCSM[1:length(interfaceSCSM)]<-lapply(interfaceSCSM[1:length(interfaceSCSM)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceCzech<-interfaceCzech[!is.na(interfaceCzech$side),]
 interfaceCzech[1:length(interfaceCzech)]<-lapply(interfaceCzech[1:length(interfaceCzech)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceJBOJP<-interfaceJBOJP[!is.na(interfaceJBOJP$side),]
+interfaceJBOJP[1:length(interfaceJBOJP)]<-lapply(interfaceJBOJP[1:length(interfaceJBOJP)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceDEHM<-interfaceDEHM[!is.na(interfaceDEHM$side),]
+interfaceDEHM[1:length(interfaceDEHM)]<-lapply(interfaceDEHM[1:length(interfaceDEHM)], function(x) gsub(pattern=",", replacement=".", x=x))
 
-toto<-strsplit(c(names(interfaceSTA), names(interfaceDENTRO), names(interfaceDECIDUOUS), names(interfaceSCSM), names(interfaceCzech)), split="_")
+
+
+toto<-strsplit(c(names(interfaceSTA), 
+                 names(interfaceDENTRO), 
+                 names(interfaceDECIDUOUS), 
+                 names(interfaceSCSM), 
+                 names(interfaceCzech),
+                 names(interfaceJBOJP),
+                 names(interfaceDEHM)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives){
@@ -204,10 +220,10 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
     else if (criteria %in% names(db)){ #one column criteria, with content equal to possible choices
       db$value<-as.numeric(db[,criteria]==chosen) 
     } else {
-      if (sum(grepl(pattern=chosen, x=names(db)))==1) {
+      if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the
       db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
     } else {
-      print("could not guess which variable to use") ; db$value<-NA
+      print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
     }}
     
   } else if (type=="checkboxInput") {
@@ -262,14 +278,14 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
   return(db)
 }
 
-
+# if you need to further reformat the data, you can do it within the suitability_MODELNAME.txt file
 source("R/suitability_DENTRO.R")
 source("R/suitability_DECIDUOUS.R")
 source("R/suitability_STA.R")
 source("R/suitability_SCSM.R")
 source("R/suitability_Czech.R")
-
-
+source("R/suitability_JBOJP.R")
+source("R/suitability_DEHM.R")
 
 
 
