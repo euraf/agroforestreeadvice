@@ -495,7 +495,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           speciesOrder$order <- unique(datalong$species)
           
           # column datainfo$Scientific_name - delete text after second space (if present) to better fit the table
-          datawide$species <- gsub("^(\\S+\\s+\\S+).*", "\\1", datawide$species)
+          # datawide$species <- gsub("^(\\S+\\s+\\S+).*", "\\1", datawide$species)
 
           # drop value. from the column names
           names(datawide) <- gsub("\\value.", "", names(datawide))
@@ -521,6 +521,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
 
       output$DTinformations <- renderDT({
+        # Information about the trees - loads data from "info" side of the interface - needs to be allowed on line 40
+        
         #calls the function when one changes
         speciesOrder$order
         language()
