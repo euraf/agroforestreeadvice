@@ -1,8 +1,9 @@
-#this file is weak point, the translations of most of the project are handled by i18n library, but that is not suitable for
-#translation of dynamic datatables, hence the need for these custom functions here, which are hard-coded and heavy-handed
+# this file is weak point, the most of translations are handled by i18n library, but that is not suitable for
+# translation of dynamic tables, hence the need for these custom functions here, which are hard-coded and heavy-handed
+
 
 Plot_legend_lang <- function(lang) {
-  # Load the CSV file
+  # Load the translation of the graph legend
   BigCriteria_translates <- read.csv("R/translation/BigCriteria_translates.csv", stringsAsFactors = FALSE)
 
   #return as character vector use en as name and cz as value
@@ -15,7 +16,7 @@ Plot_legend_lang <- function(lang) {
 
 
 translator <- function(data, interface, language) {
-  # Tries to translate all data - based on the interface and vocabulary
+  # Tries to translate all data in Information table - search in the interface and vocabulary
   vocabulary <- read.csv("R/translate_plot_categories.csv", sep = ",", header = TRUE)
 
   # Ensure 'info' side exists in 'interface'
@@ -64,7 +65,7 @@ translator <- function(data, interface, language) {
 
 
 help_text <- function(id, lang) {
-  # Load help information - very primitive, returns as list of strings
+  # Load help information - very primitive, returns as list of strings, then is viewed in modal window "Information"
   help_text <- read.csv("R/help_information.csv", stringsAsFactors = FALSE)
 
   # Gets only "tool" rows containg only actual ID - eg. Czech, DENTRO...
