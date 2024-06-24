@@ -59,9 +59,9 @@ compute_suitability_Czech<-function(inputsdata=NULL,
 }
 
 Hard_criteria_filter <- function(db, inputsdata, interface) {
-  # Filter trees - if 999 in weightwithincriteria, then it is a hard criteria and algorithm will drop trees which does not meet it 
+  # Filter trees - if 999 in weightwithincriteria, then it is a hard criteria and algorithm will drop trees which do not meet it 
   # it will check if values of these criteria is 1 - if not - drop them
-  # 1. identify hard_criteria 2. identify trees 3. identify values of hard_criteria for each tree 4. drop trees where these values are 0 
+  # In esence, it checks what is hard criterium and then drops trees which do not have it as 1
   
   if (999 %in% interface$weightwithincriteria) {
     print("Filtered by hard criteria") }
