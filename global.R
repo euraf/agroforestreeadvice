@@ -4,7 +4,7 @@
 
 #library(writexl)       # for writing xlsx files
 library(shiny)
-library(svglite)
+library(svglite)        # for svg output
 library(shinyjs)
 #library(openxlsx)
 library(ggplot2)
@@ -14,12 +14,12 @@ library(DT)
 library(dplyr)
 library(stringr)
 #library(tidyverse)
-library(purrr)
-library(shiny.i18n)
-library(cowplot)
+library(purrr)          
+library(shiny.i18n)     # for translations in the app
+library(cowplot)        # for ggplot2 plots in download
 library(gridExtra)
-library(grid)
-library(rsvg)
+library(grid)           
+library(rsvg)           # convert svg to png
 ##global----
 
 #load("dataSTA.Rdata")
