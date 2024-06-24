@@ -19,6 +19,7 @@ library(shiny.i18n)
 library(cowplot)
 library(gridExtra)
 library(grid)
+library(rsvg)
 ##global----
 
 #load("dataSTA.Rdata")
