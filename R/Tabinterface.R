@@ -239,7 +239,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           htmlOutput("dataPreview"),  # Display data preview
           footer = tagList(
             modalButton(i18n$t("Close"), icon = icon("remove")),
-            downloadButton("downloadSVG", i18n$t("Download as SVG file"))
+            downloadButton("downloadSVG", i18n$t("Download as SVG file")),
+            downloadButton("downloadPNG", i18n$t("Download as PNG file"))
             ),
           size = "l",
           easyClose = TRUE
