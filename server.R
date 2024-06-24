@@ -200,13 +200,15 @@ create_combined_plot <- function() {
   
   moduleTabInterface_Server(id = "JBOJP",
                             language= language,
-                            data=dataJBOJP, interface=interfaceJBOJP, functionSuitability=compute_suitability_JBOJP, compactobjectives=FALSE)
+                            data=dataJBOJP, interface=interfaceJBOJP, functionSuitability=compute_suitability_JBOJP, compactobjectives=FALSE,
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
   
   # German Hedgerow manager
   moduleTabInterface_Server(id = "DEHM",
                             language= language,
-                            data=dataDEHM, interface=interfaceDEHM, functionSuitability=compute_suitability_DEHM, compactobjectives=FALSE)
+                            data=dataDEHM, interface=interfaceDEHM, functionSuitability=compute_suitability_DEHM, compactobjectives=FALSE,
+                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
   
 }
 
