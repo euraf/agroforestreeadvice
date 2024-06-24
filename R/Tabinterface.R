@@ -259,9 +259,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       datatoplot<-reactive({
         allinputs<-reformattedinputs() 
         orderby<-input$orderby
-        #print(orderby)
-        # print("### allinputs ###")
-        # print(allinputs)
+        # print(paste0("### Order by: ", orderby))
+        # print(paste0("### allinputs: ", allinputs ))
         if(length(allinputs)>0){
           message(paste("computing suitability graph with"), paste(names(allinputs), collapse=" "))
           #dfSuitability<-data.frame(species="icicici", side="responsetrait", value=1, BigCriteria="debugging")
