@@ -5,54 +5,49 @@ server <- function(input, output, session) {
   reactive_dataSuitability <- reactiveVal(data.frame(x = numeric(), y = numeric()))
   reactive_plotSuitability <- reactiveVal(ggplot())
 
+  # Access the datatable - for debug purposes
   access_dataSuitability <- function() {
     print("Suitability data accessed")
     reactive_dataSuitability()
   }
 
+  # Access the plot - for debug purposes
   access_plotSuitability <- function() {
     print("Suitability plot accessed")
     reactive_plotSuitability()
   }
 
 
+  # Function to create a combined plot with a table for download
+  create_combined_plot <- function() {
+    DataSuitability <- access_dataSuitability()
+    plotting <- access_plotSuitability()
 
-create_combined_plot <- function() {
-  DataSuitability <- access_dataSuitability()  # Access the data frame
-  plotting <- access_plotSuitability()         # Access the ggplot object
+    # Style the table grob
+    table_theme <- ttheme_default(
+      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
+      colhead = list(bg_params = list(fill = "grey80", col = NA)),
+      rowhead = list(bg_params = list(fill = "grey80", col = NA))
+    )
+    table_grob <- tableGrob(head(DataSuitability, 20), theme = table_theme)
 
-  # Style the table grob
-  table_theme <- ttheme_default(
-    core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
-    colhead = list(bg_params = list(fill = "grey80", col = NA)),
-    rowhead = list(bg_params = list(fill = "grey80", col = NA))
-  )
-  table_grob <- tableGrob(head(DataSuitability, 20), theme = table_theme)
+    # Create a headline
+    headline <- ggdraw() + 
+      draw_label("Suitability Analysis Report by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
+      theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
-  # Create a headline
-  headline <- ggdraw() + 
-    draw_label("Suitability Analysis Report by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
-    theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
+    # Combine the elements into a single plot
+    combined <- plot_grid(
+      headline, NULL, plotting, NULL, table_grob, 
+      ncol = 1, 
+      rel_heights = c(0.08, 0.01, 1, 0.05, 1)  # Adjust heights to add space between elements
+    )
 
-  # Annotations for the plot (example)
-  annotated_plot <- plotting + 
-    annotate("text", x = Inf, y = Inf, label = "Data Source: AgroForesTreeAdvice", hjust = 1.1, vjust = 2, size = 3, color = "#616161") +
-    theme(plot.margin = margin(20, 0, 20, 0))
-
-  # Combine the elements into a single plot
-  combined <- plot_grid(
-    headline, NULL,
-    plotting, NULL,
-    table_grob, 
-    ncol = 1, 
-    rel_heights = c(0.08, 0.01, 1, 0.05, 1)  # Adjust heights to add space between elements
-  )
-
-  # Wrap the combined plot in a ggdraw to add a bottom margin
-  combined_with_margin <- ggdraw(combined) + 
-    theme(plot.margin = margin(10, 10, 10, 10))
-  return(combined_with_margin)
-  }
+    # Wrap the combined plot in a ggdraw to add a bottom margin
+    combined_with_margin <- ggdraw(combined) + 
+      theme(plot.margin = margin(10, 10, 10, 10))
+    return(combined_with_margin)
+    }
 
   # Download handler for svg
   observe({
@@ -86,7 +81,7 @@ create_combined_plot <- function() {
     )
   })
   
-
+  # use shiny.i18n to update the language and translate the app
   observeEvent(input$selected_language, {
     # Print the selected language to the console
     print(paste("The selected language has changed to:", input$selected_language))
