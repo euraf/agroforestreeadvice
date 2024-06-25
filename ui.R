@@ -189,6 +189,14 @@ body <- dashboardBody(
       "))
   ),
 
+  # style for the buttons on download modal
+  tags$head(
+    tags$style(HTML("
+      .download-button {
+        width: 220px;
+      }
+    "))
+  ),
           
 ) #fin dashboardbody
 
