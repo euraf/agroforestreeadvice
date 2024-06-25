@@ -204,43 +204,49 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       # shows information about the filters - loads custom texts from help_informations - only thoses with actual ID and correct language
       observeEvent(input$filter_info, {
-      texts <- help_text(as.character(id), actual_lang)
-      showModal(modalDialog(
-        title = i18n$t("Information about the filters"),
-        # Creating a list of div elements based on the texts
-        do.call(tagList, lapply(seq_along(texts), function(i) {
-          if (i %% 2 == 0) {
-            tags$div(
-              style = "display: flex; justify-content: flex-start; padding: 5px;",
-              tags$div(style = "font-family: Arial; font-weight: normal;", texts[i])
-            )
-          } else {
-            tags$div(
-              style = "display: flex; justify-content: flex-start; padding: 5px;",
-              tags$div(style = "font-family: Arial; font-weight: bold;", texts[i]))}
-           })),
-        easyClose = TRUE,
-        footer = modalButton(i18n$t("Close"), icon = icon("remove")),
-            # javascript custom modalButton and Header styles
-            tags$script('
-            $(document).ready(function() {
-              // Styling the close button
-              $(".modal-footer .btn").css({"background-color": "#3c8dbc", "color": "white", "border": "none", "padding": "5px 10px"});
-              
-              // Styling the modal header
-              $(".modal-header").css({"font-weight": "bold", "background-color": "#3c8dbc", "color": "white"});
-            });
-          ')
-            )) # ends modal
-          }) # ends observeEvent
+        texts <- help_text(as.character(id), actual_lang)
+        showModal(modalDialog(
+          title = i18n$t("Information about the filters"),
+          # Creating a list of div elements based on the texts
+          do.call(tagList, lapply(seq_along(texts), function(i) {
+            if (i %% 2 == 0) {
+              tags$div(
+                style = "display: flex; justify-content: flex-start; padding: 5px;",
+                tags$div(style = "font-family: Arial; font-weight: normal;", texts[i])
+              )
+            } else {
+              tags$div(
+                style = "display: flex; justify-content: flex-start; padding: 5px;",
+                tags$div(style = "font-family: Arial; font-weight: bold;", texts[i]))}
+            })),
+          easyClose = TRUE,
+          footer = modalButton(i18n$t("Close"), icon = icon("remove")),
+              # javascript custom modalButton and Header styles
+              tags$script('
+              $(document).ready(function() {
+                // Styling the close button
+                $(".modal-footer .btn").css({"background-color": "#3c8dbc", "color": "white", "border": "none", "padding": "5px 10px"});
+                
+                // Styling the modal header
+                $(".modal-header").css({"font-weight": "bold", "background-color": "#3c8dbc", "color": "white"});
+              });
+            ')
+          )) # ends modal
+      }) # ends observeEvent
 
       observeEvent(input$show_modal, {
         showModal(modalDialog(
           title = i18n$t("Download selected data"),
           htmlOutput("dataPreview"),  # Display data preview
           footer = tagList(
-            downloadButton("downloadSVG", i18n$t("Download as SVG file")),
-            downloadButton("downloadPNG", i18n$t("Download as PNG file")),
+            div(style = "text-align: left; padding: 5px;",
+                downloadButton("downloadExcel", i18n$t("Download as Excel file"), class = "download-button"),
+                downloadButton("downloadSVG", i18n$t("Download as SVG file"), class = "download-button")),
+
+            div(style = "text-align: left; padding: 5px;",
+                downloadButton("downloadCSV", i18n$t("Download as CSV file"), class = "download-button"),
+                downloadButton("downloadPNG", i18n$t("Download as PNG file"), class = "download-button")),
+
             modalButton(i18n$t("Close"), icon = icon("remove"))
             ),
           size = "l",
