@@ -18,7 +18,6 @@ library(purrr)
 library(shiny.i18n)     # for translations in the app
 library(cowplot)        # for ggplot2 plots in download
 library(gridExtra)
-library(grid)           
 library(rsvg)           # convert svg to png
 ##global----
 
