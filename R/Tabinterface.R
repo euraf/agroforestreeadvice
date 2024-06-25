@@ -236,12 +236,12 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
 
       observeEvent(input$show_modal, {
         showModal(modalDialog(
-          title = "Download txt file",
+          title = i18n$t("Download selected data"),
           htmlOutput("dataPreview"),  # Display data preview
           footer = tagList(
-            modalButton(i18n$t("Close"), icon = icon("remove")),
             downloadButton("downloadSVG", i18n$t("Download as SVG file")),
-            downloadButton("downloadPNG", i18n$t("Download as PNG file"))
+            downloadButton("downloadPNG", i18n$t("Download as PNG file")),
+            modalButton(i18n$t("Close"), icon = icon("remove"))
             ),
           size = "l",
           easyClose = TRUE
