@@ -20,8 +20,9 @@ server <- function(input, output, session) {
 
   # Function to create a combined plot with a table for download
   create_combined_plot <- function() {
-    DataSuitability <- access_dataSuitability()
     plotting <- access_plotSuitability()
+    DataSuitability <- access_dataSuitability()
+    DataSuitability <- data.frame(as.matrix(DataSuitability))
 
     # Style the table grob
     table_theme <- ttheme_default(
@@ -29,11 +30,11 @@ server <- function(input, output, session) {
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
-    table_grob <- tableGrob(head(DataSuitability, 20), theme = table_theme)
+    table_grob <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
 
     # Create a headline
     headline <- ggdraw() + 
-      draw_label("Suitability Analysis Report by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
+      draw_label(i18n$t("Report of Tree Suitability by AgroForesTreeAdvice"), fontface = 'bold', size = 20, x = 0, hjust = 0) +
       theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
     # Combine the elements into a single plot
@@ -80,7 +81,33 @@ server <- function(input, output, session) {
       }
     )
   })
-  
+
+  # Download handler for csv
+  observe({
+    output$downloadCSV <- downloadHandler(
+      filename = function() {
+        paste("plot_and_data-", Sys.Date(), ".csv", sep = "")
+      },
+    content = function(file) {
+      csv_data <- data.frame(access_dataSuitability())
+      write.csv(csv_data, file, row.names = FALSE)
+      }
+    )
+  })
+
+  # Download handler for excel
+  observe({
+    output$downloadExcel <- downloadHandler(
+      filename = function() {
+        paste("plot_and_data-", Sys.Date(), ".xlsx", sep = "")
+      },
+      content = function(file) {
+        excel_data <- data.frame(access_dataSuitability())
+        write.xlsx(excel_data, file, rowNames = FALSE)
+      }
+    )
+  })
+    
   # use shiny.i18n to update the language and translate the app
   observeEvent(input$selected_language, {
     # Print the selected language to the console
