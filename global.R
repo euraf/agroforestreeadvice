@@ -2,11 +2,10 @@
 #                    "https://gosme.shinyapps.io/DigitAFtreeAdvice/", streaming=TRUE)
 #"D:\\Mes_documents\\a_ABSys\\autreschercheurs\\BertReubens\\DigitAFtreeAdvice\\rsconnect\\shinyapps.io\\gosme"
 
-#library(writexl)       # for writing xlsx files
 library(shiny)
-library(svglite)        # for svg output
+library(svglite)        # for svg download
 library(shinyjs)
-#library(openxlsx)
+library(openxlsx)       # for writing xlsx files in download
 library(ggplot2)
 #library(plotly)
 library(shinydashboard)
@@ -18,7 +17,7 @@ library(purrr)
 library(shiny.i18n)     # for translations in the app
 library(cowplot)        # for ggplot2 plots in download
 library(gridExtra)
-library(rsvg)           # convert svg to png
+library(rsvg)           # convert svg to png in downloads
 ##global----
 
 #load("dataSTA.Rdata")
