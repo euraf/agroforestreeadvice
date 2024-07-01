@@ -41,6 +41,8 @@ dataJBOJP<-read.table("models/dataJBOJP.txt", fileEncoding = "UTF-8", encoding =
 interfaceJBOJP<-read.table("models/interfaceJBOJP.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataDEHM<-read.table("models/dataDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceDEHM<-read.table("models/interfaceDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataSUOMI<-read.table("models/dataSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceSUOMI<-read.table("models/interfaceSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
 #remove commas in the interface because commas are used for separating values
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
@@ -57,7 +59,8 @@ interfaceJBOJP<-interfaceJBOJP[!is.na(interfaceJBOJP$side),]
 interfaceJBOJP[1:length(interfaceJBOJP)]<-lapply(interfaceJBOJP[1:length(interfaceJBOJP)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceDEHM<-interfaceDEHM[!is.na(interfaceDEHM$side),]
 interfaceDEHM[1:length(interfaceDEHM)]<-lapply(interfaceDEHM[1:length(interfaceDEHM)], function(x) gsub(pattern=",", replacement=".", x=x))
-
+interfaceSUOMI<-interfaceSUOMI[!is.na(interfaceSUOMI$side),]
+interfaceSUOMI[1:length(interfaceSUOMI)]<-lapply(interfaceSUOMI[1:length(interfaceSUOMI)], function(x) gsub(pattern=",", replacement=".", x=x))
 
 
 toto<-strsplit(c(names(interfaceSTA), 
@@ -66,7 +69,8 @@ toto<-strsplit(c(names(interfaceSTA),
                  names(interfaceSCSM), 
                  names(interfaceCzech),
                  names(interfaceJBOJP),
-                 names(interfaceDEHM)), split="_")
+                 names(interfaceDEHM),
+                 names(interfaceSUOMI)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives){
@@ -113,7 +117,6 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
     #message(paste(c(names(compact), names(bigeffects)), collapse=" "))
     compact<-rbind(compact[compact$side=="responsetrait",],bigeffects)
   }
-  
   compact<-compact[order(compact$side, compact$order),]
   #print(head(compact))
   return(compact)
@@ -238,6 +241,7 @@ source("R/suitability_SCSM.R")
 source("R/suitability_Czech.R")
 source("R/suitability_JBOJP.R")
 source("R/suitability_DEHM.R")
+source("R/suitability_SUOMI.R") #to do: transform I-VIII to 1-8, change the - to , except in size, remove parentheses and cange them to additional not so good condition columns
 
 
 

@@ -58,7 +58,9 @@ moduleTabInterface_UI <- function(id, data, interface) {
                    div(style="display: inline-block;vertical-align:top; width: 200px;",
                        numericInput(inputId=ns("barplotto"), label="to the yth", value=20))
                  ),
-                 plotOutput((ns("barplot_suitability")))
+                 plotOutput(ns("barplot_suitability"),
+                            hover = hoverOpts(id =ns("plot_hover"))),
+                 htmlOutput(ns("hover_info"))
                  
           ),
           column(width=12,
@@ -128,7 +130,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         }
         #message("reformated inputs:"); message(str(reformated))
         return(reformated)
-
+        
       })#reformattedinputs() is a named character of choices of the user (with the checkbox name for TRUE checkboxes)
       #observe(print(str(reformattedinputs())))
       
@@ -221,7 +223,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices),
             sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices))),
             radioButtons=radioButtons(input_id, label = labelinput,choices = choices)
-          # Add more control types as needed
+            # Add more control types as needed
           )
           
           column(width = 6, control)
@@ -292,7 +294,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             # Add more control types as needed
           )
         })
-
+        
       }, ignoreInit=TRUE) #end update dynamic controls according to language
       
       
@@ -321,6 +323,25 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           labs(x = NULL, y = "Species")
         return(plot_Suitability)
       })
+      
+      ## barplot hovered bar info ----
+      output$hover_info <- renderPrint({
+        if(!is.null(input$plot_hover)){
+          hoverlist<-input$plot_hover
+          #str(hoverlist$y)
+          #browser()
+          id<-hoverlist$domain$discrete_limits$y[[round(hoverlist$y)]]
+          print(paste("<b>",id,"</b><br>", data[data$latin==id, "description"]))
+          #icicicici works only for SUOMI because the description and ID fields names are hard-coded
+          #     
+          #     #hover=input$plot_hover
+          #     #dist=abs((hover$x-datatoplot$)
+          #    # cat("Weight (lb/1000)\n")
+          #     #if(min(dist) < 3)
+          #       #mtcars$wt[which.min(dist)]
+        }
+      })
+      
       
       ## DT table----
       output$DTSuitability <- renderDT({
@@ -359,7 +380,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
           
         } else {datalong}
-        }, options = list(
+      }, options = list(
         scrollX = TRUE,
         order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
       ))
