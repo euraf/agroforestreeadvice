@@ -1,9 +1,15 @@
 initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincriteria	BigCriteria_fi	criteria_fi	choice_fi	BigCriteria_en	criteria_en	choice_en	BigCriteria_nl	criteria_nl	choice_nl	BigCriteria_fr	criteria_fr	choice_fr	BigCriteria_de	criteria_de	choice_de	BigCriteria_cz	criteria_cz	choice_cz
+	effecttrait		use	size	1	sliderInput		tuotto	koko		Use	size					Utilisation	hauteur							
+	effecttrait		use	size	30	sliderInput		tuotto	koko		Use	size					Utilisation	hauteur							
+	effecttrait		use	use	L	selectInput		tuotto	Käyttö	Laidunkäyttö	Use	AF type	Silvopastoral				Utilisation	type AF	Silvopastoral						
+	effecttrait		use	use	P	selectInput		tuotto	Käyttö	Peltometsäviljelykäyttö	Use	AF type	silvoarable				Utilisation	type AF	sylvopastoral						
+	effecttrait		use	use	VS	selectInput		tuotto	Käyttö	Vesistöjen suojakaistat	Use	AF type	Water protection strips				Utilisation	type AF	Bandes de protection contre l eau						
+	effecttrait		use	use	T	selectInput		tuotto	Käyttö	Tuulensuojaistutukset	Use	AF type	Windbreaks				Utilisation	type AF	Brise-vent						
 	effecttrait		use	yield	puu	checkboxGroupInput		tuotto	tuotto	puuaines	Use	product	wood material				Utilisation	produit	matériaux en bois						
 	effecttrait		use	yield	moni	checkboxGroupInput		tuotto	tuotto	monimuotoisuus	Use	product	biodiversity				Utilisation	produit	biodiversité						
 	effecttrait		use	yield	mah	checkboxGroupInput		tuotto	tuotto	mahla	Use	product	juice				Utilisation	produit	jus						
 	effecttrait		use	yield	bio	checkboxGroupInput		tuotto	tuotto	biomassa	Use	product	biomass				Utilisation	produit	biomasse						
-	effecttrait		use	yield	N	checkboxGroupInput		tuotto	tuotto	N+ (typensitoja)	Use	product	N+ (nitrogen fixation)				Utilisation	produit	N+ (fixation de l'azote)						
+	effecttrait		use	yield	N+	checkboxGroupInput		tuotto	tuotto	N+ (typensitoja)	Use	product	N+ (nitrogen fixation)				Utilisation	produit	N+ (fixation de l azote)						
 	effecttrait		use	yield	leh	checkboxGroupInput		tuotto	tuotto	lehdekset	Use	product	leaves				Utilisation	produit	feuilles						
 	effecttrait		use	yield	rohdos	checkboxGroupInput		tuotto	tuotto	rohdos	Use	product	herb				Utilisation	produit	herbe						
 	effecttrait		use	yield	hed	checkboxGroupInput		tuotto	tuotto	hedelmät	Use	product	fruit				Utilisation	produit	fruits						
@@ -14,33 +20,19 @@ initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincrite
 	effecttrait		use	yield	mesi	checkboxGroupInput		tuotto	tuotto	mesi	Use	product	honey				Utilisation	produit	miel						
 	effecttrait		use	yield	tee	checkboxGroupInput		tuotto	tuotto	tee	Use	product	tea				Utilisation	produit	thé						
 	effecttrait		use	yield	kuitu	checkboxGroupInput		tuotto	tuotto	kuitu	Use	product	fibre				Utilisation	produit	fibre						
-	effecttrait		use	use	L	selectInput		tuotto	Käyttö	Laidunkäyttö	Use	AF type	Silvopastoral				Utilisation	type AF	Silvopastoral						
-	effecttrait		use	use	P	selectInput		tuotto	Käyttö	Peltometsäviljelykäyttö	Use	AF type	silvoarable				Utilisation	type AF	sylvopastoral						
-	effecttrait		use	use	VS	selectInput		tuotto	Käyttö	Vesistöjen suojakaistat	Use	AF type	Water protection strips				Utilisation	type AF	Bandes de protection contre l'eau						
-	effecttrait		use	use	T	selectInput		tuotto	Käyttö	Tuulensuojaistutukset	Use	AF type	Windbreaks				Utilisation	type AF	Brise-vent						
-	responsetrait		soil	soil humidity	tuo	selectInput		Maaperä	maaperän kosteus	tuore	Soil	soil humidity	fresh				Sol	humidité du sol	frais						
-	responsetrait		soil	soil humidity	kos	selectInput		Maaperä	maaperän kosteus	kos	Soil	soil humidity	kos				Sol	humidité du sol	kos						
-	responsetrait		soil	soil richness	ravint	selectInput		Maaperä	maaperän rikkaus	runsasravinteinen	Soil	soil richness	rich in nutrients				Sol	richesse du sol	riche en nutriments						
-	responsetrait		soil	soil humidity	mär	selectInput		Maaperä	maaperän kosteus	märkä	Soil	soil humidity	wet				Sol	humidité du sol	humide						
-	responsetrait		soil	soil	kui	selectInput		Maaperä	maaperä	kui	Soil	soil	if				Sol	sol	si						
-	responsetrait		soil	soil richness	keskirav	selectInput		Maaperä	maaperän rikkaus	keskiravinteinen	Soil	soil richness	medium				Sol	humidité du sol	moyen						
-	responsetrait		soil	soil	Ca	selectInput		Maaperä	maaperä	kalkinsuosija	Soil	soil	calcium rich				Sol	sol	riche en calcium						
-	responsetrait		soil	soil humidity	läp	selectInput		Maaperä	maaperän kosteus	läpäisevä (hyvin vettä läpäisevä, ilmava)	Soil	soil humidity	permeable (highly permeable, aerated)				Sol	humidité du sol	perméable (hautement perméable, aéré)						
-	responsetrait		soil	soil texture	savi	selectInput		Maaperä	maaperä	savi	Soil	soil	clay				Sol	texture du sol	argile						
-	responsetrait		soil	soil texture	multa	selectInput		Maaperä	maaperän rakenne	multava	Soil	soil texture	loamy				Sol	texture du sol	limoneux						
-	responsetrait		soil	soil richness	niukka	selectInput		Maaperä	maaperän rikkaus	niukka	Soil	soil richness	poor				Sol	richesse du sol	pauvre						
-	effecttrait		size	size	1	sliderInput		tuotto	koko		Use	size					Utilisation	hauteur							
-	effecttrait		size	size	30	sliderInput		tuotto	koko		Use	size					Utilisation	hauteur							
-	responsetrait		climate	cultivation	au	selectInput		ilmasto	kasvupaikka	aurinkoinen,	Climate	orientation	sunny				Climat	ensoleillement	ensoleillé						
-	responsetrait		climate	cultivation	pv	selectInput		ilmasto	kasvupaikka	puolivarjoinen,	Climate	orientation	semi-shaded				Climat	ensoleillement	semi-ombragé						
-	responsetrait		climate	cultivation	var	selectInput		ilmasto	kasvupaikka	varjoinen	Climate	orientation	shady				Climat	ensoleillement	ombragé						
-	responsetrait		climate	cultivation	suojaisa	selectInput		ilmasto	kasvupaikka	suojaisa	Climate	orientation	sheltered				Climat	ensoleillement	abrité						
-	responsetrait		climate	cultivation	suoja	selectInput		ilmasto	kasvupaikka	suoja	Climate	climate zone	sheltered				Climat	ensoleillement	abrité						
-	responsetrait		climate	zone	I	selectInput		ilmasto	vyöhyke	I	Climate	climate zone	I				Climat	zone climatique	I						
-	responsetrait		climate	zone	II	selectInput		ilmasto	vyöhyke	II	Climate	climate zone	II				Climat	zone climatique	II						
-	responsetrait		climate	zone	III	selectInput		ilmasto	vyöhyke	III	Climate	climate zone	III				Climat	zone climatique	III						
-	responsetrait		climate	zone	IV	selectInput		ilmasto	vyöhyke	IV	Climate	climate zone	IV				Climat	zone climatique	IV						
-	responsetrait		climate	zone	V	selectInput		ilmasto	vyöhyke	V	Climate	climate zone	V				Climat	zone climatique	V						
-	responsetrait		climate	zone	VI	selectInput		ilmasto	vyöhyke	VI	Climate	climate zone	VI				Climat	zone climatique	VI						
-	responsetrait		climate	zone	VII	selectInput		ilmasto	vyöhyke	VII	Climate	climate zone	VII				Climat	zone climatique	VII						
-	responsetrait		climate	zone	VIII	selectInput		ilmasto	vyöhyke	VIII	Climate	climate zone	VIII				Climat	zone climatique	VIII						
+	responsetrait		climate	shelter	suoja	checkboxInput		ilmasto	suojaisa	suoja	Climate	sheltered	sheltered				Climat	abrité	abrité						
+	responsetrait		climate	sun	au	selectInput		ilmasto	kasvupaikka	aurinkoinen,	Climate	orientation	sunny				Climat	ensoleillement	ensoleillé						
+	responsetrait		climate	sun	pv	selectInput		ilmasto	kasvupaikka	puolivarjoinen,	Climate	orientation	semi-shaded				Climat	ensoleillement	semi-ombragé						
+	responsetrait		climate	sun	var	selectInput		ilmasto	kasvupaikka	varjoinen	Climate	orientation	shady				Climat	ensoleillement	ombragé						
+	responsetrait		climate	zone	1	numericInput		ilmasto	vyöhyke	I	Climate	climate zone (I-VIII)	I				Climat	zone climatique (I à VIII)	I						
+	responsetrait		soil	noncrusting	läp	checkboxInput		Maaperä	maaperän läpäisevä	läpäisevä (hyvin vettä läpäisevä, ilmava)	Soil	non crusting	permeable (highly permeable, aerated)				Sol	pas de risque de battance	perméable (hautement perméable, aéré)						
+	responsetrait		soil	soilcalcareous	Ca	checkboxInput		Maaperä	maaperä	kalkinsuosija	Soil	soil calcium	calcium rich				Sol	calcaire	riche en calcium						
+	responsetrait		soil	soilhumidity	kui	selectInput		Maaperä	maaperän kosteus	kui	Soil	soil humidity	if				Sol	humidité du sol	si						
+	responsetrait		soil	soilhumidity	tuo	selectInput		Maaperä	maaperän kosteus	tuore	Soil	soil humidity	fresh				Sol	humidité du sol	frais						
+	responsetrait		soil	soilhumidity	kos	selectInput		Maaperä	maaperän kosteus	kos	Soil	soil humidity	kos				Sol	humidité du sol	kos						
+	responsetrait		soil	soilhumidity	mär	selectInput		Maaperä	maaperän kosteus	märkä	Soil	soil humidity	wet				Sol	humidité du sol	humide						
+	responsetrait		soil	soilrichness	ravint	selectInput		Maaperä	maaperän rikkaus	runsasravinteinen	Soil	soil richness	rich in nutrients				Sol	richesse du sol	riche en nutriments						
+	responsetrait		soil	soilrichness	keskirav	selectInput		Maaperä	maaperän rikkaus	keskiravinteinen	Soil	soil richness	medium				Sol	richesse du sol	moyen						
+	responsetrait		soil	soilrichness	niukka	selectInput		Maaperä	maaperän rikkaus	niukka	Soil	soil richness	poor				Sol	richesse du sol	pauvre						
+	responsetrait		soil	soiltexture	savi	selectInput		Maaperä	maaperän rakenne	savi	Soil	soil texture	clay				Sol	texture du sol	argile						
+	responsetrait		soil	soiltexture	multa	selectInput		Maaperä	maaperän rakenne	multava	Soil	soil texture	loamy				Sol	texture du sol	limoneux						

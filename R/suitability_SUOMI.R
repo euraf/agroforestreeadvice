@@ -19,7 +19,10 @@ compute_suitability_SUOMI<-function(inputsdata=NULL,
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
   rownames(toto)<-toto$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
-                                  c("yield", "use", "soil", "size", "cultivation", "zone")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
+                                  c("yield", "use", "soilhumidity", "soilrichness", "soilcalcareous", "soiltexture", "crusting",
+                                    "size",  "sun", "shelter", "zone")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
+    
+  
   #"description"
   #warning: the data has not been corrected to separate "good" conditions and "not so good" conditions (in parenthesis => trees with parentheses are not counted)
   for(crit in standardformcriteria){
@@ -31,9 +34,27 @@ compute_suitability_SUOMI<-function(inputsdata=NULL,
                                                 inputs=inputsdata, 
                                                 db=database))
   }
-  
   #here, you can rbind dbfinal with the scores of the criteria that are not scored in the standard way
-  
+  notsogood<-data.frame()
+  for(crit in c("notsogood_yield", "notsogood_use","notsogood_zone")){
+  #  message("################## not so good ######################")
+  critbis<-gsub(pattern="notsogood_", replacement="", fixed=TRUE, x=crit)
+  inputsbis<-inputsdata[gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)) == critbis]
+  notsogood<-rbind(notsogood, default_computecrit(criteria=critbis,
+                      type= toto[critbis, "objecttype"],
+                      BigCriteria=toto[critbis, "BigCriteria"],
+                      side=toto[critbis, "side"],
+                      inputs=inputsbis,
+                      db=database[!is.na(database[,crit]) & database[,crit]!="",]))
+  }
+  notsogood<-notsogood[notsogood$value>0,]
+  notsogood$value<-notsogood$value/2
+  #browser()
+  dbfinal<-rbind(dbfinal, notsogood)
+  dbfinal<-aggregate(dbfinal[,"value", drop=FALSE], 
+                     by=dbfinal[,setdiff(names(dbfinal), "value")], sum, na.rm=TRUE)
+
+
    #order the df by orderby, using latin name as id (this adds an id variable, which is a factor with levels ordered by the orderby side)
   #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
   # to do: separate computation of score and ordering of the species

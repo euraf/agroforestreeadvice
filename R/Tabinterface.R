@@ -305,8 +305,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         #  setdiff(names(allinputs), c("orderby", "sidebarCollapsed", "ab_compute", "in_language", "sidebarItemExpanded"))]
         #browser()
         databis<-datatoplot()
-        print(str(databis))
-        print(str(as.numeric(databis$species)))
+        #print(str(databis))
+        #print(str(as.numeric(databis$species)))
         #select only the range of species to display (user choice, by default 1 to 20), species is an ordered vector
         databis<-databis[as.numeric(databis$species)>=rangetoplot$from 
                          & as.numeric(databis$species)<=rangetoplot$to ,]

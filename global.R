@@ -166,14 +166,15 @@ orderdf<-function(df, orderby, idvariable, interface){
 #' @export
 #'
 #' @examples
-default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "T", "TRUE", "VRAI")){
+default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI")){
+  #message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
     chosen<-inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria]
     services<-strsplit(
       gsub(pattern="(", replacement=", ", fixed=TRUE, x=gsub(pattern=")", replacement="", fixed=TRUE, 
                                                              x=db[,intersect(names(db), c(criteria, chosen))])) #replace first ( by comma and remove )
-           , "[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces
+      , split="[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces
     #count the number of characteristics %in% inputs to get the score
     # Function to count the number of matching keywords
     count_matching_keywords <- function(keyword_list) {
@@ -183,50 +184,73 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
     nbmatches <- sapply(services, count_matching_keywords)
     #then divide by the number of possibilities to obtain score between 0 and 1
     db$value<-nbmatches/length(chosen)
+    
   } else if (type=="selectInput") {
-   
+    
     chosen<-inputs[criteria]
     if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
       db$value<-as.numeric(db[,criteria]==chosen) 
     } else {
       if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the
-      db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
-    } else {
-      print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
-    }}
+        db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
+      } else {
+        print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
+      }}
     
   } else if (type=="checkboxInput") {
     db$value<- as.numeric(db[,criteria] %in% yesindicator)
   } else if (type=="sliderInput") {
-    #browser()
-    chosen<-as.numeric(inputs[grepl(pattern=criteria, x=names(inputs))])
+    chosen<-as.numeric(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
+    
+    #chosen<-as.numeric(inputs[grepl(pattern=criteria, x=names(inputs))])
     #I don't know why, sometimes inputs are duplicated...
     chosen<-unique(as.numeric(chosen))
     chosen<-chosen[!is.na(chosen)]
-    treetraits<-as.numeric(db[,criteria])
+    
+    
+    if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
+      splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
+      mini<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits, "[[", 1)))
+      maxi<-mini
+      maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
+      if(length(chosen)==2) { #sliderinput with a range and db with a range: percentage of desired within treetrait
+        overlap <- function(A, B) {
+          shared <- pmax(0, min(A[2], B[2]) - max(A[1], B[1]))
+          max(shared / c(diff(A), diff(B)))
+        }
+        db$value<-0
+        for(i in 1:nrow(db)) db$value[i]<-overlap(chosen, c(mini[i], maxi[i]))
+      } else { #sliderinput with just one chosen value: 1 if within treerange, 0 otherwise
+        db$value<-as.numeric(mini<=chosen & maxi>=chosen)
+      }
+    } else { #db gives only one value
+      treetraits<-as.numeric(db[,criteria])
+      if(length(chosen)==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
+        db$value<-as.numeric(treetraits>=min(chosen) & treetraits<=max(chosen))
+      } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
+        rangevalues<-range(treetraits, na.rm=TRUE)
+        db$value<-1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1]))
+      }
+    }
     
     #chosen<-as.numeric(chosen[!duplicated(names(chosen))])
     
-    if(length(chosen)==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
-      db$value<-as.numeric(treetraits>=min(chosen) & treetraits<=max(chosen))
-    } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
-      rangevalues<-range(treetraits, na.rm=TRUE)
-      db$value<-1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1]))
-    }
+    
   } else if (type=="numericInput") {
     chosen<-inputs[criteria]
     if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
       splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
-      min<-sapply(splits, "[[", 1)
-      max<-min
-      max[sapply(splits, length)>1]<-sapply(splits[sapply(splits, length)>1], "[[", 2)
-      db$value<-as.numeric(min<=chosen & max>=chosen)
+      mini<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits, "[[", 1)))
+      maxi<-mini
+      maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
+      db$value<-as.numeric(mini<=chosen & maxi>=chosen)
     } else { #unique value
       rangevalues<-range(as.numeric(db[,criteria]))
       db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(inputs[criteria]))/(rangevalues[2]-rangevalues[1]))
     }
     
   }
+  #message("values= ", paste(db$value, collapse=","))
   db$criteria<-criteria
   db$BigCriteria<-BigCriteria
   db$side<-side
