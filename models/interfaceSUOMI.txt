@@ -26,7 +26,7 @@ initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincrite
 	responsetrait		climate	sun	var	selectInput		ilmasto	kasvupaikka	varjoinen	Climate	orientation	shady				Climat	ensoleillement	ombragé						
 	responsetrait		climate	zone	1	numericInput		ilmasto	vyöhyke	I	Climate	climate zone (I-VIII)	I				Climat	zone climatique (I à VIII)	I						
 	responsetrait		soil	noncrusting	läp	checkboxInput		Maaperä	maaperän läpäisevä	läpäisevä (hyvin vettä läpäisevä, ilmava)	Soil	non crusting	permeable (highly permeable, aerated)				Sol	pas de risque de battance	perméable (hautement perméable, aéré)						
-	responsetrait		soil	soilcalcareous	Ca	checkboxInput		Maaperä	maaperä	kalkinsuosija	Soil	soil calcium	calcium rich				Sol	calcaire	riche en calcium						
+	responsetrait		soil	soilcalcareous	Ca	checkboxInput		Maaperä	kalkinsuosija	kalkinsuosija	Soil	soil calcium	calcium rich				Sol	calcaire	riche en calcium						
 	responsetrait		soil	soilhumidity	kui	selectInput		Maaperä	maaperän kosteus	kui	Soil	soil humidity	if				Sol	humidité du sol	si						
 	responsetrait		soil	soilhumidity	tuo	selectInput		Maaperä	maaperän kosteus	tuore	Soil	soil humidity	fresh				Sol	humidité du sol	frais						
 	responsetrait		soil	soilhumidity	kos	selectInput		Maaperä	maaperän kosteus	kos	Soil	soil humidity	kos				Sol	humidité du sol	kos						
