@@ -1,3 +1,5 @@
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+dataDENTRO$IDAFTA<-dataDENTRO$English.name
 
 
 #' compute_suitability for Flanders data

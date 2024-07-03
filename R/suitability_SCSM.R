@@ -1,3 +1,5 @@
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+dataSCSM$IDAFTA<-paste(dataSCSM$genus,dataSCSM$species, sep=" ")
 
 #' compute_suitability for SCSM data
 #'

@@ -1,3 +1,6 @@
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+#dataMODELNAME$IDAFTA<-dataMODELNAME$nameOfYourIDcolumn
+
 #' compute_suitability for [MODELNAME]
 #'
 #' @param inputsdata named character vector of choices (for response traits) or Big criteria (for effect traits) made by the user, warning: these are the values internal to the interface, not the labels seen on the screen (which depend on language)
@@ -35,7 +38,7 @@ compute_suitability_MODELNAME<-function(inputsdata=NULL,
    #order the df by orderby, using latin name as id (this adds an id variable, which is a factor with levels ordered by the orderby side)
   #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
   # to do: separate computation of score and ordering of the species
-  dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable="nameOfColumnID", interface=interface) 
+  dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable="IDAFTA", interface=interface) 
   
   # give negative values for response traits so that they appear on the left
   dbfinal$value[dbfinal$side=="responsetrait"]<- -dbfinal$value[dbfinal$side=="responsetrait"]

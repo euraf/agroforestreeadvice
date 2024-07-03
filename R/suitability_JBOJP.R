@@ -1,3 +1,7 @@
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+dataJBOJP$IDAFTA<-paste(dataJBOJP$Botanisch, dataJBOJP$Onderstam, dataJBOJP$Toepassingen)
+
+
 #' compute_suitability for JBOJP
 #'
 #' @param inputsdata named character vector of choices (for response traits) or Big criteria (for effect traits) made by the user, warning: these are the values internal to the interface, not the labels seen on the screen (which depend on language)
@@ -43,8 +47,8 @@ compute_suitability_JBOJP<-function(inputsdata=NULL,
   #=> make it into radioButtons
   userobjective<-inputsdata["Objective"]
   database<-database[database[,make.names(userobjective)]==userobjective,] #select the lines corresponding to the user objective
-  database$species<-ifelse(database$Onderstam=="", database$Botanisch, paste(database$Botanisch, database$Onderstam, sep="/"))
-  if(length(unique(database$specie))!=nrow(database)) {warning("there are duplicated species"); print(database[,c("Botanisch", "Onderstam", "Toepassingen", "species")])}
+  database$species<-database$IDAFTA
+  if(length(unique(database$species))!=nrow(database)) {warning("there are duplicated species"); print(database[,c("Botanisch", "Onderstam", "Toepassingen", "species")])}
   
   for( crit in setdiff(toto$criteria, c("", "Objective"))){
     print(crit)

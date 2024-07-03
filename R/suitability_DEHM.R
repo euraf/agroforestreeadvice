@@ -1,3 +1,7 @@
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+dataDEHM$IDAFTA<-dataDEHM$Wissenschaftlicher.Artname
+
+
 #' compute_suitability for [MODELNAME]
 #'
 #' @param inputsdata named character vector of choices (for response traits) or Big criteria (for effect traits) made by the user, warning: these are the values internal to the interface, not the labels seen on the screen (which depend on language)

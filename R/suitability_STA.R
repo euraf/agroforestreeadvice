@@ -1,3 +1,5 @@
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+dataSTA$IDAFTA<-dataSTA$Tree_latin
 
 
 #' compute_suitability for ShadeTreeAdvice data

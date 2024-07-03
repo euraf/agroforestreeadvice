@@ -331,7 +331,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           #str(hoverlist$y)
           #browser()
           id<-hoverlist$domain$discrete_limits$y[[round(hoverlist$y)]]
-          print(paste("<b>",id,"</b><br>", data[data$latin==id, "description"]))
+          print(paste("<b>",id,"</b><br>", data[data$IDAFTA==id, "description"]))
           #icicicici works only for SUOMI because the description and ID fields names are hard-coded
           #     
           #     #hover=input$plot_hover

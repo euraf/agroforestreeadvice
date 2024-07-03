@@ -62,7 +62,6 @@ interfaceDEHM[1:length(interfaceDEHM)]<-lapply(interfaceDEHM[1:length(interfaceD
 interfaceSUOMI<-interfaceSUOMI[!is.na(interfaceSUOMI$side),]
 interfaceSUOMI[1:length(interfaceSUOMI)]<-lapply(interfaceSUOMI[1:length(interfaceSUOMI)], function(x) gsub(pattern=",", replacement=".", x=x))
 
-
 toto<-strsplit(c(names(interfaceSTA), 
                  names(interfaceDENTRO), 
                  names(interfaceDECIDUOUS), 
@@ -265,7 +264,7 @@ source("R/suitability_SCSM.R")
 source("R/suitability_Czech.R")
 source("R/suitability_JBOJP.R")
 source("R/suitability_DEHM.R")
-source("R/suitability_SUOMI.R") #to do: transform I-VIII to 1-8, change the - to , except in size, remove parentheses and cange them to additional not so good condition columns
+source("R/suitability_SUOMI.R") 
 
 
 
