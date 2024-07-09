@@ -58,9 +58,11 @@ moduleTabInterface_UI <- function(id, data, interface) {
                    div(style="display: inline-block;vertical-align:top; width: 200px;",
                        numericInput(inputId=ns("barplotto"), label="to the yth", value=20))
                  ),
+                 
                  plotOutput(ns("barplot_suitability"),
                             hover = hoverOpts(id =ns("plot_hover"))),
-                 htmlOutput(ns("hover_info"))
+                 uiOutput(ns("tooltip"), style = "pointer-events: none"),
+                 #htmlOutput(ns("hover_info"))
                  
           ),
           column(width=12,
@@ -73,7 +75,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
 } # fin moduleTabInterface_UI
 
 
-# Fonction server du module ----
+#### Fonction server du module ----
 #language is a reactive value from the main app
 moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) {
   
@@ -323,23 +325,41 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           labs(x = NULL, y = "Species")
         return(plot_Suitability)
       })
+     
       
-      ## barplot hovered bar info ----
-      output$hover_info <- renderPrint({
-        if(!is.null(input$plot_hover)){
-          hoverlist<-input$plot_hover
-          #str(hoverlist$y)
-          #browser()
+      # ## barplot hovered bar info ----
+      # output$hover_info <- renderPrint({
+      #   if(!is.null(input$plot_hover)){
+      #     hoverlist<-input$plot_hover
+      #     #str(hoverlist$y)
+      #     #browser()
+      #     id<-hoverlist$domain$discrete_limits$y[[round(hoverlist$y)]]
+      #     print(paste("<b>",id,"</b><br>", data[data$IDAFTA==id, "description"]))
+      #     #icicicici works only for SUOMI because the description and ID fields names are hard-coded
+      #   }
+      # })
+      
+      output$tooltip <- renderUI({
+        hoverlist <- input$plot_hover
+        if(!is.null(hoverlist)){
           id<-hoverlist$domain$discrete_limits$y[[round(hoverlist$y)]]
-          print(paste("<b>",id,"</b><br>", data[data$IDAFTA==id, "description"]))
-          #icicicici works only for SUOMI because the description and ID fields names are hard-coded
-          #     
-          #     #hover=input$plot_hover
-          #     #dist=abs((hover$x-datatoplot$)
-          #    # cat("Weight (lb/1000)\n")
-          #     #if(min(dist) < 3)
-          #       #mtcars$wt[which.min(dist)]
+          left_px <- hoverlist$coords_css$x
+          top_px <- hoverlist$coords_css$y
+          # create style property fot tooltip
+          # background color is set so tooltip is a bit transparent
+          # z-index is set so we are sure are tooltip will be on top
+          style <- paste0("position:absolute; z-index:100; background-color: rgba(245, 245, 245, 0.85); ",
+                          "left:", left_px + 2, "px; top:", top_px + 2, "px;")
+          
+          # actual tooltip created as wellPanel
+          wellPanel(
+            style = style,
+            p(HTML(paste0("<b> ID: </b>", id, "<br/>",
+                          "<b> Info: </b>", data[data$IDAFTA==id, "description"], "<br/>",
+                          "<b> Distance from left: </b>", left_px, "<b>, from top: </b>", top_px)))
+          )
         }
+        
       })
       
       
