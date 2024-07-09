@@ -38,19 +38,18 @@ body <- dashboardBody(
             h2("Marie Gosme; Clément Rigal; Raphael Paut ; Birk Skyum"),
             h2("Contributors to databases"),
             h2("DENTRO: Sarah Carton; Paul Pardon; Bert Reubens"),
-            h2("Deciduous: Raphael Paut; François Warlop"),
             h2("Shade Tree Advice: Clément Rigal; Philippe Vaast; Laurence Jassogne; Just van der Wolf; Gilles Gram; Mathilde LEPINE; Anais CARPENTE; Mai Phuong NGUYEN; Sigrun WAGNER; Sophie GRAEFE; Baptiste CAMUS; Juan Carlos Villalba Malaver"),
+            h2("Deciduous: Raphael Paut; François Warlop"),
             h2("SCSM : Birk Skyum Kristoffer Ronn-Anderson"),
-            h2("Czech database : Jan Weger (VUKOZ Průhonice), Lubos Úradníček and Antonín Martiník (MENDELU Brno)"),
+            h2("Czech database : Jan Weger (VUKOZ Průhonice); Lubos Úradníček and Antonín Martiník (MENDELU Brno)"),
+            h2("Juiste Boom op de Juiste Plek: Jordy van Eijk (St. ReGeneration & Van Eijk : Consultantree); Jade Koop (Jade Reforestry);Euridice Leyequien Abarca (HVHL); Jerke de Vries (HVHL); Evert Prins (Louis Bolk Institute) "),
+            h2("German Hedgerow manager: Gaida W., Grothe H., 2000. Gehölze: Handbuch für Planung und Ausführung (Woody Species: Handbook for Planning and Planting). Berlin, Hannover: Patzer Verlag: 319"),
+            h2("Finnish tree suitability:  Ujula, Juha & Mattila, Iris. (2023). Suomessa menestyviä puu- ja pensaslajeja agrometsäkäyttöön. Teoksessa I. Mattila (toim.). Puustoinen maatalous Suomessa - opas suunnitteluun, katsaus kulttuurinmuutokseen (liite 1). Kilpiän tila. https://doi.org/10.5281/zenodo.8418298"),
             h2("If you want to report bugs, or have suggestions for improvement, or want to contribute, please do so on github: https://github.com/euraf/agroforestreeadvice")
     ),#fin infos
     tabItem(tabName = "tool", 
             tabsetPanel(
               id = "toolsTabset",
-              tabPanel("Juiste Boom op de Juiste Plek", value="JBOJP", moduleTabInterface_UI(id = "JBOJP", data = dataJBOJP, interface= interfaceJBOJP)),
-              
-              tabPanel("German Hedgerow manager", value="DEHM", moduleTabInterface_UI(id = "DEHM", data = dataDEHM, interface= interfaceDEHM)),
-              
               tabPanel("Flanders Tree Advisor (DENTRO)", value="DENTRO", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
               tabPanel("Shade Tree Advice (coffee and cocoa)", value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
@@ -60,6 +59,10 @@ body <- dashboardBody(
               tabPanel("SCSM (species climate suitability model)", value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
               
               tabPanel("Czech tree selection tool", value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech)),
+              
+              tabPanel("Juiste Boom op de Juiste Plek", value="JBOJP", moduleTabInterface_UI(id = "JBOJP", data = dataJBOJP, interface= interfaceJBOJP)),
+              
+              tabPanel("German Hedgerow manager", value="DEHM", moduleTabInterface_UI(id = "DEHM", data = dataDEHM, interface= interfaceDEHM)),
               
               tabPanel("Finnish tree suitability", value="SUOMI", moduleTabInterface_UI(id = "SUOMI", data = dataSUOMI, interface= interfaceSUOMI))
               
