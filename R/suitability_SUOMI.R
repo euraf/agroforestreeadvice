@@ -1,5 +1,7 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
 dataSUOMI$IDAFTA<-dataSUOMI$latin
+#add a tooltip column if it does not exist
+if (is.null(dataSUOMI$tooltipspecies)) dataSUOMI$tooltipspecies<-paste(dataSUOMI$finnish, dataSUOMI$description, sep="\n")
 
 #' compute_suitability for [MODELNAME]
 #'

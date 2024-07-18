@@ -1,6 +1,7 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
 dataDEHM$IDAFTA<-dataDEHM$Wissenschaftlicher.Artname
-
+#add a tooltip column if it does not exist
+if (is.null(dataDEHM$tooltipspecies)) dataDEHM$tooltipspecies<-dataDEHM$Deutscher.Artname
 
 #' compute_suitability for [MODELNAME]
 #'

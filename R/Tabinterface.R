@@ -355,8 +355,9 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           wellPanel(
             style = style,
             p(HTML(paste0("<b> ID: </b>", id, "<br/>",
-                          "<b> Info: </b>", data[data$IDAFTA==id, "description"], "<br/>",
-                          "<b> Distance from left: </b>", left_px, "<b>, from top: </b>", top_px)))
+                          "<b> Info: </b>", data[data$IDAFTA==id, "tooltipspecies"], "<br/>"#,
+                          #"<b> Distance from left: </b>", left_px, "<b>, from top: </b>", top_px
+                          )))
           )
         }
         

@@ -1,6 +1,7 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
 dataDECIDUOUS$IDAFTA<-dataDECIDUOUS$couple_espece_PG
-
+#add a tooltip column if it does not exist
+if (is.null(dataDECIDUOUS$tooltipspecies)) dataDECIDUOUS$tooltipspecies<-dataDECIDUOUS$couple_espece_PG
 
 #' compute_suitability for Deciduous data
 #'
@@ -99,7 +100,7 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   result$note_dispo[user_dispo=="userdispo_low" & result$bes_ent=="moyen"]<-0.5
   result$note_dispo[user_dispo=="userdispo_low" & result$bes_ent=="fort"]<-0
   
-  result$note_hauteur <- as.numeric((result[gsub(pattern=" ", replacement=".", fixed=TRUE, x= user_hauteur)]=="oui"))
+  result$note_hauteur <- as.numeric((result[make.names(gsub(pattern=" ", replacement=".", fixed=TRUE, x= user_hauteur))]=="oui"))
   
   # on crée les colonnes scores pour chaque critère et la colonne score global
   result$score_gel_tardif = result$note_gel_tardif * (6 - crit_esp_sensibilite_gel_tardif) # inverstion de score car l'echelle etait inversee sur google doc

@@ -1,6 +1,7 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
 dataJBOJP$IDAFTA<-paste(dataJBOJP$Botanisch, dataJBOJP$Onderstam, dataJBOJP$Toepassingen)
-
+#add a tooltip column if it does not exist
+if (is.null(dataJBOJP$tooltipspecies)) dataJBOJP$tooltipspecies<-dataJBOJP$Soort
 
 #' compute_suitability for JBOJP
 #'
