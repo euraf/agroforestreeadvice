@@ -2426,59 +2426,59 @@ Elm - Field elm	Ulmus minor Mill.	3_Climate	Late.Spring.frost	"""++(SVD)"""	7
 Elm spp.	Ulmus spp.	3_Climate	Late.Spring.frost	"""++(SVD)"""	7
 Wayfaring tree	Viburnum lantana	3_Climate	Late.Spring.frost	"""++(SVD)"""	7
 Guelder rose	Viburnum opulus L.	3_Climate	Late.Spring.frost	"""++(SVD)"""	7
-Chestnut - Sweet chestnut	Castanea sativa	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (tuin)"""	7
-Atlas cedar	Cedrus atlantica (Endl.) Carr	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (tuin)"""	7
-Cornelian cherry	Cornus mas L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (wijs)"""	7
-Dogwood	Cornus sanguinea  L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Common hazel	Corylus avellana L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (wijs)"""	7
-Turkish hazel	Corylus colurna	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (wijs)"""	7
-Hawthorn	Crataegus monogyna, Crataegus laevigata	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (wijs)"""	7
-Quince	Cydonia oblonga	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (SVD)"""	7
-European spindle	Euonymus europaeus L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (wijs)"""	7
-European beech	Fagus sylvatica L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (wijs)"""	7
-European ash	Fraxinus excelsior L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (wijs)"""	7
-Sea buckthorn	Hippophae rhamnoides	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (14)"""	7
-Holly	Ilex aquifolium L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+ (tuin)"""	6
-Walnut - Black walnut	Juglans nigra	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (wijs)"""	7
-Walnut - Common walnut	Juglans regia	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++(FE)"""	7
-Walnut - Hybrid walnut	Juglans x intermedia	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++(FE)"""	7
-Tulip tree	Liriodendron tulipifera	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""- (wijs)"""	2
-Wild apple	Malus sylvestris	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Medlar	Mespilus spp.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Mulberry	Morus spp.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Pine - Scots pine	Pinus sylvestris L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+ (wijs)"""	6
-Pine - Austrian pine	Pinus nigra Arn.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+ (wijs)"""	6
-Poplar - White poplar	Populus alba	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""-(wijs)"""	2
-Poplar - Black poplar	Populus nigra L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""-(wijs)"""	2
-Poplar - Aspen	Populus tremula L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""-(wijs)"""	2
-Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Bird cherry	Prunus padus L. 	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Blackthorn	Prunus spinosa L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++(SVD)"""	7
-Wild cherry	Prunus avium	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++(FE)"""	7
-Bush cherry	Prunus x fruticans	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++(SVD)"""	7
-Common pear	Pyrus communis	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++(FE)"""	7
-Oak - Sessile oak	Quercus petraea Lieblein	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (eik, wijs)"""	7
-Oak - English oak	Quercus robur L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""++ (eik, wijs)"""	7
-Black locust	Robinia pseudoacacia	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Willow - White willow	Salix alba	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Willow - Goat willow	Salix caprea	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Elder	Sambucus nigra L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(SVD)"""	6
-Red elder	Sambucus racemosa L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(SVD)"""	6
-Whitebeam	Sorbus aria	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Rowan	Sorbus aucuparia L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Service tree	Sorbus domestica	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Swedish whitebeam	Sorbus intermedia	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(wijs)"""	6
-Wild service tree	Sorbus torminalis	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""+(FE,wijs)"""	6
-Western red cedar	Thuja plicata  Donn ex D. Don	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(FE)"""	1
-Lime - Small-leaved lime	Tilia cordata Mill.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Lime - Large-leaved lime	Tilia platyphyllos Scop.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Lime - Common lime	Tilia x europaea L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Elm - Wych elm	Ulmus glabra Huds.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Elm - European white elm	Ulmus laevis Pallas.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Elm - Field elm	Ulmus minor Mill.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Elm spp.	Ulmus spp.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""--(wijs)"""	1
-Wayfaring tree	Viburnum lantana	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""-(SVD)"""	2
-Guelder rose	Viburnum opulus L.	4_AnimalsWildlife	Note:.this.does.not.apply.to.each.animal.species	"""-(SVD)"""	2
+Chestnut - Sweet chestnut	Castanea sativa	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (tuin)"""	7
+Atlas cedar	Cedrus atlantica (Endl.) Carr	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (tuin)"""	7
+Cornelian cherry	Cornus mas L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (wijs)"""	7
+Dogwood	Cornus sanguinea  L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Common hazel	Corylus avellana L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (wijs)"""	7
+Turkish hazel	Corylus colurna	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (wijs)"""	7
+Hawthorn	Crataegus monogyna, Crataegus laevigata	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (wijs)"""	7
+Quince	Cydonia oblonga	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (SVD)"""	7
+European spindle	Euonymus europaeus L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (wijs)"""	7
+European beech	Fagus sylvatica L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (wijs)"""	7
+European ash	Fraxinus excelsior L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (wijs)"""	7
+Sea buckthorn	Hippophae rhamnoides	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (14)"""	7
+Holly	Ilex aquifolium L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+ (tuin)"""	6
+Walnut - Black walnut	Juglans nigra	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (wijs)"""	7
+Walnut - Common walnut	Juglans regia	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++(FE)"""	7
+Walnut - Hybrid walnut	Juglans x intermedia	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++(FE)"""	7
+Tulip tree	Liriodendron tulipifera	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""- (wijs)"""	2
+Wild apple	Malus sylvestris	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Medlar	Mespilus spp.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Mulberry	Morus spp.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Pine - Scots pine	Pinus sylvestris L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+ (wijs)"""	6
+Pine - Austrian pine	Pinus nigra Arn.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+ (wijs)"""	6
+Poplar - White poplar	Populus alba	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""-(wijs)"""	2
+Poplar - Black poplar	Populus nigra L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""-(wijs)"""	2
+Poplar - Aspen	Populus tremula L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""-(wijs)"""	2
+Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Bird cherry	Prunus padus L. 	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Blackthorn	Prunus spinosa L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++(SVD)"""	7
+Wild cherry	Prunus avium	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++(FE)"""	7
+Bush cherry	Prunus x fruticans	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++(SVD)"""	7
+Common pear	Pyrus communis	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++(FE)"""	7
+Oak - Sessile oak	Quercus petraea Lieblein	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (eik, wijs)"""	7
+Oak - English oak	Quercus robur L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""++ (eik, wijs)"""	7
+Black locust	Robinia pseudoacacia	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Willow - White willow	Salix alba	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Willow - Goat willow	Salix caprea	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Elder	Sambucus nigra L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(SVD)"""	6
+Red elder	Sambucus racemosa L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(SVD)"""	6
+Whitebeam	Sorbus aria	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Rowan	Sorbus aucuparia L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Service tree	Sorbus domestica	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Swedish whitebeam	Sorbus intermedia	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(wijs)"""	6
+Wild service tree	Sorbus torminalis	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""+(FE,wijs)"""	6
+Western red cedar	Thuja plicata  Donn ex D. Don	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(FE)"""	1
+Lime - Small-leaved lime	Tilia cordata Mill.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Lime - Large-leaved lime	Tilia platyphyllos Scop.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Lime - Common lime	Tilia x europaea L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Elm - Wych elm	Ulmus glabra Huds.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Elm - European white elm	Ulmus laevis Pallas.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Elm - Field elm	Ulmus minor Mill.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Elm spp.	Ulmus spp.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""--(wijs)"""	1
+Wayfaring tree	Viburnum lantana	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""-(SVD)"""	2
+Guelder rose	Viburnum opulus L.	4_AnimalsWildlife	fruits.edible.by.domestic.animals	"""-(SVD)"""	2
 Maple - Field maple	Acer campestre L.	4_AnimalsWildlife	Horses	"""++(a)"""	7
 Maple - Norway maple	Acer platanoides	4_AnimalsWildlife	Horses	"""++(a)"""	7
 Maple - Common maple	Acer pseudoplatanus L.	4_AnimalsWildlife	Horses	"""--(ws)"""	1
