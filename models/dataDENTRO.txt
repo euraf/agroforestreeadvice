@@ -46,7 +46,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	(Heavy).clay	"""+ (wij
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	(Heavy).clay	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	(Heavy).clay	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	(Heavy).clay	"""- (SVD)"""	2
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	(Heavy).clay	"""- (SVD)"""	2
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	(Heavy).clay	"""- (SVD)"""	2
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	(Heavy).clay	"""+ (wijs)"""	6
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	(Heavy).clay	"""+ (wijs)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	(Heavy).clay	"""+ (wijs)"""	6
@@ -126,7 +126,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Loam	"""+ (wijs)"""	6
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Loam	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Loam	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Loam	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Loam	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Loam	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Loam	"""+ (wijs)"""	6
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Loam	"""+ (wijs)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Loam	"""+ (wijs)"""	6
@@ -206,7 +206,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Sandy.loam	"""+ (wijs)
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Sandy.loam	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Sandy.loam	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Sandy.loam	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Sandy.loam	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Sandy.loam	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Sandy.loam	"""+ (wijs)"""	6
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Sandy.loam	"""+ (wijs)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Sandy.loam	"""+ (wijs)"""	6
@@ -286,7 +286,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Loamy.sand	"""+ (wijs)
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Loamy.sand	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Loamy.sand	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Loamy.sand	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Loamy.sand	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Loamy.sand	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Loamy.sand	"""+ (wijs)"""	6
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Loamy.sand	"""+ (wijs)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Loamy.sand	"""+ (wijs)"""	6
@@ -366,7 +366,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Sand	"""+ (wijs)"""	6
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Sand	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Sand	"""(-) (SVD)"""	3
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Sand	"""(-) (SVD)"""	3
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Sand	"""- (SVD)"""	2
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Sand	"""- (SVD)"""	2
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Sand	"""+ (wijs)"""	6
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Sand	"""+ (wijs)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Sand	"""+ (wijs)"""	6
@@ -446,7 +446,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Wet	"""+(FTA)"""	6
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Wet	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Wet	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Wet	"""- (SVD)"""	2
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Wet	"""- (SVD)"""	2
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Wet	"""- (SVD)"""	2
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Wet	"""+(FTA)"""	6
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Wet	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Wet	"""+ (wijs)"""	6
@@ -526,7 +526,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Moist	"""++(FTA)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Moist	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Moist	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Moist	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Moist	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Moist	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Moist	"""++(FTA)"""	7
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Moist	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Moist	"""++(FE)"""	7
@@ -685,7 +685,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""+(F
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""- (SVD)"""	2
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""- (SVD)"""	2
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""- (SVD)"""	2
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""-(FTA)"""	2
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""--(FE)"""	1
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Acidic.(pH.<.5)	"""-- (FE)"""	1
@@ -764,7 +764,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7,5)	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7,5)	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7,5)	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7,5)	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7,5)	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7,5)	"""++(FTA)"""	7
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7,5)	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Neutral.(.5,5.<.pH.<.7,5)	"""++(FE)"""	7
@@ -844,7 +844,7 @@ Poplar - White poplar	Populus alba	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"""(+) (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"""+ (SVD)"""	6
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"""-(FTA)"""	2
 Poplar - Aspen	Populus tremula L.	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1a_Soilcharacteristics	Calcerous.(pH.>.7,5)	"""++(FE)"""	7
@@ -941,7 +941,7 @@ Poplar - White poplar	Populus alba	1b_Soilinteractions	Deep''.rooting	"""+(SVD)"
 "Poplar - Hybrid poplar \Grimminge\"""""	Populus interamericana	1b_Soilinteractions	Deep''.rooting	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1b_Soilinteractions	Deep''.rooting	"""(+) (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1b_Soilinteractions	Deep''.rooting	"""(+) (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1b_Soilinteractions	Deep''.rooting	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1b_Soilinteractions	Deep''.rooting	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	1b_Soilinteractions	Deep''.rooting	"""+(SVD)"""	6
 Poplar - Aspen	Populus tremula L.	1b_Soilinteractions	Deep''.rooting	"""--(FE)"""	1
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1b_Soilinteractions	Deep''.rooting	"""--(FE)"""	1
@@ -1005,7 +1005,7 @@ Poplar - White poplar	Populus alba	1b_Soilinteractions	N-fixator	"""No (SVD)"""	
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1b_Soilinteractions	N-fixator	"""No (SVD)"""	1
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1b_Soilinteractions	N-fixator	"""No (SVD)"""	1
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1b_Soilinteractions	N-fixator	"""No (SVD)"""	1
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1b_Soilinteractions	N-fixator	"""No (SVD)"""	1
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1b_Soilinteractions	N-fixator	"""No (SVD)"""	1
 Poplar - Black poplar	Populus nigra L.	1b_Soilinteractions	N-fixator	"""No (SVD)"""	1
 Poplar - Aspen	Populus tremula L.	1b_Soilinteractions	N-fixator	"""No(SVD)"""	1
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1b_Soilinteractions	N-fixator	"""No(SVD)"""	1
@@ -1085,7 +1085,7 @@ Poplar - White poplar	Populus alba	1b_Soilinteractions	Promoting.soil.fertility	
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1b_Soilinteractions	Promoting.soil.fertility	"""++(SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1b_Soilinteractions	Promoting.soil.fertility	"""++(SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1b_Soilinteractions	Promoting.soil.fertility	"""++(SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1b_Soilinteractions	Promoting.soil.fertility	"""++(SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1b_Soilinteractions	Promoting.soil.fertility	"""++(SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	1b_Soilinteractions	Promoting.soil.fertility	"""++(SVD)"""	7
 Poplar - Aspen	Populus tremula L.	1b_Soilinteractions	Promoting.soil.fertility	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1b_Soilinteractions	Promoting.soil.fertility	"""++(FE)"""	7
@@ -1165,7 +1165,7 @@ Poplar - White poplar	Populus alba	1b_Soilinteractions	Tolerates.pavement.in.cit
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	1b_Soilinteractions	Tolerates.pavement.in.cities	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	1b_Soilinteractions	Tolerates.pavement.in.cities	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	1b_Soilinteractions	Tolerates.pavement.in.cities	"""- (SVD)"""	2
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	1b_Soilinteractions	Tolerates.pavement.in.cities	"""- (SVD)"""	2
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	1b_Soilinteractions	Tolerates.pavement.in.cities	"""- (SVD)"""	2
 Poplar - Black poplar	Populus nigra L.	1b_Soilinteractions	Tolerates.pavement.in.cities	"""-(wijs)"""	2
 Poplar - Aspen	Populus tremula L.	1b_Soilinteractions	Tolerates.pavement.in.cities	"""+(FE)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	1b_Soilinteractions	Tolerates.pavement.in.cities	"""+(wijs)"""	6
@@ -1227,7 +1227,7 @@ Pine - Austrian pine	Pinus nigra Arn.	2_Light	Columnar,.V-shaped,.Pyramidal,.or.
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	2_Light	Columnar,.V-shaped,.Pyramidal,.or.Oval.crown	"""Yes (SVD)"""	4
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	2_Light	Columnar,.V-shaped,.Pyramidal,.or.Oval.crown	"""Yes (SVD)"""	4
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	2_Light	Columnar,.V-shaped,.Pyramidal,.or.Oval.crown	"""Yes (SVD)"""	4
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	2_Light	Columnar,.V-shaped,.Pyramidal,.or.Oval.crown	"""Yes (SVD)"""	4
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	2_Light	Columnar,.V-shaped,.Pyramidal,.or.Oval.crown	"""Yes (SVD)"""	4
 Poplar - Aspen	Populus tremula L.	2_Light	Columnar,.V-shaped,.Pyramidal,.or.Oval.crown	"""Yes (wijs)"""	4
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	2_Light	Columnar,.V-shaped,.Pyramidal,.or.Oval.crown	"""Yes (wijs)"""	4
 Bird cherry	Prunus padus L. 	2_Light	Columnar,.V-shaped,.Pyramidal,.or.Oval.crown	"""Yes (wijs)"""	4
@@ -1328,7 +1328,7 @@ Mulberry	Morus spp.	2_Light	5.to.10m	""" ++ (MCFG, wijs)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	2_Light	5.to.10m	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	2_Light	5.to.10m	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	2_Light	5.to.10m	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	2_Light	5.to.10m	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	2_Light	5.to.10m	"""++ (SVD)"""	7
 Bird cherry	Prunus padus L. 	2_Light	5.to.10m	"""+(wijs)"""	6
 Blackthorn	Prunus spinosa L.	2_Light	5.to.10m	"""+(SVD)"""	6
 Bush cherry	Prunus x fruticans	2_Light	5.to.10m	"""+(SVD)"""	6
@@ -1453,7 +1453,7 @@ Pine - Scots pine	Pinus sylvestris L.	2_Light	Open.(translucent)	"""Yes (FE)"""	
 "Poplar - Hybrid poplar \Vesten\"""""	Populus euramericana	2_Light	Open.(translucent)	"""Yes (SVD)"""	4
 "Poplar - Hybrid poplar \Bakan\"""""	Populus asiamericana	2_Light	Open.(translucent)	"""Yes (SVD)"""	4
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	2_Light	Open.(translucent)	"""Yes (SVD)"""	4
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	2_Light	Open.(translucent)	"""Yes (SVD)"""	4
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	2_Light	Open.(translucent)	"""Yes (SVD)"""	4
 Poplar - Aspen	Populus tremula L.	2_Light	Open.(translucent)	"""Yes (FE)"""	4
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	2_Light	Open.(translucent)	"""Yes (FE)"""	4
 Wild cherry	Prunus avium	2_Light	Open.(translucent)	"""Yes (FE)"""	4
@@ -1510,7 +1510,7 @@ Poplar - White poplar	Populus alba	2_Light	Low	"""--(FTA)"""	1
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	2_Light	Low	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	2_Light	Low	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	2_Light	Low	"""-- (SVD)"""	1
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	2_Light	Low	"""-- (SVD)"""	1
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	2_Light	Low	"""-- (SVD)"""	1
 Poplar - Black poplar	Populus nigra L.	2_Light	Low	"""--(FTA)"""	1
 Poplar - Aspen	Populus tremula L.	2_Light	Low	"""--(FE)"""	1
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	2_Light	Low	"""-(FE)"""	2
@@ -1589,7 +1589,7 @@ Poplar - White poplar	Populus alba	2_Light	Neutral	"""--(FTA)"""	1
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	2_Light	Neutral	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	2_Light	Neutral	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	2_Light	Neutral	"""-- (SVD)"""	1
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	2_Light	Neutral	"""-- (SVD)"""	1
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	2_Light	Neutral	"""-- (SVD)"""	1
 Poplar - Black poplar	Populus nigra L.	2_Light	Neutral	"""--(FTA)"""	1
 Poplar - Aspen	Populus tremula L.	2_Light	Neutral	"""--(FE)"""	1
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	2_Light	Neutral	"""--(FE)"""	1
@@ -1668,7 +1668,7 @@ Poplar - White poplar	Populus alba	2_Light	High	"""++(FTA)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	2_Light	High	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	2_Light	High	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	2_Light	High	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	2_Light	High	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	2_Light	High	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	2_Light	High	"""++(FTA)"""	7
 Poplar - Aspen	Populus tremula L.	2_Light	High	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	2_Light	High	"""++(FE)"""	7
@@ -1746,7 +1746,7 @@ Poplar - White poplar	Populus alba	2_Light	Early.or.late.budding	"""-(SVD)"""	2
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	2_Light	Early.or.late.budding	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	2_Light	Early.or.late.budding	"""-(SVD)"""	2
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	2_Light	Early.or.late.budding	"""-(SVD)"""	2
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	2_Light	Early.or.late.budding	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	2_Light	Early.or.late.budding	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	2_Light	Early.or.late.budding	"""-(SVD)"""	2
 Poplar - Aspen	Populus tremula L.	2_Light	Early.or.late.budding	"""--(FE)"""	1
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	2_Light	Early.or.late.budding	""" -  (FEE)"""	2
@@ -1824,7 +1824,7 @@ Poplar - White poplar	Populus alba	3_Climate	Strong.wind	"""++(FTA)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Strong.wind	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Strong.wind	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Strong.wind	"""- (SVD)"""	2
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Strong.wind	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Strong.wind	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	3_Climate	Strong.wind	"""+(wijs)"""	6
 Poplar - Aspen	Populus tremula L.	3_Climate	Strong.wind	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	3_Climate	Strong.wind	"""+(wijs)"""	6
@@ -1904,7 +1904,7 @@ Poplar - White poplar	Populus alba	3_Climate	Salty.sea.breeze	"""++(FTA)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Salty.sea.breeze	"""(+) (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Salty.sea.breeze	"""(+) (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Salty.sea.breeze	"""(+) (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Salty.sea.breeze	"""(+) (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Salty.sea.breeze	"""(+) (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	3_Climate	Salty.sea.breeze	"""+(wijs)"""	6
 Poplar - Aspen	Populus tremula L.	3_Climate	Salty.sea.breeze	"""+(FE)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	3_Climate	Salty.sea.breeze	"""+(wijs)"""	6
@@ -1948,7 +1948,7 @@ Guelder rose	Viburnum opulus L.	3_Climate	Salty.sea.breeze	"""+(SVD)"""	6
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Wind.resistance	"""+- (SVD)"""	4
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Wind.resistance	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Wind.resistance	"""+ (SVD)"""	6
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Wind.resistance	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Wind.resistance	"""++ (SVD)"""	7
 Maple - Field maple	Acer campestre L.	3_Climate	Drought	"""+ (FE)"""	6
 Maple - Norway maple	Acer platanoides	3_Climate	Drought	"""+ (FE)"""	6
 Maple - Common maple	Acer pseudoplatanus L.	3_Climate	Drought	"""- (FE)"""	2
@@ -1996,7 +1996,7 @@ Poplar - White poplar	Populus alba	3_Climate	Drought	"""+(FTA)"""	6
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Drought	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Drought	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Drought	"""- (SVD)"""	2
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Drought	"""- (SVD)"""	2
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Drought	"""- (SVD)"""	2
 Poplar - Black poplar	Populus nigra L.	3_Climate	Drought	"""--(FTA)"""	1
 Poplar - Aspen	Populus tremula L.	3_Climate	Drought	"""--(FE)"""	1
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	3_Climate	Drought	"""(-) (SVD)"""	3
@@ -2074,7 +2074,7 @@ Poplar - White poplar	Populus alba	3_Climate	Heat	"""++(FTA)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Heat	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Heat	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Heat	"""+ (SVD)"""	6
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Heat	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Heat	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	3_Climate	Heat	"""++(SVD)"""	7
 Poplar - Aspen	Populus tremula L.	3_Climate	Heat	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	3_Climate	Heat	"""++(FE)"""	7
@@ -2153,7 +2153,7 @@ Poplar - White poplar	Populus alba	3_Climate	Floods	"""+(FTA)"""	6
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Floods	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Floods	"""(-) (SVD)"""	3
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Floods	"""(-) (SVD)"""	3
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Floods	"""(-) (SVD)"""	3
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Floods	"""(-) (SVD)"""	3
 Poplar - Black poplar	Populus nigra L.	3_Climate	Floods	"""++(SVD)"""	7
 Poplar - Aspen	Populus tremula L.	3_Climate	Floods	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	3_Climate	Floods	"""++(FE)"""	7
@@ -2233,7 +2233,7 @@ Poplar - White poplar	Populus alba	3_Climate	Early.Autumn.frost	"""(-) (FTA)"""	
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Early.Autumn.frost	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Early.Autumn.frost	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Early.Autumn.frost	"""+ (SVD)"""	6
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Early.Autumn.frost	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Early.Autumn.frost	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	3_Climate	Early.Autumn.frost	"""+ (SVD)"""	6
 Poplar - Aspen	Populus tremula L.	3_Climate	Early.Autumn.frost	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	3_Climate	Early.Autumn.frost	"""++(FE)"""	7
@@ -2313,7 +2313,7 @@ Poplar - White poplar	Populus alba	3_Climate	Extreme.freezing.in.winter.(<.-.15�
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Extreme.freezing.in.winter.(<.-.15째C)	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Extreme.freezing.in.winter.(<.-.15째C)	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Extreme.freezing.in.winter.(<.-.15째C)	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Extreme.freezing.in.winter.(<.-.15째C)	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Extreme.freezing.in.winter.(<.-.15째C)	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	3_Climate	Extreme.freezing.in.winter.(<.-.15째C)	"""++ (SVD)"""	7
 Poplar - Aspen	Populus tremula L.	3_Climate	Extreme.freezing.in.winter.(<.-.15째C)	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	3_Climate	Extreme.freezing.in.winter.(<.-.15째C)	"""++(FE)"""	7
@@ -2393,7 +2393,7 @@ Poplar - White poplar	Populus alba	3_Climate	Late.Spring.frost	"""(-) (FTA)"""	3
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	3_Climate	Late.Spring.frost	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	3_Climate	Late.Spring.frost	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	3_Climate	Late.Spring.frost	"""+ (SVD)"""	6
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	3_Climate	Late.Spring.frost	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	3_Climate	Late.Spring.frost	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	3_Climate	Late.Spring.frost	"""+ (SVD)"""	6
 Poplar - Aspen	Populus tremula L.	3_Climate	Late.Spring.frost	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	3_Climate	Late.Spring.frost	"""++(FE)"""	7
@@ -2697,7 +2697,7 @@ Poplar - White poplar	Populus alba	5_Origin	Exotic.but.well.established.or.non-i
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	5_Origin	Exotic.but.well.established.or.non-invasive	"""Yes (SVD)"""	4
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	5_Origin	Exotic.but.well.established.or.non-invasive	"""Yes (SVD)"""	4
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	5_Origin	Exotic.but.well.established.or.non-invasive	"""Yes (SVD)"""	4
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	5_Origin	Exotic.but.well.established.or.non-invasive	"""Yes (SVD)"""	4
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	5_Origin	Exotic.but.well.established.or.non-invasive	"""Yes (SVD)"""	4
 Whitebeam	Sorbus aria	5_Origin	Exotic.but.well.established.or.non-invasive	"""Yes (BLS)"""	4
 Service tree	Sorbus domestica	5_Origin	Exotic.but.well.established.or.non-invasive	"""Yes (BLS)"""	4
 Swedish whitebeam	Sorbus intermedia	5_Origin	Exotic.but.well.established.or.non-invasive	"""Yes (BLS)"""	4
@@ -2733,7 +2733,7 @@ Poplar - White poplar	Populus alba	5_Origin	Risk.of.invasiveness	"""Yes (SVD)"""
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	5_Origin	Risk.of.invasiveness	"""Yes (SVD)"""	4
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	5_Origin	Risk.of.invasiveness	"""Yes (SVD)"""	4
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	5_Origin	Risk.of.invasiveness	"""Yes (SVD)"""	4
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	5_Origin	Risk.of.invasiveness	"""Yes (SVD)"""	4
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	5_Origin	Risk.of.invasiveness	"""Yes (SVD)"""	4
 Black locust	Robinia pseudoacacia	5_Origin	Risk.of.invasiveness	"""Yes (SVD)"""	4
 Whitebeam	Sorbus aria	5_Origin	Risk.of.invasiveness	"""(Yes) (SVD)"""	3
 Service tree	Sorbus domestica	5_Origin	Risk.of.invasiveness	"""No (SVD)"""	1
@@ -2786,7 +2786,7 @@ Poplar - White poplar	Populus alba	6_Objectives	Growth.speed	"""++(FTA)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	6_Objectives	Growth.speed	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	6_Objectives	Growth.speed	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	6_Objectives	Growth.speed	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	6_Objectives	Growth.speed	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	6_Objectives	Growth.speed	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	6_Objectives	Growth.speed	"""++ (wijs)"""	7
 Poplar - Aspen	Populus tremula L.	6_Objectives	Growth.speed	"""++(FE)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	6_Objectives	Growth.speed	"""++ (wijs)"""	7
@@ -2866,7 +2866,7 @@ Poplar - White poplar	Populus alba	6_Objectives	Potential.for.high.quality.wood	
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	6_Objectives	Potential.for.high.quality.wood	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	6_Objectives	Potential.for.high.quality.wood	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	6_Objectives	Potential.for.high.quality.wood	"""+ (SVD)"""	6
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	6_Objectives	Potential.for.high.quality.wood	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	6_Objectives	Potential.for.high.quality.wood	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	6_Objectives	Potential.for.high.quality.wood	"""--(SVD)"""	1
 Poplar - Aspen	Populus tremula L.	6_Objectives	Potential.for.high.quality.wood	"""+(FE)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	6_Objectives	Potential.for.high.quality.wood	"""+(FE)"""	6
@@ -2945,7 +2945,7 @@ Poplar - White poplar	Populus alba	6_Objectives	Fast.biomass.production.and/or.u
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	6_Objectives	Fast.biomass.production.and/or.usable.for.coppice	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	6_Objectives	Fast.biomass.production.and/or.usable.for.coppice	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	6_Objectives	Fast.biomass.production.and/or.usable.for.coppice	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	6_Objectives	Fast.biomass.production.and/or.usable.for.coppice	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	6_Objectives	Fast.biomass.production.and/or.usable.for.coppice	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	6_Objectives	Fast.biomass.production.and/or.usable.for.coppice	"""++ (MCFG, wijs)"""	7
 Poplar - Aspen	Populus tremula L.	6_Objectives	Fast.biomass.production.and/or.usable.for.coppice	"""++ (MCFG, wijs)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	6_Objectives	Fast.biomass.production.and/or.usable.for.coppice	"""++ (MCFG, wijs)"""	7
@@ -3025,7 +3025,7 @@ Poplar - White poplar	Populus alba	6_Objectives	Edibility.of.nuts.and.fruits	"""
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	6_Objectives	Edibility.of.nuts.and.fruits	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	6_Objectives	Edibility.of.nuts.and.fruits	"""-- (SVD)"""	1
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	6_Objectives	Edibility.of.nuts.and.fruits	"""-- (SVD)"""	1
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	6_Objectives	Edibility.of.nuts.and.fruits	"""-- (SVD)"""	1
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	6_Objectives	Edibility.of.nuts.and.fruits	"""-- (SVD)"""	1
 Poplar - Black poplar	Populus nigra L.	6_Objectives	Edibility.of.nuts.and.fruits	"""--(SVD)"""	1
 Poplar - Aspen	Populus tremula L.	6_Objectives	Edibility.of.nuts.and.fruits	"""--(SVD)"""	1
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	6_Objectives	Edibility.of.nuts.and.fruits	"""--(SVD)"""	1
@@ -3138,7 +3138,7 @@ Poplar - White poplar	Populus alba	6_Objectives	Attractive.to.pollinators	"""--(
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	6_Objectives	Attractive.to.pollinators	"""(+) (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	6_Objectives	Attractive.to.pollinators	"""(+) (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	6_Objectives	Attractive.to.pollinators	"""(+) (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	6_Objectives	Attractive.to.pollinators	"""(+) (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	6_Objectives	Attractive.to.pollinators	"""(+) (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	6_Objectives	Attractive.to.pollinators	"""+(SVD)"""	6
 Poplar - Aspen	Populus tremula L.	6_Objectives	Attractive.to.pollinators	"""+(SVD)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	6_Objectives	Attractive.to.pollinators	"""++(FE)"""	7
@@ -3218,7 +3218,7 @@ Poplar - White poplar	Populus alba	6_Objectives	Birds	"""++(SVD)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	6_Objectives	Birds	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	6_Objectives	Birds	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	6_Objectives	Birds	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	6_Objectives	Birds	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	6_Objectives	Birds	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	6_Objectives	Birds	"""++(SVD)"""	7
 Poplar - Aspen	Populus tremula L.	6_Objectives	Birds	"""++(SVD)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	6_Objectives	Birds	"""++(SVD)"""	7
@@ -3298,7 +3298,7 @@ Poplar - White poplar	Populus alba	6_Objectives	Windbreak	"""++(SVD)"""	7
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	6_Objectives	Windbreak	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	6_Objectives	Windbreak	"""- (SVD)"""	2
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	6_Objectives	Windbreak	"""- (SVD)"""	2
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	6_Objectives	Windbreak	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	6_Objectives	Windbreak	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	6_Objectives	Windbreak	"""++(SVD)"""	7
 Poplar - Aspen	Populus tremula L.	6_Objectives	Windbreak	"""++(SVD)"""	7
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	6_Objectives	Windbreak	"""++(SVD)"""	7
@@ -3378,7 +3378,7 @@ Poplar - White poplar	Populus alba	7_Feasibility	No.large.disease.risks	"""+ (FT
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	7_Feasibility	No.large.disease.risks	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	7_Feasibility	No.large.disease.risks	"""+ (SVD)"""	6
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	7_Feasibility	No.large.disease.risks	"""+ (SVD)"""	6
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	7_Feasibility	No.large.disease.risks	"""+ (SVD)"""	6
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	7_Feasibility	No.large.disease.risks	"""+ (SVD)"""	6
 Poplar - Black poplar	Populus nigra L.	7_Feasibility	No.large.disease.risks	"""(+) (FTA)"""	7
 Poplar - Aspen	Populus tremula L.	7_Feasibility	No.large.disease.risks	"""+(FE)"""	6
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	7_Feasibility	No.large.disease.risks	"""(-) (wijs)"""	3
@@ -3458,7 +3458,7 @@ Poplar - White poplar	Populus alba	7_Feasibility	Availability.planting.material	
 "Poplar - Hybrid poplar \Skado\"""""	Populus asiamericana	7_Feasibility	Availability.planting.material	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Dender\"""""	Populus asiamericana	7_Feasibility	Availability.planting.material	"""++ (SVD)"""	7
 "Poplar - Hybrid poplar \Marke\"""""	Populus asiamericana	7_Feasibility	Availability.planting.material	"""++ (SVD)"""	7
-"Poplar - Hybrid poplar ''Remus\"""	Populus euramericana	7_Feasibility	Availability.planting.material	"""++ (SVD)"""	7
+"Poplar - Hybrid poplar \Remus\"""""	Populus euramericana	7_Feasibility	Availability.planting.material	"""++ (SVD)"""	7
 Poplar - Black poplar	Populus nigra L.	7_Feasibility	Availability.planting.material	"""-(SVD)"""	2
 Poplar - Aspen	Populus tremula L.	7_Feasibility	Availability.planting.material	"""(-) (SVD)"""	3
 Poplar - Grey poplar	Populus x canescens (Ait.) Smith.	7_Feasibility	Availability.planting.material	"""- (wijs)"""	2

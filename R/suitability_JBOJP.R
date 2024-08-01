@@ -1,5 +1,11 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
-dataJBOJP$IDAFTA<-paste(dataJBOJP$Botanisch, dataJBOJP$Onderstam, dataJBOJP$Toepassingen)
+dataJBOJP$IDAFTA<-paste(dataJBOJP$Botanisch, dataJBOJP$Onderstam, dataJBOJP$Toepassingen, 
+dataJBOJP$Voedselproductie...veel.toegepaste.soorten, 
+dataJBOJP$Voedselproductie...bijzondere.soorten, 
+dataJBOJP$Systeem.ondersteunende.soorten, 
+dataJBOJP$Houtproductie, 
+dataJBOJP$voederhaag)
+#### warning: ‘Sambucus nigra  kleinfruitbloemen’ is present twice: once as Voedselproductie - bijzondere soorten and once as Systeem-ondersteunende soorten
 #add a tooltip column if it does not exist
 if (is.null(dataJBOJP$tooltipspecies)) dataJBOJP$tooltipspecies<-dataJBOJP$Soort
 
