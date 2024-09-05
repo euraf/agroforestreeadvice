@@ -169,7 +169,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
   #message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
-    chosen<-inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria]
+    chosen<-unlist(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
     services<-strsplit(
       gsub(pattern="(", replacement=", ", fixed=TRUE, x=gsub(pattern=")", replacement="", fixed=TRUE, 
                                                              x=db[,intersect(names(db), c(criteria, chosen))])) #replace first ( by comma and remove )
@@ -209,7 +209,8 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
     
     if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
       splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
-      mini<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits, "[[", 1)))
+      mini<-numeric(length(splits))
+      mini[sapply(splits, length)>0]<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>0], "[[", 1)))
       maxi<-mini
       maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
       if(length(chosen)==2) { #sliderinput with a range and db with a range: percentage of desired within treetrait
