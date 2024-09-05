@@ -25,7 +25,7 @@ compute_suitability_DEHM<-function(inputsdata=NULL,
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
                                   interface$criteria[interface$side %in% c("responsetrait", "effecttrait")]) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
   for(crit in standardformcriteria){
-    #print(paste("compute score for", crit))
+    print(paste("compute score for", crit))
     #warning: the choices are actually paste(criteria, choice, sep="_) to make them unique
     #=> modify inputsdata
     inputsdatabis<-sapply(inputsdata, function (x) {
