@@ -4,10 +4,11 @@
 
 library(shiny)
 #library(openxlsx)
-library(ggplot2)
+library(ggplot2) #for the barplot graph
 #library(plotly)
-library(shinydashboard)
-library(DT)
+library(shinydashboard) #for Dashboard appearance
+library(DT) #for Data Table
+library(bslib) #for tooltip
 #library(dplyr)
 ##global----
 

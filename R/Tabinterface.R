@@ -187,7 +187,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           dfSuitability$BigCriteria),]
         #print(str(dfSuitability))
         return(dfSuitability)
-      }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
+      }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values and tooltipspecies
       
       
       
@@ -227,6 +227,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             radioButtons=radioButtons(input_id, label = labelinput,choices = choices)
             # Add more control types as needed
           )
+          # tooltip(
+          #   control,
+          #   "ça marche le tooltip!!" #actually it does not work: tooltip does not get triggered... need to better understand where to add the function.
+          # )
           
           column(width = 6, control)
         })
@@ -343,6 +347,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         hoverlist <- input$plot_hover
         if(!is.null(hoverlist)){
           id<-hoverlist$domain$discrete_limits$y[[round(hoverlist$y)]]
+          print(data[data$IDAFTA==id, "tooltipspecies"])
           left_px <- hoverlist$coords_css$x
           top_px <- hoverlist$coords_css$y
           # create style property fot tooltip

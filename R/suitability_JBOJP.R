@@ -23,7 +23,7 @@ if (is.null(dataJBOJP$tooltipspecies)) dataJBOJP$tooltipspecies<-dataJBOJP$Soort
 
 compute_suitability_JBOJP<-function(inputsdata=NULL,
                                    database, 
-                                   interface,
+                                   interface, #warning: we pass the initial interface, not the result of 
                                    orderby="responsetrait"){
   print("computing compute_suitability_JBOJP")
   
@@ -57,13 +57,17 @@ compute_suitability_JBOJP<-function(inputsdata=NULL,
   database$species<-database$IDAFTA
   if(length(unique(database$species))!=nrow(database)) {warning("there are duplicated species"); print(database[,c("Botanisch", "Onderstam", "Toepassingen", "species")])}
   
+  #keep track of the MITS necessary for the trees given the user conditions: necessaryMITS is a logical matrix with tree species in lines and MITS in columns
+  dfMITS<-interface[interface$BigCriteria=="capacities",]
+  necessaryMITS<-matrix(FALSE, nrow=nrow(database), ncol=nrow(dfMITS),
+                        dimnames=list(dimnames(database)[[1]], dfMITS$choice))
   for( crit in setdiff(toto$criteria, c("", "Objective"))){
-    print(crit)
+    #print(crit)
     #browser()
     intercrit<-interface[interface$criteria==crit,]
     correspondingcolumns<-intersect(names(database), make.names(intercrit$choice))
     if(length(correspondingcolumns)>0){ #this is one of the columns in green/red
-      datacrit<-database[,c("species", "Soort", "Botanisch", "Onderstam", correspondingcolumns)]
+      datacrit<-database[,c("species", "Soort", "Botanisch", "Onderstam", "Toepassingen", "tooltipspecies", correspondingcolumns)]
       datacrit$BigCriteria<-unique(intercrit$BigCriteria)
       datacrit$side<-unique(intercrit$side)
       datacrit$value<-0
@@ -74,9 +78,10 @@ compute_suitability_JBOJP<-function(inputsdata=NULL,
         userMITS<-MITStoget
         userMITS[!userMITS %in% inputsdata]<-NA #remove the MITS that the user did not declare having
         datacrit$value[!is.na(userMITS)]<-datacrit$value[!is.na(userMITS)] + 1 #add 1 to the score when the user has the necessary MITS
+        for (m in colnames(necessaryMITS)) necessaryMITS[!is.na(userMITS) & userMITS==m, m]<-TRUE
       } 
     }else if (crit=="Toepassingen"){
-      datacrit<-database[,c("species", "Soort", "Botanisch", "Onderstam", "Toepassingen")]
+      datacrit<-database[,c("species", "Soort", "Botanisch", "Onderstam", "Toepassingen", "tooltipspecies")]
       datacrit$BigCriteria<-unique(intercrit$BigCriteria)
       datacrit$side<-unique(intercrit$side)
       datacrit$value<-ifelse(datacrit$Toepassingen %in% inputsdata,2,0)
@@ -86,9 +91,10 @@ compute_suitability_JBOJP<-function(inputsdata=NULL,
     #print(names(dbfinal))
     #print("datacrit:")
     #print(names(datacrit))
-    dbfinal<-rbind(dbfinal, datacrit[,c("species", "Soort", "Botanisch", "Onderstam",
+    dbfinal<-rbind(dbfinal, datacrit[,c("species", "Soort", "Botanisch", "Onderstam",  "Toepassingen", "tooltipspecies",
                                         "BigCriteria", "side", "value")])
   }
+  
   
    #order the df by orderby, using latin name as id (this adds an id variable, which is a factor with levels ordered by the orderby side)
   #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
@@ -99,6 +105,13 @@ compute_suitability_JBOJP<-function(inputsdata=NULL,
   dbfinal$value[dbfinal$side=="responsetrait"]<- -dbfinal$value[dbfinal$side=="responsetrait"]
   
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
+  
+  #add the information of which MITS is necessary for each tree, given the user conditions, so that it appears in the graph tooltip
+  for (m in colnames(necessaryMITS)) necessaryMITS[,m]<-ifelse(necessaryMITS[,m],dfMITS[dfMITS$choice==m,"choice_en"],NA)
+  tooltipMITS<-apply(necessaryMITS, 1, 
+                            function(x) paste(x[!is.na(x)], collapse = " ⚠ "))
+  
+  dbfinal$tooltipspecies[tooltipMITS!=""]<-paste(dbfinal$tooltipspecies, tooltipMITS, sep=" ⚠ ")[tooltipMITS!=""]
   print("fin suitability")
   
   return(dbfinal)
