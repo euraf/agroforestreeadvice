@@ -2,8 +2,8 @@
 server <- function(input, output, session) {
   #http://127.0.0.1:3775/?selected_language=cz&model=Czech this will just take the user to the desired tab, with the desired language
   #127.0.0.1:3775/?model=Czech&soil_water=soil_water_waterlogged&habitus=bush this triggers a modal dialog to download a txt file with the species scores for this particular set of conditions
-  reactive_dataSuitability <- reactiveVal(data.frame(x = numeric(), y = numeric()))
-  reactive_plotSuitability <- reactiveVal(ggplot())
+  reactive_dataSuitability <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
+  reactive_plotSuitability <<- reactiveVal(ggplot())
 
   # Access the datatable - for debug purposes
   access_dataSuitability <- function() {
@@ -189,48 +189,41 @@ server <- function(input, output, session) {
   # Czech tree advice ----
   moduleTabInterface_Server(id = "Czech",
                             language= language,
-                            data=dataCzech, interface=interfaceCzech, functionSuitability=compute_suitability_Czech, compactobjectives=FALSE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
+                            data=dataCzech, interface=interfaceCzech, functionSuitability=compute_suitability_Czech, compactobjectives=FALSE)
   
   
   # Flanders tree advice ----
   moduleTabInterface_Server(id = "DENTRO",
                             language= language,
-                            data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
+                            data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE)
   
   # Shade tree advice ----
   moduleTabInterface_Server(id = "STA",
                             language= language,
-                            data=dataSTA, interface=interfaceSTA, functionSuitability=compute_suitability_STA, compactobjectives=TRUE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
+                            data=dataSTA, interface=interfaceSTA, functionSuitability=compute_suitability_STA, compactobjectives=TRUE)
   
   
   # Deciduous ----
   moduleTabInterface_Server(id = "DECIDUOUS",
                             language= language,
-                            data=dataDECIDUOUS, interface=interfaceDECIDUOUS, functionSuitability=compute_suitability_DECIDUOUS, compactobjectives=FALSE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
+                            data=dataDECIDUOUS, interface=interfaceDECIDUOUS, functionSuitability=compute_suitability_DECIDUOUS, compactobjectives=FALSE)
   
   # Species Climate Suitability Model ----
   moduleTabInterface_Server(id = "SCSM",
                             language= language,
-                            data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM, compactobjectives=FALSE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
+                            data=dataSCSM, interface=interfaceSCSM, functionSuitability=compute_suitability_SCSM, compactobjectives=FALSE)
   
   # Juiste Boom op de Juiste Plek ----
   
   moduleTabInterface_Server(id = "JBOJP",
                             language= language,
-                            data=dataJBOJP, interface=interfaceJBOJP, functionSuitability=compute_suitability_JBOJP, compactobjectives=FALSE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
+                            data=dataJBOJP, interface=interfaceJBOJP, functionSuitability=compute_suitability_JBOJP, compactobjectives=FALSE)
   
   
   # German Hedgerow manager
   moduleTabInterface_Server(id = "DEHM",
                             language= language,
-                            data=dataDEHM, interface=interfaceDEHM, functionSuitability=compute_suitability_DEHM, compactobjectives=FALSE,
-                            reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability)
+                            data=dataDEHM, interface=interfaceDEHM, functionSuitability=compute_suitability_DEHM, compactobjectives=FALSE)
   
 }
 

@@ -58,8 +58,8 @@ moduleTabInterface_UI <- function(id, data, interface) {
 
 # Fonction server du module ----
 #language is a reactive value from the main app
-moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE,
-                                      reactive_data = reactive_dataSuitability, reactive_plot = reactive_plotSuitability) {
+moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) 
+{
   
   moduleServer(
     id,
@@ -460,7 +460,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
                 ) +
           scale_fill_discrete(labels = Plot_legend_lang(language()))
           
-        reactive_plot(plot_Suitability)     
+        reactive_plotSuitability(plot_Suitability)     
 
         return(plot_Suitability)
       })
@@ -508,7 +508,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
 
           DataSuitability <- datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
           
-          reactive_data(DataSuitability)
+          reactive_dataSuitability(DataSuitability)
 
           DataSuitability
 
