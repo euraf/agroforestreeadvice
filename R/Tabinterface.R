@@ -32,7 +32,11 @@ moduleTabInterface_UI <- function(id, data, interface) {
                    div(style="display: inline-block;vertical-align:top; width: 200px;",
                        numericInput(inputId=ns("barplotto"), label=i18n$t("Display to the"), value=20))
                  ),
-                 plotOutput((ns("barplot_suitability")))
+                 
+                 plotOutput(ns("barplot_suitability"),
+                            hover = hoverOpts(id =ns("plot_hover"))),
+                 uiOutput(ns("tooltip"), style = "pointer-events: none"),
+                 #htmlOutput(ns("hover_info"))
                  
           ),
           column(width=12,
@@ -56,7 +60,7 @@ moduleTabInterface_UI <- function(id, data, interface) {
 } # fin moduleTabInterface_UI
 
 
-# Fonction server du module ----
+#### Fonction server du module ----
 #language is a reactive value from the main app
 moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) 
 {
@@ -179,7 +183,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         }
         #message("reformated inputs:"); message(str(reformated))
         return(reformated)
-
+        
       })#reformattedinputs() is a named character of choices of the user (with the checkbox name for TRUE checkboxes)
       #observe(print(str(reformattedinputs())))
       
@@ -296,8 +300,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           }
         #write_xlsx(dfSuitability, "01_dfsuitablity.xlsx")
         return(dfSuitability)
-      }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values
-      
+      }) %>% bindEvent(input$ab_compute, input$orderby) # datatoplot() is a data frame of trees, BigCriteria and values and tooltipspecies
       
       
       
@@ -335,8 +338,12 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices),
             sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices))),
             radioButtons=radioButtons(input_id, label = labelinput,choices = choices)
-          # Add more control types as needed
+            # Add more control types as needed
           )
+          # tooltip(
+          #   control,
+          #   "ça marche le tooltip!!" #actually it does not work: tooltip does not get triggered... need to better understand where to add the function.
+          # )
           
           column(width = 6, control)
         })
@@ -416,7 +423,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             # Add more control types as needed
           )
         })
-
+        
       }, ignoreInit=TRUE) #end update dynamic controls according to language
       
       
@@ -464,6 +471,45 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
 
         return(plot_Suitability)
       })
+     
+      
+      # ## barplot hovered bar info ----
+      # output$hover_info <- renderPrint({
+      #   if(!is.null(input$plot_hover)){
+      #     hoverlist<-input$plot_hover
+      #     #str(hoverlist$y)
+      #     #browser()
+      #     id<-hoverlist$domain$discrete_limits$y[[round(hoverlist$y)]]
+      #     print(paste("<b>",id,"</b><br>", data[data$IDAFTA==id, "description"]))
+      #     #icicicici works only for SUOMI because the description and ID fields names are hard-coded
+      #   }
+      # })
+      
+      output$tooltip <- renderUI({
+        hoverlist <- input$plot_hover
+        if(!is.null(hoverlist)){
+          id<-hoverlist$domain$discrete_limits$y[[round(hoverlist$y)]]
+          print(data[data$IDAFTA==id, "tooltipspecies"])
+          left_px <- hoverlist$coords_css$x
+          top_px <- hoverlist$coords_css$y
+          # create style property fot tooltip
+          # background color is set so tooltip is a bit transparent
+          # z-index is set so we are sure are tooltip will be on top
+          style <- paste0("position:absolute; z-index:100; background-color: rgba(245, 245, 245, 0.85); ",
+                          "left:", left_px + 2, "px; top:", top_px + 2, "px;")
+          
+          # actual tooltip created as wellPanel
+          wellPanel(
+            style = style,
+            p(HTML(paste0("<b> ID: </b>", id, "<br/>",
+                          "<b> Info: </b>", data[data$IDAFTA==id, "tooltipspecies"], "<br/>"#,
+                          #"<b> Distance from left: </b>", left_px, "<b>, from top: </b>", top_px
+                          )))
+          )
+        }
+        
+      })
+      
       
       ## DT table----
       output$DTSuitability <- renderDT({
@@ -513,7 +559,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           DataSuitability
 
         } else {datalong}
-        }, options = list(
+      }, options = list(
         scrollX = TRUE,
         language = list(
           search = i18n$t("Search:"),

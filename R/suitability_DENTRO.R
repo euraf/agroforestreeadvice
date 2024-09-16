@@ -1,3 +1,7 @@
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+dataDENTRO$IDAFTA<-dataDENTRO$English.name
+#add a tooltip column if it does not exist
+#if (is.null(dataDENTRO$tooltipspecies)) dataDENTRO$tooltipspecies<-dataDENTRO$Scientific.name  #not possible: DENTRO is not organized with one line per species
 
 
 #' compute_suitability for Flanders data

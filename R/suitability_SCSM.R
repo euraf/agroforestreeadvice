@@ -1,3 +1,7 @@
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+dataSCSM$IDAFTA<-paste(dataSCSM$genus,dataSCSM$species, sep=" ")
+#add a tooltip column if it does not exist
+if (is.null(dataSCSM$tooltipspecies)) dataSCSM$tooltipspecies<-dataSCSM$nameCommon
 
 #' compute_suitability for SCSM data
 #'

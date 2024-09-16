@@ -6,10 +6,11 @@ library(shiny)
 library(svglite)        # for svg download
 library(shinyjs)
 library(openxlsx)       # for writing xlsx files in download
-library(ggplot2)
+library(ggplot2) #for the barplot graph
 #library(plotly)
-library(shinydashboard)
-library(DT)
+library(shinydashboard) #for Dashboard appearance
+library(DT) #for Data Table
+library(bslib) #for tooltip
 library(dplyr)
 library(stringr)
 #library(tidyverse)
@@ -50,6 +51,8 @@ dataJBOJP<-read.table("models/dataJBOJP.txt", fileEncoding = "UTF-8", encoding =
 interfaceJBOJP<-read.table("models/interfaceJBOJP.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataDEHM<-read.table("models/dataDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceDEHM<-read.table("models/interfaceDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataSUOMI<-read.table("models/dataSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceSUOMI<-read.table("models/interfaceSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
 # In czech, there are empty spaces around words in some cells 
 dataCzech <- data.frame(lapply(dataCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
@@ -74,8 +77,8 @@ interfaceJBOJP<-interfaceJBOJP[!is.na(interfaceJBOJP$side),]
 interfaceJBOJP[1:length(interfaceJBOJP)]<-lapply(interfaceJBOJP[1:length(interfaceJBOJP)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceDEHM<-interfaceDEHM[!is.na(interfaceDEHM$side),]
 interfaceDEHM[1:length(interfaceDEHM)]<-lapply(interfaceDEHM[1:length(interfaceDEHM)], function(x) gsub(pattern=",", replacement=".", x=x))
-
-
+interfaceSUOMI<-interfaceSUOMI[!is.na(interfaceSUOMI$side),]
+interfaceSUOMI[1:length(interfaceSUOMI)]<-lapply(interfaceSUOMI[1:length(interfaceSUOMI)], function(x) gsub(pattern=",", replacement=".", x=x))
 
 toto<-strsplit(c(names(interfaceSTA), 
                  names(interfaceDENTRO), 
@@ -83,7 +86,8 @@ toto<-strsplit(c(names(interfaceSTA),
                  names(interfaceSCSM), 
                  names(interfaceCzech),
                  names(interfaceJBOJP),
-                 names(interfaceDEHM)), split="_")
+                 names(interfaceDEHM),
+                 names(interfaceSUOMI)), split="_")
 languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
 
 reshapecontrols<-function(controls, language, compactconditions=FALSE, compactobjectives){
@@ -133,7 +137,6 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
     #message(paste(c(names(compact), names(bigeffects)), collapse=" "))
     compact<-rbind(compact[compact$side=="responsetrait",],bigeffects)
   }
-  
   compact<-compact[order(compact$side, compact$order),]
   #print(head(compact))
   return(compact)
@@ -188,16 +191,17 @@ orderdf<-function(df, orderby, idvariable, interface){
 #' @export
 #'
 #' @examples
-default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weight = as.integer(1), yesindicator=c("yes", "oui", "x", "T", "TRUE", "VRAI")){
-  print("####### get inputs[criteria]")
-  print(inputs[criteria][1])
+default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weight = as.integer(1), yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI")){
+  message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
+  #print("####### get inputs[criteria]")
+  #print(inputs[criteria][1])
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
-    chosen<-inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria]
+    chosen<-unlist(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
     services<-strsplit(
       gsub(pattern="(", replacement=", ", fixed=TRUE, x=gsub(pattern=")", replacement="", fixed=TRUE, 
                                                              x=db[,intersect(names(db), c(criteria, chosen))])) #replace first ( by comma and remove )
-           , "[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces
+      , split="[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces
     #count the number of characteristics %in% inputs to get the score
     # Function to count the number of matching keywords
     count_matching_keywords <- function(keyword_list) {
@@ -207,6 +211,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
     nbmatches <- sapply(services, count_matching_keywords)
     #then divide by the number of possibilities to obtain score between 0 and 1
     db$value<-nbmatches/length(chosen)
+    
   } else if (type=="selectInput") {
     chosen<-inputs[criteria]
     if(substr(chosen[1],start=1, stop=4) == "not ") # if the user selected "not " in the selectInput, then we select all species
@@ -219,37 +224,59 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
       db$value<-as.numeric(db[,criteria]==chosen) 
     } else {
       if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the
-      db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
-    } else {
-      print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
-    }}
+        db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
+      } else {
+        print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
+      }}
     
   } else if (type=="checkboxInput") {
     db$value<- as.numeric(db[,criteria] %in% yesindicator)
   } else if (type=="sliderInput") {
-    #browser()
-    chosen<-as.numeric(inputs[grepl(pattern=criteria, x=names(inputs))])
+    chosen<-as.numeric(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
+    
+    #chosen<-as.numeric(inputs[grepl(pattern=criteria, x=names(inputs))])
     #I don't know why, sometimes inputs are duplicated...
     chosen<-unique(as.numeric(chosen))
     chosen<-chosen[!is.na(chosen)]
-    treetraits<-as.numeric(db[,criteria])
+    
+    
+    if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
+      splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
+      mini<-numeric(length(splits))
+      mini[sapply(splits, length)>0]<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>0], "[[", 1)))
+      maxi<-mini
+      maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
+      if(length(chosen)==2) { #sliderinput with a range and db with a range: percentage of desired within treetrait
+        overlap <- function(A, B) {
+          shared <- pmax(0, min(A[2], B[2]) - max(A[1], B[1]))
+          max(shared / c(diff(A), diff(B)))
+        }
+        db$value<-0
+        for(i in 1:nrow(db)) db$value[i]<-overlap(chosen, c(mini[i], maxi[i]))
+      } else { #sliderinput with just one chosen value: 1 if within treerange, 0 otherwise
+        db$value<-as.numeric(mini<=chosen & maxi>=chosen)
+      }
+    } else { #db gives only one value
+      treetraits<-as.numeric(db[,criteria])
+      if(length(chosen)==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
+        db$value<-as.numeric(treetraits>=min(chosen) & treetraits<=max(chosen))
+      } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
+        rangevalues<-range(treetraits, na.rm=TRUE)
+        db$value<-1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1]))
+      }
+    }
     
     #chosen<-as.numeric(chosen[!duplicated(names(chosen))])
     
-    if(length(chosen)==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
-      db$value<-as.numeric(treetraits>=min(chosen) & treetraits<=max(chosen))
-    } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
-      rangevalues<-range(treetraits, na.rm=TRUE)
-      db$value<-1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1]))
-    }
+    
   } else if (type=="numericInput") {
     chosen<-inputs[criteria]
     if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
       splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
-      min<-sapply(splits, "[[", 1)
-      max<-min
-      max[sapply(splits, length)>1]<-sapply(splits[sapply(splits, length)>1], "[[", 2)
-      db$value<-as.numeric(min<=chosen & max>=chosen)
+      mini<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits, "[[", 1)))
+      maxi<-mini
+      maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
+      db$value<-as.numeric(mini<=chosen & maxi>=chosen)
     } else { #unique value
       rangevalues<-range(as.numeric(db[,criteria]))
       db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(inputs[criteria]))/(rangevalues[2]-rangevalues[1]))
@@ -269,6 +296,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
           warning("Weight is not numeric and cannot be converted. Weight set to 1.")
         }
     }
+  #message("values= ", paste(db$value, collapse=","))
   db$criteria<-criteria
   db$BigCriteria<-BigCriteria
   db$side<-side
@@ -284,6 +312,7 @@ source("R/suitability_SCSM.R")
 source("R/suitability_Czech.R")
 source("R/suitability_JBOJP.R")
 source("R/suitability_DEHM.R")
+source("R/suitability_SUOMI.R") 
 
 
 
