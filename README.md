@@ -3,7 +3,7 @@
 
 Decision Support System to help choose tree species/varieties/rootstocks
 for agroforestry systems the tool can be used here:
-<https://stanek.shinyapps.io/AFtreeadvice_vukoz/>
+<https://stanek.shinyapps.io/agroforestreeadvice_vukoz/>
 
 ## Contributors to code:
 
