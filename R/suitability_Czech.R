@@ -127,6 +127,8 @@ dfczechinfo <- function(interface = interface, data = data) {
     #from interface - load rows where column side == "info"
     datainfo2 <- data.frame(interface[interface$side == "info", c("criteria", "choice")])
 
+    sorted_col_names <<- unique(datainfo2$criteria) #get unique values of "criteria" column
+
     #combine "choice" values of duplicated "criteria" values
     datainfo2 <- aggregate(choice ~ criteria, data = datainfo2, paste, collapse = ", ")
     # Check if the column "Scientific_name" exists
@@ -194,5 +196,9 @@ dfczechinfo <- function(interface = interface, data = data) {
       return(x)
     }))
 
+    # sort the columns by the order of sorted_col_names - this is the order of original interface file
+    datainfo3 <- datainfo3[, c("Scientific_name", sorted_col_names)]
+
     return(datainfo3)
+  
 }

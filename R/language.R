@@ -56,7 +56,7 @@ translator <- function(data, interface, language) {
 
   # Rename columns based on vocabulary
   rename_cols <- filter(vocabulary, object == "DFinfo_headline")
-  rename_cols <- setNames(str_to_title(rename_cols[[language]]), rename_cols$type)
+  rename_cols <- setNames(str_to_sentence(rename_cols[[language]]), rename_cols$type)
   names(data) <- sapply(names(data), function(x) ifelse(x %in% names(rename_cols), rename_cols[x], x))
 
   return(data)

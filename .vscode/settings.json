@@ -1,0 +1,4 @@
+{
+    "r.linting.enabled": false,
+    "r.lsp.diagnostics": false
+}

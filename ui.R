@@ -14,7 +14,7 @@ sidebar <- dashboardSidebar(
   selectInput(inputId = 'selected_language',
               i18n$t("Change language"),
               choices = i18n$get_languages(),
-              selected = i18n$get_key_translation()),
+              selected = "cz"),
 
   sidebarMenu(
     id="sidemenu",
@@ -115,15 +115,27 @@ body <- dashboardBody(
               tags$li("Lubos Úradníček (MENDELU Brno)"),
               tags$li("Antonín Martiník (MENDELU Brno)")
             ),
+            h4("Juiste Boom op de Juiste Plek"),
+            tags$ul(
+              tags$li("Jordy van Eijk (St. ReGeneration & Van Eijk : Consultantree)"),
+              tags$li("Jade Koop (Jade Reforestry)"),
+              tags$li("Euridice Leyequien Abarca (HVHL)"),
+              tags$li("Jerke de Vries (HVHL)"),
+              tags$li("Evert Prins (Louis Bolk Institute)")
+            ),
+            h4("German Hedgerow manager"),
+            tags$ul(
+              tags$li("Gaida W., Grothe H., 2000. Gehölze: Handbuch für Planung und Ausführung (Woody Species: Handbook for Planning and Planting). Berlin, Hannover: Patzer Verlag: 319")
+            ),
+            h4("Finnish tree suitability"),
+            tags$ul(
+              tags$li("Ujula, Juha & Mattila, Iris. (2023). Suomessa menestyviä puu- ja pensaslajeja agrometsäkäyttöön. Teoksessa I. Mattila (toim.). Puustoinen maatalous Suomessa - opas suunnitteluun, katsaus kulttuurinmuutokseen (liite 1). Kilpiän tila. https://doi.org/10.5281/zenodo.8418298")
+            ),
+
             div(class = "spaced-text",
               h4("If you want to report bugs, or have suggestions for improvement, or want to contribute, please do so on github:"),
               a("https://github.com/euraf/agroforestreeadvice", href="https://github.com/euraf/agroforestreeadvice")
-            ),
-            h2("Juiste Boom op de Juiste Plek: Jordy van Eijk (St. ReGeneration & Van Eijk : Consultantree); Jade Koop (Jade Reforestry);Euridice Leyequien Abarca (HVHL); Jerke de Vries (HVHL); Evert Prins (Louis Bolk Institute) "),
-            h2("German Hedgerow manager: Gaida W., Grothe H., 2000. Gehölze: Handbuch für Planung und Ausführung (Woody Species: Handbook for Planning and Planting). Berlin, Hannover: Patzer Verlag: 319"),
-            h2("Finnish tree suitability:  Ujula, Juha & Mattila, Iris. (2023). Suomessa menestyviä puu- ja pensaslajeja agrometsäkäyttöön. Teoksessa I. Mattila (toim.). Puustoinen maatalous Suomessa - opas suunnitteluun, katsaus kulttuurinmuutokseen (liite 1). Kilpiän tila. https://doi.org/10.5281/zenodo.8418298")
-
-              
+            )
 
     ),#fin infos
     tabItem(tabName = "tool", 
