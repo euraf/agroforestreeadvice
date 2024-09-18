@@ -24,36 +24,37 @@ translator <- function(data, interface, language) {
     warning("No 'info' side found in the 'interface' dataframe.")
     return(data)  # Exit early if no 'info' side to avoid further errors
   }
-  interface <- interface[interface$side == "info", ]
+  valid_values <- c("info", "info_do_not_modify")
+  interface <- interface[interface$side %in% valid_values, ]
 
   # Create a translation map from vocabulary
   translations <- c(setNames(vocabulary[[language]], vocabulary$type),setNames(interface[[language]], interface$choice))
-
   # Function to translate cell values, handling both simple "furniture" and comma-separated cases "furniture, sports"
     translate_cell <- function(cell, translations) {
+    if (cell %in% names(translations)) { return(translations[cell] )
+      } else { return(cell) }
+    
     if (str_detect(cell, ", ")) {
       # Handle comma-separated values
       translated_values <- sapply(str_split(cell, ",\\s*")[[1]], function(x) {
-        if (x %in% names(translations)) {
-          return(translations[x])
-        } else {
-          return(x)
-        }
+        if (x %in% names(translations)) { return(translations[x] )
+        } else { return(x) }
       })
       str_c(translated_values, collapse = ", ") # puts cells back together
-    } else {
-      # Handle simple values
-      if (cell %in% names(translations)) {
-        return(translations[cell])
-      } else {
-        return(cell)
-      }
     }
   }
   # Apply translations to all cells in the data
+  
   data <- data %>% 
-    mutate(across(everything(), ~sapply(., translate_cell, translations = translations)))
-
+    mutate(across(everything(), ~sapply(., function(cell) {
+      if (is.na(cell)) {
+        return(NA)
+      } else {
+        translate_cell(cell, translations)
+        }
+      }
+      )
+    ))
   # Rename columns based on vocabulary
   rename_cols <- filter(vocabulary, object == "DFinfo_headline")
   rename_cols <- setNames(str_to_sentence(rename_cols[[language]]), rename_cols$type)

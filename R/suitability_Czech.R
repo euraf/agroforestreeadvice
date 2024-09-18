@@ -123,12 +123,14 @@ Hard_criteria_filter <- function(db, inputsdata, interface) {
 dfczechinfo <- function(interface = interface, data = data) {
     #loads all "info" side rows of interface, find their values for each tree in data and 
     #then agregate them into one row if they share "criteria" value
-
     #from interface - load rows where column side == "info"
     datainfo2 <- data.frame(interface[interface$side == "info", c("criteria", "choice")])
+    dataNotchange <- data.frame(interface[interface$side == "info_do_not_modify", c("criteria", "choice")])
 
-    sorted_col_names <<- unique(datainfo2$criteria) #get unique values of "criteria" column
-
+    cols_info <- unique(datainfo2$criteria)
+    cols_do_not_change <- unique(dataNotchange$criteria)
+    sorted_cols <- c(cols_do_not_change, cols_info)
+  
     #combine "choice" values of duplicated "criteria" values
     datainfo2 <- aggregate(choice ~ criteria, data = datainfo2, paste, collapse = ", ")
     # Check if the column "Scientific_name" exists
@@ -196,8 +198,17 @@ dfczechinfo <- function(interface = interface, data = data) {
       return(x)
     }))
 
+    # from data append the columns info_do_not_modify
+    no_change_cols <- interface %>% filter(side == "info_do_not_modify")
+    no_change_cols <- no_change_cols$choice
+
+    # append no_change_cols column from data to datainfo3 where it is possible - thorugh the row Scientific_name
+    if (no_change_cols %in% colnames(data)) {
+      datainfo3[no_change_cols] <- data[, no_change_cols]
+    }
+
     # sort the columns by the order of sorted_col_names - this is the order of original interface file
-    datainfo3 <- datainfo3[, c("Scientific_name", sorted_col_names)]
+    datainfo3 <- datainfo3[, c("Scientific_name", sorted_cols)]
 
     return(datainfo3)
   
