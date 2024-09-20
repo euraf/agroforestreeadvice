@@ -45,3 +45,6 @@ tests/inputsdata.rds
 tests/inputsdata_SCSM.rds
 tests/dfSuitability_SCSM.rds
 tests/dbfinal_test.rds
+.IGNORE/Czech.xlsx
+.IGNORE/Czech2jw_new.xlsx
+.IGNORE/Sešit1.xlsx

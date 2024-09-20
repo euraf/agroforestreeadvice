@@ -17,7 +17,7 @@ Plot_legend_lang <- function(lang) {
 
 translator <- function(data, interface, language) {
   # Tries to translate all data in Information table - search in the interface and vocabulary
-  vocabulary <- read.csv("R/translate_plot_categories.csv", sep = ",", header = TRUE)
+  vocabulary <- read.csv("R/translate_plot_categories.csv", sep = ";", header = TRUE)
 
   # Ensure 'info' side exists in 'interface'
   if (!"info" %in% interface$side) {
@@ -31,6 +31,7 @@ translator <- function(data, interface, language) {
   translations <- c(setNames(vocabulary[[language]], vocabulary$type),setNames(interface[[language]], interface$choice))
   # Function to translate cell values, handling both simple "furniture" and comma-separated cases "furniture, sports"
     translate_cell <- function(cell, translations) {
+    print(cell)
     if (cell %in% names(translations)) { return(translations[cell] )
       } else { return(cell) }
     
