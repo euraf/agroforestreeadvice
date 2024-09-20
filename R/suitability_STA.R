@@ -1,5 +1,5 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
-dataSTA$IDAFTA<-dataSTA$Tree_latin
+dataSTA$IDAFTA<-dataSTA$New_Tree_Latin
 #add a tooltip column if it does not exist
 #if (is.null(dataSTA$tooltipspecies)) dataSTA$tooltipspecies<-dataSTA$Tree_latin #not possible: STA is not organized with one line per species
 
@@ -22,19 +22,28 @@ dataSTA$IDAFTA<-dataSTA$Tree_latin
 #interface=interfaceSTA
 #' 
 
-
-
 compute_suitability_STA<-function(inputsdata=NULL,
-                                  database, 
-                                  interface,
-                                  orderby="responsetrait"){
+                                     database, 
+                                     interface,
+                                     orderby="responsetrait"){
+  #browser()
+  showModal(modalDialog(
+    title = "I haven't finished recoding the model after cleaning of the data"
+  ))
+  return(data.frame(species="no data yet", side="responsetrait", value=1, BigCriteria="please describe your site and objectives"))
+  
+  
+  
+  
+  
+  
   
   #print(str(inputsdata))
   interface<-interface[!is.na(interface$side),]
-  database$countryregion<-paste(database$Country, " (", database$Region,")", sep="")
+  database$Countryregion<-paste(database$Country, database$Region, sep=".")
   database$crop<-database$Crop
-  names(database)[names(database)=="ES"]<-"choice" #warning: choices have many synonyms, they are grouped through criteria column in interface
-  names(database)[names(database)=="Estimate"]<-"value"
+  names(database)[names(database)=="criteria"]<-"choice" 
+  names(database)[names(database)=="Estimate"]<-"score"
   criteriaresponse<-unique(unname(unlist(interface[!is.na(interface$side) 
                                                    & interface$side=="responsetrait", c("criteria")])))
   # BCeffect<-unique(unname(unlist(interface[!is.na(interface$side) 
@@ -45,7 +54,7 @@ compute_suitability_STA<-function(inputsdata=NULL,
   subsetDB<-database
   #remove the criteria that the user did not select specifically (e.g. still the default all...), and filter database based on the other criteria
   for(crit in criteriaresponse) {
-    if(substr(inputsdata[crit],start=1, stop=4) == "all ") {
+    if(substr(inputsdata[crit],start=1, stop=4) == "All ") {
       inputsdata<-inputsdata[setdiff(names(inputsdata), crit)]
     } else { # if the user chose a specific value for the crit crtieria then filter the data according to the user choice
       if(crit %in% names(subsetDB)) { #crop or countryregion
@@ -67,7 +76,7 @@ compute_suitability_STA<-function(inputsdata=NULL,
     #keep all data
     subsetDB<-database
     #compute adaptation score
-    dataadaptation<-unique(database[,c("Country", "Region", "countryregion", "Crop", "crop", "Subgroup", "Tree_latin")])
+    dataadaptation<-unique(database[,c("Country", "Region", "countryregion", "Crop", "crop", "Subgroup", "New_Tree_Latin")])
     dataadaptation$countryregion<-paste(dataadaptation$Country, " (", dataadaptation$Region,")", sep="")
     dataadaptation$crop<-dataadaptation$Crop
     
@@ -89,14 +98,14 @@ compute_suitability_STA<-function(inputsdata=NULL,
       toto$value<-ifelse(toto[variabletolookat]==ctk,1,0)
       resultadapt<-rbind(resultadapt, toto)
     }
-    resultadapt<-aggregate(resultadapt[,"value", drop=FALSE], by=resultadapt[,c("Tree_latin", "criteria")], max)
+    resultadapt<-aggregate(resultadapt[,"value", drop=FALSE], by=resultadapt[,c("New_Tree_Latin", "criteria")], max)
     
     #add side and big criteria info
-    resultadapt<-merge(resultadapt, unique(interface[,c("side", "BigCriteria", "criteria", "choice" )]), all.x=TRUE)[,c("side", "Tree_latin", "value", "BigCriteria", "criteria", "choice" )]
+    resultadapt<-merge(resultadapt, unique(interface[,c("side", "BigCriteria", "criteria", "choice" )]), all.x=TRUE)[,c("side", "New_Tree_Latin", "value", "BigCriteria", "criteria", "choice" )]
     #resultadapt<-aggregate(resultadapt[,"value", drop=FALSE], by=resultadapt[,c("side", "BigCriteria", "Tree_latin"), drop=FALSE], mean, na.rm=TRUE)
   } else { #there was data fitting all the users criteria
     #we give the same adaptation score to all trees
-    resultadapt<-merge(unique(database[,c("Tree_latin"), drop=FALSE]),
+    resultadapt<-merge(unique(database[,c("New_Tree_Latin"), drop=FALSE]),
                        unique(interface[interface$side=="responsetrait",c("side", "BigCriteria", "criteria", "choice" )]))#,
     #all.x=TRUE)
     resultadapt$value<-1
@@ -123,15 +132,15 @@ compute_suitability_STA<-function(inputsdata=NULL,
   subsetDB<-merge(subsetDB, BCtokeep, all.x=TRUE)
   #add the adaptation values
   subsetDB<-rbind(
-    subsetDB[,c("Tree_latin", "side", "BigCriteria", "criteria", "choice", "value")], 
-    resultadapt[,c("Tree_latin", "side", "BigCriteria", "criteria", "choice", "value")]
+    subsetDB[,c("New_Tree_Latin", "side", "BigCriteria", "criteria", "choice", "value")], 
+    resultadapt[,c("New_Tree_Latin", "side", "BigCriteria", "criteria", "choice", "value")]
   )
   
   #just in case we end up wit hseveral lines for the same combination of tree and BigCriteria
-  df<-aggregate(subsetDB[,"value", drop=FALSE], by=subsetDB[,c("Tree_latin", "side", "BigCriteria", "criteria"), drop=FALSE], mean, na.rm=TRUE)
+  df<-aggregate(subsetDB[,"value", drop=FALSE], by=subsetDB[,c("New_Tree_Latin", "side", "BigCriteria", "criteria"), drop=FALSE], mean, na.rm=TRUE)
   
   #order the df by orderby, using latin name as id
-  df<-orderdf(df=df, orderby=orderby, idvariable="Tree_latin", interface=interface) 
+  df<-orderdf(df=df, orderby=orderby, idvariable="New_Tree_Latin", interface=interface) 
   
   # give negative values for response traits so that they appear on the left
   df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]<- -  df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]
@@ -141,3 +150,122 @@ compute_suitability_STA<-function(inputsdata=NULL,
   return(df)
   
 }
+
+# 
+# compute_suitability_STAold<-function(inputsdata=NULL,
+#                                   database, 
+#                                   interface,
+#                                   orderby="responsetrait"){
+#   
+#   #print(str(inputsdata))
+#   interface<-interface[!is.na(interface$side),]
+#   database$countryregion<-paste(database$Country, " (", database$Region,")", sep="")
+#   database$crop<-database$Crop
+#   names(database)[names(database)=="ES"]<-"choice" #warning: choices have many synonyms, they are grouped through criteria column in interface
+#   names(database)[names(database)=="Estimate"]<-"value"
+#   criteriaresponse<-unique(unname(unlist(interface[!is.na(interface$side) 
+#                                                    & interface$side=="responsetrait", c("criteria")])))
+#   # BCeffect<-unique(unname(unlist(interface[!is.na(interface$side) 
+#   #                                          & interface$side=="effecttrait", c("BigCriteria")])))
+#   # 
+#   print("adaptation")
+#   #selects the subset of database corresponding to the selected country, region, crop, location
+#   subsetDB<-database
+#   #remove the criteria that the user did not select specifically (e.g. still the default all...), and filter database based on the other criteria
+#   for(crit in criteriaresponse) {
+#     if(substr(inputsdata[crit],start=1, stop=4) == "all ") {
+#       inputsdata<-inputsdata[setdiff(names(inputsdata), crit)]
+#     } else { # if the user chose a specific value for the crit crtieria then filter the data according to the user choice
+#       if(crit %in% names(subsetDB)) { #crop or countryregion
+#         subsetDB<-subsetDB[ subsetDB[[crit]] == inputsdata[crit] ,]
+#       } else { #altitude or precicpitation
+#         subsetDB<-subsetDB[ subsetDB$Subgroup == inputsdata[crit] 
+#                             | tolower(substr(subsetDB[["Subgroup"]], start=1, stop=4))=="all ",]   
+#       }
+#     }
+#   }
+#   
+#   if(nrow(subsetDB)==0) {
+#     print("this combination of country, crop, precipitation altitude does not exist")
+#     showModal(modalDialog(
+#       title = "this combination of country, crop, precipitation, altitude does not exist",
+#       "So we give you species cited in other countries/regions/precipitations/altitudes",
+#       "please consider this list as indicative only as the results might not be relevant for your conditions"
+#     ))
+#     #keep all data
+#     subsetDB<-database
+#     #compute adaptation score
+#     dataadaptation<-unique(database[,c("Country", "Region", "countryregion", "Crop", "crop", "Subgroup", "Tree_latin")])
+#     dataadaptation$countryregion<-paste(dataadaptation$Country, " (", dataadaptation$Region,")", sep="")
+#     dataadaptation$crop<-dataadaptation$Crop
+#     
+#     if(!is.null(inputsdata)) {
+#       choicetokeep<-unlist(interface[!is.na(interface$side) 
+#                                      & interface$side=="responsetrait" 
+#                                      & interface$choice %in% unlist(inputsdata), c("choice")])
+#     } else {
+#       choicetokeep<-unique(unname(unlist(interface[!is.na(interface$side) 
+#                                                    & interface$side=="responsetrait", c("choice")])))
+#     }
+#     resultadapt<-data.frame()
+#     for(ctk in choicetokeep){
+#       criterion<-interface[interface$choice==ctk, "criteria"]
+#       toto<-dataadaptation
+#       toto$criteria<-criterion
+#       toto$side<-"responsetrait"
+#       if(criterion %in% names(dataadaptation)) variabletolookat<-criterion else variabletolookat<-"Subgroup"
+#       toto$value<-ifelse(toto[variabletolookat]==ctk,1,0)
+#       resultadapt<-rbind(resultadapt, toto)
+#     }
+#     resultadapt<-aggregate(resultadapt[,"value", drop=FALSE], by=resultadapt[,c("Tree_latin", "criteria")], max)
+#     
+#     #add side and big criteria info
+#     resultadapt<-merge(resultadapt, unique(interface[,c("side", "BigCriteria", "criteria", "choice" )]), all.x=TRUE)[,c("side", "Tree_latin", "value", "BigCriteria", "criteria", "choice" )]
+#     #resultadapt<-aggregate(resultadapt[,"value", drop=FALSE], by=resultadapt[,c("side", "BigCriteria", "Tree_latin"), drop=FALSE], mean, na.rm=TRUE)
+#   } else { #there was data fitting all the users criteria
+#     #we give the same adaptation score to all trees
+#     resultadapt<-merge(unique(database[,c("Tree_latin"), drop=FALSE]),
+#                        unique(interface[interface$side=="responsetrait",c("side", "BigCriteria", "criteria", "choice" )]))#,
+#     #all.x=TRUE)
+#     resultadapt$value<-1
+#   }
+#   
+#   print("effectiveness")  
+#   #keep the ecosystem services that were chosen by user
+#   #browser()
+#   BCtokeep<-interface[ interface$side=="effecttrait" & interface$BigCriteria %in% inputsdata,]
+#   if (nrow(BCtokeep)==0){print("no objective selected, so keep them all")
+#     BCtokeep<-interface[interface$side=="effecttrait", ]
+#   }
+#   #browser()
+#   toto<-subsetDB[subsetDB$choice %in% BCtokeep$choice,]
+#   if(nrow(toto)==0) {
+#     print("no tree provides the selected ES in your conditions, so we keep all ES")
+#     showModal(modalDialog(
+#       title = "No tree provides the selected Ecosystem Services in your conditions",
+#       "So we give you all the ecosystem services"
+#     ))
+#   } else {subsetDB<-subsetDB[subsetDB$choice %in% BCtokeep$choice,]}
+#   
+#   #add the big Criteria and side info 
+#   subsetDB<-merge(subsetDB, BCtokeep, all.x=TRUE)
+#   #add the adaptation values
+#   subsetDB<-rbind(
+#     subsetDB[,c("Tree_latin", "side", "BigCriteria", "criteria", "choice", "value")], 
+#     resultadapt[,c("Tree_latin", "side", "BigCriteria", "criteria", "choice", "value")]
+#   )
+#   
+#   #just in case we end up wit hseveral lines for the same combination of tree and BigCriteria
+#   df<-aggregate(subsetDB[,"value", drop=FALSE], by=subsetDB[,c("Tree_latin", "side", "BigCriteria", "criteria"), drop=FALSE], mean, na.rm=TRUE)
+#   
+#   #order the df by orderby, using latin name as id
+#   df<-orderdf(df=df, orderby=orderby, idvariable="Tree_latin", interface=interface) 
+#   
+#   # give negative values for response traits so that they appear on the left
+#   df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]<- -  df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]
+#   
+#   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
+#   print("fin suitability")
+#   return(df)
+#   
+# }
