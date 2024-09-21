@@ -11,13 +11,10 @@ library(rsvg)           # convert svg to png in downloads
 
 dataCzech<-read.table("models/dataCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceCzech<-read.table("models/interfaceCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
-load("datainfo.RData")
 
 translator <- function(data, interface, language) {
-  data <- datainfo
-  interface <- interfaceCzech
-  language <- "choice_cz"
-  vocabulary <- read.csv("R/translate_plot_categories.csv", sep = ",", header = TRUE)
+  # Tries to translate all data in Information table - search in the interface and vocabulary
+  vocabulary <- read.csv("R/translate_plot_categories.csv", sep = ";", header = TRUE, quote = '"',fill = TRUE, encoding = "UTF-8")
 
   # Ensure 'info' side exists in 'interface'
   if (!"info" %in% interface$side) {
@@ -31,7 +28,6 @@ translator <- function(data, interface, language) {
   translations <- c(setNames(vocabulary[[language]], vocabulary$type),setNames(interface[[language]], interface$choice))
   # Function to translate cell values, handling both simple "furniture" and comma-separated cases "furniture, sports"
     translate_cell <- function(cell, translations) {
-    print(cell)
     if (cell %in% names(translations)) { return(translations[cell] )
       } else { return(cell) }
     
@@ -45,12 +41,13 @@ translator <- function(data, interface, language) {
     }
   }
   # Apply translations to all cells in the data
-  
+  print(translations)
   data <- data %>% 
     mutate(across(everything(), ~sapply(., function(cell) {
       if (is.na(cell)) {
         return(NA)
       } else {
+        print(cell)
         translate_cell(cell, translations)
         }
       }
@@ -63,4 +60,5 @@ translator <- function(data, interface, language) {
 
   return(data)
 }
+
 translated_info <- translator(dataCzech, interfaceCzech, "choice_cz")

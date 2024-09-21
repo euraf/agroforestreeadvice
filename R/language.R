@@ -31,7 +31,6 @@ translator <- function(data, interface, language) {
   translations <- c(setNames(vocabulary[[language]], vocabulary$type),setNames(interface[[language]], interface$choice))
   # Function to translate cell values, handling both simple "furniture" and comma-separated cases "furniture, sports"
     translate_cell <- function(cell, translations) {
-    print(cell)
     if (cell %in% names(translations)) { return(translations[cell] )
       } else { return(cell) }
     
@@ -45,12 +44,13 @@ translator <- function(data, interface, language) {
     }
   }
   # Apply translations to all cells in the data
-  
+  print(translations)
   data <- data %>% 
     mutate(across(everything(), ~sapply(., function(cell) {
       if (is.na(cell)) {
         return(NA)
       } else {
+        print(cell)
         translate_cell(cell, translations)
         }
       }
