@@ -183,6 +183,16 @@ server <- function(input, output, session) {
     
   }) #end managing URL queries
   
+  scoringData <- read.csv("R/scoring_information.csv", sep = ";", header = TRUE, check.names = FALSE)
+  
+  # Render the DataTable
+  output$scoringTable <- renderDT({
+    datatable(scoringData, options = list(
+    dom = 't',
+    className = 'cell-border stripe'
+      ))
+    })
+
   
   
   

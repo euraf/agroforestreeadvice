@@ -44,13 +44,11 @@ translator <- function(data, interface, language) {
     }
   }
   # Apply translations to all cells in the data
-  print(translations)
   data <- data %>% 
     mutate(across(everything(), ~sapply(., function(cell) {
       if (is.na(cell)) {
         return(NA)
       } else {
-        print(cell)
         translate_cell(cell, translations)
         }
       }

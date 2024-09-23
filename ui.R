@@ -18,9 +18,10 @@ sidebar <- dashboardSidebar(
 
   sidebarMenu(
     id="sidemenu",
+    menuItem(i18n$t("Tools"), tabName = "tool"),
     menuItem(i18n$t("Information"), tabName = "Welcome"),
     menuItem(i18n$t("Databases"), tabName = "databases"),
-    menuItem(i18n$t("Tools"), tabName = "tool")
+    menuItem(i18n$t("Scoring"), tabName = "Scoring")
   )
 )
 
@@ -141,6 +142,8 @@ body <- dashboardBody(
     tabItem(tabName = "tool", 
             tabsetPanel(
               id = "toolsTabset",
+              tabPanel(i18n$t("Czech tree selection tool"), value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech)),
+              
               tabPanel("Flanders Tree Advisor (DENTRO)", value="DENTRO", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
               tabPanel(i18n$t("Shade Tree Advice (coffee and cocoa)"), value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
@@ -148,8 +151,6 @@ body <- dashboardBody(
               tabPanel(i18n$t("Deciduous (fruit trees in France)"), value="DECIDUOUS", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
               
               tabPanel(i18n$t("SCSM (species climate suitability model)"), value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
-              
-              tabPanel(i18n$t("Czech tree selection tool"), value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech)),
               
               tabPanel("Juiste Boom op de Juiste Plek", value="JBOJP", moduleTabInterface_UI(id = "JBOJP", data = dataJBOJP, interface= interfaceJBOJP)),
               
@@ -173,7 +174,13 @@ body <- dashboardBody(
 
     
             # A completer: page tutoriel video, page pdf backend
-    )#fin databases
+    ), #fin databases
+
+    tabItem(tabName = "Scoring", 
+            h1("Scoring table of the tools:"),
+            DTOutput("scoringTable")  # Placeholder for the scoring DataTable
+  
+    ) #fin scoring
   ) #fin pages
     ,tags$style(HTML("
         /* first box, red */

@@ -1,0 +1,8 @@
+User input;Database;Score
+1 item from a drop-down list (or in radio buttons);Yes/no columns for each possible item;1 if the tree has this feature,0 otherwise
+1 item from a drop-down list (or in radio buttons);1 column containing an item;1 if the tree has this feature,0 otherwise
+1 or more items in a set of checkboxes;Yes/no columns for each possible item;(number of items present in tree features,among selected items)/(number of selected items)
+1 or more items in a set of checkboxes;1 column containing one or more items;(number of items present in tree features,among selected items)/(number of selected items)
+1 single numerical value;1 column containing a single value;1-abs(feature-value)/(max(features)-min(features))
+1 single numerical value;1 column containing a range (x-y);1 if value is within range,0 if value is outside range
+range of values;1 column containing a single value;1 if the characteristic is within the input range,0 if the characteristic is outside it
