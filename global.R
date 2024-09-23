@@ -217,7 +217,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
     if(substr(chosen[1],start=1, stop=4) == "not ") # if the user selected "not " in the selectInput, then we select all species
     {
       print(paste0(chosen[0],": selected all"))
-      db$value<-1
+      db$value<-0
     }
 
     else if (criteria %in% names(db)){ #one column criteria, with content equal to possible choices
