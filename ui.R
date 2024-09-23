@@ -176,10 +176,18 @@ body <- dashboardBody(
             # A completer: page tutoriel video, page pdf backend
     ), #fin databases
 
-    tabItem(tabName = "Scoring", 
-            h1("Scoring table of the tools:"),
-            DTOutput("scoringTable")  # Placeholder for the scoring DataTable
-  
+        tabItem(tabName = "Scoring", 
+            h1("Postup hodnocení dřevin:"),
+            tags$style(HTML("
+                .responsive-img {
+                    width: 100%;
+                    height: auto;
+                    max-width: 1280px;  /* Optional: set a max width */
+                }
+            ")),
+            img(src = "img1.png", class = "responsive-img"),
+            br(),  # Line break to add space between images
+            img(src = "img2.png", class = "responsive-img")
     ) #fin scoring
   ) #fin pages
     ,tags$style(HTML("
