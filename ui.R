@@ -178,16 +178,11 @@ body <- dashboardBody(
 
         tabItem(tabName = "Scoring", 
             h1("Postup hodnocení dřevin:"),
-            tags$style(HTML("
-                .responsive-img {
-                    width: 100%;
-                    height: auto;
-                    max-width: 1280px;  /* Optional: set a max width */
-                }
-            ")),
-            img(src = "img1.png", class = "responsive-img"),
-            br(),  # Line break to add space between images
-            img(src = "img2.png", class = "responsive-img")
+            div(
+              img(src = "obraz1a.png"),),
+            div(
+              br(),  # Line break to add space between images
+              img(src = "obraz2a.png"))
     ) #fin scoring
   ) #fin pages
     ,tags$style(HTML("
