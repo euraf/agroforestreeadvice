@@ -28,7 +28,7 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   user_ca_actif <- inputsdata["user_ca_actif"]
   user_dispo <- inputsdata["user_dispo"]
   user_hauteur <- inputsdata["user_hauteur"]
-  user_especes <- gsub(pattern="especeuser_", replacement="", x=inputsdata[grepl(x=names(inputsdata), pattern= "especeuser_")])
+  user_especes <- gsub(pattern="especeuser_", replacement="", x=inputsdata[grepl(x=names(inputsdata), pattern= "especeuser")])
   
   # Criteres d'importance des experts (Cf. google doc) de  1 (plus important) a 5 (moins important)
   # a terme il faudra reflechir a mettre des sliders pour laisser le choix a l utilisaeur
@@ -111,7 +111,6 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   result$score_ca_actif = result$note_ca_actif * (6 - crit_PG_taux_ca)
   result$score_dispo = result$note_dispo * (6 - crit_esp_dispo)
   result$score_hauteur = result$note_hauteur * (6 - crit_esp_hauteur_arbre)
-  
   # note deficit hydrique = r?sultatnt de def_hyd et irrigation
   #result$score_def_hyd_combine <- (result$score_def_hyd + result$score_irrigation)/2
   
