@@ -199,7 +199,7 @@ server <- function(input, output, session) {
   # Shade tree advice ----
   moduleTabInterface_Server(id = "STA",
                             language= language,
-                            data=dataSTA, interface=interfaceSTA, functionSuitability=compute_suitability_STA, compactobjectives=TRUE)
+                            data=dataSTA, interface=interfaceSTA, functionSuitability=compute_suitability_STA, compactobjectives=FALSE)
   
   
   # Deciduous ----

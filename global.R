@@ -179,6 +179,17 @@ orderdf<-function(df, orderby, idvariable, interface){
 
 #' Title
 #'
+#' @details 
+#' |User input|Database|Score|
+#' |-----------|---------|-------|
+#' |1 item from a drop-down list (or in radio buttons)|Yes/no columns for each possible item|1 if the tree has this feature, 0 otherwise|
+#' |1 item from a drop-down list (or in radio buttons)|1 column containing an item|1 if the tree has this feature, 0 otherwise|
+#' |1 or more items in a set of checkboxes|Yes/no columns for each possible item|(number of items present in tree features, among selected items)/(number of selected items)|
+#' |1 or more items in a set of checkboxes|1 column containing one or more items, or several columns each containing 1 item|(number of items present in tree features, among selected items)/(number of selected items)|
+#' |1 or more items in a set of checkboxes|several columns (with names corresponding to items) containing scores|sum of scores of chosen columns|
+#' |1 single numerical value|1 column containing a single value|1-abs(feature-value)/(max(features)-min(features))|
+#' |1 single numerical value|1 column containing a range (x-y) |1 if value is within range, 0 if value is outside range|
+#' |range of values|1 column containing a single value|1 if the characteristic is within the input range, 0 if the characteristic is outside it|
 #' @param criteria single name of a criteria for which to compute the score
 #' @param type #type of widget (one of "checkboxGroupInput", "selectInput", "sliderInput", "checkboxInput", "numericInput")
 #' @param inputs #character vector of reformatted inputs (until I update everything to accept lists)
@@ -196,23 +207,40 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
   #print("####### get inputs[criteria]")
   #print(inputs[criteria][1])
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
-    #extract the relevant inputs to see which were chosen, strsplit the characteristics to see all that is provided by the species, 
+    #extract the relevant inputs to see which were chosen
     chosen<-unlist(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
-    services<-strsplit(
+    services<-strsplit( #services is a list (one for each species) of vectors of keywords (or numbers but not used in this case)
       gsub(pattern="(", replacement=", ", fixed=TRUE, x=gsub(pattern=")", replacement="", fixed=TRUE, 
                                                              x=db[,intersect(names(db), c(criteria, chosen))])) #replace first ( by comma and remove )
-      , split="[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces
-    #count the number of characteristics %in% inputs to get the score
-    # Function to count the number of matching keywords
-    count_matching_keywords <- function(keyword_list) {
-      sum(keyword_list %in% chosen)
-    }
-    # Apply the function to each species
-    nbmatches <- sapply(services, count_matching_keywords)
-    #then divide by the number of possibilities to obtain score between 0 and 1
-    db$value<-nbmatches/length(chosen)
+      , split="\\s*[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces (and also remove trailing blanks)
+   
+    if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
+      db$value<-as.numeric(db[,criteria] %in% chosen) 
+    } else { # several columns, one for each possible choice
+      if (all(sapply(make.names(chosen), function(ch) ch %in% names(db)))) { #all the chosen are among the column names
+        db$value<-0
+        for (ch in chosen) {
+          if(class(db[,ch])=="numeric") {#the database contains scores
+            scores<-db[,ch]
+            scores[is.na(scores)]<-0
+            db$value<-db$value+scores
+          } else { #the database contains keywords
+            #count the number of characteristics %in% inputs to get the score
+            # Function to count the number of matching keywords
+            count_matching_keywords <- function(keyword_list) {
+              sum(keyword_list %in% chosen)
+            }
+            # Apply the function to each species
+            nbmatches <- sapply(services, count_matching_keywords)
+            #then divide by the number of possibilities to obtain score between 0 and 1
+            db$value<-nbmatches/length(chosen)
+          }
+        } #end for each chosen
+      } else {
+        print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
+      }}
+   } else if (type=="selectInput") {
     
-  } else if (type=="selectInput") {
     chosen<-inputs[criteria]
     if(substr(chosen[1],start=1, stop=4) == "not ") # if the user selected "not " in the selectInput, then we select all species
     {
@@ -223,7 +251,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
     else if (criteria %in% names(db)){ #one column criteria, with content equal to possible choices
       db$value<-as.numeric(db[,criteria]==chosen) 
     } else {
-      if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the
+      if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the column names
         db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
       } else {
         print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
@@ -262,7 +290,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
         db$value<-as.numeric(treetraits>=min(chosen) & treetraits<=max(chosen))
       } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
         rangevalues<-range(treetraits, na.rm=TRUE)
-        db$value<-1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1]))
+        db$value<-pmax(0, 1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1])))
       }
     }
     
