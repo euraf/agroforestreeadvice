@@ -1,5 +1,5 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
-dataSTA$IDAFTA<-dataSTA$Tree_latin
+dataSTA$IDAFTA<-paste(dataSTA$Tree_latin, dataSTA$Region, dataSTA$precipitation, dataSTA$altitude)
 #add a tooltip column if it does not exist
 #if (is.null(dataSTA$tooltipspecies)) dataSTA$tooltipspecies<-dataSTA$Tree_latin #not possible: STA is not organized with one line per species
 
@@ -38,7 +38,7 @@ compute_suitability_STA<-function(inputsdata=NULL,
   rownames(interfcrit)<-interfcrit$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
                                   c("Provision", "RegulationBiotic", "RegulationMicroclimate", "RegulationSoil", "RegulationInteractions", "RegulationOther")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
-  criteriaresponse<-c("Region", "Crop", "precipitation", "altitude" )
+  criteriaresponse<-c("Region", "precipitation", "altitude" )
   print("adaptation")
   #selects the subset of database corresponding to the selected country, region, crop, location
   subsetDB<-database
@@ -52,15 +52,15 @@ compute_suitability_STA<-function(inputsdata=NULL,
   }
   
   if(nrow(subsetDB)==0) {
-    combin1<-unique(database[,c("Region", "Crop")])
+    combin1<-unique(database[,c("Region"), drop=FALSE])
     combin2<-unique(database[,c("precipitation", "altitude")])
     combin2<-combin2[! (combin2$precipitation=="All precipitation zones" & combin2$altitude=="All altitudes"),]
     combin3<-merge(combin1, combin2)
     combin3<-combin3[apply(combin3, 1, paste, collapse="_") %in% apply(database[,names(combin3)], 1, paste, collapse="_"),]
     combin3[,c("precipitation", "altitude")]<-lapply(combin3[,c("precipitation", "altitude")], function(x) {x[substr(x,start=1, stop=4) == "All "]<-""; return(x)})
-    print("this combination of region, crop, precipitation altitude does not exist")
+    print("this combination of region, precipitation altitude does not exist")
     showModal(modalDialog(
-      title = "this combination of region, crop, precipitation, altitude does not exist",
+      title = "this combination of region, precipitation, altitude does not exist",
       "So we give you species cited in other countries/regions/precipitations/altitudes",
       "please consider this list as indicative only as the results might not be relevant for your conditions",
       "the available conditions are:",
@@ -69,7 +69,7 @@ compute_suitability_STA<-function(inputsdata=NULL,
     #keep all data
     subsetDB<-database
     #compute adaptation score: number of conditions (among the items in "Country", "Region", "Crop", "altitude", "precipitation" that the user did not leave at "All ...") that the line validates (NB this might be used in the future to weight the scores??)
-    dataadaptation<-unique(database[,c("Country", "Region", "Crop", "altitude", "precipitation", "IDAFTA")])
+    dataadaptation<-unique(database[,c("Country", "Region", "altitude", "precipitation", "IDAFTA")])
     if(!is.null(inputsdata)) {
       choicetokeep<-unlist(interface[!is.na(interface$side)
                                      & interface$side=="responsetrait"
@@ -112,9 +112,8 @@ compute_suitability_STA<-function(inputsdata=NULL,
   
   #here, you can rbind dbfinal with the scores of the criteria that are not scored in the standard way
   
-  
   # #just in case we end up wit hseveral lines for the same combination of tree and criteria... actually we do, I dont know why
-  dbfinal<-aggregate(dbfinal[,"value", drop=FALSE], by=dbfinal[,c("IDAFTA", "side", "BigCriteria", "criteria"), drop=FALSE], mean, na.rm=TRUE)
+  if (nrow(dbfinal)>1) dbfinal<-aggregate(dbfinal[,"value", drop=FALSE], by=dbfinal[,c("IDAFTA", "side", "BigCriteria", "criteria"), drop=FALSE], mean, na.rm=TRUE)
   resultadapt<-aggregate(resultadapt[,"value", drop=FALSE], by=resultadapt[,c("IDAFTA", "side", "BigCriteria", "criteria"), drop=FALSE], mean, na.rm=TRUE)
   dbfinal<-rbind(resultadapt, dbfinal)
   

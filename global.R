@@ -221,7 +221,7 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
       if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the column names
         db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
       } else {
-        print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
+        print(paste(chosen, "potentially corresponds to severalcolumns:", paste(names(db)[grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE)], collapse=","))) ; db$value<-NA
       }}
     
   } else if (type=="checkboxInput") {
