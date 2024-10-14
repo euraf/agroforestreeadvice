@@ -29,7 +29,7 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   rownames(toto)<-toto$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
                                 c("legislation", "fruit", "forage", "forest", "ornamental",
-                                    "height", "understory", "habitus", "growthspeed", 
+                                    "height", "coppice", "habitus", "growthspeed", 
                                     "earlinessleafing", "floweringdate", 
                                     "climateclass", "altitude", "soil_fertility",
                                     "soil_water", "light", "wood", "food",
