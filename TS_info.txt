@@ -1,0 +1,13 @@
+# only additional informations for future coding
+
+1) When calculating values - when I want input range and filter it also by filter - eg.: Tree grows 10-15 meters and I want to filter trees 5-12 meters:
+    the default algorithm is as follows:
+        loads the filter range (5-12) - check it against the tree:
+            if whole range (tree) is in range (filter) - set to 1
+            if only part is in range - check how much - then calculate the % and returns it - eg. here 2 from 5 = 0,4
+            if no limit of range (tree) in range (filter) - set to 0
+        IMPORTANT:
+            do not use floats - no 8,333 etc - just straight intergers
+            do not use zero wide ranges - eg.: 25-25
+            
+            it will return no values in these cases
