@@ -30,7 +30,7 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
                                 c("legislation", "fruit", "forage", "forest", "ornamental",
                                     "height", "coppice", "habitus", "growthspeed", 
-                                    "earlinessleafing", "floweringdate", 
+                                    "earlinessleafing", "floweringdate","subsidy",
                                     "climateclass", "altitude", "soil_fertility",
                                     "soil_water", "light", "wood", "food",
                                     "approval", "endengeredG", "endengeredU", "endengeredY")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
