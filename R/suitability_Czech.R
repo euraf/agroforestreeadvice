@@ -21,6 +21,7 @@ compute_suitability_Czech<-function(inputsdata=NULL,
                                    orderby="responsetrait",
                                    use_weights=TRUE){
   dbfinal<-data.frame()
+  #save(inputsdata, file = "inputsdata.RData")
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
   weight <- interface[, c("criteria", "weightwithincriteria")]
   print(weight)
