@@ -374,7 +374,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
             checkboxInput=checkboxInput(input_id, label = labelinput),
             numericInput=numericInput(input_id, label = labelinput, value = 0),
             selectInput=selectInput(input_id, label = labelinput, choices = choices),
-            checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices),
+            checkboxGroupInput=checkboxGroupInput(input_id, label = labelinput, choices = choices, selected = if (input_id == "Czech-subsidy") choices[1] else NULL),
             sliderInput=sliderInput(input_id, label = labelinput, min=min(as.numeric(choices)), max=max(as.numeric(choices)), value=range(as.numeric(choices))),
             radioButtons=radioButtons(input_id, label = labelinput,choices = choices)
             # Add more control types as needed
