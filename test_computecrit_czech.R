@@ -190,11 +190,12 @@ interfaceCzech[1:length(interfaceCzech)]<-lapply(interfaceCzech[1:length(interfa
 interface <- interfaceCzech
 database<-read.table("models/dataCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep=";", skipNul =TRUE, header=TRUE)
 load("inputsdata.RData")
+load("allinputs.RData")
 
 default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weight = as.integer(1), yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI")){
   criteria <- "subsidy"
     type <- "checkboxGroupInput"
-    inputs <- inputsdata
+    inputs <- allinputs
     db <- database
     BigCriteria <- "subsidy"
     side <- "responsetrait"
