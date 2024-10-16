@@ -78,7 +78,8 @@ Hard_criteria_filter <- function(db, inputsdata, interface) {
   # Consolidate criteria from interface based on inputsdata and slider inputs
   used_criteria <<- rbind(interface[interface$criteria %in% names(inputsdata) &
                                     interface$weightwithincriteria == 999 & !is.na(interface$weightwithincriteria),],
-                         interface[interface$objecttype == "sliderInput",])
+                          interface[interface$objecttype == "sliderInput",], interface[interface$objecttype == "checkboxGroupInput",])
+
 
   # drop criteria which weightwithincriteria is not 999
   used_criteria <- used_criteria[used_criteria$weightwithincriteria == 999,]
