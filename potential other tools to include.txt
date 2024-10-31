@@ -1,16 +1,13 @@
-sources of data that could be interresting to include:
-- Dutch Juiste Boom op de Juiste Plek (JBOJP) (Evert) (publicly available data)=> work in progress => done
-- Germany Hedgerow Planner (Rico)... already sent the data to Marie=> work in progress => done
-- Finnish Lopullinen (Michael)... already sent data to Marie => done
+sources of data that could be interesting to include:
 - French Auxil’haies (Chambres d’agriculture, France)
 - French Je plante ma haie (jacques de temple, alsace)
 - silvofutur
 - TreeEbb.fr
 - floriscope.io
 - https://hecken--landschaft-de.translate.goog/geh%C3%B6lzdatenbank?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en-US&_x_tr_pto=wapp&_x_tr_hist=true
-- UK guide of trees for agroforestry: https://cdn.forestresearch.gov.uk/2024/02/Agroforestry-Tree-Species-Guide-v5.pdf
+- TreeAdvisor (Bentrup & Dosskey 2022)
  
 
 Already contacted :
 - https://www.cnpf.fr/decouvrez-bioclimsol
-- Tom staton (Tom Staton1, Laurence Smith1, Kate Beauchamp2, Alice Broome2, Tom Breeze1) for UK guide
+- Tom staton (Tom Staton1, Laurence Smith1, Kate Beauchamp2, Alice Broome2, Tom Breeze1) for UK guide of trees for agroforestry: https://cdn.forestresearch.gov.uk/2024/02/Agroforestry-Tree-Species-Guide-v5.pdf
