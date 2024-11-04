@@ -1,17 +1,19 @@
 Zdravim Tadeasi , Tondo, Lubosi,
 
 diky za dalsi  progress, par rychlych poznamek 🙂
-posunuti sloupců o řádek (poznamky.doc) si nejsem jist, nesedím mi to -Luboši muzes prosim zkontrolovat co je a neni chraněné?
-zasilam navrh na upravu vstupni tabulky - v priloze- je to k diskusi zatim nic nemente
-link jsem poslal i K. Houskovi (pro testovani na prednasky), dostane se dovnitr?
-do výsledku výběru bych přidal i český název dřeviny
-proč se v grafu výsledku objevuje parametr podrostová dřevina - neni v zadavacim menu? Naroky na svetlo?
-pod jakým označením se v grafickem vystupu zobrazuje zvolené kopicování?
-a pocita se zvolena uroven kopicovani ve vystupu jako ano-ne nebo jako 3 urovne?
-Upravene texty k dotacím (od shora):
-Stromy pro ALS, na které lze získat dotaci dle NV č. 140/2023 Sb. (příloha č. 2)
-Keře které je možné vysadit v ALS dle NV č. 140/2023 Sb. (příloha č. 1), ale bez dotacediky za
-Další stromy a keře vhodné pro ALS, avšak nepodporované NV č. 140/2023
+
+1) posunuti sloupců o řádek (poznamky.doc) si nejsem jist, nesedím mi to -Luboši muzes prosim zkontrolovat co je a neni chraněné?
+2) zasilam navrh na upravu vstupni tabulky - v priloze- je to k diskusi zatim nic nemente
+3) link jsem poslal i K. Houskovi (pro testovani na prednasky), dostane se dovnitr?
+4) do výsledku výběru bych přidal i český název dřeviny
+5a) proč se v grafu výsledku objevuje parametr podrostová dřevina - neni v zadavacim menu? Naroky na svetlo?
+5b) pod jakým označením se v grafickem vystupu zobrazuje zvolené kopicování?
+    a pocita se zvolena uroven kopicovani ve vystupu jako ano-ne nebo jako 3 urovne?
+
+6)Upravene texty k dotacím (od shora):
+    Stromy pro ALS, na které lze získat dotaci dle NV č. 140/2023 Sb. (příloha č. 2)
+    Keře které je možné vysadit v ALS dle NV č. 140/2023 Sb. (příloha č. 1), ale bez dotacediky za
+    Další stromy a keře vhodné pro ALS, avšak nepodporované NV č. 140/2023
 
 Asi je cas zase na schuzku - Kdy se sejdeme?
 
