@@ -447,6 +447,15 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         #select only the range of species to display (user choice, by default 1 to 20), species is an ordered vector
         databis<-databis[as.numeric(databis$species)>=rangetoplot$from 
                          & as.numeric(databis$species)<=rangetoplot$to ,]
+
+        # drop all rows where "value" is NA or 0
+        databis <- databis %>% filter(!is.na(value) & value != 0)
+        if (nrow(databis) == 0) {
+          # If there are no data to plot, return an empty plot
+          plot_Suitability<-ggplot() + theme_minimal()
+          reactive_plotSuitability(plot_Suitability)
+          return(plot_Suitability)
+        }
         plot_Suitability<-ggplot(databis, aes(x = value, y = species, fill = BigCriteria)) +
           #geom_rect(aes(xmin = -Inf, xmax = 0, ymin = -Inf, ymax = Inf), fill = "#ffcccc", alpha = 0.5) +
           #geom_rect(aes(xmin = 0, xmax = Inf, ymin = -Inf, ymax = Inf), fill = "#ccccff", alpha = 0.5) +
