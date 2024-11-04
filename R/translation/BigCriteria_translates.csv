@@ -1,5 +1,6 @@
 en,fr,de,es,nl,cz
 climate,climat,Klima,clima,klimaat,klima
+light requirements,exigences en lumière,Lichtbedarf,requisitos de luz,lichtbehoefte,nároky na světlo
 equipment,équipement,Ausrüstung,equipo,uitrusting,vybavení
 soil,sol,Boden,suelo,bodem,půda
 species,espèces,Arten,especies,soorten,druh
@@ -8,7 +9,7 @@ height,hauteur,Höhe,altura,hoogte,výška
 production,production,Produktion,producción,productie,produkce
 legislation,législation,Gesetzgebung,legislación,wetgeving,legislativa
 growth,croissance,Wachstum,crecimiento,groei,růst
-coppice,sous-étage,Unterholz,sotobosque,ondergroei,podrostová dřevina
+coppice,sous-étage,Unterholz,sotobosque,ondergroei,kopicování
 food,nourriture,Nahrung,comida,voedsel,potrava
 wood,bois,Holz,madera,hout,dřevo
 animals,animaux,Tiere,animales,dieren,zvířata
