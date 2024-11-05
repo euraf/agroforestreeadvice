@@ -11,3 +11,23 @@
             do not use zero wide ranges - eg.: 25-25
             
             it will return no values in these cases
+			
+			
+			
+###################################	
+5.11.2024
+excel - smazat první řádek a hodit jej do poslendího - data posunutá nejsou
+
+
+Vlevo (červeně):
+	Nadmořská		PBEJ
+	Půdní -voda		půdní-úrodnost
+	
+Vpravo (zeleně) přidat:
+	Nároky na světlo
+	Ranost rašení listů III-V
+	Termín kvetení
+	
+	
+
+Dodělat stahování - zarovnat obrázky, přidat datum a parametry jak byly zaškrtnuty
