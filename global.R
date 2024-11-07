@@ -183,7 +183,6 @@ orderdf<-function(df, orderby, idvariable, interface){
 #' @examples
 default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI", "1")){
   message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
-  if(criteria=="Slope.and.aspect") browser()
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen
     chosen<-unlist(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])

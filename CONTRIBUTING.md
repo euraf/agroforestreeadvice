@@ -82,6 +82,9 @@ The standard algorithm works for each criteria that corresponds to a single colu
 |1 single numerical value|1 column containing a range (x-y) |1 if value is within range, 0 if value is outside range|
 |range of values|1 column containing a single value|1 if the characteristic is within the input range, 0 if the characteristic is outside it|
 
+Don't forget to add the ID column (line 1 in the file):
+#add an IDAFTA column to the data so that reference to this ID column can be automated
+
 save your file as suitability_MODELNAME.R
 
 ### step 4: add your tool to agroforestryadvice code

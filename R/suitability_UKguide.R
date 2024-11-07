@@ -1,5 +1,5 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
-#dataMODELNAME$IDAFTA<-dataMODELNAME$nameOfYourIDcolumn
+dataUKguide$IDAFTA<-dataUKguide$Species.name
 
 #' compute_suitability for [MODELNAME]
 #'
