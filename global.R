@@ -44,6 +44,8 @@ dataDEHM<-read.table("models/dataDEHM.txt", fileEncoding = "UTF-8", encoding = "
 interfaceDEHM<-read.table("models/interfaceDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataSUOMI<-read.table("models/dataSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceSUOMI<-read.table("models/interfaceSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataUKguide<-read.table("models/dataUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceUKguide<-read.table("models/interfaceUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
 #remove commas in the interface because commas are used for separating values
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
@@ -62,6 +64,8 @@ interfaceDEHM<-interfaceDEHM[!is.na(interfaceDEHM$side),]
 interfaceDEHM[1:length(interfaceDEHM)]<-lapply(interfaceDEHM[1:length(interfaceDEHM)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceSUOMI<-interfaceSUOMI[!is.na(interfaceSUOMI$side),]
 interfaceSUOMI[1:length(interfaceSUOMI)]<-lapply(interfaceSUOMI[1:length(interfaceSUOMI)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceUKguide<-interfaceUKguide[!is.na(interfaceUKguide$side),]
+interfaceUKguide[1:length(interfaceUKguide)]<-lapply(interfaceUKguide[1:length(interfaceUKguide)], function(x) gsub(pattern=",", replacement=".", x=x))
 
 toto<-strsplit(c(names(interfaceSTA), 
                  names(interfaceDENTRO), 
@@ -177,8 +181,9 @@ orderdf<-function(df, orderby, idvariable, interface){
 #' @export
 #'
 #' @examples
-default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI")){
-  #message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
+default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI", "1")){
+  message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
+  if(criteria=="Slope.and.aspect") browser()
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen
     chosen<-unlist(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
@@ -294,7 +299,7 @@ source("R/suitability_Czech.R")
 source("R/suitability_JBOJP.R")
 source("R/suitability_DEHM.R")
 source("R/suitability_SUOMI.R") 
-
+source("R/suitability_UKguide.R")
 
 
 

@@ -131,10 +131,16 @@ server <- function(input, output, session) {
                             language= language,
                             data=dataDEHM, interface=interfaceDEHM, functionSuitability=compute_suitability_DEHM, compactobjectives=FALSE)
   
+  
   #Finnish tree suitability
   moduleTabInterface_Server(id = "SUOMI",
                             language= language,
                             data=dataSUOMI, interface=interfaceSUOMI, functionSuitability=compute_suitability_SUOMI, compactobjectives=FALSE)
+  
+  #UK Guide of agroforestry trees
+  moduleTabInterface_Server(id = "UKguide",
+                            language= language,
+                            data=dataUKguide, interface=interfaceUKguide, functionSuitability=compute_suitability_UKguide, compactobjectives=FALSE)
   
   
   

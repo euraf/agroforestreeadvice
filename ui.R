@@ -50,6 +50,8 @@ body <- dashboardBody(
     tabItem(tabName = "tool", 
             tabsetPanel(
               id = "toolsTabset",
+              tabPanel("UK Guide demo (fake data)", value="UKguide", moduleTabInterface_UI(id = "UKguide", data = dataUKguide, interface= interfaceUKguide)),
+              
               tabPanel("Flanders Tree Advisor (DENTRO)", value="DENTRO", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
               tabPanel("Shade Tree Advice (coffee and cocoa)", value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
@@ -65,9 +67,6 @@ body <- dashboardBody(
               tabPanel("German Hedgerow manager", value="DEHM", moduleTabInterface_UI(id = "DEHM", data = dataDEHM, interface= interfaceDEHM)),
               
               tabPanel("Finnish tree suitability", value="SUOMI", moduleTabInterface_UI(id = "SUOMI", data = dataSUOMI, interface= interfaceSUOMI))
-              
-              
-              
               
             )
     ),#fin tool
