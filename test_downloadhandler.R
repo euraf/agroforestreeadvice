@@ -7,6 +7,8 @@ library(grid)
   load("DataSuitability.RData")
   load("plotting.RData")
   load("inputsdata.RData")
+  load("dbfinal.RData")
+  load("interface.RData")
   create_combined_plot <- function() {
     #save(DataSuitability, file = "DataSuitability.RData")
     #save(plotting, file = "plotting.RData")
