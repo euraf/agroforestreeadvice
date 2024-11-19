@@ -76,15 +76,18 @@ The standard algorithm works for each criteria that corresponds to a single colu
 |-----------|---------|-------|
 |1 item from a drop-down list (or in radio buttons)|Yes/no columns for each possible item|1 if the tree has this feature, 0 otherwise|
 |1 item from a drop-down list (or in radio buttons)|1 column containing an item|1 if the tree has this feature, 0 otherwise|
+|1 item from a checkbox|1 column containing a value|the value if the checkbox is checked, 0 otherwise|
 |1 or more items in a set of checkboxes|Yes/no columns for each possible item|(number of items present in tree features, among selected items)/(number of selected items)|
-|1 or more items in a set of checkboxes|1 column containing one or more items|(number of items present in tree features, among selected items)/(number of selected items)|
+|1 or more items in a set of checkboxes|1 column containing one or more items, or several columns each containing 1 item|(number of items present in tree features, among selected items)/(number of selected items)|
+|1 or more items in a set of checkboxes|several columns (with names corresponding to items) containing scores|sum of scores of chosen columns|
 |1 single numerical value|1 column containing a single value|1-abs(feature-value)/(max(features)-min(features))|
 |1 single numerical value|1 column containing a range (x-y) |1 if value is within range, 0 if value is outside range|
 |range of values|1 column containing a single value|1 if the characteristic is within the input range, 0 if the characteristic is outside it|
 
+
 Don't forget to add the ID column (line 1 in the file):
 #add an IDAFTA column to the data so that reference to this ID column can be automated
-
+and the tooltipspecies column if you want a tooltip to be displayed when hovering over the graph
 save your file as suitability_MODELNAME.R
 
 ### step 4: add your tool to agroforestryadvice code

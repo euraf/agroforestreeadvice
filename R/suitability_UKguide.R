@@ -1,5 +1,6 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
 dataUKguide$IDAFTA<-dataUKguide$Species.name
+dataUKguide$tooltipspecies<-dataUKguide$Common.name
 
 #' compute_suitability for [MODELNAME]
 #'
@@ -17,21 +18,29 @@ compute_suitability_UKguide<-function(inputsdata=NULL,
                                    database, 
                                    interface,
                                    orderby="responsetrait"){
-  
+  #print(inputsdata)
   dbfinal<-data.frame()
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
   rownames(toto)<-toto$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
-                                  c("Native.status.in.the.UK","Leaf.emergence" ,                                                   
-                                    "Speciality.products","Biomass","Food.products" ,                                                    
-                                    "Livestock.fodder.benefits.(benefit)", "Canopy.density.1",                                                  
-                                    "Acidification.(disbenefit)" ,"Nutrient.and.organic.matter.accumulation.(low.confidence,.benefit)"
-                                    ,"Waterlogging"                                                      
-                                    ,"Drought"                                                           
-                                    ,"Wind"                                                              
-                                    ,"Low.temperatures"                                                  
-                                    ,"High.temperatures"                                                 
-                                    ,"Slope.and.aspect")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
+                                  c(#"Native.status.in.the.UK","Leaf.emergence" ,                                                   
+                                    #"Speciality.products","Biomass","Food.products" ,                                                    
+                                    #"Livestock.fodder.benefits.(benefit)", "Canopy.density.1",                                                  
+                                    #"Acidification.(disbenefit)" ,"Nutrient.and.organic.matter.accumulation.(low.confidence,.benefit)"
+                                    #,"Waterlogging"                                                      
+                                    #,"Drought"                                                           
+                                    #,"Wind"                                                              
+                                    #,"Low.temperatures"                                                  
+                                    #,"High.temperatures"                                                 
+                                    #,"Slope.and.aspect"
+                                    "High.temperatures", "Unseasonal.frosts", "Wind.exposure", "Drought.risk" , 
+                                    "Seasonal.waterlogging", "North.facing", "Upland", "Main.products"    ,
+                                    "Livestock.fodder", "Max.size.of.shadow", "Leaf.emergence.time", 
+                                    "Avoid.suckering.roots",  "Fast.growth", "Coppice", "Pollard", 
+                                    "Nutrient.OM.accumulation"  , "Nitrogen.fixation", 
+                                    "Minimise.acidification", "Carbon.sequestration", "Native.status",
+                                    "Wildlife.value", "Low.disease.risk", "Low.pest.risk", 
+                                    "Low.vertebrate.pest.damage", "Climate.resilience" )) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
   for(crit in standardformcriteria){
     #print(paste("compute score for", crit))
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
