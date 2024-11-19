@@ -23,9 +23,6 @@ server <- function(input, output, session) {
     plotting <- access_plotSuitability() # for debug purposes
     DataSuitability <- access_dataSuitability() # for debug purposes
     DataSuitability <- data.frame(as.matrix(DataSuitability))
-    save(DataSuitability, file = "DataSuitability.RData")
-    save(plotting, file = "plotting.RData")
-
     # Style the table grob
     table_theme <- ttheme_default(
       core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
