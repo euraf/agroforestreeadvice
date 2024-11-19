@@ -44,7 +44,7 @@ dataDEHM<-read.table("models/dataDEHM.txt", fileEncoding = "UTF-8", encoding = "
 interfaceDEHM<-read.table("models/interfaceDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataSUOMI<-read.table("models/dataSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceSUOMI<-read.table("models/interfaceSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
-dataUKguide<-read.table("models/dataUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+dataUKguide<-read.table("models/dataUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE, na.strings="NaN")
 interfaceUKguide<-read.table("models/interfaceUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
 #remove commas in the interface because commas are used for separating values
@@ -163,6 +163,7 @@ orderdf<-function(df, orderby, idvariable, interface){
 #' |-----------|---------|-------|
 #' |1 item from a drop-down list (or in radio buttons)|Yes/no columns for each possible item|1 if the tree has this feature, 0 otherwise|
 #' |1 item from a drop-down list (or in radio buttons)|1 column containing an item|1 if the tree has this feature, 0 otherwise|
+#' |1 item from a checkbox|1 column containing a value|the value if the checkbox is checked, 0 otherwise|
 #' |1 or more items in a set of checkboxes|Yes/no columns for each possible item|(number of items present in tree features, among selected items)/(number of selected items)|
 #' |1 or more items in a set of checkboxes|1 column containing one or more items, or several columns each containing 1 item|(number of items present in tree features, among selected items)/(number of selected items)|
 #' |1 or more items in a set of checkboxes|several columns (with names corresponding to items) containing scores|sum of scores of chosen columns|
@@ -216,7 +217,8 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
       } else {
         print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
       }}
-   } else if (type=="selectInput") {
+   } else 
+     if (type=="selectInput") {
     
     chosen<-inputs[criteria]
     if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
@@ -228,9 +230,13 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
         print(paste(chosen, "potentially corresponds to severalcolumns:", paste(names(db)[grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE)], collapse=","))) ; db$value<-NA
       }}
     
-  } else if (type=="checkboxInput") {
-    db$value<- as.numeric(db[,criteria] %in% yesindicator)
-  } else if (type=="sliderInput") {
+  } else 
+    if (type=="checkboxInput") {
+      if(class(db[,criteria])=="numeric") { #the database already contains scores
+        db$value<- db[,criteria]
+      } else db$value<- as.numeric(db[,criteria] %in% yesindicator)
+  } else 
+    if (type=="sliderInput") {
     chosen<-as.numeric(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
     
     #chosen<-as.numeric(inputs[grepl(pattern=criteria, x=names(inputs))])
@@ -268,7 +274,8 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
     #chosen<-as.numeric(chosen[!duplicated(names(chosen))])
     
     
-  } else if (type=="numericInput") {
+  } else 
+    if (type=="numericInput") {
     chosen<-inputs[criteria]
     if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
       splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)

@@ -110,7 +110,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         allinputs <- controlData()
         reformated<-character()
         if(length(allinputs)>0) {
-          #message("initial inputs:") ; message(str(allinputs)) 
+          message("initial inputs:") ; print((allinputs)) 
           # List of things (chr for selectInput, 
           #                 chr for radioButtons
           #                 chr vector for checkboxGroupInput,
@@ -119,9 +119,9 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           #transform checked checkboxes into their name
           checkboxyes<-sapply(allinputs, function (x) !is.null(x) & all(is.logical(x) & as.logical(x)))
           if(sum(checkboxyes)>0){
-            checked<-unlist(allinputs)
-            checked[checkboxyes]<- names(checked)[checkboxyes]
-            checked<-checked[checked!="FALSE"]
+            checked<-unlist(allinputs[checkboxyes])
+            checked<- names(checked)
+            names(checked)<-checked
             reformated<-c(reformated, checked)
           }
           #transform numericInput radiobuttons, sliderInput, selectInput and checkboxgroupInput to character vectors
