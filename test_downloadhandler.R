@@ -6,11 +6,13 @@ library(grid)
   # Function to create a combined plot with a table for download
   load("DataSuitability.RData")
   load("plotting.RData")
+  load("inputsdata.RData")
   create_combined_plot <- function() {
     #save(DataSuitability, file = "DataSuitability.RData")
     #save(plotting, file = "plotting.RData")
     load("DataSuitability.RData")
     load("plotting.RData")
+    load("inputsdata.RData")
 
     # Style the table grob
     table_theme <- ttheme_default(
