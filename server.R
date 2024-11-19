@@ -20,9 +20,11 @@ server <- function(input, output, session) {
 
   # Function to create a combined plot with a table for download
   create_combined_plot <- function() {
-    plotting <- access_plotSuitability()
-    DataSuitability <- access_dataSuitability()
+    plotting <- access_plotSuitability() # for debug purposes
+    DataSuitability <- access_dataSuitability() # for debug purposes
     DataSuitability <- data.frame(as.matrix(DataSuitability))
+    save(DataSuitability, file = "DataSuitability.RData")
+    save(plotting, file = "plotting.RData")
 
     # Style the table grob
     table_theme <- ttheme_default(

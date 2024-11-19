@@ -16,7 +16,7 @@
 			
 ###################################	
 5.11.2024
-excel - smazat první řádek a hodit jej do poslendího - data posunutá nejsou
+excel - smazat první řádek a hodit jej do poslendího - data posunutá nejsou - XXXhotovoXXX
 
 
 Vlevo (červeně):
