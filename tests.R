@@ -3,7 +3,7 @@ library(dplyr)
 load("inputsdata.RData")
 load("interface.RData")
 
-language <- "choice_cz"
+language <- "choice_en"
 language <- gsub("choice", "", language)
 
 # convert named chr to data frame with two columns
@@ -25,3 +25,11 @@ inputsdata2$value <- ifelse(
   interface[[paste0("choice", language)]][match(inputsdata2$value, interface$choice)]
 )
 
+# concat "value" of records with same name if record objecttype is "sliderinput"
+inputsdata3 <- inputsdata2 %>%
+  group_by(name, objecttype) %>%
+  summarise(value = ifelse(objecttype == "sliderInput", paste(value, collapse = "-"), value)) %>%
+  ungroup()
+
+#drop duplicates
+inputsdata3 <- inputsdata3[!duplicated(inputsdata3),]
