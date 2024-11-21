@@ -3,33 +3,32 @@ library(dplyr)
 load("inputsdata.RData")
 load("interface.RData")
 
-language <- "choice_en"
-language <- gsub("choice", "", language)
+get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
+  ID <- data.frame(name = names(ID), value = unname(ID))                          # convert named chr to data frame with two columns
+  ID$name <- gsub("\\d$", "", ID$name)                                            # remove trailing digits from $name    - eg. height1 -> height         
+  ID$objecttype <- IF$objecttype[match(ID$name, IF$criteria)]                     # add $objecttype to ID
 
-# convert named chr to data frame with two columns
-inputsdata2 <- data.frame(name = names(inputsdata), value = unname(inputsdata))
+  # find $name in IF where IF$criteria == ID$name and replace it by criteria_cz
+  ID$name <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$criteria)]
 
-#in name column drop last char if it is number
-inputsdata2$name <- gsub("\\d$", "", inputsdata2$name)
+  # do the same for ID$value and IF$choice
+  ID$value <- ifelse(
+    is.na(match(ID$value, IF$choice)),
+    ID$value,
+    IF[[paste0("choice_", lang)]][match(ID$value, IF$choice)]
+  )
 
-# find the $objecttype in interface where interface$criteria == inputsdata2$name
-inputsdata2$objecttype <- interface$objecttype[match(inputsdata2$name, interface$criteria)] 
+  # concat "value" of records with same name if record objecttype is "sliderinput"
+  ID <- ID %>%
+    group_by(name, objecttype) %>%
+    summarise(value = ifelse(objecttype == "sliderInput", 
+      paste(value, collapse = "-"), value)) %>%
+    ungroup()
 
-# find $name in interface where interface$criteria == inputsdata2$name and replace it by criteria_cz
-inputsdata2$name <- interface[[paste0("criteria", language)]][match(inputsdata2$name, interface$criteria)]
+  #drop duplicates
+  ID <- ID[!duplicated(ID),]
+  return(ID)
+}
 
-# do the same for inputsdata2$value and interface$choice
-inputsdata2$value <- ifelse(
-  is.na(match(inputsdata2$value, interface$choice)),
-  inputsdata2$value,
-  interface[[paste0("choice", language)]][match(inputsdata2$value, interface$choice)]
-)
 
-# concat "value" of records with same name if record objecttype is "sliderinput"
-inputsdata3 <- inputsdata2 %>%
-  group_by(name, objecttype) %>%
-  summarise(value = ifelse(objecttype == "sliderInput", paste(value, collapse = "-"), value)) %>%
-  ungroup()
-
-#drop duplicates
-inputsdata3 <- inputsdata3[!duplicated(inputsdata3),]
+test = get_SelectedInputs(inputsdata, interface, "cz")
