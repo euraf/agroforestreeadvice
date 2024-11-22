@@ -1,4 +1,10 @@
 library(dplyr)
+library(ggplot2)
+library(cowplot)
+library(gridExtra)
+library(ggplot2)
+library(cowplot)
+library(grid)
 
 load("inputsdata.RData")
 load("interface.RData")
@@ -32,8 +38,47 @@ get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language)
 
   #drop duplicates
   ID <- ID[!duplicated(ID),]
+
+  # sort by side
+  ID <- ID[order(ID$side, decreasing = TRUE),]
   return(ID)
 }
 
 
+create_InputsTable <- function()  {
+  # Create a table grob
+  table_theme <- ttheme_default(
+    core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(test))), col = NA)),
+    colhead = list(bg_params = list(fill = "grey80", col = NA)),
+    rowhead = list(bg_params = list(fill = "grey80", col = NA))
+  )
+  table_grob <- tableGrob(test, theme = table_theme, rows = NULL)
+
+  # Create a headline with a sublabel for the current date
+  headline <- ggdraw() + 
+    draw_label("Test Output", fontface = 'bold', size = 20, x = 0, hjust = 0) +
+    draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0, hjust = 0, y = -0.4) +
+    theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
+
+  # Combine the elements into a single plot
+  combined <- plot_grid(
+    headline, NULL, table_grob, 
+    ncol = 1, 
+    rel_heights = c(0.08, 0.01, 1)  # Adjust heights to add space between elements
+  )
+
+
+  # Wrap the combined plot in a ggdraw to add a bottom margin
+  combined_with_margin <- ggdraw(combined) + 
+    theme(plot.margin = margin(5, 5, 5, 5))
+
+  # Save the combined plot as an SVG file
+  svg("test_output.svg", width = 17, height = 15)
+  print(combined_with_margin)
+  dev.off()
+
+}
+
+
 test <- get_SelectedInputs(inputsdata, interface, "cz")
+create_InputsTable()
