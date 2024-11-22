@@ -78,7 +78,7 @@ create_combined_plot <- function() {
 
     # Combine the elements into a single plot
     combined <- plot_grid(
-      headline, NULL, plotting, NULL, table_grob, table_grob2
+      headline, NULL, plotting, NULL, table_grob, table_grob2,  
       ncol = 1, 
       rel_heights = c(0.08, 0.01, 1, 0.05, 1)  # Adjust heights to add space between elements
     )
@@ -90,8 +90,8 @@ create_combined_plot <- function() {
    
 
     # Save the combined plot as an SVG file
-    svg("test_output.svg", width = 70, height = 50)
-    print(final_combined)
+    svg("test_output.svg", width = 22, height = 17)
+    print(combined_with_margin) 
     dev.off()
 }
 
