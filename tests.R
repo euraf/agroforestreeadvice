@@ -52,7 +52,7 @@ create_InputsTable <- function()  {
     colhead = list(bg_params = list(fill = "grey80", col = NA)),
     rowhead = list(bg_params = list(fill = "grey80", col = NA))
   )
-  table_grob <- tableGrob(test, theme = table_theme, rows = NULL)
+  table_TreeScoring <- tableGrob(test, theme = table_theme, rows = NULL)
 
   # Create a headline with a sublabel for the current date
   headline <- ggdraw() + 
@@ -62,7 +62,7 @@ create_InputsTable <- function()  {
 
   # Combine the elements into a single plot
   combined <- plot_grid(
-    headline, NULL, table_grob, 
+    headline, NULL, table_TreeScoring, 
     ncol = 1, 
     rel_heights = c(0.08, 0.01, 1)  # Adjust heights to add space between elements
   )

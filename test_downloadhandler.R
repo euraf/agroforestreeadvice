@@ -59,7 +59,7 @@ create_combined_plot <- function() {
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
-    table_grob <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
+    table_TreeScoring <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
 
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
@@ -73,14 +73,14 @@ create_combined_plot <- function() {
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
-    table_grob2 <- tableGrob(test, theme = table_theme2, rows = NULL)
+    table_SelectedInputs <- tableGrob(test, theme = table_theme2, rows = NULL)
 
 
     # Combine the elements into a single plot
     combined <- plot_grid(
-      headline, NULL, plotting, NULL, table_grob, table_grob2,  
+      headline, NULL, plotting, NULL, table_SelectedInputs, table_TreeScoring,  
       ncol = 1, 
-      rel_heights = c(0.08, 0.01, 1, 0.05, 1)  # Adjust heights to add space between elements
+      rel_heights = c(0.08, 0.01, 1, 0.05, 1, 1)  # Adjust heights to add space between elements
     )
 
     # Wrap the combined plot in a ggdraw to add a bottom margin
