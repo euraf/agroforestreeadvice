@@ -59,6 +59,12 @@ create_combined_plot <- function() {
     # Wrap text in the 'name' and 'value' columns
     ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
 
+    # Split ChosenInputs into two tables based on the 'side' column
+    ChosenInputs_responsetrait <- ChosenInputs %>% filter(side == "responsetrait")
+    ChosenInputs_responsetrait$side <- NULL
+    ChosenInputs_effecttrait <- ChosenInputs %>% filter(side == "effecttrait")
+    ChosenInputs_effecttrait$side <- NULL
+
     # Style the table grob for DataSuitability
     table_theme <- ttheme_default(
       core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
@@ -75,24 +81,47 @@ create_combined_plot <- function() {
       theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
     table_theme2 <- ttheme_default(
-      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(ChosenInputs))), col = NA)),
+      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(ChosenInputs_responsetrait))), col = NA)),
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
-    table_SelectedInputs <- tableGrob(ChosenInputs, theme = table_theme2, rows = NULL)
+    table_SelectedInputs_responsetrait <- tableGrob(ChosenInputs_responsetrait, theme = table_theme2, rows = NULL)
+
+    table_theme3 <- ttheme_default(
+      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(ChosenInputs_effecttrait))), col = NA)),
+      colhead = list(bg_params = list(fill = "grey80", col = NA)),
+      rowhead = list(bg_params = list(fill = "grey80", col = NA))
+    )
+    table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait, theme = table_theme3, rows = NULL)
 
     # Modify the plotting object to truncate y-axis labels
     plotting <- plotting + 
       scale_y_discrete(labels = function(x) sapply(x, function(y) substr(as.character(y), 1, 30)))
 
+    # Combine the SelectedInputs tables into one row
+    selected_inputs_combined <- plot_grid(
+      table_SelectedInputs_responsetrait,
+      NULL,
+      NULL,
+      table_SelectedInputs_effecttrait,
+      NULL,
+      ncol = 5
+    )
+
     # Combine the elements into a single plot
     combined <- plot_grid(
-      headline, NULL, table_SelectedInputs, NULL, plotting, NULL, table_TreeScoring, NULL,  
+      headline, 
+      NULL,
+      selected_inputs_combined, 
+      NULL,
+      plotting, 
+      NULL,
+      table_TreeScoring, 
       ncol = 1, 
-      rel_heights = c(0.08, 0.04, 0.80, 0.05, 1, 0.11, 1, 0.1),  # Adjust heights to add space between elements
+      rel_heights = c(0.08, 0.2, 0.2, 0.2, 1, 0.1, 1, 1),  # Adjust heights to add space between elements
       align = "v",  # Align the elements vertically
       axis = "l",  # Align the elements to the left
-      labels = c("A", "B", "C", "D", "E", "F", "G", "H")  # Add labels to the elements
+      labels = c("A", "B", "C", "D", "E", "F", "G")  # Add labels to the elements
     )
 
     # Wrap the combined plot in a ggdraw to add a bottom margin
@@ -100,7 +129,7 @@ create_combined_plot <- function() {
       theme(plot.margin = margin(5, 5, 5, 5))
 
     # Save the combined plot as an SVG file
-    svg("test_output.svg", width = 22, height = 20)
+    svg("test_output.svg", height = 18, width = 18)  # A4 for ref: 8.27 x 11.69 inches
     print(combined_with_margin) 
     dev.off()
 }
