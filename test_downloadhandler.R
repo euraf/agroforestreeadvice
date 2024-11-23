@@ -33,7 +33,7 @@ get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language)
   # concat "value" of records with same name if record objecttype is "sliderinput"
   ID <- ID %>%
     group_by(name, objecttype, side) %>%
-    summarise(value = ifelse(objecttype == "sliderInput", 
+    reframe(value = ifelse(objecttype == "sliderInput", 
       paste(value, collapse = "-"), value)) %>%
     ungroup()
 
@@ -42,6 +42,9 @@ get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language)
 
   # sort by side
   ID <- ID[order(ID$side, decreasing = TRUE),]
+
+  #drop column objecttype
+  ID$objecttype <- NULL
   return(ID)
 }
 
@@ -52,9 +55,9 @@ create_combined_plot <- function() {
     load("plotting.RData")
     load("inputsdata.RData")
     test <- get_SelectedInputs(inputsdata, interface, "cz")
+
+    # Wrap text in the 'name' and 'value' columns
     test$value <- sapply(test$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
-
-
 
     # Style the table grob for DataSuitability
     table_theme <- ttheme_default(
@@ -78,8 +81,9 @@ create_combined_plot <- function() {
     )
     table_SelectedInputs <- tableGrob(test, theme = table_theme2, rows = NULL)
 
-    
-
+    # Modify the plotting object to truncate y-axis labels
+    plotting <- plotting + 
+      scale_y_discrete(labels = function(x) sapply(x, function(y) substr(as.character(y), 1, 30)))
 
     # Combine the elements into a single plot
     combined <- plot_grid(
