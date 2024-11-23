@@ -54,10 +54,10 @@ create_combined_plot <- function() {
     load("DataSuitability.RData")
     load("plotting.RData")
     load("inputsdata.RData")
-    test <- get_SelectedInputs(inputsdata, interface, "cz")
+    ChosenInputs <- get_SelectedInputs(inputsdata, interface, "cz")
 
     # Wrap text in the 'name' and 'value' columns
-    test$value <- sapply(test$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
+    ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
 
     # Style the table grob for DataSuitability
     table_theme <- ttheme_default(
@@ -75,11 +75,11 @@ create_combined_plot <- function() {
       theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
     table_theme2 <- ttheme_default(
-      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(test))), col = NA)),
+      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(ChosenInputs))), col = NA)),
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
-    table_SelectedInputs <- tableGrob(test, theme = table_theme2, rows = NULL)
+    table_SelectedInputs <- tableGrob(ChosenInputs, theme = table_theme2, rows = NULL)
 
     # Modify the plotting object to truncate y-axis labels
     plotting <- plotting + 
@@ -105,6 +105,4 @@ create_combined_plot <- function() {
     dev.off()
 }
 
-# Assuming 'test' data frame is defined somewhere in the environment
-test <- get_SelectedInputs(inputsdata, interface, "cz")
 create_combined_plot()
