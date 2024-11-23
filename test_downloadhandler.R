@@ -52,6 +52,9 @@ create_combined_plot <- function() {
     load("plotting.RData")
     load("inputsdata.RData")
     test <- get_SelectedInputs(inputsdata, interface, "cz")
+    test$value <- sapply(test$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
+
+
 
     # Style the table grob for DataSuitability
     table_theme <- ttheme_default(
@@ -59,6 +62,7 @@ create_combined_plot <- function() {
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
+    DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
     table_TreeScoring <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
 
     # Create a headline with a sublabel for the current date
@@ -73,6 +77,9 @@ create_combined_plot <- function() {
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
     table_SelectedInputs <- tableGrob(test, theme = table_theme2, rows = NULL)
+
+    
+
 
     # Combine the elements into a single plot
     combined <- plot_grid(
