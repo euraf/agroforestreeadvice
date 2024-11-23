@@ -105,7 +105,7 @@ create_combined_plot <- function() {
     table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait, theme = table_theme3, rows = NULL)
 
     plotting <- plotting + 
-      scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 40, substr(y, 1, 40), y)))
+      scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 25, substr(y, 1, 25), y)))
 
 
     # Combine the SelectedInputs tables into one row
@@ -136,7 +136,7 @@ create_combined_plot <- function() {
 
 
     # Save the combined plot as an SVG file
-    svg("test_output.svg", height = 20, width = 18)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
+    svg("test_output.svg", height = 18, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
     print(combined) 
     dev.off()
 }
