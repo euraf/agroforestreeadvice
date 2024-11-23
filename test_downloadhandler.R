@@ -135,6 +135,11 @@ create_combined_plot <- function() {
     )
 
 
+    # Add upper and left margins
+    combined <- combined + theme(plot.margin = margin(t = 20, l = 50, unit = "pt"))
+
+
+
     # Save the combined plot as an SVG file
     svg("test_output.svg", height = 18, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
     print(combined) 
