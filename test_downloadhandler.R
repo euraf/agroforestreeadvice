@@ -63,11 +63,10 @@ create_combined_plot <- function() {
 
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
-      draw_label("Report of Tree Suitability by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
-      draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0, hjust = 0, y = -0.4) +
+      draw_label("Report of Tree Suitability by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0.2, hjust = 0) +
+      draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0.2, hjust = 0, y = -1) +
       theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
-      # Assuming 'test' data frame is defined somewhere in the environment
     table_theme2 <- ttheme_default(
       core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(test))), col = NA)),
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
@@ -75,22 +74,22 @@ create_combined_plot <- function() {
     )
     table_SelectedInputs <- tableGrob(test, theme = table_theme2, rows = NULL)
 
-
     # Combine the elements into a single plot
     combined <- plot_grid(
-      headline, NULL, plotting, NULL, table_SelectedInputs, table_TreeScoring,  
+      headline, NULL, table_SelectedInputs, NULL, plotting, NULL, table_TreeScoring, NULL,  
       ncol = 1, 
-      rel_heights = c(0.08, 0.01, 1, 0.05, 1, 1)  # Adjust heights to add space between elements
+      rel_heights = c(0.08, 0.04, 0.80, 0.05, 1, 0.11, 1, 0.1),  # Adjust heights to add space between elements
+      align = "v",  # Align the elements vertically
+      axis = "l",  # Align the elements to the left
+      labels = c("A", "B", "C", "D", "E", "F", "G", "H")  # Add labels to the elements
     )
 
     # Wrap the combined plot in a ggdraw to add a bottom margin
     combined_with_margin <- ggdraw(combined) + 
       theme(plot.margin = margin(5, 5, 5, 5))
 
-   
-
     # Save the combined plot as an SVG file
-    svg("test_output.svg", width = 22, height = 17)
+    svg("test_output.svg", width = 22, height = 20)
     print(combined_with_margin) 
     dev.off()
 }
@@ -98,4 +97,3 @@ create_combined_plot <- function() {
 # Assuming 'test' data frame is defined somewhere in the environment
 test <- get_SelectedInputs(inputsdata, interface, "cz")
 create_combined_plot()
-
