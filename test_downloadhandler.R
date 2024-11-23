@@ -94,13 +94,16 @@ create_combined_plot <- function() {
     )
     table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait, theme = table_theme3, rows = NULL)
 
+    plotting <- plotting + 
+      scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 40, substr(y, 1, 40), y)))
+
 
     # Combine the SelectedInputs tables into one row
     selected_inputs_combined <- plot_grid(
       table_SelectedInputs_responsetrait,
       NULL,
-      NULL,
       table_SelectedInputs_effecttrait,
+      NULL,
       NULL,
       ncol = 5
     )
