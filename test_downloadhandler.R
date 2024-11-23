@@ -71,7 +71,7 @@ create_combined_plot <- function() {
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
-    DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
+    DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 40), collapse = "\n"))
     table_TreeScoring <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
 
     # Create a headline with a sublabel for the current date
@@ -94,9 +94,6 @@ create_combined_plot <- function() {
     )
     table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait, theme = table_theme3, rows = NULL)
 
-    # Modify the plotting object to truncate y-axis labels
-    plotting <- plotting + 
-      scale_y_discrete(labels = function(x) sapply(x, function(y) substr(as.character(y), 1, 30)))
 
     # Combine the SelectedInputs tables into one row
     selected_inputs_combined <- plot_grid(
@@ -119,18 +116,15 @@ create_combined_plot <- function() {
       table_TreeScoring, 
       ncol = 1, 
       rel_heights = c(0.08, 0.2, 0.2, 0.2, 1, 0.1, 1, 1),  # Adjust heights to add space between elements
-      align = "v",  # Align the elements vertically
-      axis = "l",  # Align the elements to the left
-      labels = c("A", "B", "C", "D", "E", "F", "G")  # Add labels to the elements
+      align = "h",  # Align the elements vertically
+      axis = "l"  # Align the elements to the left
+      #labels = c("A", "B", "C", "D", "E", "F", "G")  # Add labels to the elements
     )
 
-    # Wrap the combined plot in a ggdraw to add a bottom margin
-    combined_with_margin <- ggdraw(combined) + 
-      theme(plot.margin = margin(5, 5, 5, 5))
 
     # Save the combined plot as an SVG file
-    svg("test_output.svg", height = 18, width = 18)  # A4 for ref: 8.27 x 11.69 inches
-    print(combined_with_margin) 
+    svg("test_output.svg", height = 20, width = 18)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
+    print(combined) 
     dev.off()
 }
 
