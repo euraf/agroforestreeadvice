@@ -3,6 +3,7 @@ library(ggplot2)
 library(cowplot)
 library(grid)
 library(dplyr)
+library(gridExtra)
 
   # Function to create a combined plot with a table for download
 load("DataSuitability.RData")
@@ -34,7 +35,7 @@ get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language)
   ID <- ID %>%
     group_by(name, objecttype, side) %>%
     reframe(value = ifelse(objecttype == "sliderInput", 
-      paste(value, collapse = "-"), value)) %>%
+    paste(value, collapse = "-"), value)) %>%
     ungroup()
 
   #drop duplicates
@@ -72,8 +73,17 @@ create_combined_plot <- function() {
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
     DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 40), collapse = "\n"))
-    table_TreeScoring <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
+    
+    # Create a custom theme to rotate the column names
+    table_theme <- ttheme_default(
+      colhead = list(
+        fg_params = list(rot = 90, just = "right")
+      )
+    )
 
+    # Create the table with adjusted column widths and rotated column names
+    table_TreeScoring <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
+    
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
       draw_label("Report of Tree Suitability by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0.2, hjust = 0) +
