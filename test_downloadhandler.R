@@ -70,16 +70,15 @@ create_combined_plot <- function(language = "en") {
       rowhead = list(bg_params = list(fill = "grey80", col = NA))
     )
     DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 40), collapse = "\n"))
-    
-    # Create a custom theme to rotate the column names
-    table_theme <- ttheme_default(
-      colhead = list(
-        fg_params = list(rot = 90, just = "right")
-      )
-    )
+
+    # Convert float to int and NA to 0 in DataSuitability (ignore the 'species' column)
+    DataSuitability <- DataSuitability %>%
+      mutate(across(-species, ~ ifelse(is.na(.), 0, as.integer(.))))
 
     # Create the table with adjusted column widths and rotated column names
-    table_TreeScoring <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
+    table_TreeScoring <- tableGrob(head(DataSuitability, 20), 
+                                  theme = ttheme_default(colhead = list(fg_params = list(rot = 90, just = "right"))), 
+                                  rows = NULL)
     
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
