@@ -115,6 +115,7 @@ create_combined_plot <- function() {
       table_SelectedInputs_effecttrait,
       NULL,
       NULL,
+      rel_widths = c(1, 1, 1, 0.3, 0.3),  # Adjust widths to add space between tables
       ncol = 5
     )
 
