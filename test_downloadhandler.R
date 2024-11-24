@@ -110,12 +110,13 @@ create_combined_plot <- function() {
 
     # Combine the SelectedInputs tables into one row
     selected_inputs_combined <- plot_grid(
+      NULL,
       table_SelectedInputs_responsetrait,
       NULL,
       table_SelectedInputs_effecttrait,
       NULL,
-      NULL,
-      rel_widths = c(1, 1, 1, 0.3, 0.3),  # Adjust widths to add space between tables
+      align = "hv", 
+      rel_widths = c(0.4, 1, 1, 1, 0.4),  # Adjust widths to add space between tables
       ncol = 5
     )
 
@@ -136,7 +137,7 @@ create_combined_plot <- function() {
     )
 
 
-    # Add upper and left margins
+    # Add top, bottom and left margins
     combined <- combined + theme(plot.margin = margin(t = 20, l = 20, b = 70, unit = "pt"))
 
 
