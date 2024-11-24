@@ -50,12 +50,9 @@ get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language)
 }
 
 
-create_combined_plot <- function() {
+create_combined_plot <- function(language = "en") {
     # Load necessary data
-    load("DataSuitability.RData")
-    load("plotting.RData")
-    load("inputsdata.RData")
-    ChosenInputs <- get_SelectedInputs(inputsdata, interface, "cz")
+    ChosenInputs <- get_SelectedInputs(inputsdata, interface, lang = language)
 
     # Wrap text in the 'name' and 'value' columns
     ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
@@ -131,9 +128,8 @@ create_combined_plot <- function() {
       table_TreeScoring, 
       ncol = 1, 
       rel_heights = c(0.08, 0.2, 0.2, 0.2, 1, 0.1, 1, 1),  # Adjust heights to add space between elements
-      align = "h",  # Align the elements vertically
-      axis = "l"  # Align the elements to the left
-      #labels = c("A", "B", "C", "D", "E", "F", "G")  # Add labels to the elements
+      align = "h", 
+      axis = "l"  
     )
 
     # Add top, bottom and left margins
