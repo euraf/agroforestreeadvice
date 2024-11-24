@@ -116,7 +116,7 @@ create_combined_plot <- function() {
       table_SelectedInputs_effecttrait,
       NULL,
       align = "hv", 
-      rel_widths = c(0.4, 1, 1, 1, 0.4),  # Adjust widths to add space between tables
+      rel_widths = c(0.5, 0.9, 2, 0.9, 0.5),  # Adjust widths to add space between tables
       ncol = 5
     )
 
@@ -136,11 +136,8 @@ create_combined_plot <- function() {
       #labels = c("A", "B", "C", "D", "E", "F", "G")  # Add labels to the elements
     )
 
-
     # Add top, bottom and left margins
-    combined <- combined + theme(plot.margin = margin(t = 20, l = 20, b = 70, unit = "pt"))
-
-
+    combined <- combined + theme(plot.margin = margin(t = 20, l = 50, r = 50, b = 70, unit = "pt"))
 
     # Save the combined plot as an SVG file
     svg("test_output.svg", height = 19, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
