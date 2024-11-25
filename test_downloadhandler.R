@@ -13,6 +13,7 @@ load_data <- function() {
     load("dbfinal.RData")
     load("interface.RData")
     load("datainfo.RData")
+    print("Data loaded successfully")
   }, error = function(e) {
     stop("Error loading data: ", e$message)
   })
@@ -142,6 +143,54 @@ create_combined_plot <- function(language = "en") {
   })
 }
 
+create_dataINFO_plot <- function() {
+  tryCatch({
+    
+    #get average lenght of each column
+    avg_length <- sapply(datainfo, function(column) {
+      mean(nchar(as.character(column)), na.rm = TRUE)
+    })
+
+    wrapCoef <- 0.5  # Coefficient to adjust the width of the columns
+
+    # dynamically adjust the width of the columns based on the average length of the data
+    datainfo <- as.data.frame(mapply(function(column, width) {
+      sapply(column, function(x) paste(strwrap(as.character(x), width = width), collapse = "\n"))
+    }, datainfo, avg_length*wrapCoef, SIMPLIFY = FALSE))
+
+    dataINFO_table <- tableGrob(head(datainfo, 20), theme = ttheme_default(), rows = NULL)
+    # Create a headline with a sublabel for the current date
+    headline <- ggdraw() + 
+      draw_label("Report of Tree Suitability by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0.2, hjust = 0) +
+      draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0.2, hjust = 0, y = -1) +
+      theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
+
+    # Combine all elements into a single plot
+    combined <- plot_grid(
+      headline, 
+      NULL,
+      dataINFO_table, 
+      NULL,
+      ncol = 1, 
+      rel_heights = c(1, 1, 1),  # Adjust heights to add space between elements
+      align = "h", 
+      axis = "l"  
+    )
+
+    # Add top, left and bottom margins
+    combined <- combined + theme(plot.margin = margin(t = 20, l = 50, r = 50, b = 70, unit = "pt"))
+
+    # Save the combined plot as an SVG file
+    svg("test_output_datainfo.svg", height = 19, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
+    print(combined) 
+    dev.off()
+  }, error = function(e) {
+    stop("#create_combined_plot# - Error creating combined plot: ", e$message)
+  })
+}
+
+
 # Example usage
 load_data()
-create_combined_plot(language = "cz")
+
+create_dataINFO_plot()
