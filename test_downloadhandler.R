@@ -151,30 +151,39 @@ create_dataINFO_plot <- function() {
       mean(nchar(as.character(column)), na.rm = TRUE)
     })
 
-    wrapCoef <- 0.5  # Coefficient to adjust the width of the columns
+    wrapCoef <- 0.65                                                                                    # Coefficient to adjust the width of the columns
+    coreTextSize <- 0.85                                                                                # Font size for the table cells
 
     # dynamically adjust the width of the columns based on the average length of the data
     datainfo <- as.data.frame(mapply(function(column, width) {
       sapply(column, function(x) paste(strwrap(as.character(x), width = width), collapse = "\n"))
     }, datainfo, avg_length*wrapCoef, SIMPLIFY = FALSE))
 
-    dataINFO_table <- tableGrob(head(datainfo, 20), theme = ttheme_default(), rows = NULL)
+    datainfo <- replace(datainfo, datainfo == "NA", "")                                                 # replace "NA" with empty string
+
+    # Customize the table theme to have smaller text
+    table_theme <- ttheme_default(
+      core = list(fg_params = list(cex = coreTextSize)),
+      colhead = list(fg_params = list(cex = 1.2)),
+      rowhead = list(fg_params = list(cex = 1.2))
+    )
+
+    dataINFO_table <- tableGrob(head(datainfo, 20), theme = table_theme, rows = NULL)
+    
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
-      draw_label("Report of Tree Suitability by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0.2, hjust = 0) +
-      draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0.2, hjust = 0, y = -1) +
-      theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
+      draw_label("Additional informations about the trees by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
+      draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0, hjust = 0, y = 0) 
 
     # Combine all elements into a single plot
     combined <- plot_grid(
       headline, 
       NULL,
       dataINFO_table, 
-      NULL,
       ncol = 1, 
-      rel_heights = c(1, 1, 1),  # Adjust heights to add space between elements
-      align = "h", 
-      axis = "l"  
+      align = "h",
+      axis = "lt",
+      rel_heights = c(0.05, 0.001, 1)
     )
 
     # Add top, left and bottom margins
@@ -194,3 +203,4 @@ create_dataINFO_plot <- function() {
 load_data()
 
 create_dataINFO_plot()
+
