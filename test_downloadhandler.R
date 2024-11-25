@@ -12,6 +12,7 @@ load_data <- function() {
     load("inputsdata.RData")
     load("dbfinal.RData")
     load("interface.RData")
+    load("datainfo.RData")
   }, error = function(e) {
     stop("Error loading data: ", e$message)
   })
@@ -68,7 +69,7 @@ create_combined_plot <- function(language = "en") {
     # Function to create table theme
     createTable <- function(SetLengthOutput = integer(20)) {
       table_theme <- ttheme_default(
-      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
+      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=SetLengthOutput)), col = NA)),
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA)))
       

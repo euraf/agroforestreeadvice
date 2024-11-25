@@ -600,7 +600,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
         # Translate the data
         datainfo <- translator(datainfo, interfaceCzech, actual_lang)
-
+        save(datainfo, file = "datainfo.RData")
         datainfo
 
         }, options = list(
