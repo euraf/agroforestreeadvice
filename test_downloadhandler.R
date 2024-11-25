@@ -3,53 +3,59 @@ library(ggplot2)
 library(cowplot)
 library(grid)
 library(dplyr)
-library(gridExtra)
 
-  # Function to create a combined plot with a table for download
-load("DataSuitability.RData")
-load("plotting.RData")
-load("inputsdata.RData")
-load("dbfinal.RData")
-load("interface.RData")
-get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
-  ID <- data.frame(name = names(ID), value = unname(ID))                          # convert named chr to data frame with two columns
-  ID$name <- gsub("\\d$", "", ID$name)                                            # remove trailing digits from $name    - eg. height1 -> height         
-  ID$objecttype <- IF$objecttype[match(ID$name, IF$criteria)]                     # add $objecttype to ID
-  # add $side to ID
-  ID$side <- IF$side[match(ID$name, IF$criteria)]
-
-  # find $name in IF where IF$criteria == ID$name and replace it by criteria_cz
-  ID$name <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$criteria)]
-
-  # do the same for ID$value and IF$choice
-  ID$value <- ifelse(
-    is.na(match(ID$value, IF$choice)),
-    ID$value,
-    IF[[paste0("choice_", lang)]][match(ID$value, IF$choice)]
-  )
-
-  # concat "value" of records with same name if record objecttype is "sliderinput"
-  ID <- ID %>%
-    group_by(name, objecttype, side) %>%
-    reframe(value = ifelse(objecttype == "sliderInput", 
-    paste(value, collapse = "-"), value)) %>%
-    ungroup()
-
-  #drop duplicates
-  ID <- ID[!duplicated(ID),]
-
-  # sort by side
-  ID <- ID[order(ID$side, decreasing = TRUE),]
-
-  #drop column objecttype
-  ID$objecttype <- NULL
-  return(ID)
+# Function to create a combined plot with a table for download
+load_data <- function() {
+  tryCatch({
+    load("DataSuitability.RData")
+    load("plotting.RData")
+    load("inputsdata.RData")
+    load("dbfinal.RData")
+    load("interface.RData")
+  }, error = function(e) {
+    stop("Error loading data: ", e$message)
+  })
 }
 
-create_combined_plot <- function(language = "en") {
-    # Load necessary data
-    ChosenInputs <- get_SelectedInputs(inputsdata, interface, lang = language)
+# Function to get selected inputs and return a translated data frame
+get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
+  tryCatch({
+    ID <- data.frame(name = names(ID), value = unname(ID))                          # convert named chr to data frame with two columns
+    ID$name <- gsub("\\d$", "", ID$name)                                            # remove trailing digits from $name    - eg. height1 -> height         
+    ID$objecttype <- IF$objecttype[match(ID$name, IF$criteria)]                     # add $objecttype to ID
+    ID$side <- IF$side[match(ID$name, IF$criteria)]                                 # add $side to ID
 
+    # find $name in IF where IF$criteria == ID$name and replace it by criteria in selected language - eg. "height" -> "Výška"
+    ID$name <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$criteria)]
+
+    # do the same for ID$value and IF$choice - eg. "True" -> "Ano"
+    ID$value <- ifelse(
+      is.na(match(ID$value, IF$choice)),
+      ID$value,
+      IF[[paste0("choice_", lang)]][match(ID$value, IF$choice)]
+    )
+
+    # concat "value" of records with same name if record objecttype is "sliderinput"
+    ID <- ID %>%
+      group_by(name, objecttype, side) %>%
+      reframe(value = ifelse(objecttype == "sliderInput", 
+      paste(value, collapse = "-"), value)) %>%
+      ungroup()
+
+    ID <- ID[!duplicated(ID),]                                                    # remove duplicates
+    ID <- ID[order(ID$side, decreasing = TRUE),]                                  # order by side in descending order
+    ID$objecttype <- NULL                                                         # remove $objecttype column         
+    
+    return(ID)
+  }, error = function(e) {
+    stop("#get_SelectedInputs# - Error processing selected inputs: ", e$message)
+  })
+}
+
+# Function to create a combined plot with a table for download - takes selected Inputs, plot and both tables and combines them into a single plot
+create_combined_plot <- function(language = "en") {
+  ChosenInputs <- get_SelectedInputs(inputsdata, interface, lang = language)
+  tryCatch({
     # Wrap text in the 'name' and 'value' columns
     ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
 
@@ -59,6 +65,7 @@ create_combined_plot <- function(language = "en") {
     ChosenInputs_effecttrait <- ChosenInputs %>% filter(side == "effecttrait")
     ChosenInputs_effecttrait$side <- NULL
 
+    # Function to create table theme
     createTable <- function(SetLengthOutput = integer(20)) {
       table_theme <- ttheme_default(
       core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
@@ -72,7 +79,7 @@ create_combined_plot <- function(language = "en") {
     DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 40), collapse = "\n"))
 
     # Convert float to int and NA to 0 in DataSuitability (ignore the 'species' column)
-    DataSuitability <- DataSuitability %>%
+    DataSuitability <- DataSuitability %>% 
       mutate(across(-species, ~ ifelse(is.na(.), 0, as.integer(.))))
 
     # Create the table with adjusted column widths and rotated column names
@@ -95,7 +102,6 @@ create_combined_plot <- function(language = "en") {
     plotting <- plotting + 
       scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 25, substr(y, 1, 25), y)))
 
-
     # Combine the SelectedInputs tables into one row
     selected_inputs_combined <- plot_grid(
       NULL,
@@ -108,7 +114,7 @@ create_combined_plot <- function(language = "en") {
       ncol = 5
     )
 
-    # Combine the elements into a single plot
+    # Combine all elements into a single plot
     combined <- plot_grid(
       headline, 
       NULL,
@@ -130,6 +136,11 @@ create_combined_plot <- function(language = "en") {
     svg("test_output.svg", height = 19, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
     print(combined) 
     dev.off()
+  }, error = function(e) {
+    stop("#create_combined_plot# - Error creating combined plot: ", e$message)
+  })
 }
 
+# Example usage
+load_data()
 create_combined_plot(language = "cz")
