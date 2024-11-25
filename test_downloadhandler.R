@@ -12,9 +12,6 @@ load("inputsdata.RData")
 load("dbfinal.RData")
 load("interface.RData")
 get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
-  ID = inputsdata
-  IF = interface
-  lang = "cz"
   ID <- data.frame(name = names(ID), value = unname(ID))                          # convert named chr to data frame with two columns
   ID$name <- gsub("\\d$", "", ID$name)                                            # remove trailing digits from $name    - eg. height1 -> height         
   ID$objecttype <- IF$objecttype[match(ID$name, IF$criteria)]                     # add $objecttype to ID
@@ -49,7 +46,6 @@ get_SelectedInputs <- function(ID = inputsdata, IF = interface, lang = language)
   return(ID)
 }
 
-
 create_combined_plot <- function(language = "en") {
     # Load necessary data
     ChosenInputs <- get_SelectedInputs(inputsdata, interface, lang = language)
@@ -63,12 +59,16 @@ create_combined_plot <- function(language = "en") {
     ChosenInputs_effecttrait <- ChosenInputs %>% filter(side == "effecttrait")
     ChosenInputs_effecttrait$side <- NULL
 
-    # Style the table grob for DataSuitability
-    table_theme <- ttheme_default(
+    createTable <- function(SetLengthOutput = integer(20)) {
+      table_theme <- ttheme_default(
       core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
-      rowhead = list(bg_params = list(fill = "grey80", col = NA))
-    )
+      rowhead = list(bg_params = list(fill = "grey80", col = NA)))
+      
+      return(table_theme)
+    }
+
+    table_theme <- createTable(20)
     DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 40), collapse = "\n"))
 
     # Convert float to int and NA to 0 in DataSuitability (ignore the 'species' column)
@@ -86,19 +86,11 @@ create_combined_plot <- function(language = "en") {
       draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0.2, hjust = 0, y = -1) +
       theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
-    table_theme2 <- ttheme_default(
-      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(ChosenInputs_responsetrait))), col = NA)),
-      colhead = list(bg_params = list(fill = "grey80", col = NA)),
-      rowhead = list(bg_params = list(fill = "grey80", col = NA))
-    )
-    table_SelectedInputs_responsetrait <- tableGrob(ChosenInputs_responsetrait, theme = table_theme2, rows = NULL)
+    table_SelectedInputs_responsetrait <- tableGrob(ChosenInputs_responsetrait,
+      theme = createTable(nrow(ChosenInputs_responsetrait)), rows = NULL)
 
-    table_theme3 <- ttheme_default(
-      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=nrow(ChosenInputs_effecttrait))), col = NA)),
-      colhead = list(bg_params = list(fill = "grey80", col = NA)),
-      rowhead = list(bg_params = list(fill = "grey80", col = NA))
-    )
-    table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait, theme = table_theme3, rows = NULL)
+    table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait,
+      theme = createTable(nrow(ChosenInputs_effecttrait)), rows = NULL)
 
     plotting <- plotting + 
       scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 25, substr(y, 1, 25), y)))
@@ -131,7 +123,7 @@ create_combined_plot <- function(language = "en") {
       axis = "l"  
     )
 
-    # Add top, bottom and left margins
+    # Add top, left and bottom margins
     combined <- combined + theme(plot.margin = margin(t = 20, l = 50, r = 50, b = 70, unit = "pt"))
 
     # Save the combined plot as an SVG file
@@ -140,4 +132,4 @@ create_combined_plot <- function(language = "en") {
     dev.off()
 }
 
-create_combined_plot()
+create_combined_plot(language = "cz")
