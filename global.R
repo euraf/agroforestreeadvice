@@ -18,7 +18,7 @@ library(purrr)
 library(shiny.i18n)     # for translations in the app
 library(cowplot)        # for ggplot2 plots in download
 library(gridExtra)
-library(rsvg)           # convert svg to png in downloads
+library(rsvg)           # convert svg to pdf in downloads
 ##global----
 
 #load("dataSTA.Rdata")
@@ -57,6 +57,9 @@ interfaceSUOMI<-read.table("models/interfaceSUOMI.txt", fileEncoding = "UTF-8", 
 # In czech, there are empty spaces around words in some cells 
 dataCzech <- data.frame(lapply(dataCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
 interfaceCzech <- data.frame(lapply(interfaceCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
+
+#include downloadhandler functions
+source("DownloadHandler.R")
 
 # Initialize the translator
 i18n <- Translator$new(translation_csvs_path = "R/translation/")
@@ -98,7 +101,7 @@ reshapecontrols<-function(controls, language, compactconditions=FALSE, compactob
   languages<-unique(sapply(toto[lapply(toto, length)==2],"[[", 2))
   #print(paste("languages=", paste(languages, collapse=",")))
   if(is.null(language) ) language<-"en"
-  if(! language %in% languages) {print(paste(language, "is not in the languages available for this interface, so defaulting to english"))
+  if(!language %in% languages) {print(paste(language, "is not in the languages available for this interface, so defaulting to english"))
     language<-"en"
   }
   #we select the desired language
@@ -206,6 +209,10 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
   message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
   #print("####### get inputs[criteria]")
   #print(inputs[criteria][1])
+
+  # We need access to used inputs - download handler needs to access them for table creation
+  computedInputs <<- inputs
+  
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen
     chosen<-unlist(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])

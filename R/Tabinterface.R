@@ -249,7 +249,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
 
             div(style = "text-align: left; padding: 5px;",
                 downloadButton("downloadCSV", i18n$t("Download as CSV file"), class = "download-button"),
-                downloadButton("downloadPNG", i18n$t("Download as PNG file"), class = "download-button")),
+                downloadButton("downloadPDF", i18n$t("Download as PDF file"), class = "download-button")),
 
             modalButton(i18n$t("Close"), icon = icon("remove"))
             ),

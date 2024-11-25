@@ -4,6 +4,7 @@ server <- function(input, output, session) {
   #127.0.0.1:3775/?model=Czech&soil_water=soil_water_waterlogged&habitus=bush this triggers a modal dialog to download a txt file with the species scores for this particular set of conditions
   reactive_dataSuitability <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
   reactive_plotSuitability <<- reactiveVal(ggplot())
+  reactive_Interface <<- reactiveVal(list())
 
   # Access the datatable - for debug purposes
   access_dataSuitability <- function() {
@@ -17,37 +18,10 @@ server <- function(input, output, session) {
     reactive_plotSuitability()
   }
 
-
-  # Function to create a combined plot with a table for download
-  create_combined_plot <- function() {
-    plotting <- access_plotSuitability() # for debug purposes
-    DataSuitability <- access_dataSuitability() # for debug purposes
-    DataSuitability <- data.frame(as.matrix(DataSuitability))
-    # Style the table grob
-    table_theme <- ttheme_default(
-      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=20)), col = NA)),
-      colhead = list(bg_params = list(fill = "grey80", col = NA)),
-      rowhead = list(bg_params = list(fill = "grey80", col = NA))
-    )
-    table_grob <- tableGrob(head(DataSuitability, 20), theme = table_theme, rows = NULL)
-
-    # Create a headline
-    headline <- ggdraw() + 
-      draw_label(i18n$t("Report of Tree Suitability by AgroForesTreeAdvice"), fontface = 'bold', size = 20, x = 0, hjust = 0) +
-      theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
-
-    # Combine the elements into a single plot
-    combined <- plot_grid(
-      headline, NULL, plotting, NULL, table_grob, 
-      ncol = 1, 
-      rel_heights = c(0.08, 0.01, 1, 0.05, 1)  # Adjust heights to add space between elements
-    )
-
-    # Wrap the combined plot in a ggdraw to add a bottom margin
-    combined_with_margin <- ggdraw(combined) + 
-      theme(plot.margin = margin(10, 10, 10, 10))
-    return(combined_with_margin)
-    }
+  access_Interface <- function() {
+    print("Interface accessed")
+    reactive_Interface()
+  }
 
   # Download handler for svg
   observe({
@@ -56,27 +30,27 @@ server <- function(input, output, session) {
         paste("plot_and_data-", Sys.Date(), ".svg", sep = "")
       },
       content = function(file) {
-        combined <- create_combined_plot()
-        svg(file, width = 17, height = 13)
+        combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), DataSuitability = req(access_dataSuitability()))
+        svg(file, height = 19, width = 14)
         print(combined)
         dev.off()
       }
     )
   })
 
-  # Download handler for png
+  # Download handler for pdf
   observe({
-    output$downloadPNG <- downloadHandler(
+    output$downloadPDF <- downloadHandler(
       filename = function() {
-        paste("plot_and_data-", Sys.Date(), ".png", sep = "")
+        paste("plot_and_data-", Sys.Date(), ".pdf", sep = "")
       },
       content = function(file) {
-        combined <- create_combined_plot()
+        combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), DataSuitability = req(access_dataSuitability()))
         svg_file <- tempfile(fileext = ".svg")
-        svg(svg_file, width = 17, height = 13)
+        svg(svg_file, height = 19, width = 14)
         print(combined)
         dev.off()
-        rsvg_png(svg_file, file)
+        rsvg_pdf(svg_file, file)
       }
     )
   })

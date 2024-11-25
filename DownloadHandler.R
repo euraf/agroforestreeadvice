@@ -1,21 +1,11 @@
-library(gridExtra)
-library(ggplot2)
-library(cowplot)
-library(grid)
-library(dplyr)
-
-# Function to create a combined plot with a table for download
-
-  load("DataSuitability.RData")
-  load("plotting.RData")
-  load("inputsdata.RData")
-  load("dbfinal.RData")
-  load("interface.RData")
-  load("datainfo.RData")
-
 
 # Function to get selected inputs and return a translated data frame
 GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
+  print("GetSelectedInputs")
+  print(ID)
+  print(IF)
+  print(lang)
+
   tryCatch({
     ID <- data.frame(name = names(ID), value = unname(ID))                          # convert named chr to data frame with two columns
     ID$name <- gsub("\\d$", "", ID$name)                                            # remove trailing digits from $name    - eg. height1 -> height         
@@ -50,8 +40,20 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
 }
 
 # Function to create a combined plot with a table for download - takes selected Inputs, plot and both tables and combines them into a single plot
-CombinePlotsForDownload <- function(language = "en") {
-  ChosenInputs <- GetSelectedInputs(inputsdata, interface, lang = language)
+CombinePlotsForDownload <- function(language = "en", interface, DataSuitability) {
+  ChosenInputs <- GetSelectedInputs(ID = computedInputs, IF = interface, lang = language)
+  print("Chosen Inputs:")
+  print(ChosenInputs)
+
+  print("Data Suitability:")
+  print(DataSuitability)
+
+  print("Interface:")
+  print(interface)
+
+  print("Language:")
+  print(language)
+
   tryCatch({
     # Wrap text in the 'name' and 'value' columns
     ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
