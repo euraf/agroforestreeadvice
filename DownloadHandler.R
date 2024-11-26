@@ -38,6 +38,16 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
 CombinePlotsForDownload <- function(language = "en", interface, DataSuitability, ComputedPlot) {
   ChosenInputs <- GetSelectedInputs(ID = computedInputs, IF = interface, lang = language)
 
+  save(computedInputs, file = "computedInputs.RData")
+  save(DataSuitability, file = "DataSuitability.RData")
+  save(ComputedPlot, file = "ComputedPlot.RData")
+  save(interface, file = "interface.RData")
+  # load("computedInputs.RData")
+  # load("DataSuitability.RData")
+  # load("ComputedPlot.RData")
+  # load("interface.RData")
+  # lang <- "cz"
+
   tryCatch({
     # Wrap text in the 'name' and 'value' columns
     ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
@@ -107,7 +117,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
       NULL,
       table_TreeScoring, 
       ncol = 1, 
-      rel_heights = c(0.08, 0.2, 0.2, 0.2, 1, 0.1, 1, 1),  # Adjust heights to add space between elements
+      rel_heights = c(0.08, 0.1, 0.2, 0.2, 1, 0.1, 1, 1),  # Adjust heights to add space between elements
       align = "h", 
       axis = "l"  
     )

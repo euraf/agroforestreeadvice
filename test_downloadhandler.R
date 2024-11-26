@@ -4,16 +4,6 @@ library(cowplot)
 library(grid)
 library(dplyr)
 
-# Function to create a combined plot with a table for download
-
-  load("DataSuitability.RData")
-  load("plotting.RData")
-  load("inputsdata.RData")
-  load("dbfinal.RData")
-  load("interface.RData")
-  load("datainfo.RData")
-
-
 # Function to get selected inputs and return a translated data frame
 GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
   tryCatch({
@@ -50,8 +40,14 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
 }
 
 # Function to create a combined plot with a table for download - takes selected Inputs, plot and both tables and combines them into a single plot
-CombinePlotsForDownload <- function(language = "en") {
-  ChosenInputs <- GetSelectedInputs(inputsdata, interface, lang = language)
+CombinePlotsForDownload <- function(language = "en", interface, DataSuitability, ComputedPlot) {
+  load("computedInputs.RData")
+  load("DataSuitability.RData")
+  load("ComputedPlot.RData")
+  load("interface.RData")
+  language <- "cz"
+  ChosenInputs <- GetSelectedInputs(ID = computedInputs, IF = interface, lang = language)
+
   tryCatch({
     # Wrap text in the 'name' and 'value' columns
     ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 50), collapse = "\n"))
@@ -61,6 +57,24 @@ CombinePlotsForDownload <- function(language = "en") {
     ChosenInputs_responsetrait$side <- NULL
     ChosenInputs_effecttrait <- ChosenInputs %>% filter(side == "effecttrait")
     ChosenInputs_effecttrait$side <- NULL
+
+    # count and compare rows - append empty to the smaller table
+    response_rows <- nrow(ChosenInputs_responsetrait)
+    effect_rows <- nrow(ChosenInputs_effecttrait)
+
+    # Usually the tables have diff number of rows, so we need to adjust them - we calculate the diff, then append empty rows to the smaller table
+    if (response_rows > effect_rows) {
+      rows_to_add <- response_rows - effect_rows
+      empty_rows <- data.frame(matrix(NA, nrow = rows_to_add, ncol = ncol(ChosenInputs_effecttrait)))
+      colnames(empty_rows) <- colnames(ChosenInputs_effecttrait) # This is to ensure that the empty rows have the same column names as the original table
+      ChosenInputs_effecttrait <- rbind(ChosenInputs_effecttrait, empty_rows)
+    } else if (effect_rows > response_rows) {
+      rows_to_add <- effect_rows - response_rows
+      empty_rows <- data.frame(matrix(NA, nrow = rows_to_add, ncol = ncol(ChosenInputs_responsetrait)))
+      colnames(empty_rows) <- colnames(ChosenInputs_responsetrait) # This is to ensure that the empty rows have the same column names as the original table
+      ChosenInputs_responsetrait <- rbind(ChosenInputs_responsetrait, empty_rows)
+    }
+
 
     # Function to create table theme
     createTable <- function(SetLengthOutput = integer(20)) {
@@ -96,7 +110,7 @@ CombinePlotsForDownload <- function(language = "en") {
     table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait,
       theme = createTable(nrow(ChosenInputs_effecttrait)), rows = NULL)
 
-    plotting <- plotting + 
+    ComputedPlot <- ComputedPlot + 
       scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 25, substr(y, 1, 25), y)))
 
     # Combine the SelectedInputs tables into one row
@@ -107,7 +121,7 @@ CombinePlotsForDownload <- function(language = "en") {
       table_SelectedInputs_effecttrait,
       NULL,
       align = "hv", 
-      rel_widths = c(0.5, 0.9, 2, 0.9, 0.5),  # Adjust widths to add space between tables
+      rel_widths = c(0.3, 0.9, 2, 0.9, 0.3),  # Adjust widths to add space between tables
       ncol = 5
     )
 
@@ -117,11 +131,11 @@ CombinePlotsForDownload <- function(language = "en") {
       NULL,
       selected_inputs_combined, 
       NULL,
-      plotting, 
+      ComputedPlot, 
       NULL,
       table_TreeScoring, 
       ncol = 1, 
-      rel_heights = c(0.08, 0.2, 0.2, 0.2, 1, 0.1, 1, 1),  # Adjust heights to add space between elements
+      rel_heights = c(0.07, 0.15, 0.2, 0.1, 1, 0.1, 1, 1),  # Adjust heights to add space between elements
       align = "h", 
       axis = "l"  
     )
@@ -135,60 +149,11 @@ CombinePlotsForDownload <- function(language = "en") {
   return(combined)
 }
 
-create_dataINFO_plot <- function() {
-  tryCatch({
-    
-    #get average lenght of each column
-    avg_length <- sapply(datainfo, function(column) {
-      mean(nchar(as.character(column)), na.rm = TRUE)
-    })
 
-    wrapCoef <- 0.65                                                                                    # Coefficient to adjust the width of the columns
-    coreTextSize <- 0.85                                                                                # Font size for the table cells
-
-    # dynamically adjust the width of the columns based on the average length of the data
-    datainfo <- as.data.frame(mapply(function(column, width) {
-      sapply(column, function(x) paste(strwrap(as.character(x), width = width), collapse = "\n"))
-    }, datainfo, avg_length*wrapCoef, SIMPLIFY = FALSE))
-
-    datainfo <- replace(datainfo, datainfo == "NA", "")                                                 # replace "NA" with empty string
-
-    # Customize the table theme to have smaller text
-    table_theme <- ttheme_default(
-      core = list(fg_params = list(cex = coreTextSize)),
-      colhead = list(fg_params = list(cex = 1.2)),
-      rowhead = list(fg_params = list(cex = 1.2))
-    )
-
-    dataINFO_table <- tableGrob(head(datainfo, 20), theme = table_theme, rows = NULL)
-    
-    # Create a headline with a sublabel for the current date
-    headline <- ggdraw() + 
-      draw_label("Additional informations about the trees by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
-      draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0, hjust = 0, y = 0) 
-
-    # Combine all elements into a single plot
-    combined <- plot_grid(
-      headline, 
-      NULL,
-      dataINFO_table, 
-      ncol = 1, 
-      align = "h",
-      axis = "lt",
-      rel_heights = c(0.05, 0.001, 1)
-    )
-
-    # Add top, left and bottom margins
-    combined <- combined + theme(plot.margin = margin(t = 20, l = 50, r = 50, b = 70, unit = "pt"))
-
-    # Save the combined plot as an SVG file
-    svg("test_output_datainfo.svg", height = 19, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
-    print(combined) 
-    dev.off()
-  }, error = function(e) {
-    stop("#CombinePlotsForDownload# - Error creating combined plot: ", e$message)
-  })
-}
+plot <- CombinePlotsForDownload()
+svg("test_output.svg", height = 19, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
+print(plot)
+dev.off()
 
 
 # CombinePlotsForDownload()
