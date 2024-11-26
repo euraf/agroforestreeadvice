@@ -111,7 +111,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
       theme = createTable(nrow(ChosenInputs_effecttrait)), rows = NULL)
 
     ComputedPlot <- ComputedPlot + 
-      scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 25, substr(y, 1, 25), y)))
+      scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 25, substr(y, 1, 25), y))) 
 
     # Combine the SelectedInputs tables into one row
     selected_inputs_combined <- plot_grid(

@@ -454,6 +454,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           # If there are no data to plot, return an empty plot
           plot_Suitability<-ggplot() + theme_minimal()
           reactive_plotSuitability(plot_Suitability)
+          print("Saved reactive plot")
           return(plot_Suitability)
         }
         plot_Suitability<-ggplot(databis, aes(x = value, y = species, fill = BigCriteria)) +
@@ -475,7 +476,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
                 panel.grid.minor.x = element_blank()                                             # hides minor vertical grid lines  
                 ) +
           scale_fill_discrete(labels = Plot_legend_lang(language()))
-          
+        print("Saved reactive plot")
         reactive_plotSuitability(plot_Suitability)     
 
         return(plot_Suitability)
