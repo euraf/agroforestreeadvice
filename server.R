@@ -6,6 +6,19 @@ server <- function(input, output, session) {
   reactive_plotSuitability <<- reactiveVal(ggplot())
   reactive_Interface <<- reactiveVal(list())
 
+  observe({
+    # Code to handle changes in reactive values
+    data <- reactive_dataSuitability()
+    plot <- reactive_plotSuitability()
+    interface <- reactive_Interface()
+    
+    # Perform actions based on the changes
+    print("Reactive values have changed")
+    print(paste("Data length:", nrow(data)))
+    print(paste("Plot length:", length(plot)))
+    print(paste("Interface length:", length(interface)))
+  })
+
   # Access the datatable - for debug purposes
   access_dataSuitability <- function() {
     print("Suitability data accessed")
@@ -30,7 +43,9 @@ server <- function(input, output, session) {
         paste("plot_and_data-", Sys.Date(), ".svg", sep = "")
       },
       content = function(file) {
-        combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), DataSuitability = req(access_dataSuitability()))
+        access_plotSuitability()
+        combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
+          DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
         svg(file, height = 19, width = 14)
         print(combined)
         dev.off()
@@ -45,7 +60,9 @@ server <- function(input, output, session) {
         paste("plot_and_data-", Sys.Date(), ".pdf", sep = "")
       },
       content = function(file) {
-        combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), DataSuitability = req(access_dataSuitability()))
+        access_plotSuitability()
+        combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
+          DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
         svg_file <- tempfile(fileext = ".svg")
         svg(svg_file, height = 19, width = 14)
         print(combined)

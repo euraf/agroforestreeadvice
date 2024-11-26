@@ -1,11 +1,6 @@
 
 # Function to get selected inputs and return a translated data frame
 GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
-  print("GetSelectedInputs")
-  print(ID)
-  print(IF)
-  print(lang)
-
   tryCatch({
     ID <- data.frame(name = names(ID), value = unname(ID))                          # convert named chr to data frame with two columns
     ID$name <- gsub("\\d$", "", ID$name)                                            # remove trailing digits from $name    - eg. height1 -> height         
@@ -40,19 +35,8 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
 }
 
 # Function to create a combined plot with a table for download - takes selected Inputs, plot and both tables and combines them into a single plot
-CombinePlotsForDownload <- function(language = "en", interface, DataSuitability) {
+CombinePlotsForDownload <- function(language = "en", interface, DataSuitability, ComputedPlot) {
   ChosenInputs <- GetSelectedInputs(ID = computedInputs, IF = interface, lang = language)
-  print("Chosen Inputs:")
-  print(ChosenInputs)
-
-  print("Data Suitability:")
-  print(DataSuitability)
-
-  print("Interface:")
-  print(interface)
-
-  print("Language:")
-  print(language)
 
   tryCatch({
     # Wrap text in the 'name' and 'value' columns
@@ -98,7 +82,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability)
     table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait,
       theme = createTable(nrow(ChosenInputs_effecttrait)), rows = NULL)
 
-    plotting <- plotting + 
+    ComputedPlot <- ComputedPlot + 
       scale_y_discrete(labels = function(x) sapply(x, function(y) ifelse(nchar(y) > 25, substr(y, 1, 25), y)))
 
     # Combine the SelectedInputs tables into one row
@@ -119,7 +103,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability)
       NULL,
       selected_inputs_combined, 
       NULL,
-      plotting, 
+      ComputedPlot, 
       NULL,
       table_TreeScoring, 
       ncol = 1, 

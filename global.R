@@ -177,6 +177,10 @@ orderdf<-function(df, orderby, idvariable, interface){
   #reorder rows
   df<-df[order(df$species, decreasing=TRUE), c("species", setdiff(names(df), "species"))] 
   #decreasing = TRUE so that the best are on top in the dataframe (best = first in the levels of the factor)
+
+  # Update reactive interface - so other functions know which interface was used (eg. download handler)
+  reactive_Interface(interface)
+
   return(df)
 }
 
