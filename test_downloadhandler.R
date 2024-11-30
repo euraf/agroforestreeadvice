@@ -5,6 +5,38 @@ library(grid)
 library(dplyr)
 library(rsvg) 
 
+DownloadHeadline_translate <- function(HeadlineToTranslate, language = "en") {
+  # Translate the headline of the download page - takes data from translate_plot_categories
+  # where type == "Download page headline" and tries to match inputted text to it
+
+  if (language == "en") {
+    return(HeadlineToTranslate)
+  }
+  if (!is.character(HeadlineToTranslate) || nchar(HeadlineToTranslate) == 0) {
+    return("DownloadHeadline_translate unable to translate headline.")
+  }
+  if (!is.character(language) || nchar(language) == 0) {
+    language <- "en"
+  }
+
+  language <- paste0("choice_",language)
+  vocabulary <- read.csv("R/translate_plot_categories.csv", sep = ";", header = TRUE)
+
+  # We only need relevant rows - eg. "Download page headline"
+  vocabulary <- vocabulary[vocabulary$type == "Download page headline", ]
+
+  # to make the translator more tolerant to changes
+  TranslatedHeadline <- vocabulary[vocabulary$choice_en == HeadlineToTranslate, language]
+
+  # Handle case where translation is not found
+  if (is.na(TranslatedHeadline) || nchar(TranslatedHeadline) == 0) {
+    warning("Translation not found for the given headline.")
+    return(HeadlineToTranslate)
+  }
+
+  return(TranslatedHeadline)
+}
+
 # Function to get selected inputs and return a translated data frame
 GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
   tryCatch({
@@ -40,7 +72,7 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
   })
 }
 
-create_dataINFO_plot <- function(datainfo = datainfo) {
+create_dataINFO_plot <- function(datainfo = datainfo, language = "en") {
   load("datainfo.RData")
   tryCatch({
     
@@ -48,6 +80,7 @@ create_dataINFO_plot <- function(datainfo = datainfo) {
     avg_length <- sapply(datainfo, function(column) {
       mean(nchar(as.character(column)), na.rm = TRUE)
     })
+    TranslatedHeadline <- DownloadHeadline_translate("Additional informations about the trees by AgroForesTreeAdvice", language = language)
 
     wrapCoef <- 0.6                                                                                  # When to wrap the text in the table cells
     coreTextSize <- 0.9                                                                              # Font size for the table cells
@@ -70,7 +103,7 @@ create_dataINFO_plot <- function(datainfo = datainfo) {
 
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
-      draw_label("Additional informations about the trees by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
+      draw_label(TranslatedHeadline , fontface = 'bold', size = 20, x = 0, hjust = 0) +
       draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0, hjust = 0, y = 0) 
 
     # Combine all elements into a single plot
@@ -103,6 +136,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
   load("interface.RData")
   language <- "cz"
   ChosenInputs <- GetSelectedInputs(ID = computedInputs, IF = interface, lang = language)
+  TranslatedHeadline <- DownloadHeadline_translate("Report of Tree Suitability by AgroForesTreeAdvice", language = language)
 
   tryCatch({
     # Wrap text in the 'name' and 'value' columns
@@ -156,7 +190,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
     
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
-      draw_label("Report of Tree Suitability by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0.2, hjust = 0) +
+      draw_label(TranslatedHeadline , fontface = 'bold', size = 20, x = 0.2, hjust = 0) +
       draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0.2, hjust = 0, y = -1) +
       theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 

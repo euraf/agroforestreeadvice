@@ -34,9 +34,42 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
   })
 }
 
+DownloadHeadline_translate <- function(HeadlineToTranslate, language = "en") {
+  # Translate the headline of the download page - takes data from translate_plot_categories
+  # where type == "Download page headline" and tries to match inputted text to it
+
+  if (language == "en") {
+    return(HeadlineToTranslate)
+  }
+  if (!is.character(HeadlineToTranslate) || nchar(HeadlineToTranslate) == 0) {
+    return("DownloadHeadline_translate unable to translate headline.")
+  }
+  if (!is.character(language) || nchar(language) == 0) {
+    language <- "en"
+  }
+
+  language <- paste0("choice_",language)
+  vocabulary <- read.csv("R/translate_plot_categories.csv", sep = ";", header = TRUE)
+
+  # We only need relevant rows - eg. "Download page headline"
+  vocabulary <- vocabulary[vocabulary$type == "Download page headline", ]
+
+  # to make the translator more tolerant to changes
+  TranslatedHeadline <- vocabulary[vocabulary$choice_en == HeadlineToTranslate, language]
+
+  # Handle case where translation is not found
+  if (is.na(TranslatedHeadline) || nchar(TranslatedHeadline) == 0) {
+    warning("Translation not found for the given headline.")
+    return(HeadlineToTranslate)
+  }
+
+  return(TranslatedHeadline)
+}
+
 # Function to create a combined plot with a table for download - takes selected Inputs, plot and both tables and combines them into a single plot
 CombinePlotsForDownload <- function(language = "en", interface, DataSuitability, ComputedPlot) {
   ChosenInputs <- GetSelectedInputs(ID = computedInputs, IF = interface, lang = language)
+  TranslatedHeadline <- DownloadHeadline_translate("Report of Tree Suitability by AgroForesTreeAdvice", language = language)
 
   tryCatch({
     # Wrap text in the 'name' and 'value' columns
@@ -90,7 +123,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
     
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
-      draw_label("Report of Tree Suitability by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0.2, hjust = 0) +
+      draw_label(TranslatedHeadline , fontface = 'bold', size = 20, x = 0.2, hjust = 0) +
       draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0.2, hjust = 0, y = -1) +
       theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
@@ -136,16 +169,18 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
   return(combined)
 }
 
-create_dataINFO_plot <- function(datainfo = datainfo) {
+# Function to create a table with additional information about the trees
+create_dataINFO_plot <- function(datainfo = datainfo, language = "en") {
   tryCatch({
     
     #get average lenght of each column
     avg_length <- sapply(datainfo, function(column) {
       mean(nchar(as.character(column)), na.rm = TRUE)
     })
+    TranslatedHeadline <- DownloadHeadline_translate("Additional informations about the trees by AgroForesTreeAdvice", language = language)
 
     wrapCoef <- 0.6                                                                                  # When to wrap the text in the table cells
-    coreTextSize <- 0.85                                                                              # Font size for the table cells
+    coreTextSize <- 0.9                                                                              # Font size for the table cells
 
     # dynamically adjust the width of the columns based on the average length of the data
     datainfo <- as.data.frame(mapply(function(column, width) {
@@ -165,7 +200,7 @@ create_dataINFO_plot <- function(datainfo = datainfo) {
 
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
-      draw_label("Additional informations about the trees by AgroForesTreeAdvice", fontface = 'bold', size = 20, x = 0, hjust = 0) +
+      draw_label(TranslatedHeadline , fontface = 'bold', size = 20, x = 0, hjust = 0) +
       draw_label(paste("Date:", Sys.Date()), fontface = 'italic', size = 12, x = 0, hjust = 0, y = 0) 
 
     # Combine all elements into a single plot
@@ -181,7 +216,7 @@ create_dataINFO_plot <- function(datainfo = datainfo) {
     )
 
     # Add top, left and bottom margins
-    combined <- combined + theme(plot.margin = margin(t = 10, l = 100, r = 100, b = 0, unit = "pt"))
+    combined <- combined + theme(plot.margin = margin(t = 10, l = 80, r = 80, b = 0, unit = "pt"))
     return(combined)
  
   }, error = function(e) {
@@ -189,8 +224,3 @@ create_dataINFO_plot <- function(datainfo = datainfo) {
       return("Error creating dataINFO plot")
     })
 }
-
-
-
-# CombinePlotsForDownload()
-

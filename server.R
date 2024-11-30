@@ -35,16 +35,16 @@ server <- function(input, output, session) {
   observe({
     output$downloadSVG <- downloadHandler(
       filename = function() {
-        paste("plot_and_data-", Sys.Date(), ".zip", sep = "")
+        paste("AGFTadvice_results_", Sys.Date(), ".zip", sep = "")
       },
       content = function(file) {
         OutputPlots <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
           DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
-        OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()))
+        OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()), language = req(language()))
         
         tempDir <- tempdir()
-        tempSVG1 <- file.path(tempDir, "plot_and_data.svg")
-        tempSVG2 <- file.path(tempDir, "plot_and_data222.svg")
+        tempSVG1 <- file.path(tempDir, "AGFTadvice_results.svg")
+        tempSVG2 <- file.path(tempDir, "AGFTadvice_additionalinfo.svg")
 
         svg(tempSVG1, height = 19, width = 14)
         print(OutputPlots)
@@ -57,7 +57,7 @@ server <- function(input, output, session) {
         # Create a ZIP file containing both SVGs
         oldwd <- setwd(tempDir)
         on.exit(setwd(oldwd), add = TRUE)
-        zip::zip(file, files = c("plot_and_data.svg", "plot_and_data222.svg"))
+        zip::zip(file, files = c("AGFTadvice_results.svg", "AGFTadvice_additionalinfo.svg"))
 
         # Clean up temporary files
         unlink(tempSVG1)
@@ -70,18 +70,18 @@ server <- function(input, output, session) {
   observe({
     output$downloadPDF <- downloadHandler(
       filename = function() {
-        paste("plot_and_data-", Sys.Date(), ".zip", sep = "")
+        paste("AGFTadvice_results_", Sys.Date(), ".zip", sep = "")
       },
       content = function(file) {
         OutputPlots <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
           DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
-        OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()))
+        OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()), language = req(language()))
         
         tempDir <- tempdir()
-        tempSVG1 <- file.path(tempDir, "plot_and_data.svg")
-        tempSVG2 <- file.path(tempDir, "plot_and_data222.svg")
-        tempPDF1 <- file.path(tempDir, "plot_and_data.pdf")
-        tempPDF2 <- file.path(tempDir, "plot_and_data222.pdf")
+        tempSVG1 <- file.path(tempDir, "AGFTadvice_results.svg")
+        tempSVG2 <- file.path(tempDir, "AGFTadvice_additionalinfo.svg")
+        tempPDF1 <- file.path(tempDir, "AGFTadvice_results.pdf")
+        tempPDF2 <- file.path(tempDir, "AGFTadvice_additionalinfo.pdf")
 
 
         svg(tempSVG1, height = 19, width = 14)
@@ -97,7 +97,7 @@ server <- function(input, output, session) {
         # Create a ZIP file containing both SVGs
         oldwd <- setwd(tempDir)
         on.exit(setwd(oldwd), add = TRUE)
-        zip::zip(file, files = c("plot_and_data.pdf", "plot_and_data222.pdf"))
+        zip::zip(file, files = c("AGFTadvice_results.pdf", "AGFTadvice_additionalinfo.pdf"))
 
         # Clean up temporary files
         unlink(tempSVG1)
@@ -112,10 +112,10 @@ server <- function(input, output, session) {
   observe({
     output$downloadCSV <- downloadHandler(
       filename = function() {
-        paste("plot_and_data-", Sys.Date(), ".csv", sep = "")
+        paste("AGFTadvice_csv_results_", Sys.Date(), ".csv", sep = "")
       },
     content = function(file) {
-      csv_data <- data.frame(access_dataSuitability())
+      csv_data <- data.frame(req(access_dataSuitability()))
       write.csv(csv_data, file, row.names = FALSE)
       }
     )
@@ -125,10 +125,10 @@ server <- function(input, output, session) {
   observe({
     output$downloadExcel <- downloadHandler(
       filename = function() {
-        paste("plot_and_data-", Sys.Date(), ".xlsx", sep = "")
+        paste("AGFTadvice_excel_results_-", Sys.Date(), ".xlsx", sep = "")
       },
       content = function(file) {
-        excel_data <- data.frame(access_dataSuitability())
+        excel_data <- data.frame(req(access_dataSuitability()))
         write.xlsx(excel_data, file, rowNames = FALSE)
       }
     )
