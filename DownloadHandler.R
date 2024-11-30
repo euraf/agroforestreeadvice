@@ -55,12 +55,12 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
     # Usually the tables have diff number of rows, so we need to adjust them - we calculate the diff, then append empty rows to the smaller table
     if (response_rows > effect_rows) {
       rows_to_add <- response_rows - effect_rows
-      empty_rows <- data.frame(matrix(NA, nrow = rows_to_add, ncol = ncol(ChosenInputs_effecttrait)))
+      empty_rows <- data.frame(matrix("", nrow = rows_to_add, ncol = ncol(ChosenInputs_effecttrait)))
       colnames(empty_rows) <- colnames(ChosenInputs_effecttrait) # This is to ensure that the empty rows have the same column names as the original table
       ChosenInputs_effecttrait <- rbind(ChosenInputs_effecttrait, empty_rows)
     } else if (effect_rows > response_rows) {
       rows_to_add <- effect_rows - response_rows
-      empty_rows <- data.frame(matrix(NA, nrow = rows_to_add, ncol = ncol(ChosenInputs_responsetrait)))
+      empty_rows <- data.frame(matrix("", nrow = rows_to_add, ncol = ncol(ChosenInputs_responsetrait)))
       colnames(empty_rows) <- colnames(ChosenInputs_responsetrait) # This is to ensure that the empty rows have the same column names as the original table
       ChosenInputs_responsetrait <- rbind(ChosenInputs_responsetrait, empty_rows)
     }
@@ -108,7 +108,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
       table_SelectedInputs_effecttrait,
       NULL,
       align = "hv", 
-      rel_widths = c(0.2, 1, 2, 1, 0.2),  # Adjust widths to add space between tables
+      rel_widths = c(0.4, 1, 1.8, 1, 0.4),  # Adjust widths to add space between tables
       ncol = 5
     )
 
@@ -118,7 +118,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
       NULL,
       selected_inputs_combined, 
       NULL,
-      ComputedPlot + theme(plot.margin = margin(t = 0, b = 0, r = -100, l = -100, unit = "pt")),
+      ComputedPlot + theme(plot.margin = margin(t = 0, b = 0, r = -80, l = -80, unit = "pt")),
       NULL,
       table_TreeScoring, 
       ncol = 1, 
@@ -128,7 +128,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
     )
 
     # Add top, left and bottom margins
-    combined <- combined + theme(plot.margin = margin(t = 10, l = 110, r = 110, b = 40, unit = "pt"))
+    combined <- combined + theme(plot.margin = margin(t = 10, l = 110, r = 110, b = 50, unit = "pt"))
 
   }, error = function(e) {
     stop("#CombinePlotsForDownload# - Error creating combined plot: ", e$message)
@@ -136,7 +136,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
   return(combined)
 }
 
-create_dataINFO_plot <- function(datainfo) {
+create_dataINFO_plot <- function(datainfo = datainfo) {
   tryCatch({
     
     #get average lenght of each column
@@ -176,11 +176,12 @@ create_dataINFO_plot <- function(datainfo) {
       ncol = 1, 
       align = "h",
       axis = "lt",
-      rel_heights = c(0.05, 0, 1.2)
+      rel_heights = c(0.05, 0, 1.2),
+      rel_widths = c(1, 1, 0.8) 
     )
 
     # Add top, left and bottom margins
-    combined <- combined + theme(plot.margin = margin(t = 20, l = 0, r = 0, b = 0, unit = "pt"))
+    combined <- combined + theme(plot.margin = margin(t = 10, l = 100, r = 100, b = 0, unit = "pt"))
     return(combined)
  
   }, error = function(e) {

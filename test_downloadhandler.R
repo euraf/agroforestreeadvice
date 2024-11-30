@@ -40,7 +40,7 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
   })
 }
 
-create_dataINFO_plot <- function() {
+create_dataINFO_plot <- function(datainfo = datainfo) {
   load("datainfo.RData")
   tryCatch({
     
@@ -81,11 +81,12 @@ create_dataINFO_plot <- function() {
       ncol = 1, 
       align = "h",
       axis = "lt",
-      rel_heights = c(0.05, 0, 1.2)
+      rel_heights = c(0.05, 0, 1.2),
+      rel_widths = c(1, 1, 0.8) 
     )
 
     # Add top, left and bottom margins
-    combined <- combined + theme(plot.margin = margin(t = 20, l = 0, r = 0, b = 0, unit = "pt"))
+    combined <- combined + theme(plot.margin = margin(t = 10, l = 80, r = 80, b = 0, unit = "pt"))
     return(combined)
  
   }, error = function(e) {
@@ -173,7 +174,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
       table_SelectedInputs_effecttrait,
       NULL,
       align = "hv", 
-      rel_widths = c(0.2, 1, 2, 1, 0.2),  # Adjust widths to add space between tables
+      rel_widths = c(0.4, 1, 1.8, 1, 0.4),  # Adjust widths to add space between tables
       ncol = 5
     )
 
@@ -183,7 +184,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
       NULL,
       selected_inputs_combined, 
       NULL,
-      ComputedPlot + theme(plot.margin = margin(t = 0, b = 0, r = -100, l = -100, unit = "pt")),
+      ComputedPlot + theme(plot.margin = margin(t = 0, b = 0, r = -80, l = -80, unit = "pt")),
       NULL,
       table_TreeScoring, 
       ncol = 1, 
@@ -193,7 +194,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
     )
 
     # Add top, left and bottom margins
-    combined <- combined + theme(plot.margin = margin(t = 10, l = 110, r = 110, b = 40, unit = "pt"))
+    combined <- combined + theme(plot.margin = margin(t = 10, l = 110, r = 110, b = 50, unit = "pt"))
 
   }, error = function(e) {
     stop("#CombinePlotsForDownload# - Error creating combined plot: ", e$message)
@@ -202,7 +203,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
 }
 
 
-plot <- CombinePlotsForDownload()
+plot <- create_dataINFO_plot()
 svg("test_output.svg", height = 19, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
 print(plot)
 dev.off()

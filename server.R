@@ -7,23 +7,25 @@ server <- function(input, output, session) {
   reactive_Interface <<- reactiveVal(list())
   reactive_AdditionalInfo <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
 
-  # Access the datatable - for debug purposes
+  # We need to access the data from TabInterface (output$DTSuitability)
   access_dataSuitability <- function() {
     print("Suitability data accessed")
     reactive_dataSuitability()
   }
 
-  # Access the plot - for debug purposes
+  # We need to access the plot from TabInterface (output$barplot_suitability)
   access_plotSuitability <- function() {
     print("Suitability plot accessed")
     reactive_plotSuitability()
   }
 
+  # We need to access the interface from global (orderdf)
   access_Interface <- function() {
     print("Interface accessed")
     reactive_Interface()
   }
 
+  # We need to access the additional info from TabInterface (output$DTinformations)
   access_AdditionalInfo <- function() {
     print("Additional informations accessed")
     reactive_AdditionalInfo()
@@ -33,17 +35,34 @@ server <- function(input, output, session) {
   observe({
     output$downloadSVG <- downloadHandler(
       filename = function() {
-        paste("plot_and_data-", Sys.Date(), ".svg", sep = "")
+        paste("plot_and_data-", Sys.Date(), ".zip", sep = "")
       },
       content = function(file) {
-        access_plotSuitability()
-        combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
+        OutputPlots <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
           DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
-        combined <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()))
-        svg(file, height = 19, width = 14)
-        print(combined)
+        OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()))
+        
+        tempDir <- tempdir()
+        tempSVG1 <- file.path(tempDir, "plot_and_data.svg")
+        tempSVG2 <- file.path(tempDir, "plot_and_data222.svg")
+
+        svg(tempSVG1, height = 19, width = 14)
+        print(OutputPlots)
         dev.off()
-      }
+
+        svg(tempSVG2, height = 19, width = 14)
+        print(OutputAdditionalInfo)
+        dev.off()
+        
+        # Create a ZIP file containing both SVGs
+        oldwd <- setwd(tempDir)
+        on.exit(setwd(oldwd), add = TRUE)
+        zip::zip(file, files = c("plot_and_data.svg", "plot_and_data222.svg"))
+
+        # Clean up temporary files
+        unlink(tempSVG1)
+        unlink(tempSVG2)
+       }
     )
   })
 
@@ -54,11 +73,13 @@ server <- function(input, output, session) {
         paste("plot_and_data-", Sys.Date(), ".pdf", sep = "")
       },
       content = function(file) {
-        combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
+        OutputPlots <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
           DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
+        OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()))
+        
         svg_file <- tempfile(fileext = ".svg")
         svg(svg_file, height = 19, width = 14)
-        print(combined)
+        print(OutputPlots)
         dev.off()
         rsvg_pdf(svg_file, file,  height = 3508, width = 2480)  # metrics are in pixels - 1 inch = 96 pixels; A4 is 2480 x 3508 pixels
       }
