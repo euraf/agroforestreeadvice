@@ -5,19 +5,7 @@ server <- function(input, output, session) {
   reactive_dataSuitability <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
   reactive_plotSuitability <<- reactiveVal(ggplot())
   reactive_Interface <<- reactiveVal(list())
-
-  observe({
-    # Code to handle changes in reactive values
-    data <- reactive_dataSuitability()
-    plot <- reactive_plotSuitability()
-    interface <- reactive_Interface()
-    
-    # Perform actions based on the changes
-    print("Reactive values have changed")
-    print(paste("Data length:", nrow(data)))
-    print(paste("Plot length:", length(plot)))
-    print(paste("Interface length:", length(interface)))
-  })
+  reactive_AdditionalInfo <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
 
   # Access the datatable - for debug purposes
   access_dataSuitability <- function() {
@@ -36,6 +24,11 @@ server <- function(input, output, session) {
     reactive_Interface()
   }
 
+  access_AdditionalInfo <- function() {
+    print("Additional informations accessed")
+    reactive_AdditionalInfo()
+  }
+
   # Download handler for svg
   observe({
     output$downloadSVG <- downloadHandler(
@@ -46,6 +39,7 @@ server <- function(input, output, session) {
         access_plotSuitability()
         combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
           DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
+        combined <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()))
         svg(file, height = 19, width = 14)
         print(combined)
         dev.off()
@@ -60,14 +54,13 @@ server <- function(input, output, session) {
         paste("plot_and_data-", Sys.Date(), ".pdf", sep = "")
       },
       content = function(file) {
-        access_plotSuitability()
         combined <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
           DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
         svg_file <- tempfile(fileext = ".svg")
         svg(svg_file, height = 19, width = 14)
         print(combined)
         dev.off()
-        rsvg_pdf(svg_file, file)
+        rsvg_pdf(svg_file, file,  height = 3508, width = 2480)  # metrics are in pixels - 1 inch = 96 pixels; A4 is 2480 x 3508 pixels
       }
     )
   })

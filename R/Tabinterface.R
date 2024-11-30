@@ -601,7 +601,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         datainfo <- arrange(datainfo, match(Scientific_name, speciesOrder$order))
         # Translate the data
         datainfo <- translator(datainfo, interfaceCzech, actual_lang)
-        save(datainfo, file = "datainfo.RData")
+        save(datainfo, file = "datainfo.RData") # for debugging 
+        reactive_AdditionalInfo(datainfo) # We need to access this data in the download handler
         datainfo
 
         }, options = list(
