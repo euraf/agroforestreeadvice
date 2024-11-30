@@ -70,18 +70,40 @@ server <- function(input, output, session) {
   observe({
     output$downloadPDF <- downloadHandler(
       filename = function() {
-        paste("plot_and_data-", Sys.Date(), ".pdf", sep = "")
+        paste("plot_and_data-", Sys.Date(), ".zip", sep = "")
       },
       content = function(file) {
         OutputPlots <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
           DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
         OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()))
         
-        svg_file <- tempfile(fileext = ".svg")
-        svg(svg_file, height = 19, width = 14)
+        tempDir <- tempdir()
+        tempSVG1 <- file.path(tempDir, "plot_and_data.svg")
+        tempSVG2 <- file.path(tempDir, "plot_and_data222.svg")
+        tempPDF1 <- file.path(tempDir, "plot_and_data.pdf")
+        tempPDF2 <- file.path(tempDir, "plot_and_data222.pdf")
+
+
+        svg(tempSVG1, height = 19, width = 14)
         print(OutputPlots)
         dev.off()
-        rsvg_pdf(svg_file, file,  height = 3508, width = 2480)  # metrics are in pixels - 1 inch = 96 pixels; A4 is 2480 x 3508 pixels
+        rsvg_pdf(tempSVG1, tempPDF1,  height = 3508, width = 2480)  # metrics are in pixels - 1 inch = 96 pixels; A4 is 2480 x 3508 pixels
+
+        svg(tempSVG2, height = 19, width = 14)
+        print(OutputAdditionalInfo)
+        dev.off()
+        rsvg_pdf(tempSVG2, tempPDF2,  height = 3508, width = 2480)  # metrics are in pixels - 1 inch = 96 pixels; A4 is 2480 x 3508 pixels
+        
+        # Create a ZIP file containing both SVGs
+        oldwd <- setwd(tempDir)
+        on.exit(setwd(oldwd), add = TRUE)
+        zip::zip(file, files = c("plot_and_data.pdf", "plot_and_data222.pdf"))
+
+        # Clean up temporary files
+        unlink(tempSVG1)
+        unlink(tempSVG2)
+        unlink(tempPDF1)
+        unlink(tempPDF2)
       }
     )
   })

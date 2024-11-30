@@ -145,7 +145,7 @@ create_dataINFO_plot <- function(datainfo = datainfo) {
     })
 
     wrapCoef <- 0.6                                                                                  # When to wrap the text in the table cells
-    coreTextSize <- 0.9                                                                              # Font size for the table cells
+    coreTextSize <- 0.85                                                                              # Font size for the table cells
 
     # dynamically adjust the width of the columns based on the average length of the data
     datainfo <- as.data.frame(mapply(function(column, width) {
