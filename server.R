@@ -2,33 +2,60 @@
 server <- function(input, output, session) {
   #http://127.0.0.1:3775/?selected_language=cz&model=Czech this will just take the user to the desired tab, with the desired language
   #127.0.0.1:3775/?model=Czech&soil_water=soil_water_waterlogged&habitus=bush this triggers a modal dialog to download a txt file with the species scores for this particular set of conditions
-  reactive_dataSuitability <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
+  reactive_DataSuitability <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
   reactive_plotSuitability <<- reactiveVal(ggplot())
   reactive_Interface <<- reactiveVal(list())
   reactive_AdditionalInfo <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
+  reactive_inputs <<- reactiveVal(list())
 
   # We need to access the data from TabInterface (output$DTSuitability)
-  access_dataSuitability <- function() {
+  access_DataSuitability <- function() {
     print("Suitability data accessed")
-    reactive_dataSuitability()
+
+    DataSuitability <- reactive_DataSuitability()
+    save(DataSuitability, file = "DataSuitability.RData")
+    
+    reactive_DataSuitability()
   }
 
   # We need to access the plot from TabInterface (output$barplot_suitability)
   access_plotSuitability <- function() {
     print("Suitability plot accessed")
+
+    plotSuitability <- reactive_plotSuitability()
+    save(plotSuitability, file = "plotSuitability.RData")
+
     reactive_plotSuitability()
   }
 
   # We need to access the interface from global (orderdf)
   access_Interface <- function() {
     print("Interface accessed")
+
+    interface <- reactive_Interface()
+    save(interface, file = "interface.RData")
+
     reactive_Interface()
   }
 
   # We need to access the additional info from TabInterface (output$DTinformations)
   access_AdditionalInfo <- function() {
     print("Additional informations accessed")
+
+    additionalinfo <- reactive_AdditionalInfo()
+    save(additionalinfo, file = "additionalinfo.RData")
+
     reactive_AdditionalInfo()
+  }
+
+  access_inputs <- function() {
+    print("Inputs accessed")
+    print(reactive_inputs())
+
+    inputsdata <- reactive_inputs()
+    save(inputsdata, file = "inputsdata.RData")
+
+    reactive_inputs()
   }
 
   # Download handler for svg
@@ -38,9 +65,18 @@ server <- function(input, output, session) {
         paste("AGFTadvice_results_", Sys.Date(), ".zip", sep = "")
       },
       content = function(file) {
-        OutputPlots <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
-          DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
-        OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()), language = req(language()))
+        OutputPlots <- CombinePlotsForDownload(
+          interface = req(access_Interface()), 
+          language = req(language()), 
+          DataSuitability = req(access_DataSuitability()), 
+          plotSuitability = req(access_plotSuitability()),
+          inputsdata = req(access_inputs())
+        )
+
+        OutputAdditionalInfo <- create_dataINFO_plot(
+          datainfo = req(access_AdditionalInfo()), 
+          language = req(language())
+          )
         
         tempDir <- tempdir()
         tempSVG1 <- file.path(tempDir, "AGFTadvice_results.svg")
@@ -73,10 +109,19 @@ server <- function(input, output, session) {
         paste("AGFTadvice_results_", Sys.Date(), ".zip", sep = "")
       },
       content = function(file) {
-        OutputPlots <- CombinePlotsForDownload(interface = req(access_Interface()), language = req(language()), 
-          DataSuitability = req(access_dataSuitability()), ComputedPlot = req(access_plotSuitability()))
-        OutputAdditionalInfo <- create_dataINFO_plot(datainfo = req(access_AdditionalInfo()), language = req(language()))
-        
+        OutputPlots <- CombinePlotsForDownload(
+          interface = req(access_Interface()), 
+          language = req(language()), 
+          DataSuitability = req(access_DataSuitability()), 
+          plotSuitability = req(access_plotSuitability()),
+          inputsdata = req(access_inputs())
+        )
+
+        OutputAdditionalInfo <- create_dataINFO_plot(
+          datainfo = req(access_AdditionalInfo()), 
+          language = req(language())
+          )
+
         tempDir <- tempdir()
         tempSVG1 <- file.path(tempDir, "AGFTadvice_results.svg")
         tempSVG2 <- file.path(tempDir, "AGFTadvice_additionalinfo.svg")
@@ -115,7 +160,7 @@ server <- function(input, output, session) {
         paste("AGFTadvice_csv_results_", Sys.Date(), ".csv", sep = "")
       },
     content = function(file) {
-      csv_data <- data.frame(req(access_dataSuitability()))
+      csv_data <- data.frame(req(access_DataSuitability()))
       write.csv(csv_data, file, row.names = FALSE)
       }
     )
@@ -128,7 +173,7 @@ server <- function(input, output, session) {
         paste("AGFTadvice_excel_results_-", Sys.Date(), ".xlsx", sep = "")
       },
       content = function(file) {
-        excel_data <- data.frame(req(access_dataSuitability()))
+        excel_data <- data.frame(req(access_DataSuitability()))
         write.xlsx(excel_data, file, rowNames = FALSE)
       }
     )

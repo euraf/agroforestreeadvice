@@ -73,6 +73,9 @@ compute_suitability_DENTRO<-function(inputsdata=NULL,
   # give negative values for response traits so that they appear on the left
   df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]<- -  df$value[df$BigCriteria %in% interface[!is.na(interface$side) & interface$side=="responsetrait", c("BigCriteria")]]
   
+  # We need access to used inputs - download handler needs to access them for table creation
+  reactive_inputs(inputsdata)
+
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
   print("fin suitability")
   return(df)

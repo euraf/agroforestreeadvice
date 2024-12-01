@@ -564,7 +564,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
 
           DataSuitability <- datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
           
-          reactive_dataSuitability(DataSuitability)
+          reactive_DataSuitability(DataSuitability)
 
           DataSuitability
 

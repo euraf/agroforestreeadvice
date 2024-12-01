@@ -1,21 +1,25 @@
 
-# Function to get selected inputs and return a translated data frame
+# Function to get inputs selected by the user and return a translated data frame
 GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
   tryCatch({
     ID <- data.frame(name = names(ID), value = unname(ID))                          # convert named chr to data frame with two columns
     ID$name <- gsub("\\d$", "", ID$name)                                            # remove trailing digits from $name    - eg. height1 -> height         
     ID$objecttype <- IF$objecttype[match(ID$name, IF$criteria)]                     # add $objecttype to ID
     ID$side <- IF$side[match(ID$name, IF$criteria)]                                 # add $side to ID
+    
+    # sometimes the side is not found - registered as "NA" - we will try to find it by IF$BigCriteria
+    ID$side <- ifelse(is.na(ID$side), IF$side[match(ID$name, IF$BigCriteria)], ID$side)
+
+    #sometimes the objecttype is not found - registered as "NA" - we will try to find it by IF$BigCriteria
+    ID$objecttype <- ifelse(is.na(ID$objecttype), IF$objecttype[match(ID$name, IF$BigCriteria)], ID$objecttype)
 
     # find $name in IF where IF$criteria == ID$name and replace it by criteria in selected language - eg. "height" -> "Výška"
-    ID$name <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$criteria)]
+    translated_names <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$criteria)]
+    ID$name <- ifelse(is.na(translated_names), ID$name, translated_names)
 
-    # do the same for ID$value and IF$choice - eg. "True" -> "Ano"
-    ID$value <- ifelse(
-      is.na(match(ID$value, IF$choice)),
-      ID$value,
-      IF[[paste0("choice_", lang)]][match(ID$value, IF$choice)]
-    )
+    #Sometimes the correct translation can be in IF$BigCriteria
+    translated_names <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$BigCriteria)]
+    ID$name <- ifelse(is.na(translated_names), ID$name, translated_names)
 
     # concat "value" of records with same name if record objecttype is "sliderinput"
     ID <- ID %>%
@@ -33,7 +37,6 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
     stop("#get_SelectedInputs# - Error processing selected inputs: ", e$message)
   })
 }
-
 DownloadHeadline_translate <- function(HeadlineToTranslate, language = "en") {
   # Translate the headline of the download page - takes data from translate_plot_categories
   # where type == "Download page headline" and tries to match inputted text to it
@@ -67,8 +70,8 @@ DownloadHeadline_translate <- function(HeadlineToTranslate, language = "en") {
 }
 
 # Function to create a combined plot with a table for download - takes selected Inputs, plot and both tables and combines them into a single plot
-CombinePlotsForDownload <- function(language = "en", interface, DataSuitability, ComputedPlot) {
-  ChosenInputs <- GetSelectedInputs(ID = computedInputs, IF = interface, lang = language)
+CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitability = "", plotSuitability = "", inputsdata = "") {
+  ChosenInputs <- GetSelectedInputs(ID = inputsdata, IF = interface, lang = language)
   TranslatedHeadline <- DownloadHeadline_translate("Report of Tree Suitability by AgroForesTreeAdvice", language = language)
 
   tryCatch({
@@ -151,7 +154,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
       NULL,
       selected_inputs_combined, 
       NULL,
-      ComputedPlot + theme(plot.margin = margin(t = 0, b = 0, r = -80, l = -80, unit = "pt")),
+      plotSuitability + theme(plot.margin = margin(t = 0, b = 0, r = -80, l = -80, unit = "pt")),
       NULL,
       table_TreeScoring, 
       ncol = 1, 
@@ -168,6 +171,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
   })
   return(combined)
 }
+
 
 # Function to create a table with additional information about the trees
 create_dataINFO_plot <- function(datainfo = datainfo, language = "en") {

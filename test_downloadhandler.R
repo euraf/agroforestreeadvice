@@ -39,21 +39,30 @@ DownloadHeadline_translate <- function(HeadlineToTranslate, language = "en") {
 
 # Function to get selected inputs and return a translated data frame
 GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) {
+  load("inputsdata.RData")
+  load("interface.RData")
+  ID = inputsdata
+  IF = interface
+  lang <- "cz"
   tryCatch({
     ID <- data.frame(name = names(ID), value = unname(ID))                          # convert named chr to data frame with two columns
     ID$name <- gsub("\\d$", "", ID$name)                                            # remove trailing digits from $name    - eg. height1 -> height         
     ID$objecttype <- IF$objecttype[match(ID$name, IF$criteria)]                     # add $objecttype to ID
     ID$side <- IF$side[match(ID$name, IF$criteria)]                                 # add $side to ID
+    
+    # sometimes the side is not found - registered as "NA" - we will try to find it by IF$BigCriteria
+    ID$side <- ifelse(is.na(ID$side), IF$side[match(ID$name, IF$BigCriteria)], ID$side)
+
+    #sometimes the objecttype is not found - registered as "NA" - we will try to find it by IF$BigCriteria
+    ID$objecttype <- ifelse(is.na(ID$objecttype), IF$objecttype[match(ID$name, IF$BigCriteria)], ID$objecttype)
 
     # find $name in IF where IF$criteria == ID$name and replace it by criteria in selected language - eg. "height" -> "Výška"
-    ID$name <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$criteria)]
+    translated_names <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$criteria)]
+    ID$name <- ifelse(is.na(translated_names), ID$name, translated_names)
 
-    # do the same for ID$value and IF$choice - eg. "True" -> "Ano"
-    ID$value <- ifelse(
-      is.na(match(ID$value, IF$choice)),
-      ID$value,
-      IF[[paste0("choice_", lang)]][match(ID$value, IF$choice)]
-    )
+    #Sometimes the correct translation can be in IF$BigCriteria
+    translated_names <- IF[[paste0("criteria_", lang)]][match(ID$name, IF$BigCriteria)]
+    ID$name <- ifelse(is.na(translated_names), ID$name, translated_names)
 
     # concat "value" of records with same name if record objecttype is "sliderinput"
     ID <- ID %>%
@@ -129,13 +138,13 @@ create_dataINFO_plot <- function(datainfo = datainfo, language = "en") {
 }
 
 # Function to create a combined plot with a table for download - takes selected Inputs, plot and both tables and combines them into a single plot
-CombinePlotsForDownload <- function(language = "en", interface, DataSuitability, ComputedPlot) {
-  load("computedInputs.RData")
+CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitability = "", plotSuitability = "", inputsdata = "") {
+  load("inputsdata.RData")
   load("DataSuitability.RData")
-  load("ComputedPlot.RData")
+  load("plotSuitability.RData")
   load("interface.RData")
   language <- "cz"
-  ChosenInputs <- GetSelectedInputs(ID = computedInputs, IF = interface, lang = language)
+  ChosenInputs <- GetSelectedInputs(ID = inputsdata, IF = interface, lang = language)
   TranslatedHeadline <- DownloadHeadline_translate("Report of Tree Suitability by AgroForesTreeAdvice", language = language)
 
   tryCatch({
@@ -218,7 +227,7 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
       NULL,
       selected_inputs_combined, 
       NULL,
-      ComputedPlot + theme(plot.margin = margin(t = 0, b = 0, r = -80, l = -80, unit = "pt")),
+      plotSuitability + theme(plot.margin = margin(t = 0, b = 0, r = -80, l = -80, unit = "pt")),
       NULL,
       table_TreeScoring, 
       ncol = 1, 
@@ -237,11 +246,11 @@ CombinePlotsForDownload <- function(language = "en", interface, DataSuitability,
 }
 
 
-plot <- create_dataINFO_plot()
+plot <- CombinePlotsForDownload()
 svg("test_output.svg", height = 19, width = 14)  # A4 for ref: 8.27 x 11.69 inches - relative: 1,413542
 print(plot)
 dev.off()
-rsvg_pdf("test_output.svg", file = "test_output.pdf", height = 3508, width = 2480)  # metrics are in pixels - 1 inch = 96 pixels; A4 is 2480 x 3508 pixels
+#rsvg_pdf("test_output.svg", file = "test_output.pdf", height = 3508, width = 2480)  # metrics are in pixels - 1 inch = 96 pixels; A4 is 2480 x 3508 pixels
 
 
 # CombinePlotsForDownload()
