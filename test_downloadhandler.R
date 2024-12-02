@@ -162,6 +162,20 @@ CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitabi
     ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 45), collapse = "\n"))
     ChosenInputs$name <- sapply(ChosenInputs$name, function(x) paste(strwrap(x, width = 45), collapse = "\n"))
 
+    # Count the number of rows in the ChosenInputs table - we will adjust size of text if too much rows
+    ChosenInputs_rows <- nrow(ChosenInputs)
+    graph_height <- 1  # Default height of the graph
+
+    if (ChosenInputs_rows > 22) {
+      ChosenInputs_TextSize <- 0.6
+      graph_height <- 0.8
+      }
+    if (ChosenInputs_rows > 17) {
+      ChosenInputs_TextSize <- 0.8
+    } else {
+      ChosenInputs_TextSize <- 1
+    }
+
     # Split ChosenInputs into two tables based on the 'side' column
     ChosenInputs_responsetrait <- ChosenInputs %>% filter(side == "responsetrait")
     ChosenInputs_responsetrait$side <- NULL
@@ -187,9 +201,10 @@ CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitabi
 
 
     # Function to create table theme
-    createTable <- function(SetLengthOutput = integer(20)) {
+    createTable <- function(SetLengthOutput = integer(20), text_size = integer(1)) {
       table_theme <- ttheme_default(
-      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=SetLengthOutput)), col = NA)),
+      core = list(bg_params = list(fill = c(rep(c("white", "grey95"), length.out=SetLengthOutput)), col = NA),
+                  fg_params = list(cex = text_size)),
       colhead = list(bg_params = list(fill = "grey80", col = NA)),
       rowhead = list(bg_params = list(fill = "grey80", col = NA)))
       
@@ -197,19 +212,30 @@ CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitabi
     }
 
     table_theme <- createTable(20)
-    DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 40), collapse = "\n"))
-
-    # Wrap column headers
-    colnames(DataSuitability) <- sapply(colnames(DataSuitability), function(x) substr(x, 1, 30))
 
     # Convert float to int and NA to 0 in DataSuitability (ignore the 'species' column)
     DataSuitability <- DataSuitability %>% 
       mutate(across(-species, ~ ifelse(is.na(.), 0, as.integer(.))))
 
+    # delete too long lines in the table
+    colnames(DataSuitability) <- sapply(colnames(DataSuitability), function(x) {
+      if (nchar(x) > 30) {x <- substr(x, 1, 30)} 
+      return(x)
+    })
+
+    # Wrap column headers and delete the too long ones
+    colnames(DataSuitability) <- sapply(colnames(DataSuitability), function(x) {
+      if (nchar(x) > 20) {
+        paste0(substr(x, 1, 15), "\n", substr(x, 16, nchar(x)))
+      } else {
+        x
+      }
+    })
+
     # Create the table with adjusted column widths and rotated column names
     table_TreeScoring <- tableGrob(head(DataSuitability, 20), 
-                                  theme = ttheme_default(colhead = list(fg_params = list(rot = 90, just = "right"))), 
-                                  rows = NULL)
+                    theme = ttheme_default(colhead = list(fg_params = list(rot = 90, just = "right"))), 
+                    rows = NULL)
     
     # Create a headline with a sublabel for the current date
     headline <- ggdraw() + 
@@ -218,10 +244,12 @@ CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitabi
       theme(plot.margin = margin(0, 10, 20, 0))  # Add space below the headline
 
     table_SelectedInputs_responsetrait <- tableGrob(ChosenInputs_responsetrait,
-      theme = createTable(nrow(ChosenInputs_responsetrait)), rows = NULL)
+      theme = createTable(SetLengthOutput = nrow(ChosenInputs_responsetrait), text_size = ChosenInputs_TextSize), 
+      rows = NULL)
 
     table_SelectedInputs_effecttrait <- tableGrob(ChosenInputs_effecttrait,
-      theme = createTable(nrow(ChosenInputs_effecttrait)), rows = NULL)
+      theme = createTable(SetLengthOutput = nrow(ChosenInputs_effecttrait), text_size = ChosenInputs_TextSize), 
+      rows = NULL)
 
     # Combine the SelectedInputs tables into one row
     selected_inputs_combined <- plot_grid(
@@ -245,7 +273,7 @@ CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitabi
       NULL,
       table_TreeScoring, 
       ncol = 1, 
-      rel_heights = c(0.07, 0.15, 0.2, 0.2, 1, 0.1, 1, 1),  # Adjust heights to add space between elements
+      rel_heights = c(0.07, 0.15, 0.2, 0.2, 1*graph_height, 0.1, 1, 1),  # Adjust heights to add space between elements
       align = "h", 
       axis = "l"  
     )
