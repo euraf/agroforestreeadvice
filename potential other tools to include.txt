@@ -5,7 +5,11 @@ sources of data that could be interesting to include:
 - TreeEbb.fr
 - floriscope.io
 - https://hecken--landschaft-de.translate.goog/geh%C3%B6lzdatenbank?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en-US&_x_tr_pto=wapp&_x_tr_hist=true
-- TreeAdvisor (Bentrup & Dosskey 2022)
+- TreeAdvisor (Bentrup & Dosskey 2022): www.fs.usda.gov/nac-plant-guide/
+- USDA NRCS (U.S Department of Agriculture Natural Resources Conservation Service). The PLANTS Database. Available online:
+http://plants.usda.gov (accessed on 7 December 2021).
+- Plants For A Future. Available online: https://pfaf.org/user/Default.aspx (accessed on 14 December 2021).
+
  
 
 Already contacted :
