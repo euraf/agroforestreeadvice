@@ -49,6 +49,12 @@ version might differ, it can be tested here
 -   Lubos Úradníček (MENDELU Brno)
 -   Antonín Martiník (MENDELU Brno)
 
+-   **GoÖko:**
+-   Tsonkova, P.
+-   C. Böhm
+-   R. Hübner
+-   J. Ehritt
+
 -   **UK agroforestry Tree guide:**
 -   Tom Staton (University of Reading)
 -   Kate Beauchamp (Forest Research)

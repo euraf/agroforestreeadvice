@@ -43,7 +43,7 @@ body <- dashboardBody(
             h2("SCSM : Birk Skyum Kristoffer Ronn-Anderson"),
             h2("Czech database : Jan Weger (VUKOZ Průhonice); Lubos Úradníček and Antonín Martiník (MENDELU Brno)"),
             h2("Juiste Boom op de Juiste Plek: Jordy van Eijk (St. ReGeneration & Van Eijk : Consultantree); Jade Koop (Jade Reforestry);Euridice Leyequien Abarca (HVHL); Jerke de Vries (HVHL); Evert Prins (Louis Bolk Institute) "),
-            h2("German Hedgerow manager: Gaida W., Grothe H., 2000. Gehölze: Handbuch für Planung und Ausführung (Woody Species: Handbook for Planning and Planting). Berlin, Hannover: Patzer Verlag: 319"),
+            h2("GoÖko : Tsonkova, P., C. Böhm, R. Hübner and J. Ehritt (2019). Managing hedgerows to optimise ecosystem services in agroforestry systems. Agroforestry for sustainable agriculture. M. R. Mosquera-Losada and R. Prabhu. Cambridge, Burleigh Dodds Science Publishing. 1: 39-88. DOI 10.19103/as.2018.0041.03 using among others data from Gaida W., Grothe H., 2000. Gehölze: Handbuch für Planung und Ausführung (Woody Species: Handbook for Planning and Planting). Berlin, Hannover: Patzer Verlag: 319"),
             h2("Finnish tree suitability:  Ujula, Juha & Mattila, Iris. (2023). Suomessa menestyviä puu- ja pensaslajeja agrometsäkäyttöön. Teoksessa I. Mattila (toim.). Puustoinen maatalous Suomessa - opas suunnitteluun, katsaus kulttuurinmuutokseen (liite 1). Kilpiän tila. https://doi.org/10.5281/zenodo.8418298"),
             h2("If you want to report bugs, or have suggestions for improvement, or want to contribute, please do so on github: https://github.com/euraf/agroforestreeadvice")
     ),#fin infos
