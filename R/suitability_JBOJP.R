@@ -53,6 +53,10 @@ compute_suitability_JBOJP<-function(inputsdata=NULL,
   #actually the BigCriteria GeneralUse is used to filter the rows (necessary to avoid duplicated species)
   #=> make it into radioButtons
   userobjective<-inputsdata["Objective"]
+  
+  # We need access to used inputs - download handler needs to access them for table creation
+  reactive_inputs(inputsdata)
+
   database<-database[database[,make.names(userobjective)]==userobjective,] #select the lines corresponding to the user objective
   database$species<-database$IDAFTA
   if(length(unique(database$species))!=nrow(database)) {warning("there are duplicated species"); print(database[,c("Botanisch", "Onderstam", "Toepassingen", "species")])}

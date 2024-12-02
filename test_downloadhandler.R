@@ -71,6 +71,16 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
       paste(value, collapse = "-"), value)) %>%
       ungroup()
 
+    # do the same for ID$value and IF$choice - eg. "True" -> "Ano"
+    ID$value <- ifelse(
+      is.na(match(ID$value, IF$choice)),
+      ID$value,
+      IF[[paste0("choice_", lang)]][match(ID$value, IF$choice)]
+    )
+
+    # We want to simplify - when objecttype is "checkboxInput" - set value to "Selected"
+    ID$value <- ifelse(ID$objecttype == "checkboxInput", "Selected", ID$value)
+
     ID <- ID[!duplicated(ID),]                                                    # remove duplicates
     ID <- ID[order(ID$side, decreasing = TRUE),]                                  # order by side in descending order
     ID$objecttype <- NULL                                                         # remove $objecttype column         
@@ -150,6 +160,7 @@ CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitabi
   tryCatch({
     # Wrap text in the 'name' and 'value' columns
     ChosenInputs$value <- sapply(ChosenInputs$value, function(x) paste(strwrap(x, width = 45), collapse = "\n"))
+    ChosenInputs$name <- sapply(ChosenInputs$name, function(x) paste(strwrap(x, width = 45), collapse = "\n"))
 
     # Split ChosenInputs into two tables based on the 'side' column
     ChosenInputs_responsetrait <- ChosenInputs %>% filter(side == "responsetrait")
@@ -187,6 +198,9 @@ CombinePlotsForDownload <- function(language = "en", interface = "", DataSuitabi
 
     table_theme <- createTable(20)
     DataSuitability$species <- sapply(DataSuitability$species, function(x) paste(strwrap(x, width = 40), collapse = "\n"))
+
+    # Wrap column headers
+    colnames(DataSuitability) <- sapply(colnames(DataSuitability), function(x) substr(x, 1, 30))
 
     # Convert float to int and NA to 0 in DataSuitability (ignore the 'species' column)
     DataSuitability <- DataSuitability %>% 

@@ -70,6 +70,9 @@ compute_suitability_SUOMI<-function(inputsdata=NULL,
   
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
   print("fin suitability")
+
+  # We need access to used inputs - download handler needs to access them for table creation
+  reactive_inputs(inputsdata)
   
   return(dbfinal)
   

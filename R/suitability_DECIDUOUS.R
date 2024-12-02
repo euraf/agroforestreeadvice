@@ -30,6 +30,9 @@ compute_suitability_DECIDUOUS<-function(inputsdata=NULL,
   user_hauteur <- inputsdata["user_hauteur"]
   user_especes <- gsub(pattern="especeuser_", replacement="", x=inputsdata[grepl(x=names(inputsdata), pattern= "especeuser")])
   
+  # We need access to used inputs - download handler needs to access them for table creation
+  reactive_inputs(inputsdata)
+  
   # Criteres d'importance des experts (Cf. google doc) de  1 (plus important) a 5 (moins important)
   # a terme il faudra reflechir a mettre des sliders pour laisser le choix a l utilisaeur
   # criteres PG :

@@ -28,6 +28,16 @@ GetSelectedInputs <- function(ID = inputsdata, IF = interface, lang = language) 
       paste(value, collapse = "-"), value)) %>%
       ungroup()
 
+    # do the same for ID$value and IF$choice - eg. "True" -> "Ano"
+    ID$value <- ifelse(
+      is.na(match(ID$value, IF$choice)),
+      ID$value,
+      IF[[paste0("choice_", lang)]][match(ID$value, IF$choice)]
+    )
+
+    # We want to simplify - when objecttype is "checkboxInput" - set value to "Selected"
+    ID$value <- ifelse(ID$objecttype == "checkboxInput", "Selected", ID$value)
+
     ID <- ID[!duplicated(ID),]                                                    # remove duplicates
     ID <- ID[order(ID$side, decreasing = TRUE),]                                  # order by side in descending order
     ID$objecttype <- NULL                                                         # remove $objecttype column         
