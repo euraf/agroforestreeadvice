@@ -9,6 +9,8 @@ library(ggplot2) #for the barplot graph
 library(shinydashboard) #for Dashboard appearance
 library(DT) #for Data Table
 library(bslib) #for tooltip
+#library(reactlog) #to display reactive graph
+#options(shiny.reactlog = TRUE)
 #library(dplyr)
 ##global----
 
