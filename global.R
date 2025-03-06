@@ -10,6 +10,9 @@ library(shinydashboard) #for Dashboard appearance
 library(DT) #for Data Table
 library(bslib) #for tooltip
 #library(reactlog) #to display reactive graph
+library(leaflet)#for the map
+library(countrycode)#for the map
+library(rnaturalearth)#for the map
 #options(shiny.reactlog = TRUE)
 #library(dplyr)
 ##global----
@@ -309,6 +312,91 @@ source("R/suitability_DEHM.R")
 source("R/suitability_SUOMI.R") 
 source("R/suitability_UKguide.R")
 
+# Sample data.table with projects and countries
+sample_data <- data.frame(
+  project = c('Czech', 'DECIDUOUS', 'GoÖko', 'DENTRO', 'JBOJP', 'SCSM', 'STA', 'SUOMI', 'UK Guide'),
+  countries = c('Czechia', 'France', 'Germany', 'Belgium', 'Netherlands', 'Netherlands',
+                'Cameroon, China, Colombia, Ghana, Laos, Nicaragua, Tanzania, Uganda, Vietnam', 
+                'Finland', 'United Kingdom'
+  )
+)
+
+# Function to get country centroid coordinates
+get_country_coords <- function() {
+  world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
+  
+  # Extract centroids
+  world_centroids <- world
+  world_centroids$longitude<-sf::st_coordinates(sf::st_centroid(world_centroids))[,1]
+  world_centroids$latitude<-sf::st_coordinates(sf::st_centroid(world_centroids))[,2]
+  world_centroids<-as.data.frame(world_centroids)[,c("name", "longitude", "latitude")]
+  
+  return(world_centroids)
+}
+
+# Function to prepare data for mapping
+prepare_map_data <- function(data) {
+  country_coords <- get_country_coords()
+  
+  # Split the comma-separated countries and create a row for each country-project pair
+  projects <- data$project
+  countries_list <- strsplit(data$countries, ",\\s*")
+  
+  # Create a data frame with one row per country-project pair
+  map_data <- data.frame(
+    project = rep(projects, sapply(countries_list, length)),
+    country = unlist(countries_list)
+  )
+  
+  # Merge with country coordinates
+  map_data <- merge(map_data, country_coords, 
+                    by.x = "country", by.y = "name", 
+                    all.x = TRUE)
+  
+  # Calculate slight offsets for countries with multiple projects to prevent exact overlap
+  # Group by country, count projects
+  country_counts <- aggregate(map_data[, "country", drop=FALSE], by = map_data[, "country", drop=FALSE], "length")
+  names(country_counts)[2]<-"N"
+  map_data <- merge(map_data, country_counts, by = "country")
+  
+  # Assign an index to each project within a country
+  map_data<-map_data[order(map_data$country),]
+  map_data$project_index<-1
+  for(i in 2:nrow(map_data)) if(map_data$country[i]==map_data$country[i-1]) map_data$project_index[i]<-map_data$project_index[i-1]+1
+  
+  
+  # Create offsets based on the index and total number of projects
+  map_data$offset_lon <- ifelse(map_data$N > 1, 
+                                (map_data$project_index - (map_data$N + 1) / 2) * 2, 
+                                0)
+  map_data$offset_lat <- ifelse(map_data$N > 1, 
+                                (map_data$project_index - (map_data$N + 1) / 2) * 2, 
+                                0)
+  
+  
+  # Apply offsets to coordinates
+  map_data$longitude <- map_data$longitude + map_data$offset_lon / 111  # Roughly 111 km per degree
+  map_data$latitude <- map_data$latitude + map_data$offset_lat / 111
+  
+  
+  # Create project colors and icon indices
+  projects <- unique(map_data$project)
+  colors <- c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", 
+              "#FFFF33", "#A65628", "#F781BF", "#999999")
+  
+  # Assign each project an icon index
+  icon_indices <- 1:length(projects)
+  
+  project_attrs <- data.frame(
+    project = projects,
+    color = colors[1:length(projects)],
+    icon_index = icon_indices
+  )
+  
+  map_data <- merge(map_data, project_attrs, by = "project")
+  
+  return(map_data)
+}
 
 
 

@@ -83,6 +83,115 @@ server <- function(input, output, session) {
     input$in_language
   })
   
+  # For the map ----
+  # Create a list of different colored icons
+  project_icons <- list(
+    makeAwesomeIcon(icon = "flag", markerColor = "red", iconColor = "white", library = "fa"),
+    makeAwesomeIcon(icon = "star", markerColor = "blue", iconColor = "white", library = "fa"),
+    makeAwesomeIcon(icon = "check", markerColor = "green", iconColor = "white", library = "fa"),
+    makeAwesomeIcon(icon = "circle", markerColor = "purple", iconColor = "white", library = "fa"),
+    makeAwesomeIcon(icon = "certificate", markerColor = "orange", iconColor = "white", library = "fa"),
+    makeAwesomeIcon(icon = "tag", markerColor = "yellow", iconColor = "black", library = "fa"),
+    makeAwesomeIcon(icon = "bookmark", markerColor = "darkred", iconColor = "white", library = "fa"),
+    makeAwesomeIcon(icon = "globe", markerColor = "darkblue", iconColor = "white", library = "fa"),
+    makeAwesomeIcon(icon = "map-marker", markerColor = "cadetblue", iconColor = "white", library = "fa")
+  )
+  
+  # Prepare the map data
+  map_data <- reactive({
+    data <- prepare_map_data(sample_data)
+    # Filter data based on selected projects
+    if (!is.null(input$project_select)) {
+      data <- data[data$project %in% input$project_select,]
+    }
+    return(data)
+  })
+  
+  # Create the map
+  output$map <- renderLeaflet({
+    data <- map_data()
+    
+    # Create a legend with project information
+    projects <- unique(data[, c("project", "color")])
+    
+    leaflet() %>%
+      addTiles() %>%
+      setView(lng = 0, lat = 20, zoom = 2)
+  })
+  
+  # Update map markers when selection changes
+  observe({
+    data <- map_data()
+    
+    # Add markers with different icons based on project
+    leafletProxy("map") %>%
+      clearMarkers()
+    
+    # Add markers one project at a time so we can use a different icon for each project
+    for (proj in unique(data$project)) {
+      proj_data <- data[data$project == proj,]
+      icon_index <- proj_data$icon_index[1]
+      
+      leafletProxy("map") %>%
+        addAwesomeMarkers(
+          data = proj_data,
+          lng = ~longitude, 
+          lat = ~latitude,
+          popup = ~paste("<strong>Project:</strong>", project, "<br>",
+                         "<strong>Country:</strong>", country),
+          label = ~project,
+          icon = project_icons[[icon_index]],
+          group = proj
+        )
+    }
+  })
+  
+  # Add a legend to the map
+  observe({
+    data <- map_data()
+    projects <- unique(data[, c("project", "icon_index")])
+    
+    # Create HTML for the legend
+    legend_html <- "<div style='padding: 6px; background-color: white; border-radius: 4px; border: 1px solid #ccc;'>"
+    legend_html <- paste0(legend_html, "<div style='font-weight: bold; margin-bottom: 5px;'>Projects</div>")
+    
+    # Add each project to the legend
+    for (i in 1:nrow(projects)) {
+      proj <- projects$project[i]
+      index <- projects$icon_index[i]
+      
+      # Get the marker color based on the icon index
+      marker_colors <- c("red", "blue", "green", "purple", "orange", "yellow", "darkred", "darkblue", "cadetblue")
+      color <- marker_colors[index]
+      
+      # Create a colored circle to represent the project
+      legend_html <- paste0(
+        legend_html, 
+        "<div style='margin: 3px 0;'><span style='background-color: ", 
+        color, 
+        "; width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px;'></span>",
+        proj,
+        "</div>"
+      )
+    }
+    
+    legend_html <- paste0(legend_html, "</div>")
+    
+    # Add the legend to the map
+    leafletProxy("map") %>%
+      clearControls() %>%
+      addControl(
+        html = legend_html,
+        position = "bottomright"
+      )
+  })
+  
+  # Show project table
+  output$project_table <- renderTable({
+    selected_data <- sample_data[sample_data$project %in% input$project_select,]
+    selected_data
+  })
+  
   # Czech tree advice ----
   
   moduleTabInterface_Server(id = "Czech",
