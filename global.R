@@ -301,26 +301,6 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
   return(db)
 }
 
-# if you need to further reformat the data, you can do it within the suitability_MODELNAME.txt file
-source("R/suitability_DENTRO.R")
-source("R/suitability_DECIDUOUS.R")
-source("R/suitability_STA.R")
-source("R/suitability_SCSM.R")
-source("R/suitability_Czech.R")
-source("R/suitability_JBOJP.R")
-source("R/suitability_DEHM.R")
-source("R/suitability_SUOMI.R") 
-source("R/suitability_UKguide.R")
-
-# Sample data.table with projects and countries
-sample_data <- data.frame(
-  project = c('Czech', 'DECIDUOUS', 'GoÖko', 'DENTRO', 'JBOJP', 'SCSM', 'STA', 'SUOMI', 'UK Guide'),
-  countries = c('Czech Republic', 'France', 'Germany', 'Belgium', 'Netherlands', 'Netherlands',
-                'Cameroon, China, Colombia, Ghana, Laos, Nicaragua, Tanzania, Uganda, Vietnam', 
-                'Finland', 'UK'
-  )
-)
-
 # Function to get country centroid coordinates
 get_country_coords <- function() {
   # Get world map data
@@ -397,6 +377,28 @@ prepare_map_data <- function(data) {
   
   return(map_data)
 }
+
+
+
+# if you need to further reformat the data, you can do it within the suitability_MODELNAME.txt file
+source("R/suitability_DENTRO.R")
+source("R/suitability_DECIDUOUS.R")
+source("R/suitability_STA.R")
+source("R/suitability_SCSM.R")
+source("R/suitability_Czech.R")
+source("R/suitability_JBOJP.R")
+source("R/suitability_DEHM.R")
+source("R/suitability_SUOMI.R") 
+source("R/suitability_UKguide.R")
+
+# Sample data.table with projects and countries
+sample_data <- data.frame(
+  project = c('Czech', 'DECIDUOUS', 'GoÖko', 'DENTRO', 'JBOJP', 'SCSM', 'STA', 'SUOMI', 'UK Guide'),
+  countries = c('Czech Republic', 'France', 'Germany', 'Belgium', 'Netherlands', 'Netherlands',
+                'Cameroon, China, Colombia, Ghana, Laos, Nicaragua, Tanzania, Uganda, Vietnam', 
+                'Finland', 'UK'
+  )
+)
 
 
 
