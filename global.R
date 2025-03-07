@@ -11,8 +11,8 @@ library(DT) #for Data Table
 library(bslib) #for tooltip
 #library(reactlog) #to display reactive graph
 library(leaflet)#for the map
-library(countrycode)#for the map
-library(rnaturalearth)#for the map
+library(sf) #for the map
+library(maps) #for the world map centroids
 #options(shiny.reactlog = TRUE)
 #library(dplyr)
 ##global----
@@ -315,22 +315,21 @@ source("R/suitability_UKguide.R")
 # Sample data.table with projects and countries
 sample_data <- data.frame(
   project = c('Czech', 'DECIDUOUS', 'GoÖko', 'DENTRO', 'JBOJP', 'SCSM', 'STA', 'SUOMI', 'UK Guide'),
-  countries = c('Czechia', 'France', 'Germany', 'Belgium', 'Netherlands', 'Netherlands',
+  countries = c('Czech Republic', 'France', 'Germany', 'Belgium', 'Netherlands', 'Netherlands',
                 'Cameroon, China, Colombia, Ghana, Laos, Nicaragua, Tanzania, Uganda, Vietnam', 
-                'Finland', 'United Kingdom'
+                'Finland', 'UK'
   )
 )
 
 # Function to get country centroid coordinates
 get_country_coords <- function() {
-  world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
-  
-  # Extract centroids
-  world_centroids <- world
+  # Get world map data
+  world_map <- map("world", exact = FALSE, plot = FALSE, fill = TRUE)
+  world_map<-st_as_sf(world_map)
+  world_centroids <- st_make_valid(st_transform(world_map, crs=4326))
   world_centroids$longitude<-sf::st_coordinates(sf::st_centroid(world_centroids))[,1]
   world_centroids$latitude<-sf::st_coordinates(sf::st_centroid(world_centroids))[,2]
-  world_centroids<-as.data.frame(world_centroids)[,c("name", "longitude", "latitude")]
-  
+  world_centroids<-as.data.frame(world_centroids)[,c("ID", "longitude", "latitude")]
   return(world_centroids)
 }
 
@@ -347,10 +346,11 @@ prepare_map_data <- function(data) {
     project = rep(projects, sapply(countries_list, length)),
     country = unlist(countries_list)
   )
-  
+  toto<-setdiff(map_data$country, country_coords$ID)
+  if(length(toto)>0) warning("Warning: the following countries are not spelled as in the 'world' map in package maps: ", paste(toto, collapse=", "))
   # Merge with country coordinates
   map_data <- merge(map_data, country_coords, 
-                    by.x = "country", by.y = "name", 
+                    by.x = "country", by.y = "ID", 
                     all.x = TRUE)
   
   # Calculate slight offsets for countries with multiple projects to prevent exact overlap
