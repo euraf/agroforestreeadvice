@@ -301,6 +301,21 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
   return(db)
 }
 
+
+# read data for databases page ---
+toolsdata<-read.table("models/allModels.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+#"project"         "countries"       "Info"            "reference"       "link_reference"  "Link_standalone"
+#countries are comma-delimited, warning about the spelling: it must be the spelling used by the "world" map of maps package
+# # Sample data.table with projects and countries
+# sample_data <- data.frame(
+#   project = c('Czech', 'DECIDUOUS', 'GoÖko', 'DENTRO', 'JBOJP', 'SCSM', 'STA', 'SUOMI', 'UK Guide'),
+#   countries = c('Czech Republic', 'France', 'Germany', 'Belgium', 'Netherlands', 'Netherlands',
+#                 'Cameroon, China, Colombia, Ghana, Laos, Nicaragua, Tanzania, Uganda, Vietnam', 
+#                 'Finland', 'UK'
+#   )
+# )
+
+
 # Function to get country centroid coordinates
 get_country_coords <- function() {
   # Get world map data
@@ -313,8 +328,15 @@ get_country_coords <- function() {
   return(world_centroids)
 }
 
+# Create project colors and icon indices
+# Create a list of different colored icons
+combinaisons<-expand.grid(markerColor=c("red", "darkred", "orange", "beige", "green", "darkgreen", "lightgreen", "blue", "darkblue", "lightblue", "purple", "pink", "cadetblue", "white", "gray", "black"),
+                          icon=c("flag", "star", "check", "circle", "certificate", "tag", "bookmark", "globe", "map-marker"))
+iconespossibles<-mapply(makeAwesomeIcon, as.character(combinaisons$icon), rep("fa", nrow(combinaisons)), as.character(combinaisons$markerColor),MoreArgs =list( iconColor = "white"),SIMPLIFY =FALSE)
+
+
 # Function to prepare data for mapping
-prepare_map_data <- function(data) {
+prepare_map_data <- function(data, country_coords=country_coords) {
   country_coords <- get_country_coords()
   
   # Split the comma-separated countries and create a row for each country-project pair
@@ -359,20 +381,28 @@ prepare_map_data <- function(data) {
   map_data$latitude <- map_data$latitude + map_data$offset_lat / 111
   
   
-  # Create project colors and icon indices
-  projects <- unique(map_data$project)
-  colors <- c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00", 
-              "#FFFF33", "#A65628", "#F781BF", "#999999")
-  
+   colors<-unname(sapply(iconespossibles,"[[", "markerColor"))
+  # project_icons <- list(
+  #   makeAwesomeIcon(icon = "flag", markerColor = "red", iconColor = "white", library = "fa"),
+  #   makeAwesomeIcon(icon = "star", markerColor = "darkblue", iconColor = "white", library = "fa"),
+  #   makeAwesomeIcon(icon = "check", markerColor = "green", iconColor = "white", library = "fa"),
+  #   makeAwesomeIcon(icon = "circle", markerColor = "purple", iconColor = "white", library = "fa"),
+  #   makeAwesomeIcon(icon = "certificate", markerColor = "orange", iconColor = "white", library = "fa"),
+  #   makeAwesomeIcon(icon = "tag", markerColor = "yellow", iconColor = "black", library = "fa"),
+  #   makeAwesomeIcon(icon = "bookmark", markerColor = "darkred", iconColor = "white", library = "fa"),
+  #   makeAwesomeIcon(icon = "globe", markerColor = "darkgreen", iconColor = "white", library = "fa"),
+  #   makeAwesomeIcon(icon = "map-marker", markerColor = "cadetblue", iconColor = "white", library = "fa")
+  # )
   # Assign each project an icon index
-  icon_indices <- 1:length(projects)
-  
+  projects <- unique(map_data$project)
   project_attrs <- data.frame(
     project = projects,
     color = colors[1:length(projects)],
-    icon_index = icon_indices
+    icon_index = 1:length(projects)
   )
-  
+  #put back the other project information
+  project_attrs<-merge(project_attrs, data[,c("project", "countries", "Info", "reference", "link_reference",   "Link_standalone")])
+
   map_data <- merge(map_data, project_attrs, by = "project")
   
   return(map_data)
@@ -390,15 +420,6 @@ source("R/suitability_JBOJP.R")
 source("R/suitability_DEHM.R")
 source("R/suitability_SUOMI.R") 
 source("R/suitability_UKguide.R")
-
-# Sample data.table with projects and countries
-sample_data <- data.frame(
-  project = c('Czech', 'DECIDUOUS', 'GoÖko', 'DENTRO', 'JBOJP', 'SCSM', 'STA', 'SUOMI', 'UK Guide'),
-  countries = c('Czech Republic', 'France', 'Germany', 'Belgium', 'Netherlands', 'Netherlands',
-                'Cameroon, China, Colombia, Ghana, Laos, Nicaragua, Tanzania, Uganda, Vietnam', 
-                'Finland', 'UK'
-  )
-)
 
 
 

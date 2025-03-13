@@ -59,7 +59,7 @@ server <- function(input, output, session) {
           writeLines(txt_content, file)
         }
       )
-
+      
       showModal(modalDialog(
         title = "Download txt file",
         htmlOutput("dataPreview"),  # Display data preview
@@ -83,23 +83,13 @@ server <- function(input, output, session) {
     input$in_language
   })
   
-  # For the map ----
-  # Create a list of different colored icons
-  project_icons <- list(
-    makeAwesomeIcon(icon = "flag", markerColor = "red", iconColor = "white", library = "fa"),
-    makeAwesomeIcon(icon = "star", markerColor = "blue", iconColor = "white", library = "fa"),
-    makeAwesomeIcon(icon = "check", markerColor = "green", iconColor = "white", library = "fa"),
-    makeAwesomeIcon(icon = "circle", markerColor = "purple", iconColor = "white", library = "fa"),
-    makeAwesomeIcon(icon = "certificate", markerColor = "orange", iconColor = "white", library = "fa"),
-    makeAwesomeIcon(icon = "tag", markerColor = "yellow", iconColor = "black", library = "fa"),
-    makeAwesomeIcon(icon = "bookmark", markerColor = "darkred", iconColor = "white", library = "fa"),
-    makeAwesomeIcon(icon = "globe", markerColor = "darkblue", iconColor = "white", library = "fa"),
-    makeAwesomeIcon(icon = "map-marker", markerColor = "cadetblue", iconColor = "white", library = "fa")
-  )
+  
+  # For the database page ----
+  
   
   # Prepare the map data
   map_data <- reactive({
-    data <- prepare_map_data(sample_data)
+    data <- prepare_map_data(toolsdata)
     # Filter data based on selected projects
     if (!is.null(input$project_select)) {
       data <- data[data$project %in% input$project_select,]
@@ -109,11 +99,11 @@ server <- function(input, output, session) {
   
   # Create the map
   output$map <- renderLeaflet({
-    data <- map_data()
-    
-    # Create a legend with project information
-    projects <- unique(data[, c("project", "color")])
-    
+    # data <- map_data()
+    # 
+    # # Create a legend with project information
+    # projects <- unique(data[, c("project", "color")])
+    # 
     leaflet() %>%
       addTiles() %>%
       setView(lng = 0, lat = 20, zoom = 2)
@@ -122,25 +112,22 @@ server <- function(input, output, session) {
   # Update map markers when selection changes
   observe({
     data <- map_data()
-    
     # Add markers with different icons based on project
     leafletProxy("map") %>%
       clearMarkers()
-    
     # Add markers one project at a time so we can use a different icon for each project
     for (proj in unique(data$project)) {
       proj_data <- data[data$project == proj,]
       icon_index <- proj_data$icon_index[1]
-      
       leafletProxy("map") %>%
         addAwesomeMarkers(
           data = proj_data,
           lng = ~longitude, 
           lat = ~latitude,
-          popup = ~paste("<strong>Project:</strong>", project, "<br>",
-                         "<strong>Country:</strong>", country),
+          popup = ~paste("<strong>Tool:</strong>", project, "<br>",
+                         "<strong>Description:</strong>", Info),
           label = ~project,
-          icon = project_icons[[icon_index]],
+          icon = iconespossibles[[icon_index]],
           group = proj
         )
     }
@@ -149,7 +136,7 @@ server <- function(input, output, session) {
   # Add a legend to the map
   observe({
     data <- map_data()
-    projects <- unique(data[, c("project", "icon_index")])
+    projects <- unique(data[, c("project", "color")])
     
     # Create HTML for the legend
     legend_html <- "<div style='padding: 6px; background-color: white; border-radius: 4px; border: 1px solid #ccc;'>"
@@ -158,11 +145,7 @@ server <- function(input, output, session) {
     # Add each project to the legend
     for (i in 1:nrow(projects)) {
       proj <- projects$project[i]
-      index <- projects$icon_index[i]
-      
-      # Get the marker color based on the icon index
-      marker_colors <- c("red", "blue", "green", "purple", "orange", "yellow", "darkred", "darkblue", "cadetblue")
-      color <- marker_colors[index]
+      color <- projects$color[i]
       
       # Create a colored circle to represent the project
       legend_html <- paste0(
@@ -186,11 +169,17 @@ server <- function(input, output, session) {
       )
   })
   
+  
   # Show project table
-  output$project_table <- renderTable({
-    selected_data <- sample_data[sample_data$project %in% input$project_select,]
+  output$DTToolComparison <- renderDT({
+    selected_data <- toolsdata[toolsdata$project %in% input$project_select,]
+    pasmanq<-selected_data$link_reference !=""
+    selected_data$link_reference[pasmanq] <- paste0("<a href='",selected_data$link_reference[pasmanq],"' target='_blank'>",selected_data$link_reference[pasmanq],"</a>")
+    pasmanq<-selected_data$Link_standalone !=""
+    selected_data$Link_standalone[pasmanq] <- paste0("<a href='",selected_data$Link_standalone[pasmanq],"' target='_blank'>",selected_data$Link_standalone[pasmanq],"</a>")
     selected_data
   })
+  
   
   # Czech tree advice ----
   
