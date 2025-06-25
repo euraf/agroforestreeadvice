@@ -3,7 +3,6 @@
 #"D:\\Mes_documents\\a_ABSys\\autreschercheurs\\BertReubens\\DigitAFtreeAdvice\\rsconnect\\shinyapps.io\\gosme"
 
 library(shiny)
-#library(openxlsx)
 library(ggplot2) #for the barplot graph
 #library(plotly)
 library(shinydashboard) #for Dashboard appearance
@@ -14,41 +13,11 @@ library(leaflet)#for the map
 library(sf) #for the map
 library(maps) #for the world map centroids
 #options(shiny.reactlog = TRUE)
-#library(dplyr)
-##global----
-
-#load("dataSTA.Rdata")
-#load("dataFlanders.Rdata")
-#load("dataDeciduous.Rdata")
-#load("dataSCSM.Rdata")
-# dataDENTRO<-read.xlsx("models/DENTRO.xlsx", sheet="data")
-# interfaceDENTRO<-read.xlsx("models/DENTRO.xlsx", sheet="interface")
-# dataSTA<-read.xlsx("models/STA.xlsx", sheet="data")
-# interfaceSTA<-read.xlsx("models/STA.xlsx", sheet="interface")
-# dataDECIDUOUS<-read.xlsx("models/DECIDUOUS.xlsx", sheet="data")
-# interfaceDECIDUOUS<-read.xlsx("models/DECIDUOUS.xlsx", sheet="interface")
-# dataSCSM<-read.xlsx("models/SCSM.xlsx", sheet="data")
-# interfaceSCSM<-read.xlsx("models/SCSM.xlsx", sheet="interface")
-# dataCzech<-read.xlsx("models/Czech.xlsx", sheet="data")
-# interfaceCzech<-read.xlsx("models/Czech.xlsx", sheet="interface")
-
-library(shiny)
 library(svglite)        # for svg download
 library(shinyjs)
 library(openxlsx)       # for writing xlsx files in download
-library(ggplot2) #for the barplot graph
-#library(plotly)
-library(shinydashboard) #for Dashboard appearance
-library(DT) #for Data Table
-library(bslib) #for tooltip
-#library(reactlog) #to display reactive graph
-library(leaflet)#for the map
-library(sf) #for the map
-library(maps) #for the world map centroids
-#options(shiny.reactlog = TRUE)
 library(dplyr)
 library(stringr)
-#library(tidyverse)
 library(purrr)          
 library(shiny.i18n)     # for translations in the app
 library(cowplot)        # for ggplot2 plots in download
@@ -94,6 +63,13 @@ interfaceUKguide<-read.table("models/interfaceUKguide.txt", fileEncoding = "UTF-
 # In czech, there are empty spaces around words in some cells 
 dataCzech <- data.frame(lapply(dataCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
 interfaceCzech <- data.frame(lapply(interfaceCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
+
+#include downloadhandler functions
+source("DownloadHandler.R")
+
+# Initialize the translator
+i18n <- Translator$new(translation_csvs_path = "R/translation/")
+i18n$set_translation_language("en")  # Default language
 
 #remove commas in the interface because commas are used for separating values
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
@@ -201,6 +177,10 @@ orderdf<-function(df, orderby, idvariable, interface){
   #reorder rows
   df<-df[order(df$species, decreasing=TRUE), c("species", setdiff(names(df), "species"))] 
   #decreasing = TRUE so that the best are on top in the dataframe (best = first in the levels of the factor)
+
+  # Update reactive interface - so other functions know which interface was used (eg. download handler)
+  reactive_Interface(interface)
+
   return(df)
 }
 
