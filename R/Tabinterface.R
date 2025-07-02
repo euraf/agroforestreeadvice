@@ -8,55 +8,29 @@ moduleTabInterface_UI <- function(id, data, interface) {
   # Appliquer la fonction ns à tous les inputId / outputId
   ns <- NS(id)
   
-  
+
   # Il faut encapsuler l'interface dans un tagList
   tagList(
-    fluidRow(column(width=6,
-                    box(title = "Your site",
-                        solidHeader = TRUE,
-                        status="danger",
-                        width=NULL,
-                        uiOutput(ns("dynamicControlsResponse"))
-                    )),
-             column(width=6,
-                    box(title = "Your objectives",
-                        solidHeader = TRUE,
-                        status="primary",
-                        width=NULL,
-                        uiOutput(ns("dynamicControlsEffect"))
-                    ))
-    ),
-    fluidRow(wellPanel(
-      class = "custom-well-panel5",
-      style = "display: flex; justify-content: center;",
-      # Fourth panel (full width)
-      # box(title="For debugging",
-      #     solidHeader = TRUE,
-      #     status="danger",
-      #     width=NULL,
-      #     fluidRow(verbatimTextOutput(ns("controlOutput")))),
-      actionButton(inputId = ns("ab_compute"), label="Compare trees !")
-      
-    )),
-    
-    box(title = "All trees",
+    uiOutput(ns("dynamicUI")),
+
+    box(title = i18n$t("Trees suitability"),
         solidHeader = TRUE,
-        status="warning",
+        status="info",
         width=NULL,
         fluidRow(
           column(width=12,
                  fluidRow(
                    div(style="display: inline-block;vertical-align:top; width: 20px;", HTML("<br>")), #because else the orderby radiobuttons start out of the box
                    div(style="display: inline-block;vertical-align:top; width: 300px;",
-                       radioButtons(inputId=ns("orderby"), label="Order By", 
+                       radioButtons(inputId=ns("orderby"), label=i18n$t("Order by"), 
                                     choices=c(Adaptation="responsetrait", Efficiency="effecttrait"),
                                     selected="responsetrait", inline=TRUE)),
                    div(style="display: inline-block;vertical-align:top; width: 100px;",
                        HTML("<br>")),
                    div(style="display: inline-block;vertical-align:top; width: 200px;",
-                       numericInput(inputId=ns("barplotfrom"), label="Display from the xth", value=1)),
+                       numericInput(inputId=ns("barplotfrom"), label=i18n$t("Display from the"), value=1)),
                    div(style="display: inline-block;vertical-align:top; width: 200px;",
-                       numericInput(inputId=ns("barplotto"), label="to the yth", value=20))
+                       numericInput(inputId=ns("barplotto"), label=i18n$t("Display to the"), value=20))
                  ),
                  
                  plotOutput(ns("barplot_suitability"),
@@ -68,8 +42,19 @@ moduleTabInterface_UI <- function(id, data, interface) {
           column(width=12,
                  DTOutput(outputId = ns("DTSuitability"))
           )
-        ))
-    
+        )),
+
+    if (id == "Czech") {      # Add legislative criteria for Czech tree advice
+          box(title = i18n$t("Additional information"),
+              solidHeader = TRUE,
+              status="info",
+              width=NULL,
+                column(width=12,
+                      DTOutput(outputId = ns("DTinformations"))
+          ))}
+            
+        
+      
   ) # fin tagList
   
 } # fin moduleTabInterface_UI
@@ -77,7 +62,8 @@ moduleTabInterface_UI <- function(id, data, interface) {
 
 #### Fonction server du module ----
 #language is a reactive value from the main app
-moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) {
+moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE) 
+{
   
   moduleServer(
     id,
@@ -85,9 +71,74 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       
       ns <- session$ns # utile si renderUI
       
+      output$dynamicUI <- renderUI({
+      req(language())  # Ensure 'language' is available
+      # assign actual language
+      actual_lang <<- paste0("choice_",as.character(language()))
+      
+      # information about the filters, calls modalDialog
+      tagList(
+        fluidRow(wellPanel(
+        style = "padding: 5px; border-radius: 0px",
+        class = "custom-class",
+        div(
+          style = "text-align: right;",
+          actionButton(inputId = ns("filter_info"), 
+            label = i18n$t("Information"), icon("circle-question"),
+            style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"),
+          actionButton(inputId = ns("show_modal"), 
+            label = i18n$t("Download"), icon = icon("download"), 
+            style = "font-weight: bold; background-color: #337ab7; color: white; border: none; padding: 5px 10px;"),
+              
+              
+              
+              ) # end div
+            )), 
+
+
+        fluidRow(column(width=6,
+                        box(title = i18n$t("Your site"),
+                            solidHeader = TRUE,
+                            status="danger",
+                            width=NULL,
+                            uiOutput(ns("dynamicControlsResponse")),
+                            tags$style(HTML("
+                              .box-title {
+                                font-family: 'Arial', sans-serif;
+                                   }")
+                                )
+                        )),
+                 column(width=6,
+                        box(title = i18n$t("Your Objectives"),
+                            solidHeader = TRUE,
+                            status="primary",
+                            width=NULL,
+                            uiOutput(ns("dynamicControlsEffect")),
+                            tags$style(HTML("
+                              .box-title {
+                                font-family: 'Arial', sans-serif;
+                                   }")
+                                )
+                        ))
+        ),
+        fluidRow(wellPanel(
+          class = "custom-well-panel5",
+          style = "display: flex; justify-content: center;",
+          actionButton(inputId = ns("ab_compute"), label=i18n$t(c("Compare Trees")),
+                        icon("tree"), style=" font-weight: bold; color: #fff; background-color: #337ab7; border-color: #2e6da4")
+        ))
+      )
+    })
+
+
+
       ## reactives ----
       
       # Reactive expression to capture control names and values
+
+      # reactiveValues to keep the order of the species for the second datatable
+      speciesOrder <- reactiveValues(order = NULL)   
+
       controlData <- reactive({
         controls <- reactiveValuesToList(input)
         theoreticalcontrols<-compactcontrols()
@@ -108,6 +159,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       #to do in the future: move the formatting to inside the suitability functions that need character vector, and allow suitability fnctions to accept lists as inputs
       reformattedinputs<-reactive({
         allinputs <- controlData()
+        reactive_inputs(allinputs)   # we need to get to the used inputs in downloadhandler
         reformated<-character()
         if(length(allinputs)>0) {
           message("initial inputs:") ; print((allinputs)) 
@@ -154,7 +206,28 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         # Update the buttonClicked reactive value when the button is clicked
         buttonClicked(TRUE)
       })
+
+      observeEvent(input$show_modal, {
+        showModal(modalDialog(
+          title = i18n$t("Download selected data"),
+          htmlOutput("dataPreview"),  # Display data preview
+          footer = tagList(
+            div(style = "text-align: left; padding: 5px;",
+                downloadButton("downloadExcel", i18n$t("Download as Excel file"), class = "download-button"),
+                downloadButton("downloadSVG", i18n$t("Download as SVG file"), class = "download-button")),
+
+            div(style = "text-align: left; padding: 5px;",
+                downloadButton("downloadCSV", i18n$t("Download as CSV file"), class = "download-button"),
+                downloadButton("downloadPDF", i18n$t("Download as PDF file"), class = "download-button")),
+
+            modalButton(i18n$t("Close"), icon = icon("remove"))
+            ),
+          size = "l",
+          easyClose = TRUE
+          ))
+      })
       
+
       #reactive keeping the range of species to plot
       rangetoplot<-reactiveValues(from=1, to=20)
       observeEvent(input$barplotfrom, {
@@ -272,6 +345,15 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         tagList(controls_list)
       }) # end create dynamic controls for user objectives
       
+      # Update language in session when user selects a new language
+      observeEvent(input$selected_language, {
+      # This print is just for demonstration
+      print(paste("Language change!", input$selected_language))
+      # Here is where we update language in session
+      store_input <<- input
+      shiny.i18n::update_lang(input$selected_language)
+      })
+
       ### update dynamic ui in case of language selection----
       observeEvent(compactcontrols(), {
         message("update dynamicControls (both Response and Effect)")
@@ -311,22 +393,51 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         #  setdiff(names(allinputs), c("orderby", "sidebarCollapsed", "ab_compute", "in_language", "sidebarItemExpanded"))]
         #browser()
         databis<-datatoplot()
-        #print(str(databis))
-        #print(str(as.numeric(databis$species)))
+        # print(str(databis))
+        
+
+        # change BigCriteria names in order to change plot legend language
+        # databis <- BigCriteria_lang(language(), databis)
+
+        # reset the as.numeric(databis$species) from one to the number of species - needed if I want to reduce the number of species to plot
+        databis$species<-factor(databis$species, levels=speciesOrder$order)
+
+        # print(str(as.numeric(databis$species)))
         #select only the range of species to display (user choice, by default 1 to 20), species is an ordered vector
         databis<-databis[as.numeric(databis$species)>=rangetoplot$from 
                          & as.numeric(databis$species)<=rangetoplot$to ,]
+
+        # drop all rows where "value" is NA or 0
+        databis <- databis %>% filter(!is.na(value) & value != 0)
+        if (nrow(databis) == 0) {
+          # If there are no data to plot, return an empty plot
+          plot_Suitability<-ggplot() + theme_minimal()
+          reactive_plotSuitability(plot_Suitability)
+          print("Saved reactive plot")
+          return(plot_Suitability)
+        }
         plot_Suitability<-ggplot(databis, aes(x = value, y = species, fill = BigCriteria)) +
           #geom_rect(aes(xmin = -Inf, xmax = 0, ymin = -Inf, ymax = Inf), fill = "#ffcccc", alpha = 0.5) +
           #geom_rect(aes(xmin = 0, xmax = Inf, ymin = -Inf, ymax = Inf), fill = "#ccccff", alpha = 0.5) +
-          geom_bar(stat = "identity", position = "stack") +
+          geom_bar(stat = "identity", position = "stack", color = NA) +
           scale_y_discrete(limits=rev) +
           geom_vline(xintercept = 0, color = "black", linetype = "solid", linewidth = 1.5)+
-          #scale_fill_manual(values = colors) +
           theme_minimal() +
-          #theme(legend.position = "none" )+
-          scale_x_continuous(breaks = c(-2, 2), labels = c("Adaptation", "Efficiency")) +
-          labs(x = NULL, y = "Species")
+          labs(x = NULL, fill = i18n$t("Main Criteria"))+
+          ylab(i18n$t("Species")) +
+          scale_x_continuous(breaks = c(-2, 2), labels = i18n$t(c("Adaptation", "Efficiency"))) +        # anchors the descriptions of X axis around the vline, hides X axis values
+          theme(axis.text.y = element_text(size = 14),                         # too small descriptions on some monitors
+                axis.text.x = element_text(size = 14),
+                legend.title = element_text(size = 16),
+                legend.text = element_text(size = 14),
+                axis.title.y = element_text(size = 16),
+                panel.grid.major.x = element_blank(),                                            # hides major vertical grid lines
+                panel.grid.minor.x = element_blank()                                             # hides minor vertical grid lines  
+                ) +
+          scale_fill_discrete(labels = Plot_legend_lang(language()))
+        print("Saved reactive plot")
+        reactive_plotSuitability(plot_Suitability)     
+
         return(plot_Suitability)
       })
      
@@ -402,18 +513,34 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           if(any(crits$side=="effecttrait")){
             datawide$efficiency.score<-rowSums(datawide[, crits$criteria[crits$side=="effecttrait"], drop=FALSE],na.rm=TRUE)
           } else datawide$efficiency.score<-0
+          speciesOrder$order <- unique(datalong$species)
           
-          datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
+          # column datainfo$Scientific_name - delete text after second space (if present) to better fit the table
+          # datawide$species <- gsub("^(\\S+\\s+\\S+).*", "\\1", datawide$species)
+
+          # drop value. from the column names
+          names(datawide) <- gsub("\\value.", "", names(datawide))
+
+          DataSuitability <- datawide[,c("species", "adaptation.score", "efficiency.score", setdiff(names(datawide), c("species", "adaptation.score", "efficiency.score")))]
           
+          reactive_DataSuitability(DataSuitability)
+
+          DataSuitability
+
         } else {datalong}
       }, options = list(
         scrollX = TRUE,
-        order = list(list(1, 'asc')) #order by the species column, which is an ordered factor
-      ))
+        language = list(
+          search = i18n$t("Search:"),
+          lengthMenu = i18n$t("Display _MENU_ entries"),
+          info = i18n$t("Showing _START_ to _END_ of _TOTAL_ entries"),
+          paginate = list(
+            "next" = i18n$t("Next"),
+            "previous" = i18n$t("Previous"))
+          )
+        ))
       
-      
-    } # fin function(input, output, session)
-    
-  ) # fin moduleServer
-  return(moduleServer)
+    return(moduleServer)
+  })
+
 } # fin moduleTabInterface_Server

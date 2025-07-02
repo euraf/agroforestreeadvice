@@ -1,14 +1,153 @@
-
 server <- function(input, output, session) {
-  #http://127.0.0.1:3775/?in_language=cz&model=Czech this will just take the user to the desired tab, with the desired language
+  #http://127.0.0.1:3775/?selected_language=cz&model=Czech this will just take the user to the desired tab, with the desired language
   #127.0.0.1:3775/?model=Czech&soil_water=soil_water_waterlogged&habitus=bush this triggers a modal dialog to download a txt file with the species scores for this particular set of conditions
-  
-  
+  reactive_DataSuitability <<- reactiveVal(data.frame(x = numeric(), y = numeric()))
+  reactive_plotSuitability <<- reactiveVal(ggplot())
+  reactive_Interface <<- reactiveVal(list())
+
+  reactive_inputs <<- reactiveVal(list())
+
+  # We need to access the data from TabInterface (output$DTSuitability)
+  access_DataSuitability <- function() {
+    print("Suitability data accessed")
+    DataSuitability <- reactive_DataSuitability()
+    reactive_DataSuitability()
+  }
+
+  # We need to access the plot from TabInterface (output$barplot_suitability)
+  access_plotSuitability <- function() {
+    print("Suitability plot accessed")
+    plotSuitability <- reactive_plotSuitability()
+    reactive_plotSuitability()
+  }
+
+  # We need to access the interface from global (orderdf)
+  access_Interface <- function() {
+    print("Interface accessed")
+    interface <- reactive_Interface()
+    reactive_Interface()
+  }
+
+  access_inputs <- function() {
+    print("Inputs accessed")
+    inputsdata <- reactive_inputs()
+    reactive_inputs()
+  }
+
+  # Download handler for svg
+  observe({
+    output$downloadSVG <- downloadHandler(
+      filename = function() {
+        paste("AGFTadvice_results_", Sys.Date(), ".zip", sep = "")
+      },
+      content = function(file) {
+        OutputPlots <- CombinePlotsForDownload(
+          interface = req(access_Interface()), 
+          language = req(language()), 
+          DataSuitability = req(access_DataSuitability()), 
+          plotSuitability = req(access_plotSuitability()),
+          inputsdata = req(access_inputs())
+        )
+
+        
+        tempDir <- tempdir()
+        tempSVG1 <- file.path(tempDir, "AGFTadvice_results.svg")
+
+        svg(tempSVG1, height = 19, width = 14)
+        print(OutputPlots)
+        dev.off()
+        
+        # Create a ZIP file containing the SVG
+        oldwd <- setwd(tempDir)
+        on.exit(setwd(oldwd), add = TRUE)
+        zip::zip(file, files = c("AGFTadvice_results.svg"))
+
+        # Clean up temporary files
+        unlink(tempSVG1)
+      }
+    )
+  })
+
+  # Download handler for pdf
+  observe({
+    output$downloadPDF <- downloadHandler(
+      filename = function() {
+        paste("AGFTadvice_results_", Sys.Date(), ".zip", sep = "")
+      },
+      content = function(file) {
+        OutputPlots <- CombinePlotsForDownload(
+          interface = req(access_Interface()), 
+          language = req(language()), 
+          DataSuitability = req(access_DataSuitability()), 
+          plotSuitability = req(access_plotSuitability()),
+          inputsdata = req(access_inputs())
+        )
+
+        tempDir <- tempdir()
+        tempSVG1 <- file.path(tempDir, "AGFTadvice_results.svg")
+        tempPDF1 <- file.path(tempDir, "AGFTadvice_results.pdf")
+
+
+        svg(tempSVG1, height = 19, width = 14)
+        print(OutputPlots)
+        dev.off()
+        rsvg_pdf(tempSVG1, tempPDF1,  height = 3508, width = 2480)  # metrics are in pixels - 1 inch = 96 pixels; A4 is 2480 x 3508 pixels
+        # Create a ZIP file containing both SVGs
+        oldwd <- setwd(tempDir)
+        on.exit(setwd(oldwd), add = TRUE)
+        zip::zip(file, files = c("AGFTadvice_results.pdf"))
+
+        # Clean up temporary files
+        unlink(tempSVG1)
+        unlink(tempPDF1)
+      }
+    )
+  })
+
+  # Download handler for csv
+  observe({
+    output$downloadCSV <- downloadHandler(
+      filename = function() {
+        paste("AGFTadvice_csv_results_", Sys.Date(), ".csv", sep = "")
+      },
+    content = function(file) {
+      csv_data <- data.frame(req(access_DataSuitability()))
+      write.csv(csv_data, file, row.names = FALSE)
+      }
+    )
+  })
+
+  # Download handler for excel
+  observe({
+    output$downloadExcel <- downloadHandler(
+      filename = function() {
+        paste("AGFTadvice_excel_results_-", Sys.Date(), ".xlsx", sep = "")
+      },
+      content = function(file) {
+        excel_data <- data.frame(req(access_DataSuitability()))
+        write.xlsx(excel_data, file, rowNames = FALSE)
+      }
+    )
+  })
+    
+  # use shiny.i18n to update the language and translate the app
+  observeEvent(input$selected_language, {
+    # Print the selected language to the console
+    print(paste("The selected language has changed to:", input$selected_language))
+    shiny.i18n::update_lang(input$selected_language)
+  })
+    
+  # Reactive expression for the selected language - still needed for some functions
+  language <- reactive({
+    input$selected_language
+  })
+
+
   observe({
     query <- parseQueryString(session$clientData$url_search)
     
-    if (!is.null(query[['in_language']])) {
-      updateRadioButtons(session, "in_language", selected = query[['in_language']])
+    if (!is.null(query[['selected_language']])) {
+      updateRadioButtons(session, "selected_language", selected = query[['selected_language']])
     }
     
     desiredmodel <- query$model 
@@ -20,7 +159,7 @@ server <- function(input, output, session) {
       updateTabsetPanel(session, "toolsTabset", selected = desiredmodel)
     }
     
-    allotherparameters<-setdiff(names(query), c("in_language", "model"))
+    allotherparameters<-setdiff(names(query), c("selected_language", "model"))
     if(length(allotherparameters)>0){ #we passed parameters by URL = we want to get the results as csv
       queryinputs<-unlist(query[allotherparameters]) #icicicic todo : check that all necessary inputs are provided before sending to the suitability function
       print(paste("computing suitability of model", desiredmodel))
@@ -60,17 +199,6 @@ server <- function(input, output, session) {
         }
       )
       
-      showModal(modalDialog(
-        title = "Download txt file",
-        htmlOutput("dataPreview"),  # Display data preview
-        footer = tagList(
-          modalButton("Cancel"),
-          downloadButton("modalDownload", "Download")
-        ),
-        size = "l",
-        easyClose = TRUE
-      ))
-      
       
     }
     
@@ -78,10 +206,6 @@ server <- function(input, output, session) {
   
   
   
-  # Reactive expression for the selected language
-  language <- reactive({
-    input$in_language
-  })
   
   
   # For the database page ----
@@ -189,14 +313,10 @@ server <- function(input, output, session) {
   
   
   # Flanders tree advice ----
-  
-  moduleTabInterface_Server( # nom de la fonction server du module
-    
-    id = "DENTRO", # Attention à bien donner le même id que dans ui !
-    language= language,
-    
-    data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE )
-  
+
+  moduleTabInterface_Server(id = "DENTRO",
+                            language= language,
+                            data = dataDENTRO, interface= interfaceDENTRO, functionSuitability=compute_suitability_DENTRO, compactobjectives=TRUE)
   
   # Shade tree advice ----
   
