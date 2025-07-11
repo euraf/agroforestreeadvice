@@ -83,9 +83,9 @@ initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincrite
 	information	12	information	Pflanzabstand.und.Position.in.der.Hecke		information		information	Plant.spacing.and.position.in.the.hedge	NA	information	Pflanzabstand.und.Position.in.der.Hecke	NA	informazioni	Spaziatura.delle.piante.e.posizione.nella.siepe	NA
 	information	13	information	Bemerkungen		information		information	Remarks	NA	information	Bemerkungen	NA	informazioni	Osservazioni	NA
 	effecttrait	14	size	Height	0	sliderInput		size	Height	0	size	Height	0	dimensioni	Altezza	0
-	effecttrait	14	size	Height	30	sliderInput		size	Height	30	size	Height	30	dimensioni	Altezza	30
+	effecttrait	14	size	Height	40	sliderInput		size	Height	30	size	Height	30	dimensioni	Altezza	30
 	effecttrait	15	size	Width	0	sliderInput		size	Width	0	size	Width	0	dimensioni	Larghezza	0
-	effecttrait	15	size	Width	30	sliderInput		size	Width	30	size	Width	30	dimensioni	Larghezza	30
+	effecttrait	15	size	Width	15	sliderInput		size	Width	30	size	Width	30	dimensioni	Larghezza	30
 	information	16	information	Comments		information		information	Comments		information	Comments		informazioni	Commenti	
 	responsetrait	17	work	Blütezeit	0	sliderInput		work	Flowering time	0	work	Blütezeit	0	lavoro	Tempo di fioritura	0
 	responsetrait	17	work	Blütezeit	12	sliderInput		work	Flowering time	12	work	Blütezeit	12	lavoro	Tempo di fioritura	12
