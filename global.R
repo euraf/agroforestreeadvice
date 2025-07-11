@@ -201,8 +201,9 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesin
                                                              x=db[,intersect(names(db), c(criteria, chosen))])) #replace first ( by comma and remove )
       , split="\\s*[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces (and also remove trailing blanks)
    
-    if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
-      db$value<-as.numeric(db[,criteria] %in% chosen) 
+    if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices, or comma or semicolon separated keywords
+      db$value<-sapply(services, function(x) length(intersect(x, chosen)))
+      db$value<-db$value/length(chosen)
     } else { # several columns, one for each possible choice
       if (all(sapply(make.names(chosen), function(ch) ch %in% names(db)))) { #all the chosen are among the column names
         db$value<-0
