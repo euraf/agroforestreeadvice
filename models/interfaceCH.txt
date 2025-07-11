@@ -1,0 +1,93 @@
+initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincriteria	BigCriteria_en	criteria_en	choice_en	BigCriteria_de	criteria_de	choice_de	BigCriteria_it	criteria_it	choice_it
+	information	1	ID	Name		ID		ID	Name	NA	ID	Name	NA	ID	Nome	NA
+	information	2	ID	Lateinischer.Name		ID		ID	Latin.name	NA	ID	Lateinischer.Name	NA	ID	Nome latino	NA
+	responsetrait	3	use	Kategorie	Alley-Cropping	radioButtons		use	Category	Alley cropping	ID	Kategorie	Alley-Cropping	utilizzo	categoria	Coltivazione in campo
+	responsetrait	3	use	Kategorie	Beerensträucher	radioButtons		use	Category	Berry bushes	ID	Kategorie	Beerensträucher	utilizzo	categoria	Cespugli di bacche
+	responsetrait	3	use	Kategorie	Biomassenutzung	radioButtons		use	Category	Biomass utilization	ID	Kategorie	Biomassenutzung	utilizzo	categoria	Utilizzo della biomassa
+	responsetrait	3	use	Kategorie	Nussbäume und -sträucher	radioButtons		use	Category	Nut trees and shrubs	ID	Kategorie	Nussbäume und -sträucher	utilizzo	categoria	Alberi e arbusti da frutta a guscio
+	responsetrait	3	use	Kategorie	Obstbäume	radioButtons		use	Category	Fruit trees	ID	Kategorie	Obstbäume	utilizzo	categoria	Alberi da frutto
+	responsetrait	3	use	Kategorie	Stock-/Biomassehecke	radioButtons		use	Category	Stock/biomass hedge	ID	Kategorie	Stock-/Biomassehecke	utilizzo	categoria	Siepe di scorte/biomassa
+	responsetrait	3	use	Kategorie	Trüffelanbau	radioButtons		use	Category	Truffle cultivation	ID	Kategorie	Trüffelanbau	utilizzo	categoria	Coltivazione di tartufi
+	responsetrait	3	use	Kategorie	veredelt	radioButtons		use	Category	grafted	ID	Kategorie	veredelt	utilizzo	categoria	innestato
+	responsetrait	3	use	Kategorie	Vitiforst in der Parzelle	radioButtons		use	Category	Vitiforst in the plot	ID	Kategorie	Vitiforst in der Parzelle	utilizzo	categoria	Vitiforst nell'appezzamento
+	responsetrait	3	use	Kategorie	Vitiforst Umrandung	radioButtons		use	Category	Vitiforst border	ID	Kategorie	Vitiforst Umrandung	utilizzo	categoria	Bordo di Vitiforst
+	responsetrait	3	use	Kategorie	Vitiforst Zeilenende	radioButtons		use	Category	Vitiforst row end	ID	Kategorie	Vitiforst Zeilenende	utilizzo	categoria	Fine filare di Vitiforst
+	responsetrait	3	use	Kategorie	Wildobst-Bäume	radioButtons		use	Category	Wild fruit trees	ID	Kategorie	Wildobst-Bäume	utilizzo	categoria	Alberi da frutto selvatico
+	responsetrait	3	use	Kategorie	Wildobst-Kleinbäume und -sträucher	radioButtons		use	Category	Wild fruit small trees and shrubs	ID	Kategorie	Wildobst-Kleinbäume und -sträucher	utilizzo	categoria	Piccoli alberi e arbusti da frutto selvatico
+	effecttrait	4	use	Verwendung		checkboxGroupInput		use	Use	NA	use	Verwendung	NA	utilizzo	Utilizzo	NA
+	effecttrait	4	use	Verwendung	Biomasse	checkboxGroupInput		use	Use	Biomass	use	Verwendung	Biomasse	utilizzo	Utilizzo	Biomassa
+	effecttrait	4	use	Verwendung	Frischkonsum	checkboxGroupInput		use	Use	Fresh consumption	use	Verwendung	Frischkonsum	utilizzo	Utilizzo	Consumo fresco
+	effecttrait	4	use	Verwendung	Früchte	checkboxGroupInput		use	Use	Fruits	use	Verwendung	Früchte	utilizzo	Utilizzo	Frutti
+	effecttrait	4	use	Verwendung	Futterweide	checkboxGroupInput		use	Use	Forage pasture	use	Verwendung	Futterweide	utilizzo	Utilizzo	Pascolo foraggero
+	effecttrait	4	use	Verwendung	Gelee	checkboxGroupInput		use	Use	Jelly	use	Verwendung	Gelee	utilizzo	Utilizzo	Gelatina
+	effecttrait	4	use	Verwendung	Hecke	checkboxGroupInput		use	Use	Hedge	use	Verwendung	Hecke	utilizzo	Utilizzo	Siepe
+	effecttrait	4	use	Verwendung	Heilpflanze	checkboxGroupInput		use	Use	Medicinal plant	use	Verwendung	Heilpflanze	utilizzo	Utilizzo	Pianta medicinale
+	effecttrait	4	use	Verwendung	Holz	checkboxGroupInput		use	Use	wood	use	Verwendung	Holz	utilizzo	Utilizzo	legno
+	effecttrait	4	use	Verwendung	Holzschnitzel	checkboxGroupInput		use	Use	Wood chips	use	Verwendung	Holzschnitzel	utilizzo	Utilizzo	Trucioli di legno
+	effecttrait	4	use	Verwendung	Honig	checkboxGroupInput		use	Use	honey	use	Verwendung	Honig	utilizzo	Utilizzo	miele
+	effecttrait	4	use	Verwendung	Imkerei	checkboxGroupInput		use	Use	Beekeeping	use	Verwendung	Imkerei	utilizzo	Utilizzo	Apicoltura
+	effecttrait	4	use	Verwendung	Kompott	checkboxGroupInput		use	Use	Compote	use	Verwendung	Kompott	utilizzo	Utilizzo	Composta
+	effecttrait	4	use	Verwendung	Konfitüre	checkboxGroupInput		use	Use	Jam	use	Verwendung	Konfitüre	utilizzo	Utilizzo	Marmellata
+	effecttrait	4	use	Verwendung	Küche	checkboxGroupInput		use	Use	kitchen	use	Verwendung	Küche	utilizzo	Utilizzo	cucina
+	effecttrait	4	use	Verwendung	Laubfutter	checkboxGroupInput		use	Use	Foliage food	use	Verwendung	Laubfutter	utilizzo	Utilizzo	Cibo per il fogliame
+	effecttrait	4	use	Verwendung	Mykorrhiza-Partnergehölz	checkboxGroupInput		use	Use	Mycorrhiza partner plant	use	Verwendung	Mykorrhiza-Partnergehölz	utilizzo	Utilizzo	Pianta partner della micorriza
+	effecttrait	4	use	Verwendung	nachwachsendes Bindematerial	checkboxGroupInput		use	Use	renewable binding material	use	Verwendung	nachwachsendes Bindematerial	utilizzo	Utilizzo	materiale legante rinnovabile
+	effecttrait	4	use	Verwendung	Nutztierfutter	checkboxGroupInput		use	Use	livestock feed	use	Verwendung	Nutztierfutter	utilizzo	Utilizzo	mangime per il bestiame
+	effecttrait	4	use	Verwendung	Park	checkboxGroupInput		use	Use	park	use	Verwendung	Park	utilizzo	Utilizzo	parco
+	effecttrait	4	use	Verwendung	Pollen-/Nektarquelle	checkboxGroupInput		use	Use	Pollen/nectar source	use	Verwendung	Pollen-/Nektarquelle	utilizzo	Utilizzo	Fonte di polline/nettare
+	effecttrait	4	use	Verwendung	Saft	checkboxGroupInput		use	Use	sap	use	Verwendung	Saft	utilizzo	Utilizzo	linfa
+	effecttrait	4	use	Verwendung	Solitär	checkboxGroupInput		use	Use	Solitary	use	Verwendung	Solitär	utilizzo	Utilizzo	Solitario
+	effecttrait	4	use	Verwendung	Stockhecke	checkboxGroupInput		use	Use	Stock hedge	use	Verwendung	Stockhecke	utilizzo	Utilizzo	Siepe di allevamento
+	effecttrait	4	use	Verwendung	Stockhecken	checkboxGroupInput		use	Use	Stock hedges	use	Verwendung	Stockhecken	utilizzo	Utilizzo	Siepe di scorte
+	effecttrait	4	use	Verwendung	Verzehr	checkboxGroupInput		use	Use	Consumption	use	Verwendung	Verzehr	utilizzo	Utilizzo	Consumo
+	effecttrait	4	use	Verwendung	Viehfutter	checkboxGroupInput		use	Use	Cattle feed	use	Verwendung	Viehfutter	utilizzo	Utilizzo	Mangime per bovini
+	effecttrait	4	use	Verwendung	Viehfutter Flechtarbeit	checkboxGroupInput		use	Use	Cattle fodder Plaiting	use	Verwendung	Viehfutter Flechtarbeit	utilizzo	Utilizzo	Foraggio per il bestiame Vimini
+	effecttrait	4	use	Verwendung	Wildhecken	checkboxGroupInput		use	Use	wild hedges	use	Verwendung	Wildhecken	utilizzo	Utilizzo	siepi selvatiche
+	responsetrait	5	orientation	Standortanspruch	hs	checkboxGroupInput		orientation	Site requirements	hs	orientation	Standortanspruch	hs	orientamento	Requisiti del sito	hs
+	responsetrait	5	orientation	Standortanspruch	hs.	checkboxGroupInput		orientation	Site requirements	hs.	orientation	Standortanspruch	hs.	orientamento	Requisiti del sito	hs.
+	responsetrait	5	orientation	Standortanspruch	s	checkboxGroupInput		orientation	Site requirements	s	orientation	Standortanspruch	s	orientamento	Requisiti del sito	s
+	responsetrait	5	orientation	Standortanspruch	S	checkboxGroupInput		orientation	Site requirements	S	orientation	Standortanspruch	S	orientamento	Requisiti del sito	S
+	responsetrait	5	orientation	Standortanspruch	Sonnig	checkboxGroupInput		orientation	Site requirements	Sunny	orientation	Standortanspruch	Sonnig	orientamento	Requisiti del sito	Soleggiato
+	responsetrait	5	orientation	Standortanspruch	sonnig bis halbschattig	checkboxGroupInput		orientation	Site requirements	Sunny to semi-shady	orientation	Standortanspruch	sonnig bis halbschattig	orientamento	Requisiti del sito	Da soleggiato a semi-ombreggiato
+	responsetrait	5	orientation	Standortanspruch	Sonnig bis halbschattig	checkboxGroupInput		orientation	Site requirements	Sunny to semi-shady	orientation	Standortanspruch	Sonnig bis halbschattig	orientamento	Requisiti del sito	Da soleggiato a semi-ombreggiato
+	responsetrait	6	soil	Boden	Basisch bis leicht saure	checkboxGroupInput		soil	Soil	Alkaline to slightly acidic	soil	Boden	Basisch bis leicht saure	suolo	Suolo	Da alcalino a leggermente acido
+	responsetrait	6	soil	Boden	durchlässig	checkboxGroupInput		soil	Soil	Permeable	soil	Boden	durchlässig	suolo	Suolo	Permeabile
+	responsetrait	6	soil	Boden	Durchlässig	checkboxGroupInput		soil	Soil	Permeable	soil	Boden	Durchlässig	suolo	Suolo	Permeabile
+	responsetrait	6	soil	Boden	feucht bis normal	checkboxGroupInput		soil	Soil	moist to normal	soil	Boden	feucht bis normal	suolo	Suolo	da umido a normale
+	responsetrait	6	soil	Boden	frische bis mässig feuchte Böden. Mittlerer Nährstoffgehalt. pH: 4.5 – 7.5	checkboxGroupInput		soil	Soil	Fresh to moderately moist soils. Medium nutrient content. pH: 4.5 - 7.5	soil	Boden	frische bis mässig feuchte Böden. Mittlerer Nährstoffgehalt. pH: 4.5 – 7.5	suolo	Suolo	Terreni da freschi a moderatamente umidi. Contenuto medio di sostanze nutritive. pH: 4,5 - 7,5
+	responsetrait	6	soil	Boden	kalkhaltig	checkboxGroupInput		soil	Soil	calcareous	soil	Boden	kalkhaltig	suolo	Suolo	calcareo
+	responsetrait	6	soil	Boden	Keine besonderen Ansprüche	checkboxGroupInput		soil	Soil	No special requirements	soil	Boden	Keine besonderen Ansprüche	suolo	Suolo	Nessun requisito speciale
+	responsetrait	6	soil	Boden	Keine Staunässe	checkboxGroupInput		soil	Soil	No waterlogging	soil	Boden	Keine Staunässe	suolo	Suolo	Nessun ristagno d'acqua
+	responsetrait	6	soil	Boden	keine Staunässe. pH: 5.5 - 8	checkboxGroupInput		soil	Soil	No waterlogging. pH: 5.5 - 8	soil	Boden	keine Staunässe. pH: 5.5 - 8	suolo	Suolo	Nessun ristagno d'acqua. pH: 5,5 - 8
+	responsetrait	6	soil	Boden	nährstoffarm bis nährstoffreich	checkboxGroupInput		soil	Soil	Nutrient-poor to nutrient-rich	soil	Boden	nährstoffarm bis nährstoffreich	suolo	Suolo	Da povero di nutrienti a ricco di nutrienti
+	responsetrait	6	soil	Boden	nährstoffreich	checkboxGroupInput		soil	Soil	Nutrient-rich	soil	Boden	nährstoffreich	suolo	Suolo	Ricco di sostanze nutritive
+	responsetrait	6	soil	Boden	tiefgründig	checkboxGroupInput		soil	Soil	deep	soil	Boden	tiefgründig	suolo	Suolo	profondo
+	responsetrait	6	soil	Boden	Tiefgründig	checkboxGroupInput		soil	Soil	Deep	soil	Boden	Tiefgründig	suolo	Suolo	Profondo
+	responsetrait	6	soil	Boden	Tiefgründige	checkboxGroupInput		soil	Soil	Deep	soil	Boden	Tiefgründige	suolo	Suolo	Profondo
+	effecttrait	7	biodiversity	Ökologie	Bienenweide	checkboxGroupInput		biodiversity	Ecology	Bee pasture	biodiversity	Ökologie	Bienenweide	biodiversità	Ecologia	Pascolo per le api
+	effecttrait	7	biodiversity	Ökologie	Frühe Bienenfutterpflanze	checkboxGroupInput		biodiversity	Ecology	Early bee forage plant	biodiversity	Ökologie	Frühe Bienenfutterpflanze	biodiversità	Ecologia	Pianta precocemente foraggiata dalle api
+	effecttrait	7	biodiversity	Ökologie	Futter für Kleinsäugtiere	checkboxGroupInput		biodiversity	Ecology	Food for small mammals	biodiversity	Ökologie	Futter für Kleinsäugtiere	biodiversità	Ecologia	Cibo per piccoli mammiferi
+	effecttrait	7	biodiversity	Ökologie	Insektenweide	checkboxGroupInput		biodiversity	Ecology	Insect pasture	biodiversity	Ökologie	Insektenweide	biodiversità	Ecologia	Pascolo per insetti
+	effecttrait	7	biodiversity	Ökologie	Kleintiere und Vögel. Die ökologische Wertigkeit ist für männliche und weibliche Weiden einer Art in Bezug auf die Kätzchenblüte unterschiedlich. Weidengehölze sind Mykorrhiza-fähig.	checkboxGroupInput		biodiversity	Ecology	Small animals and birds. The ecological value is different for male and female willows of the same species in terms of catkin flowering. Willow shrubs are capable of mycorrhization.	biodiversity	Ökologie	Kleintiere und Vögel. Die ökologische Wertigkeit ist für männliche und weibliche Weiden einer Art in Bezug auf die Kätzchenblüte unterschiedlich. Weidengehölze sind Mykorrhiza-fähig.	biodiversità	Ecologia	Piccoli animali e uccelli. Il valore ecologico è diverso per i salici maschi e femmine della stessa specie in termini di fioritura delle infiorescenze. Gli arbusti di salice sono in grado di micorizzare.
+	effecttrait	7	biodiversity	Ökologie	Lebensraum und Nahrungsgrundlage für diverse Insekten	checkboxGroupInput		biodiversity	Ecology	Habitat and food source for various insects	biodiversity	Ökologie	Lebensraum und Nahrungsgrundlage für diverse Insekten	biodiversità	Ecologia	Habitat e fonte di cibo per vari insetti
+	effecttrait	7	biodiversity	Ökologie	Nager und Wild	checkboxGroupInput		biodiversity	Ecology	rodents and game	biodiversity	Ökologie	Nager und Wild	biodiversità	Ecologia	roditori e selvaggina
+	effecttrait	7	biodiversity	Ökologie	Ökologisch extrem wertvoll. Etliche Schmetterlings- und Insektenarten darauf spezialisiert. Eicheln als Winterfutter für Vögel	checkboxGroupInput		biodiversity	Ecology	Extremely valuable ecologically. Several butterfly and insect species specialize in it. Acorns as winter food for birds	biodiversity	Ökologie	Ökologisch extrem wertvoll. Etliche Schmetterlings- und Insektenarten darauf spezialisiert. Eicheln als Winterfutter für Vögel	biodiversità	Ecologia	Estremamente prezioso dal punto di vista ecologico. Diverse specie di farfalle e insetti sono specializzate in questo habitat. Ghiande come cibo invernale per gli uccelli
+	effecttrait	7	biodiversity	Ökologie	Versteck und Nistplatz für Vögel	checkboxGroupInput		biodiversity	Ecology	Hiding and nesting place for birds	biodiversity	Ökologie	Versteck und Nistplatz für Vögel	biodiversità	Ecologia	Nascondiglio e nido per gli uccelli
+	effecttrait	7	biodiversity	Ökologie	Vogelnahrung und Versteck und Nistplatz	checkboxGroupInput		biodiversity	Ecology	Bird food and hiding and nesting place	biodiversity	Ökologie	Vogelnahrung und Versteck und Nistplatz	biodiversità	Ecologia	Cibo per uccelli, nascondiglio e nido
+	effecttrait	8	biodiversity	Mykorrhiza	AM	checkboxGroupInput		biodiversity	Mycorrhiza	AM	biodiversity	Mykorrhiza	AM	biodiversità	Micorrize	AM
+	effecttrait	8	biodiversity	Mykorrhiza	EM	checkboxGroupInput		biodiversity	Mycorrhiza	EM	biodiversity	Mykorrhiza	EM	biodiversità	Micorrize	EM
+	effecttrait	8	biodiversity	Mykorrhiza	EM (+AM)	checkboxGroupInput		biodiversity	Mycorrhiza	EM (+AM)	biodiversity	Mykorrhiza	EM (+AM)	biodiversità	Micorrize	EM (+AM)
+	information	9	information	Bemerkung		information		information	Remark	NA	information	Bemerkung	NA	informazioni	Osservazione	NA
+	information	10	information	Empfohlene.Sorte		information		information	Recommended.variety	NA	information	Empfohlene.Sorte	NA	informazioni	Varietà raccomandata	NA
+	information	11	information	Befruchtung.(bspw..mehrere.Sorten)		information		information	Fertilization.(e.g..several.varieties)	NA	information	Befruchtung.(bspw..mehrere.Sorten)	NA	informazioni	Concimazione (ad es. diverse varietà)	NA
+	information	12	information	Pflanzabstand.und.Position.in.der.Hecke		information		information	Plant.spacing.and.position.in.the.hedge	NA	information	Pflanzabstand.und.Position.in.der.Hecke	NA	informazioni	Spaziatura.delle.piante.e.posizione.nella.siepe	NA
+	information	13	information	Bemerkungen		information		information	Remarks	NA	information	Bemerkungen	NA	informazioni	Osservazioni	NA
+	effecttrait	14	size	Height	0	sliderInput		size	Height	0	size	Height	0	dimensioni	Altezza	0
+	effecttrait	14	size	Height	30	sliderInput		size	Height	30	size	Height	30	dimensioni	Altezza	30
+	effecttrait	15	size	Width	0	sliderInput		size	Width	0	size	Width	0	dimensioni	Larghezza	0
+	effecttrait	15	size	Width	30	sliderInput		size	Width	30	size	Width	30	dimensioni	Larghezza	30
+	information	16	information	Comments		information		information	Comments		information	Comments		informazioni	Commenti	
+	responsetrait	17	work	Blütezeit	0	sliderInput		work	Flowering time	0	work	Blütezeit	0	lavoro	Tempo di fioritura	0
+	responsetrait	17	work	Blütezeit	12	sliderInput		work	Flowering time	12	work	Blütezeit	12	lavoro	Tempo di fioritura	12
+	responsetrait	18	work	Erntezeit	0	sliderInput		work	Harvest time	0	work	Erntezeit	0	lavoro	Tempo di raccolta	0
+	responsetrait	18	work	Erntezeit	12	sliderInput		work	Harvest time	12	work	Erntezeit	12	lavoro	Tempo di raccolta	12

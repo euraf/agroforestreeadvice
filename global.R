@@ -51,6 +51,8 @@ dataSUOMI<-read.table("models/dataSUOMI.txt", fileEncoding = "UTF-8", encoding =
 interfaceSUOMI<-read.table("models/interfaceSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataUKguide<-read.table("models/dataUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE, na.strings="NaN")
 interfaceUKguide<-read.table("models/interfaceUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataCH<-read.table("models/dataCH.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceCH<-read.table("models/interfaceCH.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
 #remove commas in the interface because commas are used for separating values
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
@@ -71,6 +73,8 @@ interfaceSUOMI<-interfaceSUOMI[!is.na(interfaceSUOMI$side),]
 interfaceSUOMI[1:length(interfaceSUOMI)]<-lapply(interfaceSUOMI[1:length(interfaceSUOMI)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceUKguide<-interfaceUKguide[!is.na(interfaceUKguide$side),]
 interfaceUKguide[1:length(interfaceUKguide)]<-lapply(interfaceUKguide[1:length(interfaceUKguide)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceCH<-interfaceCH[!is.na(interfaceCH$side),]
+interfaceCH[1:length(interfaceCH)]<-lapply(interfaceCH[1:length(interfaceCH)], function(x) gsub(pattern=",", replacement=".", x=x))
 
 toto<-strsplit(c(names(interfaceSTA), 
                  names(interfaceDENTRO), 
@@ -420,7 +424,7 @@ source("R/suitability_JBOJP.R")
 source("R/suitability_DEHM.R")
 source("R/suitability_SUOMI.R") 
 source("R/suitability_UKguide.R")
-
+source("R/suitability_CH.R")
 
 
 #colorscontrols<-c("")
