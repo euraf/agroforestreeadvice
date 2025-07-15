@@ -407,8 +407,10 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         databis<-databis[as.numeric(databis$species)>=rangetoplot$from 
                          & as.numeric(databis$species)<=rangetoplot$to ,]
 
-        # drop all rows where "value" is NA or 0
-        databis <- databis %>% filter(!is.na(value) & value != 0)
+        # drop all rows where "value" is NA or 0 # icicicici Tadeas filtered out the data with value = 0, Marie prefers to keep them
+        #databis <- databis %>% filter(!is.na(value) & value != 0)
+        databis <- databis %>% filter(!is.na(value))
+        #print(paste("there are ", nrow(databis), " rows in databis"))
         if (nrow(databis) == 0) {
           # If there are no data to plot, return an empty plot
           plot_Suitability<-ggplot() + theme_minimal()
@@ -458,7 +460,8 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
         hoverlist <- input$plot_hover
         if(!is.null(hoverlist)){
           id<-hoverlist$domain$discrete_limits$y[[round(hoverlist$y)]]
-          print(data[data$IDAFTA==id, "tooltipspecies"])
+          databis<-datatoplot()
+          tooltipgraph<-unique(databis[databis$IDAFTA==id, "tooltipspecies"]) #strangely, even if the data is supposed to be filtered so that IDAFTA is a unique identifier, some trees have their tooltipspecies of length>1
           left_px <- hoverlist$coords_css$x
           top_px <- hoverlist$coords_css$y
           # create style property fot tooltip
@@ -471,7 +474,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
           wellPanel(
             style = style,
             p(HTML(paste0("<b> ID: </b>", id, "<br/>",
-                          "<b> Info: </b>", data[data$IDAFTA==id, "tooltipspecies"], "<br/>"#,
+                          "<b> Info: </b>",tooltipgraph, "<br/>"#,
                           #"<b> Distance from left: </b>", left_px, "<b>, from top: </b>", top_px
                           )))
           )

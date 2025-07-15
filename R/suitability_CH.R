@@ -1,8 +1,23 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
-dataCH$IDAFTA<-paste(dataCH$Lateinischer.Name, dataCH$Kategorie)
+#dataCH$IDAFTA<-paste(dataCH$Lateinischer.Name, dataCH$Kategorie)
+dataCH$IDAFTA<-dataCH$Lateinischer.Name
 #add a tooltipspecies column so that information is displayed when hovering on the barplot
-dataCH$tooltipspecies<-paste(dataCH$"Bemerkung", dataCH$"Empfohlene.Sorte",dataCH$"Befruchtung..bspw..mehrere.Sorten.",
-                             dataCH$"Pflanzabstand.und.Position.in.der.Hecke", dataCH$"Bemerkungen", dataCH$Comments)
+removeNA<-function(x) {
+  x[is.na(x)]<-""
+  x[x=="NA"]<-""
+  return(x)
+}
+dataCH$tooltipspecies<-paste(dataCH$Name,
+                             removeNA(dataCH$"Bemerkung"), 
+                             removeNA(dataCH$"Empfohlene.Sorte"),
+                             removeNA(dataCH$"Befruchtung..bspw..mehrere.Sorten."),
+                             removeNA(dataCH$"Pflanzabstand.und.Position.in.der.Hecke"), 
+                             removeNA(dataCH$"Bemerkungen"), 
+                             removeNA(dataCH$Comments))
+#actually, the tooltipspecies is not displayed because I removed the Kategorie in the IDAFTA column of data, to simplify yaxis labels in the graph...
+#solution: use only latin name as IDAFTA, because the data is filtered by Kategorie right away in suitability_CH
+
+
 
 #' compute_suitability for Swiss database
 #'
@@ -60,7 +75,7 @@ compute_suitability_CH<-function(inputsdata=NULL,
   
   # give negative values for response traits so that they appear on the left
   dbfinal$value[dbfinal$side=="responsetrait"]<- -dbfinal$value[dbfinal$side=="responsetrait"]
-
+  
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
   print("fin suitability")
   
