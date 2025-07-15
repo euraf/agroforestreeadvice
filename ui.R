@@ -81,6 +81,8 @@ body <- dashboardBody(
             h2("Juiste Boom op de Juiste Plek: Jordy van Eijk (St. ReGeneration & Van Eijk : Consultantree); Jade Koop (Jade Reforestry);Euridice Leyequien Abarca (HVHL); Jerke de Vries (HVHL); Evert Prins (Louis Bolk Institute) "),
             h2("GoÖko : Tsonkova, P., C. Böhm, R. Hübner and J. Ehritt (2019). Managing hedgerows to optimise ecosystem services in agroforestry systems. Agroforestry for sustainable agriculture. M. R. Mosquera-Losada and R. Prabhu. Cambridge, Burleigh Dodds Science Publishing. 1: 39-88. DOI 10.19103/as.2018.0041.03 using among others data from Gaida W., Grothe H., 2000. Gehölze: Handbuch für Planung und Ausführung (Woody Species: Handbook for Planning and Planting). Berlin, Hannover: Patzer Verlag: 319"),
             h2("Finnish tree suitability:  Ujula, Juha & Mattila, Iris. (2023). Suomessa menestyviä puu- ja pensaslajeja agrometsäkäyttöön. Teoksessa I. Mattila (toim.). Puustoinen maatalous Suomessa - opas suunnitteluun, katsaus kulttuurinmuutokseen (liite 1). Kilpiän tila. https://doi.org/10.5281/zenodo.8418298"),
+            h2("UK Tree Suitability: Staton T, Beauchamp K, Broome A, Breeze T (2024) Tree species guide for UK agroforestry systems https://cdn.forestresearch.gov.uk/2024/11/READING-AGROFORESTY-Accessible.pdf"),
+            h2("Swiss tree suitability: Lisa Nilles, Sonja Kay. https://www.haupt.ch/agroforst/"),
             h2("If you want to report bugs, or have suggestions for improvement, or want to contribute, please do so on github: https://github.com/euraf/agroforestreeadvice")
     ),#fin infos
     # Tool page ----
@@ -104,7 +106,10 @@ body <- dashboardBody(
               
               tabPanel(i18n$t("Finnish tree suitability"), value="SUOMI", moduleTabInterface_UI(id = "SUOMI", data = dataSUOMI, interface= interfaceSUOMI)),
               
-              tabPanel(i18n$t("UK Guide"), value="UKguide", moduleTabInterface_UI(id = "UKguide", data = dataUKguide, interface= interfaceUKguide))
+              tabPanel(i18n$t("UK Guide"), value="UKguide", moduleTabInterface_UI(id = "UKguide", data = dataUKguide, interface= interfaceUKguide)),
+              
+              tabPanel(i18n$t("Swiss tree guide"), value="CH", moduleTabInterface_UI(id = "CH", data = dataCH, interface= interfaceCH))
+              
               
             )
     ),#fin tool

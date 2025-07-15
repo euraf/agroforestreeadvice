@@ -59,6 +59,8 @@ dataSUOMI<-read.table("models/dataSUOMI.txt", fileEncoding = "UTF-8", encoding =
 interfaceSUOMI<-read.table("models/interfaceSUOMI.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataUKguide<-read.table("models/dataUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE, na.strings="NaN")
 interfaceUKguide<-read.table("models/interfaceUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataCH<-read.table("models/dataCH.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
+interfaceCH<-read.table("models/interfaceCH.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 
 # In czech, there are empty spaces around words in some cells 
 dataCzech <- data.frame(lapply(dataCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
@@ -90,6 +92,8 @@ interfaceSUOMI<-interfaceSUOMI[!is.na(interfaceSUOMI$side),]
 interfaceSUOMI[1:length(interfaceSUOMI)]<-lapply(interfaceSUOMI[1:length(interfaceSUOMI)], function(x) gsub(pattern=",", replacement=".", x=x))
 interfaceUKguide<-interfaceUKguide[!is.na(interfaceUKguide$side),]
 interfaceUKguide[1:length(interfaceUKguide)]<-lapply(interfaceUKguide[1:length(interfaceUKguide)], function(x) gsub(pattern=",", replacement=".", x=x))
+interfaceCH<-interfaceCH[!is.na(interfaceCH$side),]
+interfaceCH[1:length(interfaceCH)]<-lapply(interfaceCH[1:length(interfaceCH)], function(x) gsub(pattern=",", replacement=".", x=x))
 
 toto<-strsplit(c(names(interfaceSTA), 
                  names(interfaceDENTRO), 
@@ -220,8 +224,9 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
                                                              x=db[,intersect(names(db), c(criteria, chosen))])) #replace first ( by comma and remove )
       , split="\\s*[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces (and also remove trailing blanks)
    
-    if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
-      db$value<-as.numeric(db[,criteria] %in% chosen) 
+    if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices, or comma or semicolon separated keywords
+      db$value<-sapply(services, function(x) length(intersect(x, chosen)))
+      db$value<-db$value/length(chosen)
     } else { # several columns, one for each possible choice
       if (all(sapply(make.names(chosen), function(ch) ch %in% names(db)))) { #all the chosen are among the column names
         db$value<-0
@@ -443,7 +448,7 @@ source("R/suitability_JBOJP.R")
 source("R/suitability_DEHM.R")
 source("R/suitability_SUOMI.R") 
 source("R/suitability_UKguide.R")
-
+source("R/suitability_CH.R")
 
 
 #colorscontrols<-c("")

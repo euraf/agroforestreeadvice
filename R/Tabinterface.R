@@ -153,7 +153,7 @@ moduleTabInterface_Server <- function(id, language, data = dataDENTRO, interface
       compactcontrols<-reactive({
         reshapecontrols(interface, language=language(), compactobjectives=compactobjectives)
       }) # compactcontrols() is a dataframe of controls (object type, criteria (for site controls) or BigCriteria (for objective controls if compactobjectives is true) (=object name), and their labels, and the choices (for SelectInput and CheckboxGroup)
-      #observe(print(str(head(compactcontrols()))))
+      observe(print(str(head(compactcontrols()))))
       
       #reactive value of formatted inputs for computing suitability (icicicici : now I regret reformatting: lists are more versatile than character vectors, but for legacy reasons, suitability functions expect character vectors.)
       #to do in the future: move the formatting to inside the suitability functions that need character vector, and allow suitability fnctions to accept lists as inputs

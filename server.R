@@ -360,6 +360,11 @@ server <- function(input, output, session) {
                             language= language,
                             data=dataUKguide, interface=interfaceUKguide, functionSuitability=compute_suitability_UKguide, compactobjectives=FALSE)
   
+  # Swiss Guide of agroforestry trees  ----
+  moduleTabInterface_Server(id = "CH",
+                            language= language,
+                            data=dataCH, interface=interfaceCH, functionSuitability=compute_suitability_CH, compactobjectives=FALSE)
+  
   
   
 }
