@@ -1,4 +1,3 @@
-
 # Fichier de définition de l'interface utilisateur pour l'application Shiny
 
 # header ----
@@ -10,24 +9,60 @@ header <- dashboardHeader(title = "AgroforesTreeAdvice")
 
 sidebar <- dashboardSidebar(
   
-  radioButtons(
-    inputId="in_language",
-    label="Language",
-    choices = languages,
-    selected = "en",
-    inline = TRUE),
+  shiny.i18n::usei18n(i18n),
+  selectInput(inputId = 'selected_language',
+              i18n$t("Change language"),
+              choices = i18n$get_languages(),
+              selected = "en"),
+
   sidebarMenu(
     id="sidemenu",
-    menuItem("Informations", tabName = "Welcome"),
-    menuItem("Tool", tabName = "tool"),
-    menuItem("Databases", tabName = "databases")
+    menuItem(i18n$t("Tools"), tabName = "tool"),
+    menuItem(i18n$t("Information"), tabName = "Welcome"),
+    menuItem(i18n$t("Databases"), tabName = "databases"),
+    menuItem(i18n$t("Scoring"), tabName = "Scoring")
   )
 )
 
 # Main panel ----
 
 body <- dashboardBody(
-  
+  # tags$head(
+  #     tags$style(HTML("
+  #       /* Custom styles for tabs */
+  #       .nav-tabs > li > a {
+  #         background-color: #f8f9fa; /* Light grey background */
+  #         border: 1px solid #dee2e6;
+  #         color: #495057; /* Dark grey text */
+  #       }
+  #       .nav-tabs > li.active > a {
+  #         background-color: #007bff; /* Blue background for active tab */
+  #         color: white; /* White text for active tab */
+  #       }
+  #       .tab-content {
+  #         padding: 20px;
+  #         border: 1px solid #dee2e6;
+  #         border-top: none;
+  #       }
+  #     "))
+  #   ),
+  tags$head(
+    tags$style(HTML("
+      body {
+        font-family: Arial, sans-serif;
+      }
+    "))
+  ),
+  # style for github link
+  tags$style(HTML("
+      .spaced-text {
+        margin-top: 50px;  /* Adjust the value to add more space */
+      }
+      .text-and-link {
+        margin-bottom: 0px;  /* Remove bottom margin */
+      }
+    ")),
+
   tabItems(
     # Welcome page ----
     tabItem(tabName = "Welcome", 
@@ -54,26 +89,26 @@ body <- dashboardBody(
     tabItem(tabName = "tool", 
             tabsetPanel(
               id = "toolsTabset",
+
               tabPanel("Flanders Tree Advisor (DENTRO)", value="DENTRO", moduleTabInterface_UI(id = "DENTRO", data = dataDENTRO, interface= interfaceDENTRO)), 
               
-              tabPanel("Shade Tree Advice (coffee and cocoa)", value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
+              tabPanel(i18n$t("Shade Tree Advice (coffee and cocoa)"), value="STA", moduleTabInterface_UI(id = "STA", data=dataSTA, interface=interfaceSTA)), 
               
-              tabPanel("Deciduous (fruit trees in France)", value="DECIDUOUS", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
+              tabPanel(i18n$t("Deciduous (fruit trees in France)"), value="DECIDUOUS", moduleTabInterface_UI(id = "DECIDUOUS", data=dataDECIDUOUS, interface=interfaceDECIDUOUS)), 
+
+              tabPanel(i18n$t("Czech tree selection tool"), value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech)),
               
-              tabPanel("SCSM (species climate suitability model)", value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
+              tabPanel(i18n$t("SCSM (species climate suitability model)"), value="SCSM", moduleTabInterface_UI(id = "SCSM", data=dataSCSM, interface=interfaceSCSM)), 
               
-              tabPanel("Czech tree selection tool", value="Czech", moduleTabInterface_UI(id = "Czech", data = dataCzech, interface= interfaceCzech)),
+              tabPanel(i18n$t("Juiste Boom op de Juiste Plek"), value="JBOJP", moduleTabInterface_UI(id = "JBOJP", data = dataJBOJP, interface= interfaceJBOJP)),
               
-              tabPanel("Juiste Boom op de Juiste Plek", value="JBOJP", moduleTabInterface_UI(id = "JBOJP", data = dataJBOJP, interface= interfaceJBOJP)),
+              tabPanel(i18n$t("GoÖko (German Hedgerow manager)"), value="DEHM", moduleTabInterface_UI(id = "DEHM", data = dataDEHM, interface= interfaceDEHM)),
               
-              tabPanel("GoÖko (German Hedgerow manager)", value="DEHM", moduleTabInterface_UI(id = "DEHM", data = dataDEHM, interface= interfaceDEHM)),
+              tabPanel(i18n$t("Finnish tree suitability"), value="SUOMI", moduleTabInterface_UI(id = "SUOMI", data = dataSUOMI, interface= interfaceSUOMI)),
               
-              tabPanel("Finnish tree suitability", value="SUOMI", moduleTabInterface_UI(id = "SUOMI", data = dataSUOMI, interface= interfaceSUOMI)),
+              tabPanel(i18n$t("UK Guide"), value="UKguide", moduleTabInterface_UI(id = "UKguide", data = dataUKguide, interface= interfaceUKguide)),
               
-              tabPanel("UK Guide", value="UKguide", moduleTabInterface_UI(id = "UKguide", data = dataUKguide, interface= interfaceUKguide)),
-              
-              tabPanel("Swiss tree guide", value="CH", moduleTabInterface_UI(id = "CH", data = dataCH, interface= interfaceCH))
-              
+              tabPanel(i18n$t("Swiss tree guide"), value="CH", moduleTabInterface_UI(id = "CH", data = dataCH, interface= interfaceCH))
               
               
             )
@@ -88,14 +123,21 @@ body <- dashboardBody(
            # h1("Czech AgroforesTree Selection Tool:"),
             #p("Data and other know-how for this tree selection tool in conditions of the Czech Republic were provided from publication (certified methodology) Practices and components of agroforestry systems recommended for the restoration and strengthening of environmental functions of landscape which was main result of the research project EPSILON TH04030409 of TACR (2019-2022). The input database was updated and adapted for use in the on-line tool AgroforetsTreeAdvice by following authors: Jan Weger, Luboš Úradníček, Antonín Martiník, Tadeáš Staněk and Marie Gosme."),
             #a("Link for the pdf explaining the methodology", href="https://www.vukoz.cz/wp-content/uploads/2023/03/Metodika-ALS-Epsilon-fin-3.pdf"),
-            checkboxGroupInput("project_select", "Select Tools:", 
-                               choices = toolsdata$project),
-                               #selected = toolsdata$project),
-            leafletOutput("map", height = "800px"),
+            # Make the checkboxGroupInput scrollable and visually compact
+            div(
+              style = "max-height: 120px; overflow-y: auto; border: 1px solid #ccc; padding: 4px; background: #fafafa; margin-bottom: 10px;",
+              checkboxGroupInput("project_select", "Select Tools:", 
+                                 choices = toolsdata$project,
+                                 selected = toolsdata$project)
+            ),
+            leafletOutput("map", height = "600px"),
             card(
               full_screen = TRUE,
               card_header("Tool Information"),
-              DTOutput(outputId ="DTToolComparison")
+              div(
+                style = "height: 600px; overflow-y: auto;",
+                DTOutput(outputId ="DTToolComparison")
+              )
             )
             
             
@@ -103,6 +145,46 @@ body <- dashboardBody(
             # A completer: page tutoriel video, page pdf backend
     )#fin databases
   ) #fin pages
+    ,tags$style(HTML("
+        /* first box, red */
+        .box.box-solid.box-danger>.box-header {
+                  background-color: #e35a56; 
+                  color: white;}
+        .box.box-solid.box-danger {border-color: #e35a56;}
+
+        /* second box, green */
+        .box.box-solid.box-primary>.box-header {
+                  background-color: #6dab57; 
+                  color: white;}
+        .box.box-solid.box-primary {border-color: #6dab57;}
+
+        /* third box, blue */
+        .box.box-solid.box-info>.box-header {
+                  background-color: #3c8dbc; 
+                  color: white;}
+        .box.box-solid.box-info {border-color: #3c8dbc;}
+        ")),
+    
+    # center the image
+    tags$head(
+      tags$style(HTML("
+          .centered-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+      "))
+  ),
+
+  # style for the buttons on download modal
+  tags$head(
+    tags$style(HTML("
+      .download-button {
+        width: 220px;
+      }
+    "))
+  ),
+          
 ) #fin dashboardbody
 
 

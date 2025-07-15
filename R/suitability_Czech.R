@@ -1,7 +1,7 @@
 #add an IDAFTA column to the data so that reference to this ID column can be automated
 dataCzech$IDAFTA<-dataCzech$Scientific_name
 #add a tooltip column if it does not exist
-if (is.null(dataCzech$tooltipspecies)) dataCzech$tooltipspecies<-dataCzech$Czech_name
+if (is.null(dataCzech$tooltipspecies)) dataCzech$tooltipspecies<-dataCzech$Latin_name
 
 #' compute_suitability for Czech data
 #'
@@ -18,28 +18,35 @@ if (is.null(dataCzech$tooltipspecies)) dataCzech$tooltipspecies<-dataCzech$Czech
 compute_suitability_Czech<-function(inputsdata=NULL,
                                    database, 
                                    interface,
-                                   orderby="responsetrait"){
-  
+                                   orderby="responsetrait",
+                                   use_weights=FALSE){
   dbfinal<-data.frame()
+  #save(inputsdata, file = "inputsdata.RData")
   toto<-unique(interface[,c("criteria", "objecttype", "side", "BigCriteria")])
+  weight <- interface[, c("criteria", "weightwithincriteria")]
+  print(weight)
+  if (use_weights==FALSE) weight$weightwithincriteria<-1
+  
   rownames(toto)<-toto$criteria
   standardformcriteria<-intersect(gsub(pattern="[0-9]+", replacement="", x=names(inputsdata)), 
-                                  c("legislation", "fruit", "forage", "forest", "ornamental",
-                                    "height", "habitus", "growthspeed", 
-                                    "earlinessleafing", "floweringdate", 
+                                c("legislation", "fruit", "forage", "forest", "ornamental",
+                                    "height", "coppice", "habitus", "growthspeed", 
+                                    "earlinessleafing", "floweringdate","subsidy",
                                     "climateclass", "altitude", "soil_fertility",
-                                    "soil_water", "light", "wood", "food")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
+                                    "soil_water", "light", "wood", "food", "Undergrowth",
+                                    "approval", "endengeredG", "endengeredU", "endengeredY")) #we intersect to cover the case when parameters are sent through url=> not all parameters might be present
   for(crit in standardformcriteria){
     #print(paste("compute score for", crit))
     dbfinal<-rbind(dbfinal, default_computecrit(criteria=crit,
                                                 type= toto[crit, "objecttype"],
                                                 BigCriteria=toto[crit, "BigCriteria"],
                                                 side=toto[crit, "side"],
+                                                weight=weight[weight$criteria==crit,"weightwithincriteria"][1],
                                                 inputs=inputsdata, 
-                                                db=database))
+                                                db=database))                                             
   }
-  
-   #order the df by orderby, using latin name as id (ads an id variable, which is a factor with levels ordered by the orderby side)
+
+  #order the df by orderby, using latin name as id (ads an id variable, which is a factor with levels ordered by the orderby side)
   #icicicic I know it is not logical to do that here, it would be more logical to reorder the factor outside of the computation of the score
   # to do: separate computation of score and ordering of the species
   dbfinal<-orderdf(df=dbfinal, orderby=orderby, idvariable='Scientific_name', interface=interface) 
@@ -50,6 +57,9 @@ compute_suitability_Czech<-function(inputsdata=NULL,
   #df10best<-df[df$English.name %in% species_order[(length(species_order)-10):length(species_order)],]
   print("fin suitability")
   
+
+
+  #assign("dbfinal", dbfinal, envir = .GlobalEnv) # debugging, this is to be able to see the result in the console
   return(dbfinal)
   
 }

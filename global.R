@@ -3,7 +3,6 @@
 #"D:\\Mes_documents\\a_ABSys\\autreschercheurs\\BertReubens\\DigitAFtreeAdvice\\rsconnect\\shinyapps.io\\gosme"
 
 library(shiny)
-#library(openxlsx)
 library(ggplot2) #for the barplot graph
 #library(plotly)
 library(shinydashboard) #for Dashboard appearance
@@ -14,7 +13,16 @@ library(leaflet)#for the map
 library(sf) #for the map
 library(maps) #for the world map centroids
 #options(shiny.reactlog = TRUE)
-#library(dplyr)
+library(svglite)        # for svg download
+library(shinyjs)
+library(openxlsx)       # for writing xlsx files in download
+library(dplyr)
+library(stringr)
+library(purrr)          
+library(shiny.i18n)     # for translations in the app
+library(cowplot)        # for ggplot2 plots in download
+library(gridExtra)
+library(rsvg)           # convert svg to pdf in downloads
 ##global----
 
 #load("dataSTA.Rdata")
@@ -41,8 +49,8 @@ dataDECIDUOUS<-read.table("models/dataDECIDUOUS.txt",  fileEncoding = "UTF-8", e
 interfaceDECIDUOUS<-read.table("models/interfaceDECIDUOUS.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataSCSM<-read.table("models/dataSCSM.txt", fileEncoding = "UTF-8", encoding = "UTF-8", quote="", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceSCSM<-read.table("models/interfaceSCSM.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
-dataCzech<-read.table("models/dataCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
-interfaceCzech<-read.table("models/interfaceCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+dataCzech<-read.table("models/dataCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep=";", skipNul =TRUE, header=TRUE)
+interfaceCzech<-read.table("models/interfaceCzech.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep=";", header=TRUE)
 dataJBOJP<-read.table("models/dataJBOJP.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceJBOJP<-read.table("models/interfaceJBOJP.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataDEHM<-read.table("models/dataDEHM.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
@@ -53,6 +61,17 @@ dataUKguide<-read.table("models/dataUKguide.txt", fileEncoding = "UTF-8", encodi
 interfaceUKguide<-read.table("models/interfaceUKguide.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
 dataCH<-read.table("models/dataCH.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceCH<-read.table("models/interfaceCH.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
+
+# In czech, there are empty spaces around words in some cells 
+dataCzech <- data.frame(lapply(dataCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
+interfaceCzech <- data.frame(lapply(interfaceCzech, function(x) {if (is.character(x)) {return(trimws(x))} else {return(x)}}))
+
+#include downloadhandler functions
+source("DownloadHandler.R")
+
+# Initialize the translator
+i18n <- Translator$new(translation_csvs_path = "R/translation/")
+i18n$set_translation_language("en")  # Default language
 
 #remove commas in the interface because commas are used for separating values
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
@@ -162,6 +181,10 @@ orderdf<-function(df, orderby, idvariable, interface){
   #reorder rows
   df<-df[order(df$species, decreasing=TRUE), c("species", setdiff(names(df), "species"))] 
   #decreasing = TRUE so that the best are on top in the dataframe (best = first in the levels of the factor)
+
+  # Update reactive interface - so other functions know which interface was used (eg. download handler)
+  reactive_Interface(interface)
+
   return(df)
 }
 
@@ -191,7 +214,7 @@ orderdf<-function(df, orderby, idvariable, interface){
 #' @export
 #'
 #' @examples
-default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI", "1")){
+default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weight = as.integer(1), yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI", "1")){
   #message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
   if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
     #extract the relevant inputs to see which were chosen
@@ -324,7 +347,7 @@ toolsdata<-read.table("models/allModels.txt", fileEncoding = "UTF-8", encoding =
 # Function to get country centroid coordinates
 get_country_coords <- function() {
   # Get world map data
-  world_map <- map("world", exact = FALSE, plot = FALSE, fill = TRUE)
+  world_map <- maps::map("world", exact = FALSE, plot = FALSE, fill = TRUE)
   world_map<-st_as_sf(world_map)
   world_centroids <- st_make_valid(st_transform(world_map, crs=4326))
   world_centroids$longitude<-sf::st_coordinates(sf::st_centroid(world_centroids))[,1]

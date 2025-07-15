@@ -1,0 +1,16 @@
+object;type;choice_en;choice_fr;choice_de;choice_es;choice_nl;choice_cz
+DTinformations;DTinfo_col_names;Scientific name;Nom scientifique;Wissenschaftlicher Name;Nombre científico;Wetenschappelijke naam;Vědecký název
+DTinformations;DTinfo_col_legislative;Legislation;Législation;Gesetzgebung;Legislación;Wetgeving;Legislativa
+DTinformations;DTinfo_col_information;Information;Information;Information;Información;Informatie;Informace
+Site_box;Site_box_title;Your site;Votre emplacement;Ihr Standort;Tu ubicación;Jouw locatie;Vaše stanoviště
+Objective_box;Objective_box_title;Your Objectives;Vos objectifs;Ihre Ziele;Sus objetivos;Uw doelstellingen;Vaše cíle
+Compere!;Compare_trees_button;Compare Trees;Comparer les Arbres;Bäume vergleichen;Comparar Árboles;Bomen vergelijken;Porovnat stromy
+Graph;Graph_legend;Main Criteria;Critères Principaux;Hauptkriterien;Criterios Principales;Belangrijkste Criteria;Hlavní Kritéria
+Graph;Graph_label;Adaptation;Adaptation;Anpassung;Adaptación;Aanpassing;Adaptace
+Graph;Graph_label;Efficiency;Efficacité;Effizienz;Eficiencia;Efficiëntie;Efektivita
+Graph;Graph_y_label;Species;Species;Spezies;Especies;Soorten;Druh
+Help_info;Close_button;Close;Fermer;Schließen;Cerrar;Sluiten;Zavřít
+Help_info;Main_header;Detailed information about filters;Informations détaillées sur les filtres;Detaillierte Informationen zu den Filtern;Información detallada sobre los filtros;Gedetailleerde informatie over de filters;Podrobné informace o filtrech
+Help_info;Info_button;Information;Information;Information;Información;Informatie;Informace
+Download;Download page headline;Report of Tree Suitability by AgroForesTreeAdvice;Rapport de la pertinence des arbres par AgroForesTreeAdvice;Bericht zur Baumtauglichkeit von AgroForesTreeAdvice;Informe de la idoneidad de los árboles por AgroForesTreeAdvice;Rapport van de geschiktheid van bomen door AgroForesTreeAdvice;Doporučený výběr dřevin dle AgroForesTreeAdvice
+Download;Download page headline;Additional informations about the trees by AgroForesTreeAdvice;Informations supplémentaires sur les arbres par AgroForesTreeAdvice;Zusätzliche Informationen zu den Bäumen von AgroForesTreeAdvice;Información adicional sobre los árboles por AgroForesTreeAdvice;Aanvullende informatie over de bomen door AgroForesTreeAdvice;Dodatečné informace o stromech od AgroForesTreeAdvice
