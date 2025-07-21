@@ -5,10 +5,9 @@ initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincrite
 	responsetrait	3	use	Kategorie	Beerensträucher	radioButtons		use	Category	Berry bushes	ID	Kategorie	Beerensträucher	utilizzo	categoria	Cespugli di bacche
 	responsetrait	3	use	Kategorie	Biomassenutzung	radioButtons		use	Category	Biomass utilization	ID	Kategorie	Biomassenutzung	utilizzo	categoria	Utilizzo della biomassa
 	responsetrait	3	use	Kategorie	Nussbäume und -sträucher	radioButtons		use	Category	Nut trees and shrubs	ID	Kategorie	Nussbäume und -sträucher	utilizzo	categoria	Alberi e arbusti da frutta a guscio
-	responsetrait	3	use	Kategorie	Obstbäume	radioButtons		use	Category	Fruit trees	ID	Kategorie	Obstbäume	utilizzo	categoria	Alberi da frutto
+	responsetrait	3	use	Kategorie	Obstbäume veredelt	radioButtons		use	Category	Grafted fruit trees	ID	Kategorie	Obstbäume veredelt	utilizzo	categoria	Alberi da frutto innestato 
 	responsetrait	3	use	Kategorie	Stock-/Biomassehecke	radioButtons		use	Category	Stock/biomass hedge	ID	Kategorie	Stock-/Biomassehecke	utilizzo	categoria	Siepe di scorte/biomassa
 	responsetrait	3	use	Kategorie	Trüffelanbau	radioButtons		use	Category	Truffle cultivation	ID	Kategorie	Trüffelanbau	utilizzo	categoria	Coltivazione di tartufi
-	responsetrait	3	use	Kategorie	veredelt	radioButtons		use	Category	grafted	ID	Kategorie	veredelt	utilizzo	categoria	innestato
 	responsetrait	3	use	Kategorie	Vitiforst in der Parzelle	radioButtons		use	Category	Vitiforst in the plot	ID	Kategorie	Vitiforst in der Parzelle	utilizzo	categoria	Vitiforst nell'appezzamento
 	responsetrait	3	use	Kategorie	Vitiforst Umrandung	radioButtons		use	Category	Vitiforst border	ID	Kategorie	Vitiforst Umrandung	utilizzo	categoria	Bordo di Vitiforst
 	responsetrait	3	use	Kategorie	Vitiforst Zeilenende	radioButtons		use	Category	Vitiforst row end	ID	Kategorie	Vitiforst Zeilenende	utilizzo	categoria	Fine filare di Vitiforst

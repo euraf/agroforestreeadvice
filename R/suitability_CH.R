@@ -39,7 +39,7 @@ compute_suitability_CH<-function(inputsdata=NULL,
   print(str(inputsdata))
   #we filter by Kategorie ("hard filter" because else tree species are not unique IDs)
   if(!"Kategorie" %in% names(inputsdata)) {
-    dbfinal<-data.frame(IDAFTA="For this model, it is mandatory to provide at leaset parameter Kategorie",
+    dbfinal<-data.frame(IDAFTA="For this model, it is mandatory to provide at least parameter Kategorie",
                         "side"="reponsetrait", "BigCriteria"="", 
                         "English.name"="", "Scientific.name"="", "value"=0)
     print("end suitability CH with missing Kategorie parameter")

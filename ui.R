@@ -71,7 +71,7 @@ body <- dashboardBody(
             img(src = "logoDigitAF_HR_500.png"),
             h1("Contributors:"),
             h2("Contributors to code"),
-            h2("Marie Gosme; Clément Rigal; Raphael Paut ; Birk Skyum"),
+            h2("Marie Gosme;Tadeáš Staněk ; Clément Rigal; Raphael Paut ; Birk Skyum"),
             h2("Contributors to databases"),
             h2("DENTRO: Sarah Carton; Paul Pardon; Bert Reubens"),
             h2("Shade Tree Advice: Clément Rigal; Philippe Vaast; Laurence Jassogne; Just van der Wolf; Gilles Gram; Mathilde LEPINE; Anais CARPENTE; Mai Phuong NGUYEN; Sigrun WAGNER; Sophie GRAEFE; Baptiste CAMUS; Juan Carlos Villalba Malaver"),
