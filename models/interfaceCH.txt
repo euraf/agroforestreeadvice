@@ -1,18 +1,18 @@
 initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincriteria	BigCriteria_en	criteria_en	choice_en	BigCriteria_de	criteria_de	choice_de	BigCriteria_it	criteria_it	choice_it
 	information	1	ID	Name		ID		ID	Name	NA	ID	Name	NA	ID	Nome	NA
 	information	2	ID	Lateinischer.Name		ID		ID	Latin.name	NA	ID	Lateinischer.Name	NA	ID	Nome latino	NA
-	responsetrait	3	use	Kategorie	Biomassenutzung	radioButtons		use	Category	Biomass	ID	Kategorie	Biomassenutzung	utilizzo	categoria	Biomassa
-	responsetrait	3	use	Kategorie	Wildobst-Kleinbäume und -sträucher	radioButtons		use	Category	Small wild fruit trees and shrubs	ID	Kategorie	Wildobst-Kleinbäume und -sträucher	utilizzo	categoria	Piccoli alberi e arbusti da frutto selvatici
-	responsetrait	3	use	Kategorie	Alley-Cropping	radioButtons		use	Category	Alley cropping	ID	Kategorie	Alley-Cropping	utilizzo	categoria	Coltivazione a filari
-	responsetrait	3	use	Kategorie	Stock-/Biomassehecke	radioButtons		use	Category	Hedge/biomass hedge	ID	Kategorie	Stock-/Biomassehecke	utilizzo	categoria	Siepe di ceppi/biomassa
-	responsetrait	3	use	Kategorie	Vitiforst Umrandung	radioButtons		use	Category	Vitiforst border	ID	Kategorie	Vitiforst Umrandung	utilizzo	categoria	Bordatura vitiforesta
-	responsetrait	3	use	Kategorie	Vitiforst in der Parzelle	radioButtons		use	Category	Vitiforst in the plot	ID	Kategorie	Vitiforst in der Parzelle	utilizzo	categoria	Vitiforesta nell'appezzamento
-	responsetrait	3	use	Kategorie	Vitiforst Zeilenende	radioButtons		use	Category	Vitiforst row end	ID	Kategorie	Vitiforst Zeilenende	utilizzo	categoria	Vitiforesta alla fine del filare
-	responsetrait	3	use	Kategorie	Nussbäume und -sträucher	radioButtons		use	Category	Nut trees and shrubs	ID	Kategorie	Nussbäume und -sträucher	utilizzo	categoria	Alberi e arbusti da frutta a guscio
-	responsetrait	3	use	Kategorie	Obstbäume veredelt	radioButtons		use	Category	Grafted fruit trees	ID	Kategorie	Obstbäume veredelt	utilizzo	categoria	Alberi da frutto innestati
-	responsetrait	3	use	Kategorie	Wildobst-Bäume	radioButtons		use	Category	Wild fruit trees	ID	Kategorie	Wildobst-Bäume	utilizzo	categoria	Alberi da frutto selvatici
-	responsetrait	3	use	Kategorie	Trüffelanbau	radioButtons		use	Category	Truffle cultivation	ID	Kategorie	Trüffelanbau	utilizzo	categoria	Coltivazione di tartufi
-	responsetrait	3	use	Kategorie	Beerensträucher	radioButtons		use	Category	Berry bushes	ID	Kategorie	Beerensträucher	utilizzo	categoria	Arbusti da bacche
+	responsetrait	3	use	Kategorie	Biomassenutzung	radioButtons		use	Category	Biomass (19 trees)	ID	Kategorie	Biomassenutzung (19 Bäume)	utilizzo	categoria	Biomassa (19 alberi)
+	responsetrait	3	use	Kategorie	Wildobst-Kleinbäume und -sträucher	radioButtons		use	Category	Small wild fruit trees and shrubs (18 trees)	ID	Kategorie	Wildobst-Kleinbäume und -sträucher (18 Bäume)	utilizzo	categoria	Piccoli alberi e arbusti da frutto selvatici (18 alberi)
+	responsetrait	3	use	Kategorie	Alley-Cropping	radioButtons		use	Category	Alley cropping (16 trees)	ID	Kategorie	Alley-Cropping (16 Bäume)	utilizzo	categoria	Alley-Cropping (16 alberi)
+	responsetrait	3	use	Kategorie	Stock-/Biomassehecke	radioButtons		use	Category	Hedge/biomass hedge (15 trees)	ID	Kategorie	Stock-/Biomassehecke (15 Bäume)	utilizzo	categoria	Siepe di ceppi/biomassa (15 alberi)
+	responsetrait	3	use	Kategorie	Vitiforst Umrandung	radioButtons		use	Category	Vitiforst border (13 trees)	ID	Kategorie	Vitiforst Umrandung (13 Bäume)	utilizzo	categoria	Bordo vitiforesta (13 alberi)
+	responsetrait	3	use	Kategorie	Vitiforst in der Parzelle	radioButtons		use	Category	Vitiforst in the plot (9 trees)	ID	Kategorie	Vitiforst in der Parzelle (9 Bäume)	utilizzo	categoria	Vitiforesta nell'appezzamento (9 alberi)
+	responsetrait	3	use	Kategorie	Vitiforst Zeilenende	radioButtons		use	Category	Vitiforst row end (6 trees)	ID	Kategorie	Nussbäume und -sträucher (8 Bäume)	utilizzo	categoria	Vitiforesta alla fine del filare (6 alberi)
+	responsetrait	3	use	Kategorie	Nussbäume und -sträucher	radioButtons		use	Category	Nut trees and shrubs (8 trees)	ID	Kategorie	Obstbäume veredelt (8 Bäume)	utilizzo	categoria	Alberi e arbusti da frutta a guscio (8 alberi)
+	responsetrait	3	use	Kategorie	Obstbäume veredelt	radioButtons		use	Category	Grafted fruit trees (8 trees)	ID	Kategorie	Wildobst-Bäume (8 Bäume)	utilizzo	categoria	Alberi da frutto innestati (8 alberi)
+	responsetrait	3	use	Kategorie	Wildobst-Bäume	radioButtons		use	Category	Wild fruit trees (8 trees)	ID	Kategorie	Trüffelanbau (7 Bäume)	utilizzo	categoria	Alberi da frutto selvatici (8 alberi)
+	responsetrait	3	use	Kategorie	Trüffelanbau	radioButtons		use	Category	Truffle cultivation (7 trees)	ID	Kategorie	Beerensträucher (6 Bäume)	utilizzo	categoria	Coltivazione di tartufi (7 alberi)
+	responsetrait	3	use	Kategorie	Beerensträucher	radioButtons		use	Category	Berry bushes (6 trees)	ID	Kategorie	Vitiforst Zeilenende (6 Bäume)	utilizzo	categoria	Arbusti da bacche (6 alberi)
 	effecttrait	4	use	Verwendung	Biodiversität / Bodenschutz	checkboxGroupInput		use	Use	Biodiversity / Soil protection	use	Verwendung	Biodiversität / Bodenschutz	utilizzo	Utilizzo	Biodiversity / Soil protection
 	effecttrait	4	use	Verwendung	Biomasse / Energie	checkboxGroupInput		use	Use	Biomass / Energy	use	Verwendung	Biomasse / Energie	utilizzo	Utilizzo	Biomass / Energy
 	effecttrait	4	use	Verwendung	Holz / Möbel / Instrumente	checkboxGroupInput		use	Use	Wood / Furniture / Instruments	use	Verwendung	Holz / Möbel / Instrumente	utilizzo	Utilizzo	Wood / Furniture / Instruments
@@ -20,44 +20,44 @@ initialorder	side	order	BigCriteria	criteria	choice	objecttype	weightwithincrite
 	effecttrait	4	use	Verwendung	Saft / Likör / öl	checkboxGroupInput		use	Use	Juice / Liqueur / Oil	use	Verwendung	Saft / Likör / öl	utilizzo	Utilizzo	Juice / Liqueur / Oil
 	effecttrait	4	use	Verwendung	Medizinalpflanze / Duftstoffe / Imkerei	checkboxGroupInput		use	Use	Medicinal plants / Fragrances / Beekeeping	use	Verwendung	Medizinalpflanze / Duftstoffe / Imkerei	utilizzo	Utilizzo	Medicinal plants / Fragrances / Beekeeping
 	effecttrait	4	use	Verwendung	Trüffel	checkboxGroupInput		use	Use	Truffles	use	Verwendung	Trüffel	utilizzo	Utilizzo	Truffles
-	responsetrait	5	climate	climate.change	climate.change	checkboxInput		climate	climate change	climate change	climate	climate change	climate change	climate	climate change	climate change
-	responsetrait	5	climate	orientation	sunny	radioButtons		climate	orientation	sunny	climate	orientation	sunny	climate	orientation	sunny
-	responsetrait	5	climate	orientation	semi-shaded	radioButtons		climate	orientation	semi-shaded	climate	orientation	semi-shaded	climate	orientation	semi-shaded
-	responsetrait	5	climate	cold.winter	cold.winter	checkboxInput		climate	cold winter	cold winter	climate	cold winter	cold winter	climate	cold winter	cold winter
-	responsetrait	5	climate	spring.frost	spring.frost	checkboxInput		climate	spring frost	spring frost	climate	spring frost	spring frost	climate	spring frost	spring frost
-	information	5	information	waterlogging	waterlogging	checkboxInput		climate	waterlogging	waterlogging	climate	waterlogging	waterlogging	climate	waterlogging	waterlogging
-	responsetrait	5	climate	drought	drought	checkboxInput		climate	drought	drought	climate	drought	drought	climate	drought	drought
-	information	5	information	heavy.soil	heavy.soil	checkboxInput		climate	heavy soil	heavy soil	climate	heavy soil	heavy soil	climate	heavy soil	heavy soil
-	responsetrait	5	climate	hot.summer	hot.summer	checkboxInput		climate	hot summer	hot summer	climate	hot summer	hot summer	climate	hot summer	hot summer
-	information	5	information	shallow.soil	shallow.soil	checkboxInput		climate	shallow soil	shallow soil	climate	shallow soil	shallow soil	climate	shallow soil	shallow soil
-	responsetrait	6	soil	soil wetness	dry	selectInput		soil	soil wetness	dry	soil	soil wetness	dry	soil	soil wetness	dry
-	responsetrait	6	soil	soil wetness	well-drained	selectInput		soil	soil wetness	well-drained	soil	soil wetness	well-drained	soil	soil wetness	well-drained
-	responsetrait	6	soil	soil wetness	fresh	selectInput		soil	soil wetness	fresh	soil	soil wetness	fresh	soil	soil wetness	fresh
-	responsetrait	6	soil	soil wetness	moist	selectInput		soil	soil wetness	moist	soil	soil wetness	moist	soil	soil wetness	moist
-	responsetrait	6	soil	soil wetness	wet	selectInput		soil	soil wetness	wet	soil	soil wetness	wet	soil	soil wetness	wet
-	responsetrait	6	soil	waterlogging	waterlogging	checkboxInput		soil	waterlogging	waterlogging	soil	waterlogging	waterlogging	soil	waterlogging	waterlogging
-	responsetrait	6	soil	soil structure	light	selectInput		soil	soil structure	light	soil	soil structure	light	soil	soil structure	light
-	responsetrait	6	soil	soil structure	medium	selectInput		soil	soil structure	medium	soil	soil structure	medium	soil	soil structure	medium
-	responsetrait	6	soil	soil structure	heavy	selectInput		soil	soil structure	heavy	soil	soil structure	heavy	soil	soil structure	heavy
-	responsetrait	6	soil	soil structure	compacted	selectInput		soil	soil structure	compacted	soil	soil structure	compacted	soil	soil structure	compacted
-	responsetrait	6	soil	soil texture	sandy	selectInput		soil	soil texture	sandy	soil	soil texture	sandy	soil	soil texture	sandy
-	responsetrait	6	soil	soil texture	loamy	selectInput		soil	soil texture	loamy	soil	soil texture	loamy	soil	soil texture	loamy
-	responsetrait	6	soil	soil texture	clayey	selectInput		soil	soil texture	clayey	soil	soil texture	clayey	soil	soil texture	clayey
-	responsetrait	6	soil	soil depth	deep	selectInput		soil	soil depth	deep	soil	soil depth	deep	soil	soil depth	deep
-	responsetrait	6	soil	soil depth	medium_depth	selectInput		soil	soil depth	medium_depth	soil	soil depth	medium_depth	soil	soil depth	medium_depth
-	responsetrait	6	soil	soil depth	superficial	selectInput		soil	soil depth	superficial	soil	soil depth	superficial	soil	soil depth	superficial
-	responsetrait	6	soil	soil richness	nutrient-poor	selectInput		soil	soil richness	nutrient-poor	soil	soil richness	nutrient-poor	soil	soil richness	nutrient-poor
-	responsetrait	6	soil	soil richness	medium nutrient content	selectInput		soil	soil richness	medium nutrient content	soil	soil richness	medium nutrient content	soil	soil richness	medium nutrient content
-	responsetrait	6	soil	soil richness	nutrient-rich	selectInput		soil	soil richness	nutrient-rich	soil	soil richness	nutrient-rich	soil	soil richness	nutrient-rich
-	responsetrait	6	soil	humus	humus	checkboxInput		soil	humus	humus	soil	humus	humus	soil	humus	humus
-	responsetrait	6	soil	stony	stony	checkboxInput		soil	stony	stony	soil	stony	stony	soil	stony	stony
-	responsetrait	6	soil	calcareous	calcareous	checkboxInput		soil	calcareous	calcareous	soil	calcareous	calcareous	soil	calcareous	calcareous
-	responsetrait	6	soil	soil acidity	alkaline	selectInput		soil	soil acidity	alkaline	soil	soil acidity	alkaline	soil	soil acidity	alkaline
-	responsetrait	6	soil	soil acidity	slightly alkaline	selectInput		soil	soil acidity	slightly alkaline	soil	soil acidity	slightly alkaline	soil	soil acidity	slightly alkaline
-	responsetrait	6	soil	soil acidity	slightly acidic	selectInput		soil	soil acidity	slightly acidic	soil	soil acidity	slightly acidic	soil	soil acidity	slightly acidic
-	responsetrait	6	soil	soil acidity	acidic	selectInput		soil	soil acidity	acidic	soil	soil acidity	acidic	soil	soil acidity	acidic
-	responsetrait	6	soil	pH	4	numericInput		soil	pH	4	soil	pH	4	soil	pH	4
-	responsetrait	6	soil	pH	11	numericInput		soil	pH	11	soil	pH	11	soil	pH	11
+	responsetrait	5	soil	soil wetness	dry	selectInput		soil	soil wetness	dry	soil	soil wetness	dry	soil	soil wetness	dry
+	responsetrait	5	soil	soil wetness	well-drained	selectInput		soil	soil wetness	well-drained	soil	soil wetness	well-drained	soil	soil wetness	well-drained
+	responsetrait	5	soil	soil wetness	fresh	selectInput		soil	soil wetness	fresh	soil	soil wetness	fresh	soil	soil wetness	fresh
+	responsetrait	5	soil	soil wetness	moist	selectInput		soil	soil wetness	moist	soil	soil wetness	moist	soil	soil wetness	moist
+	responsetrait	5	soil	soil wetness	wet	selectInput		soil	soil wetness	wet	soil	soil wetness	wet	soil	soil wetness	wet
+	responsetrait	5	soil	waterlogging	waterlogging	checkboxInput		soil	waterlogging	waterlogging	soil	waterlogging	waterlogging	soil	waterlogging	waterlogging
+	responsetrait	5	soil	soil structure	light	selectInput		soil	soil structure	light	soil	soil structure	light	soil	soil structure	light
+	responsetrait	5	soil	soil structure	medium	selectInput		soil	soil structure	medium	soil	soil structure	medium	soil	soil structure	medium
+	responsetrait	5	soil	soil structure	heavy	selectInput		soil	soil structure	heavy	soil	soil structure	heavy	soil	soil structure	heavy
+	responsetrait	5	soil	soil structure	compacted	selectInput		soil	soil structure	compacted	soil	soil structure	compacted	soil	soil structure	compacted
+	responsetrait	5	soil	soil texture	sandy	selectInput		soil	soil texture	sandy	soil	soil texture	sandy	soil	soil texture	sandy
+	responsetrait	5	soil	soil texture	loamy	selectInput		soil	soil texture	loamy	soil	soil texture	loamy	soil	soil texture	loamy
+	responsetrait	5	soil	soil texture	clayey	selectInput		soil	soil texture	clayey	soil	soil texture	clayey	soil	soil texture	clayey
+	responsetrait	5	soil	soil depth	deep	selectInput		soil	soil depth	deep	soil	soil depth	deep	soil	soil depth	deep
+	responsetrait	5	soil	soil depth	medium_depth	selectInput		soil	soil depth	medium_depth	soil	soil depth	medium_depth	soil	soil depth	medium_depth
+	responsetrait	5	soil	soil depth	superficial	selectInput		soil	soil depth	superficial	soil	soil depth	superficial	soil	soil depth	superficial
+	responsetrait	5	soil	soil acidity	alkaline	selectInput		soil	soil acidity	alkaline	soil	soil acidity	alkaline	soil	soil acidity	alkaline
+	responsetrait	5	soil	soil acidity	slightly alkaline	selectInput		soil	soil acidity	slightly alkaline	soil	soil acidity	slightly alkaline	soil	soil acidity	slightly alkaline
+	responsetrait	5	soil	soil acidity	slightly acidic	selectInput		soil	soil acidity	slightly acidic	soil	soil acidity	slightly acidic	soil	soil acidity	slightly acidic
+	responsetrait	5	soil	soil acidity	acidic	selectInput		soil	soil acidity	acidic	soil	soil acidity	acidic	soil	soil acidity	acidic
+	responsetrait	5	soil	pH	4	numericInput		soil	pH	4	soil	pH	4	soil	pH	4
+	responsetrait	5	soil	pH	11	numericInput		soil	pH	11	soil	pH	11	soil	pH	11
+	responsetrait	5	soil	soil richness	nutrient-poor	selectInput		soil	soil richness	nutrient-poor	soil	soil richness	nutrient-poor	soil	soil richness	nutrient-poor
+	responsetrait	5	soil	soil richness	medium nutrient content	selectInput		soil	soil richness	medium nutrient content	soil	soil richness	medium nutrient content	soil	soil richness	medium nutrient content
+	responsetrait	5	soil	soil richness	nutrient-rich	selectInput		soil	soil richness	nutrient-rich	soil	soil richness	nutrient-rich	soil	soil richness	nutrient-rich
+	responsetrait	5	soil	humus	humus	checkboxInput		soil	humus	humus	soil	humus	humus	soil	humus	humus
+	responsetrait	5	soil	stony	stony	checkboxInput		soil	stony	stony	soil	stony	stony	soil	stony	stony
+	responsetrait	5	soil	calcareous	calcareous	checkboxInput		soil	calcareous	calcareous	soil	calcareous	calcareous	soil	calcareous	calcareous
+	responsetrait	6	climate	climate.change	climate.change	checkboxInput		climate	climate change	climate change	climate	climate change	climate change	climate	climate change	climate change
+	responsetrait	6	climate	orientation	sunny	radioButtons		climate	orientation	sunny	climate	orientation	sunny	climate	orientation	sunny
+	responsetrait	6	climate	orientation	semi-shaded	radioButtons		climate	orientation	semi-shaded	climate	orientation	semi-shaded	climate	orientation	semi-shaded
+	responsetrait	6	climate	cold.winter	cold.winter	checkboxInput		climate	cold winter	cold winter	climate	cold winter	cold winter	climate	cold winter	cold winter
+	responsetrait	6	climate	spring.frost	spring.frost	checkboxInput		climate	spring frost	spring frost	climate	spring frost	spring frost	climate	spring frost	spring frost
+	information	6	information	waterlogging	waterlogging	checkboxInput		climate	waterlogging	waterlogging	climate	waterlogging	waterlogging	climate	waterlogging	waterlogging
+	responsetrait	6	climate	drought	drought	checkboxInput		climate	drought	drought	climate	drought	drought	climate	drought	drought
+	information	6	information	heavy.soil	heavy.soil	checkboxInput		climate	heavy soil	heavy soil	climate	heavy soil	heavy soil	climate	heavy soil	heavy soil
+	responsetrait	6	climate	hot.summer	hot.summer	checkboxInput		climate	hot summer	hot summer	climate	hot summer	hot summer	climate	hot summer	hot summer
+	information	6	information	shallow.soil	shallow.soil	checkboxInput		climate	shallow soil	shallow soil	climate	shallow soil	shallow soil	climate	shallow soil	shallow soil
 	effecttrait	7	biodiversity	Ökologie	Biodiversität / Bodenschutz	checkboxGroupInput		biodiversity	Ecology	Biodiversity / Soil protection	biodiversity	Ökologie	Biodiversität / Bodenschutz	biodiversità	Ecologia	Biodiversity / Soil protection
 	effecttrait	7	biodiversity	Ökologie	Lebensraum Insekten	checkboxGroupInput		biodiversity	Ecology	Insect habitat	biodiversity	Ökologie	Lebensraum Insekten	biodiversità	Ecologia	Insect habitat
 	effecttrait	7	biodiversity	Ökologie	Lebensraum Kleinsäuger	checkboxGroupInput		biodiversity	Ecology	Small mammal habitat	biodiversity	Ökologie	Lebensraum Kleinsäuger	biodiversità	Ecologia	Small mammal habitat
