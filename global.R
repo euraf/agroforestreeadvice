@@ -181,10 +181,10 @@ orderdf<-function(df, orderby, idvariable, interface){
   #reorder rows
   df<-df[order(df$species, decreasing=TRUE), c("species", setdiff(names(df), "species"))] 
   #decreasing = TRUE so that the best are on top in the dataframe (best = first in the levels of the factor)
-
+  
   # Update reactive interface - so other functions know which interface was used (eg. download handler)
   reactive_Interface(interface)
-
+  
   return(df)
 }
 
@@ -215,15 +215,15 @@ orderdf<-function(df, orderby, idvariable, interface){
 #'
 #' @examples
 default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weight = as.integer(1), yesindicator=c("yes", "oui", "x", "X", "T", "TRUE", "VRAI", "1")){
-  #message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
-  if (type=="checkboxGroupInput"){ #for checkboxgroups, criteria is the title of the group
+  message("computing value for criteria ", criteria , " of type ", type, " based on iputs ", paste(inputs, collapse=","))
+  if (type %in% c("checkboxGroupInput", "radioButtons")){ #for checkboxgroups and radiobuttons, criteria is the title of the group
     #extract the relevant inputs to see which were chosen
     chosen<-unlist(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
     services<-strsplit( #services is a list (one for each species) of vectors of keywords (or numbers but not used in this case)
       gsub(pattern="(", replacement=", ", fixed=TRUE, x=gsub(pattern=")", replacement="", fixed=TRUE, 
                                                              x=db[,intersect(names(db), c(criteria, chosen))])) #replace first ( by comma and remove )
       , split="\\s*[,;]\\s*") #commas or semicolon followed by 0 or more whitespaces (and also remove trailing blanks)
-   
+    
     if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices, or comma or semicolon separated keywords
       db$value<-sapply(services, function(x) length(intersect(x, chosen)))
       db$value<-db$value/length(chosen)
@@ -250,78 +250,78 @@ default_computecrit<-function(criteria,type,inputs, db, BigCriteria, side, weigh
       } else {
         print(paste("could not guess which variable to use for", chosen)) ; db$value<-NA
       }}
-   } else 
-     if (type=="selectInput") {
-    
-    chosen<-inputs[criteria]
-    if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
-      db$value<-as.numeric(db[,criteria]==chosen) 
-    } else {
-      if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the column names
-        db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
+  } else 
+    if (type=="selectInput") {
+      
+      chosen<-inputs[criteria]
+      if(criteria %in% names(db)){ #one column criteria, with content equal to possible choices
+        db$value<-as.numeric(db[,criteria]==chosen) 
       } else {
-        print(paste(chosen, "potentially corresponds to severalcolumns:", paste(names(db)[grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE)], collapse=","))) ; db$value<-NA
-      }}
-    
-  } else 
-    if (type=="checkboxInput") {
-      if(class(db[,criteria])=="numeric") { #the database already contains scores
-        db$value<- db[,criteria]
-      } else db$value<- as.numeric(db[,criteria] %in% yesindicator)
-  } else 
-    if (type=="sliderInput") {
-    chosen<-as.numeric(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
-    
-    #chosen<-as.numeric(inputs[grepl(pattern=criteria, x=names(inputs))])
-    #I don't know why, sometimes inputs are duplicated...
-    chosen<-unique(as.numeric(chosen))
-    chosen<-chosen[!is.na(chosen)]
-    
-    
-    if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
-      splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
-      mini<-numeric(length(splits))
-      mini[sapply(splits, length)>0]<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>0], "[[", 1)))
-      maxi<-mini
-      maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
-      if(length(chosen)==2) { #sliderinput with a range and db with a range: percentage of desired within treetrait
-        overlap <- function(A, B) {
-          shared <- pmax(0, min(A[2], B[2]) - max(A[1], B[1]))
-          max(shared / c(diff(A), diff(B)))
-        }
-        db$value<-0
-        for(i in 1:nrow(db)) db$value[i]<-overlap(chosen, c(mini[i], maxi[i]))
-      } else { #sliderinput with just one chosen value: 1 if within treerange, 0 otherwise
-        db$value<-as.numeric(mini<=chosen & maxi>=chosen)
-      }
-    } else { #db gives only one value
-      treetraits<-as.numeric(db[,criteria])
-      if(length(chosen)==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
-        db$value<-as.numeric(treetraits>=min(chosen) & treetraits<=max(chosen))
-      } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
-        rangevalues<-range(treetraits, na.rm=TRUE)
-        db$value<-pmax(0, 1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1])))
-      }
-    }
-    
-    #chosen<-as.numeric(chosen[!duplicated(names(chosen))])
-    
-    
-  } else 
-    if (type=="numericInput") {
-    chosen<-inputs[criteria]
-    if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
-      splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
-      mini<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits, "[[", 1)))
-      maxi<-mini
-      maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
-      db$value<-as.numeric(mini<=chosen & maxi>=chosen)
-    } else { #unique value
-      rangevalues<-range(as.numeric(db[,criteria]))
-      db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(inputs[criteria]))/(rangevalues[2]-rangevalues[1]))
-    }
-    
-  }
+        if (sum(grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE))==1) { #the chosen is among the column names
+          db$value<-as.numeric(db[,grepl(pattern=chosen, x=names(db))]) 
+        } else {
+          print(paste(chosen, "potentially corresponds to severalcolumns:", paste(names(db)[grepl(pattern=make.names(chosen), x=names(db), fixed=TRUE)], collapse=","))) ; db$value<-NA
+        }}
+      
+    } else 
+      if (type=="checkboxInput") {
+        if(class(db[,criteria])=="numeric") { #the database already contains scores
+          db$value<- db[,criteria]
+        } else db$value<- as.numeric(db[,criteria] %in% yesindicator)
+      } else 
+        if (type=="sliderInput") {
+          chosen<-as.numeric(inputs[gsub(pattern="[0-9]+", replacement="", x=names(inputs))==criteria])
+          
+          #chosen<-as.numeric(inputs[grepl(pattern=criteria, x=names(inputs))])
+          #I don't know why, sometimes inputs are duplicated...
+          chosen<-unique(as.numeric(chosen))
+          chosen<-chosen[!is.na(chosen)]
+          
+          
+          if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
+            splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
+            mini<-numeric(length(splits))
+            mini[sapply(splits, length)>0]<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>0], "[[", 1)))
+            maxi<-mini
+            maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
+            if(length(chosen)==2) { #sliderinput with a range and db with a range: percentage of desired within treetrait
+              overlap <- function(A, B) {
+                shared <- pmax(0, min(A[2], B[2]) - max(A[1], B[1]))
+                max(shared / c(diff(A), diff(B)))
+              }
+              db$value<-0
+              for(i in 1:nrow(db)) db$value[i]<-overlap(chosen, c(mini[i], maxi[i]))
+            } else { #sliderinput with just one chosen value: 1 if within treerange, 0 otherwise
+              db$value<-as.numeric(mini<=chosen & maxi>=chosen)
+            }
+          } else { #db gives only one value
+            treetraits<-as.numeric(db[,criteria])
+            if(length(chosen)==2) { #sliderinput with a range: 0 if the species is outside, 1 if it is inside
+              db$value<-as.numeric(treetraits>=min(chosen) & treetraits<=max(chosen))
+            } else { #sliderinput with just one value: 1 when criteria = chosen, 0 when it is the farthest away among all species
+              rangevalues<-range(treetraits, na.rm=TRUE)
+              db$value<-pmax(0, 1-abs((treetraits-chosen)/(rangevalues[2]-rangevalues[1])))
+            }
+          }
+          
+          #chosen<-as.numeric(chosen[!duplicated(names(chosen))])
+          
+          
+        } else 
+          if (type=="numericInput") {
+            chosen<-inputs[criteria]
+            if(any(grepl(pattern=")-(", fixed=TRUE, x=db[,criteria]))) { #db gives a range of values
+              splits<-strsplit(db[,criteria], split=")-(", fixed=TRUE)
+              mini<-as.numeric(gsub(pattern="(", fixed=TRUE, replacement="", x=sapply(splits, "[[", 1)))
+              maxi<-mini
+              maxi[sapply(splits, length)>1]<-as.numeric(gsub(pattern=")", fixed=TRUE, replacement="", x=sapply(splits[sapply(splits, length)>1], "[[", 2)))
+              db$value<-as.numeric(mini<=chosen & maxi>=chosen)
+            } else { #unique value
+              rangevalues<-range(as.numeric(db[,criteria]))
+              db$value<-1-abs((as.numeric(db[,criteria])-as.numeric(inputs[criteria]))/(rangevalues[2]-rangevalues[1]))
+            }
+            
+          }
   #message("values= ", paste(db$value, collapse=","))
   db$criteria<-criteria
   db$BigCriteria<-BigCriteria
@@ -409,7 +409,7 @@ prepare_map_data <- function(data, country_coords=country_coords) {
   map_data$latitude <- map_data$latitude + map_data$offset_lat / 111
   
   
-   colors<-unname(sapply(iconespossibles,"[[", "markerColor"))
+  colors<-unname(sapply(iconespossibles,"[[", "markerColor"))
   # project_icons <- list(
   #   makeAwesomeIcon(icon = "flag", markerColor = "red", iconColor = "white", library = "fa"),
   #   makeAwesomeIcon(icon = "star", markerColor = "darkblue", iconColor = "white", library = "fa"),
@@ -430,7 +430,7 @@ prepare_map_data <- function(data, country_coords=country_coords) {
   )
   #put back the other project information
   project_attrs<-merge(project_attrs, data[,c("project", "countries", "Info", "reference", "link_reference",   "Link_standalone")])
-
+  
   map_data <- merge(map_data, project_attrs, by = "project")
   
   return(map_data)
