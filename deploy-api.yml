@@ -1,0 +1,39 @@
+name: Deploy API to Render
+
+on:
+  push:
+  branches: [ main, master ]  # Deploy when pushing to main/master
+pull_request:
+  branches: [ main, master ]
+
+jobs:
+  deploy:
+  runs-on: ubuntu-latest
+
+steps:
+  - uses: actions/checkout@v3
+
+- name: Set up R
+uses: r-lib/actions/setup-r@v2
+with:
+  r-version: '4.3.0'
+
+- name: Install system dependencies
+run: |
+  sudo apt-get update
+sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+- name: Install R packages
+run: |
+  Rscript -e "install.packages(c('plumber', 'jsonlite', 'callr', 'datasets'))"
+# Add any other packages your global.R needs
+
+- name: Test API locally
+run: |
+  Rscript -e "
+        source('api.R')
+        cat('API script loaded successfully\n')
+        "
+
+# This step would trigger deployment to your chosen service
+# Different for each service - see examples below

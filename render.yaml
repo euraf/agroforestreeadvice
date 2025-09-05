@@ -1,0 +1,11 @@
+services:
+  - type: web
+name: agroforestry-api
+env: r
+repo: https://github.com/yourusername/yourrepo.git
+buildCommand: |
+  Rscript -e "install.packages(c('plumber', 'jsonlite', 'callr', 'datasets'))"
+startCommand: Rscript run_api.R
+envVars:
+  - key: PORT
+generateValue: true
