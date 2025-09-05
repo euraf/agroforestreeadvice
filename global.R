@@ -2,27 +2,27 @@
 #                    "https://gosme.shinyapps.io/DigitAFtreeAdvice/", streaming=TRUE)
 #"D:\\Mes_documents\\a_ABSys\\autreschercheurs\\BertReubens\\DigitAFtreeAdvice\\rsconnect\\shinyapps.io\\gosme"
 
-library(shiny)
-library(ggplot2) #for the barplot graph
+require (shiny)
+require (ggplot2) #for the barplot graph
 #library(plotly)
-library(shinydashboard) #for Dashboard appearance
-library(DT) #for Data Table
-library(bslib) #for tooltip
+require (shinydashboard) #for Dashboard appearance
+require (DT) #for Data Table
+require (bslib) #for tooltip
 #library(reactlog) #to display reactive graph
-library(leaflet)#for the map
-library(sf) #for the map
-library(maps) #for the world map centroids
+require (leaflet)#for the map
+require (sf) #for the map
+require (maps) #for the world map centroids
 #options(shiny.reactlog = TRUE)
-library(svglite)        # for svg download
-library(shinyjs)
-library(openxlsx)       # for writing xlsx files in download
-library(dplyr)
-library(stringr)
-library(purrr)          
-library(shiny.i18n)     # for translations in the app
-library(cowplot)        # for ggplot2 plots in download
-library(gridExtra)
-library(rsvg)           # convert svg to pdf in downloads
+require (svglite)        # for svg download
+require (shinyjs)
+require (openxlsx)       # for writing xlsx files in download
+require (dplyr)
+require (stringr)
+require (purrr)          
+require (shiny.i18n)     # for translations in the app
+require (cowplot)        # for ggplot2 plots in download
+require (gridExtra)
+require (rsvg)           # convert svg to pdf in downloads
 ##global----
 
 #load("dataSTA.Rdata")
