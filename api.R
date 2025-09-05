@@ -3,7 +3,12 @@ library(plumber)
 library(jsonlite)
 
 # Source your existing code
-source("global.R")
+#load data and interface of all models
+source("load_interface_data.R")
+#source default functions to compute the suitability
+source("default_functions.R")
+#load the suitability functions
+source("load_suitability_functions.R")
 
 #* @apiTitle AgroforestrTreeAdvice API
 #* @apiDescription API for computing tree suitability with dynamic parameters

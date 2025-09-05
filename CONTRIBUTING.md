@@ -94,17 +94,17 @@ save your file as suitability_MODELNAME.R
 - clone the repository on your computer
 - add the excel file with sheets "data" and "interface" in folder "models", with name MODELNAME.xlsx (MODELNAME should be a short version of your model name, without spaces not underscore nor special characters that will be used everywhere in agroforestreeadvice to identify parts that are specific to your tool)
 - add the suitability_MODLENAME.R file to the "R" folder
-- in global.R file, add the following 4 lines at the beginning:
+- in file "load_interface_data.R", add the following 4 lines at the beginning:
 ```
 dataMODELNAME<-read.table("models/dataMODELNAME.txt", fileEncoding = "UTF-8", encoding = "UTF-8", fill=TRUE, sep="\t", skipNul =TRUE, header=TRUE)
 interfaceMODELNAME<-read.table("models/interfaceMODELNAME.txt", fileEncoding = "UTF-8", encoding = "UTF-8",quote="", fill=TRUE, sep="\t", header=TRUE)
-#remove commas in the interface because commas are used for separating values
+
 interfaceMODELNAME<-interfaceMODELNAME[!is.na(interfaceMODELNAME$side),]
 interfaceMODELNAME[1:length(interfaceMODELNAME)]<-lapply(interfaceMODELNAME[1:length(interfaceMODELNAME)], function(x) gsub(pattern=",", replacement=".", x=x))
 
 
 ```
-and add the following line at the end to import your suitability function:
+and add the following line in file load_suitability_functions.R to import your suitability function:
 ```
 source("R/suitability_MODELNAME.R")
 ```
@@ -114,6 +114,7 @@ source("R/suitability_MODELNAME.R")
 tabPanel("name to display in tab", value="MODELNAME", moduleTabInterface_UI(id = "MODELNAME", data = dataMODELNAME, interface= interfaceMODELNAME))
 ```
 (you can also add the information about your tool in the "infos" tabItem)
+
 - at the end of the  server.R file, add the following line:
 ```
 moduleTabInterface_Server(id = "MODELNAME",
