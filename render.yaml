@@ -1,10 +1,10 @@
 services:
   - type: web
-name: agroforestry-api
+name: agroforestreeadvice_api
 env: r
-repo: https://github.com/yourusername/yourrepo.git
+repo: https://github.com/euraf/agroforestreeadvice.git
 buildCommand: |
-  Rscript -e "install.packages(c('plumber', 'jsonlite', 'callr', 'datasets'))"
+  Rscript -e "install.packages(c('plumber', 'jsonlite'))"
 startCommand: Rscript run_api.R
 envVars:
   - key: PORT

@@ -14,7 +14,7 @@ libsodium-dev \
 COPY . .
 
 # Install R packages
-RUN Rscript -e "install.packages(c('plumber', 'jsonlite', 'callr', 'datasets', 'httr', 'dplyr'), repos='https://cran.rstudio.com/')"
+RUN Rscript -e "install.packages(c('plumber', 'jsonlite', 'httr'), repos='https://cran.rstudio.com/')"
 
 # Expose port
 EXPOSE 8000
