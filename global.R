@@ -70,8 +70,21 @@ interfaceCzech <- data.frame(lapply(interfaceCzech, function(x) {if (is.characte
 source("DownloadHandler.R")
 
 # Initialize the translator
-i18n <- Translator$new(translation_csvs_path = "R/translation/")
-i18n$set_translation_language("en")  # Default language
+# Only initialize translator when running Shiny (not API)
+if (exists(".shiny_mode") || Sys.getenv("RUNNING_SHINY") == "TRUE") {
+  # Initialize the translator (only for Shiny)
+  library(shiny.i18n)
+  i18n <- Translator$new(translation_csvs_path = "R/translation/")
+  i18n$set_translation_language("en")  # Default language
+  cat("Translator initialized for Shiny\n")
+} else {
+  # Create a dummy translator for API (avoids errors)
+  i18n <- list(
+    t = function(text, ...) return(text),  # Just return text as-is
+    translate = function(text, ...) return(text)
+  )
+  cat("Dummy translator created for API\n")
+}
 
 #remove commas in the interface because commas are used for separating values
 interfaceSTA<-interfaceSTA[!is.na(interfaceSTA$side),]
