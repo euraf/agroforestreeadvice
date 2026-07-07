@@ -128,7 +128,7 @@ body <- dashboardBody(
               style = "max-height: 120px; overflow-y: auto; border: 1px solid #ccc; padding: 4px; background: #fafafa; margin-bottom: 10px;",
               checkboxGroupInput("project_select", "Select Tools:", 
                                  choices = toolsdata$project,
-                                 selected = toolsdata$project)
+                                 selected = NULL)
             ),
             leafletOutput("map", height = "600px"),
             card(
