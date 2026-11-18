@@ -67,7 +67,7 @@ body <- dashboardBody(
     # Welcome page ----
     tabItem(tabName = "Welcome", 
             h1("Welcome! please go to Tool in the menu to find the best tree for you! or to the Databases to learn where all this comes from"),
-            h1("This tool is under development (to do: make this welcome page look nicer!) within the DigitAF European project"),
+            h1("This tool is under development (to do: make this welcome page look nicer!) within the EU project DigitAF (Grant agreement n° 101059794), funded by the European Union’s Horizon Europe research and innovation programme"),
             img(src = "logoDigitAF_HR_500.png"),
             h1("Contributors:"),
             h2("Contributors to code"),
